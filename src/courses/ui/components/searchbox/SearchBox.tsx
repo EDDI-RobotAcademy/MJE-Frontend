@@ -27,7 +27,7 @@ export default function SearchBox() {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <FieldLabel htmlFor="place">장소</FieldLabel>
+          <FieldLabel htmlFor="place" tooltip="만날 지역이나 역 이름을 입력하세요">장소</FieldLabel>
           <input
             id="place"
             type="text"
@@ -39,7 +39,7 @@ export default function SearchBox() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <FieldLabel>시간대</FieldLabel>
+          <FieldLabel tooltip="데이트를 즐길 시간대를 선택하세요">시간대</FieldLabel>
           <div className="flex gap-2">
             {TIME_SLOT_OPTIONS.map(({ value, label }) => (
               <button
@@ -59,7 +59,7 @@ export default function SearchBox() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <FieldLabel>이동수단</FieldLabel>
+          <FieldLabel tooltip="코스 이동 시 주로 사용할 교통수단을 선택하세요">이동수단</FieldLabel>
           <div className="flex gap-2">
             {TRANSPORT_OPTIONS.map(({ value, label }) => (
               <button
