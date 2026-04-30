@@ -16,7 +16,8 @@
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Force)",
       "Bash(Select-Object Name, PSIsContainer)",
       "Bash(Format-Table -AutoSize)",
-      "Bash(Remove-Item *)"
+      "Bash(Remove-Item *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
