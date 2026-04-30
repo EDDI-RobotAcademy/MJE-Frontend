@@ -4,13 +4,7 @@ import { useSearchBox } from "@/courses/hooks/useSearchBox";
 import FieldLabel from "@/courses/ui/components/label/FieldLabel";
 import LocationTextField from "@/courses/ui/components/location_textfield/LocationTextField";
 import TimeDropdown from "@/courses/ui/components/time_dropdown/TimeDropdown";
-import type { Transport } from "@/courses/types/search";
-
-const TRANSPORT_OPTIONS: { value: Transport; label: string }[] = [
-  { value: "walk", label: "도보" },
-  { value: "transit", label: "대중교통" },
-  { value: "car", label: "자동차" },
-];
+import TransportCheckboxGroup from "@/courses/ui/components/transport_checkbox/TransportCheckboxGroup";
 
 export default function SearchBox() {
   const { params, setPlace, setMeetTime, setTransport } = useSearchBox();
@@ -34,22 +28,7 @@ export default function SearchBox() {
 
         <div className="flex flex-col gap-2">
           <FieldLabel tooltip="코스 이동 시 주로 사용할 교통수단을 선택하세요">이동수단</FieldLabel>
-          <div className="flex gap-2">
-            {TRANSPORT_OPTIONS.map(({ value, label }) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setTransport(value)}
-                className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
-                  params.transport === value
-                    ? "border-gray-900 bg-gray-900 text-white"
-                    : "border-gray-300 bg-white text-gray-600 hover:border-gray-500"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          <TransportCheckboxGroup value={params.transport} onChange={setTransport} />
         </div>
       </div>
     </div>
