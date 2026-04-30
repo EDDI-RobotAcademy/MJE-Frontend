@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchBox } from "@/courses/hooks/useSearchBox";
+import FieldLabel from "@/courses/ui/components/label/FieldLabel";
 import type { TimeSlot, Transport } from "@/courses/types/search";
 
 const TIME_SLOT_OPTIONS: { value: TimeSlot; label: string }[] = [
@@ -26,8 +27,9 @@ export default function SearchBox() {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium text-gray-700">장소</label>
+          <FieldLabel htmlFor="place">장소</FieldLabel>
           <input
+            id="place"
             type="text"
             placeholder="어디서 만날까요?"
             value={params.place}
@@ -37,7 +39,7 @@ export default function SearchBox() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium text-gray-700">시간대</label>
+          <FieldLabel>시간대</FieldLabel>
           <div className="flex gap-2">
             {TIME_SLOT_OPTIONS.map(({ value, label }) => (
               <button
@@ -57,7 +59,7 @@ export default function SearchBox() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium text-gray-700">이동수단</label>
+          <FieldLabel>이동수단</FieldLabel>
           <div className="flex gap-2">
             {TRANSPORT_OPTIONS.map(({ value, label }) => (
               <button
