@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { SearchParams, TimeSlot, Transport } from "@/courses/types/search";
+import type { SearchParams, Transport } from "@/courses/types/search";
 
 const initialState: SearchParams = {
   place: "",
-  timeSlot: null,
+  meetTime: null,
   transport: null,
 };
 
@@ -15,11 +15,11 @@ export function useSearchBox() {
   const setPlace = (place: string) =>
     setParams((prev) => ({ ...prev, place }));
 
-  const setTimeSlot = (timeSlot: TimeSlot) =>
-    setParams((prev) => ({ ...prev, timeSlot }));
+  const setMeetTime = (meetTime: string) =>
+    setParams((prev) => ({ ...prev, meetTime }));
 
   const setTransport = (transport: Transport) =>
     setParams((prev) => ({ ...prev, transport }));
 
-  return { params, setPlace, setTimeSlot, setTransport };
+  return { params, setPlace, setMeetTime, setTransport };
 }

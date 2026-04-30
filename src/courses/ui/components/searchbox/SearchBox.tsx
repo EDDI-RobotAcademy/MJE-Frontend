@@ -3,13 +3,8 @@
 import { useSearchBox } from "@/courses/hooks/useSearchBox";
 import FieldLabel from "@/courses/ui/components/label/FieldLabel";
 import LocationTextField from "@/courses/ui/components/location_textfield/LocationTextField";
-import type { TimeSlot, Transport } from "@/courses/types/search";
-
-const TIME_SLOT_OPTIONS: { value: TimeSlot; label: string }[] = [
-  { value: "morning", label: "오전" },
-  { value: "afternoon", label: "오후" },
-  { value: "evening", label: "저녁" },
-];
+import TimeDropdown from "@/courses/ui/components/time_dropdown/TimeDropdown";
+import type { Transport } from "@/courses/types/search";
 
 const TRANSPORT_OPTIONS: { value: Transport; label: string }[] = [
   { value: "walk", label: "도보" },
@@ -18,7 +13,7 @@ const TRANSPORT_OPTIONS: { value: Transport; label: string }[] = [
 ];
 
 export default function SearchBox() {
-  const { params, setPlace, setTimeSlot, setTransport } = useSearchBox();
+  const { params, setPlace, setMeetTime, setTransport } = useSearchBox();
 
   return (
     <div className="w-full max-w-lg rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
@@ -33,23 +28,8 @@ export default function SearchBox() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <FieldLabel tooltip="데이트를 즐길 시간대를 선택하세요">시간대</FieldLabel>
-          <div className="flex gap-2">
-            {TIME_SLOT_OPTIONS.map(({ value, label }) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setTimeSlot(value)}
-                className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
-                  params.timeSlot === value
-                    ? "border-gray-900 bg-gray-900 text-white"
-                    : "border-gray-300 bg-white text-gray-600 hover:border-gray-500"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          <FieldLabel htmlFor="meet-time" tooltip="데이트를 즐길 시간대를 선택하세요">시간대</FieldLabel>
+          <TimeDropdown id="meet-time" value={params.meetTime} onChange={setMeetTime} />
         </div>
 
         <div className="flex flex-col gap-2">
