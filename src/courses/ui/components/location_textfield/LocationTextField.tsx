@@ -3,6 +3,7 @@ interface LocationTextFieldProps {
   value: string;
   onChange: (value: string) => void;
   error?: boolean;
+  onClearError?: () => void;
 }
 
 function MapPinHeartIcon() {
@@ -19,11 +20,14 @@ export default function LocationTextField({
   value,
   onChange,
   error,
+  onClearError,
 }: LocationTextFieldProps) {
   return (
     <div
-      className={`flex h-[46px] items-center rounded-full border px-3.5 gap-2 ${
-        error ? "border-[#FF4D4F]" : "border-[#d0d0d0]"
+      className={`flex h-[46px] items-center rounded-full border px-3.5 gap-2 transition-colors ${
+        error
+          ? "border-dashed border-[#FF4D4F]"
+          : "border-[#d0d0d0]"
       }`}
     >
       <MapPinHeartIcon />
@@ -33,6 +37,7 @@ export default function LocationTextField({
         placeholder="어디로 갈까요? (ex. 성수동, 홍대역)"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onFocus={onClearError}
         className="flex-1 bg-transparent text-xs text-gray-900 placeholder-[#b0b0b0] outline-none min-w-0"
       />
     </div>

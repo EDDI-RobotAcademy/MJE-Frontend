@@ -25,14 +25,25 @@ export function useSearchBox() {
   const [params, setParams] = useState<SearchParams>(initialState);
   const [errors, setErrors] = useState<SearchErrors>(initialErrors);
 
-  const setPlace = (place: string) =>
+  const setPlace = (place: string) => {
     setParams((prev) => ({ ...prev, place }));
+    if (errors.place) setErrors((prev) => ({ ...prev, place: false }));
+  };
 
-  const setMeetTime = (meetTime: string) =>
+  const setMeetTime = (meetTime: string) => {
     setParams((prev) => ({ ...prev, meetTime }));
+    if (errors.meetTime) setErrors((prev) => ({ ...prev, meetTime: false }));
+  };
 
-  const setTransport = (transport: Transport) =>
+  const setTransport = (transport: Transport) => {
     setParams((prev) => ({ ...prev, transport }));
+    if (errors.transport) setErrors((prev) => ({ ...prev, transport: false }));
+  };
+
+  // 포커스 시 즉시 에러 해제 (입력하기 전 클릭만 해도 클리어)
+  const clearFieldError = (field: keyof SearchErrors) => {
+    setErrors((prev) => ({ ...prev, [field]: false }));
+  };
 
   const validate = (): boolean => {
     const next: SearchErrors = {
@@ -44,5 +55,5 @@ export function useSearchBox() {
     return !Object.values(next).some(Boolean);
   };
 
-  return { params, errors, setPlace, setMeetTime, setTransport, validate };
+  return { params, errors, setPlace, setMeetTime, setTransport, clearFieldError, validate };
 }
