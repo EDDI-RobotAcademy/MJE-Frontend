@@ -46,11 +46,7 @@ export default function TransportCheckboxGroup({
   error,
 }: TransportCheckboxGroupProps) {
   return (
-    <div
-      role="group"
-      aria-label="이동수단 선택"
-      className={`flex gap-3 ${error ? "outline outline-2 outline-[#FF4D4F] rounded-xl" : ""}`}
-    >
+    <div role="group" aria-label="이동수단 선택" className="flex gap-3">
       {TRANSPORT_OPTIONS.map((option) => (
         <TransportCheckbox
           key={option.value}
@@ -58,6 +54,7 @@ export default function TransportCheckboxGroup({
           label={option.label}
           icon={option.renderIcon(value === option.value)}
           checked={value === option.value}
+          error={error && !value}
           onChange={onChange}
         />
       ))}
