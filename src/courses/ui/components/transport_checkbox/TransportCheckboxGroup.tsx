@@ -10,14 +10,20 @@ const TRANSPORT_OPTIONS: { value: Transport; label: string }[] = [
 interface TransportCheckboxGroupProps {
   value: Transport | null;
   onChange: (value: Transport) => void;
+  error?: boolean;
 }
 
 export default function TransportCheckboxGroup({
   value,
   onChange,
+  error,
 }: TransportCheckboxGroupProps) {
   return (
-    <div role="group" aria-label="이동수단 선택" className="flex gap-2">
+    <div
+      role="group"
+      aria-label="이동수단 선택"
+      className={`flex gap-2 rounded-lg p-0.5 transition-colors ${error ? "outline outline-2 outline-[#FF4D4F] rounded-lg" : ""}`}
+    >
       {TRANSPORT_OPTIONS.map((option) => (
         <TransportCheckbox
           key={option.value}
