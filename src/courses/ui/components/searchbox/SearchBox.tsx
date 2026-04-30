@@ -2,6 +2,7 @@
 
 import { useSearchBox } from "@/courses/hooks/useSearchBox";
 import FieldLabel from "@/courses/ui/components/label/FieldLabel";
+import LocationTextField from "@/courses/ui/components/location_textfield/LocationTextField";
 import type { TimeSlot, Transport } from "@/courses/types/search";
 
 const TIME_SLOT_OPTIONS: { value: TimeSlot; label: string }[] = [
@@ -28,14 +29,7 @@ export default function SearchBox() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <FieldLabel htmlFor="place" tooltip="만날 지역이나 역 이름을 입력하세요">장소</FieldLabel>
-          <input
-            id="place"
-            type="text"
-            placeholder="어디서 만날까요?"
-            value={params.place}
-            onChange={(e) => setPlace(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-          />
+          <LocationTextField id="place" value={params.place} onChange={setPlace} />
         </div>
 
         <div className="flex flex-col gap-2">
