@@ -8,7 +8,12 @@ export default function Logo() {
 
   return (
     <Link href="/" aria-label="홈으로 이동" onClick={handleLogoClick}>
-      <span className="text-xl font-bold tracking-tight text-gray-900">MJE</span>
+      <span
+        className="text-xl font-bold tracking-tight text-gray-900"
+        style={{ fontFamily: "'Prompt', sans-serif" }}
+      >
+        Dehangsa
+      </span>
     </Link>
   );
 }

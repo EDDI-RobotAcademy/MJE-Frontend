@@ -12,11 +12,12 @@ export default function HomeTab() {
   return (
     <Link
       href="/"
-      className={`text-sm font-medium px-3 py-1 rounded transition-colors ${
+      className={`pb-1 text-[17px] transition-colors ${
         isActive
-          ? "text-gray-900 font-semibold"
-          : "text-gray-500 hover:text-gray-900"
+          ? "text-black border-b-2 border-black"
+          : "text-[#5e5e5e] hover:text-black"
       }`}
+      style={{ fontFamily: "'Prompt', sans-serif" }}
       aria-current={isActive ? "page" : undefined}
       onClick={handleHomeTabClick}
     >
