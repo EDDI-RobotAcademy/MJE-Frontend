@@ -1,6 +1,7 @@
 import { Course } from "@/courses/types/course";
 import MainCourseImage from "@/courses/ui/components/main_course_image/MainCourseImage";
 import MainCourseLocation from "@/courses/ui/components/main_course_location/MainCourseLocation";
+import MainCourseExplainText from "@/courses/ui/components/main_course_explain_text/MainCourseExplainText";
 
 interface MainCourseProps {
   course: Course;
@@ -22,16 +23,9 @@ export default function MainCourse({ course, onClick }: MainCourseProps) {
         {course.location && <MainCourseLocation location={course.location} />}
       </div>
 
-      <h3
-        className="text-xl font-bold text-[#2a4874] mb-2 group-hover:text-[#1a3254] transition-colors"
-        style={{ fontFamily: "Prompt, sans-serif" }}
-      >
-        {course.name}
-      </h3>
+      <MainCourseExplainText name={course.name} description={course.description} />
 
-      <p className="text-sm text-gray-600 mb-5 leading-relaxed">{course.description}</p>
-
-      <div className="flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         {course.keywords.map((kw, i) => (
           <span
             key={i}
