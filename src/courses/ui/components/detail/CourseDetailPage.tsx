@@ -7,6 +7,8 @@ import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
+import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
+import HeadlineCourseExplain from "@/courses/ui/components/headline_course_explain/HeadlineCourseExplain";
 
 interface CourseDetailPageProps {
   courseId: string;
@@ -80,16 +82,9 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
           </div>
         )}
 
-        <div>
-          <h2
-            className="text-[22px] font-semibold text-brand-text-dark"
-            style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
-          >
-            {selectedCourse.name}
-          </h2>
-          <p className="mt-2 whitespace-pre-line text-[13px] leading-relaxed text-brand-text-muted">
-            {selectedCourse.description}
-          </p>
+        <div className="flex flex-col gap-1.5">
+          <HeadlineCourseTitle title={selectedCourse.name} />
+          <HeadlineCourseExplain description={selectedCourse.description} />
         </div>
 
         {selectedCourse.keywords.length > 0 && (
