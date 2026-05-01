@@ -1,5 +1,7 @@
 import { Course } from "@/courses/types/course";
 import SubCourseImage from "@/courses/ui/components/sub_course_image/SubCourseImage";
+import SubCourseLocation from "@/courses/ui/components/sub_course_location/SubCourseLocation";
+import SubCourseExplainText from "@/courses/ui/components/sub_course_explain_text/SubCourseExplainText";
 
 interface SubCourseProps {
   course: Course;
@@ -14,21 +16,16 @@ export default function SubCourse({ course, onClick }: SubCourseProps) {
     >
       <SubCourseImage imageUrl={course.imageUrl} alt={course.name} />
 
-      <div className="mb-3 mt-3">
-        <span className="text-xs font-medium bg-[#D0E2F4] text-[#2a4874] px-2.5 py-1 rounded-full">
+      <div className="mt-3 flex flex-col gap-1.5">
+        <span className="text-xs font-medium bg-[#D0E2F4] text-[#2a4874] px-2.5 py-1 rounded-full self-start">
           이런 코스는 어때요?
         </span>
+        {course.location && <SubCourseLocation location={course.location} />}
       </div>
 
-      <h4 className="text-sm font-semibold text-gray-800 mb-2 group-hover:text-[#2a4874] transition-colors line-clamp-2">
-        {course.name}
-      </h4>
+      <SubCourseExplainText name={course.name} description={course.description} />
 
-      <p className="text-xs text-gray-500 mb-3 line-clamp-2 leading-relaxed">
-        {course.description}
-      </p>
-
-      <div className="flex flex-wrap gap-1.5">
+      <div className="mt-3 flex flex-wrap gap-1.5">
         {course.keywords.map((kw, i) => (
           <span
             key={i}
