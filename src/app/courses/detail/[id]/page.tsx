@@ -1,5 +1,5 @@
 import CourseDetailPage from "@/courses/ui/components/detail/CourseDetailPage";
-import TryAgain from "@/courses/ui/components/try_again/TryAgain";
+import ReturnToRecommendation from "@/courses/ui/components/return/ReturnToRecommendation";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -11,8 +11,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     >
       <div className="mx-auto max-w-[800px] px-6 py-[60px]">
         <CourseDetailPage courseId={id} />
-        <div className="mt-12">
-          <TryAgain />
+        <div className="mt-12 pb-20">
+          <ReturnToRecommendation />
         </div>
       </div>
     </main>
