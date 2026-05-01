@@ -7,6 +7,7 @@ export interface Course {
   name: string;
   description: string;
   keywords: CourseKeyword[];
+  imageUrl?: string;
 }
 
 export interface SuggestedCoursesData {

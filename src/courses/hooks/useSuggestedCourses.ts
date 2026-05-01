@@ -15,6 +15,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
       { label: "야경" },
       { label: "산책" },
     ],
+    imageUrl: "https://picsum.photos/seed/hangang/800/400",
   },
   subCourses: [
     {
