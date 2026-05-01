@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
 import MainCourse from "@/courses/ui/components/main_course/MainCourse";
@@ -10,9 +10,11 @@ import { trackCardClick } from "@/courses/ui/components/suggested_courses/event_
 export default function SuggestedCourses() {
   const { data, isLoading, error } = useSuggestedCourses();
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleCourseClick = (course: Course, card_type: "main" | "sub") => {
     void trackCardClick(pathname, course.id, course.name, card_type);
+    router.push(`/courses/detail/${course.id}`);
   };
 
   if (isLoading) {
