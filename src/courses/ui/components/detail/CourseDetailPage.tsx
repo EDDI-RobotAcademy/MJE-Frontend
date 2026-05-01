@@ -9,6 +9,7 @@ import HeadlineLocation from "@/courses/ui/components/headline_location/Headline
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
 import HeadlineCourseExplain from "@/courses/ui/components/headline_course_explain/HeadlineCourseExplain";
+import RestaurantCard from "@/courses/ui/components/list_restaurant/RestaurantCard";
 
 interface CourseDetailPageProps {
   courseId: string;
@@ -97,6 +98,17 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
           </div>
         )}
       </div>
+
+      {selectedCourse.places && selectedCourse.places.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <p className="text-[12px] text-brand-text-muted">코스 상세 일정</p>
+          <div className="flex flex-col gap-3">
+            {selectedCourse.places.map((place) => (
+              <RestaurantCard key={place.id} place={place} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {alternatives.length > 0 && (
         <div className="flex flex-col gap-3">

@@ -2,6 +2,15 @@ export interface CourseKeyword {
   label: string;
 }
 
+export interface Place {
+  id: string;
+  name: string;
+  description: string;
+  location: string;
+  time?: string;
+  imageUrl?: string;
+}
+
 export interface Course {
   id: string;
   name: string;
@@ -11,6 +20,7 @@ export interface Course {
   startTime?: string;
   keywords: CourseKeyword[];
   imageUrl?: string;
+  places?: Place[];
 }
 
 export interface SuggestedCoursesData {
