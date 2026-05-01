@@ -8,6 +8,7 @@ export interface Course {
   description: string;
   location?: string;
   locations?: string[];
+  startTime?: string;
   keywords: CourseKeyword[];
   imageUrl?: string;
 }

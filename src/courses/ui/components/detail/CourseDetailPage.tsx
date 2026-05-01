@@ -5,6 +5,8 @@ import { Course } from "@/courses/types/course";
 import AlternativeCourseCard from "./AlternativeCourseCard";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
+import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
+import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 
 interface CourseDetailPageProps {
   courseId: string;
@@ -44,10 +46,16 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
 
   const locations = selectedCourse.locations ?? (selectedCourse.location ? [selectedCourse.location] : []);
 
+  const headlineLocation = locations[0];
+
   return (
     <div className="flex flex-col gap-6">
-      <div>
+      <div className="flex flex-col gap-2">
         <BestCourseLabel />
+        <div className="flex flex-wrap gap-2">
+          {headlineLocation && <HeadlineLocation location={headlineLocation} />}
+          {selectedCourse.startTime && <HeadlineStartTime time={selectedCourse.startTime} />}
+        </div>
       </div>
 
       <div className="flex flex-col gap-4 rounded-[24px] bg-white p-5 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
