@@ -1,0 +1,41 @@
+import { Course } from "@/courses/types/course";
+
+interface MainCourseProps {
+  course: Course;
+  onClick: (course: Course) => void;
+}
+
+export default function MainCourse({ course, onClick }: MainCourseProps) {
+  return (
+    <button
+      onClick={() => onClick(course)}
+      className="w-full text-left rounded-2xl bg-white border border-[#d0d0d0] shadow-[3px_6px_20px_0px_rgba(187,199,211,0.54)] hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.2)] hover:border-[#2a4874] transition-all duration-200 p-6 cursor-pointer group"
+    >
+      <div className="mb-4">
+        <span className="text-xs font-medium bg-[#2a4874] text-white px-3 py-1 rounded-full">
+          메인 코스
+        </span>
+      </div>
+
+      <h3
+        className="text-xl font-bold text-[#2a4874] mb-2 group-hover:text-[#1a3254] transition-colors"
+        style={{ fontFamily: "Prompt, sans-serif" }}
+      >
+        {course.name}
+      </h3>
+
+      <p className="text-sm text-gray-600 mb-5 leading-relaxed">{course.description}</p>
+
+      <div className="flex flex-wrap gap-2">
+        {course.keywords.map((kw, i) => (
+          <span
+            key={i}
+            className="text-xs bg-[#D0E2F4] text-[#2a4874] px-3 py-1 rounded-full"
+          >
+            #{kw.label}
+          </span>
+        ))}
+      </div>
+    </button>
+  );
+}
