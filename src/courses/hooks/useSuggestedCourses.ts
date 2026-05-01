@@ -45,6 +45,15 @@ const MOCK_COURSES: SuggestedCoursesData = {
         imageUrl: "https://picsum.photos/seed/bar1/400/300",
         type: "restaurant",
       },
+      {
+        id: "place-1-4",
+        name: "탄방 볼링장",
+        description: "도심 속 볼링 데이트, 가볍게 즐기며 승부욕을 불태울 수 있는 2인 활동 코스",
+        location: "탄방동",
+        time: "16:00",
+        imageUrl: "https://picsum.photos/seed/activity1/400/300",
+        type: "activity",
+      },
     ],
   },
   subCourses: [
