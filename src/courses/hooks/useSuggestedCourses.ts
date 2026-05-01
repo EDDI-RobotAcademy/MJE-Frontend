@@ -29,6 +29,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
         { label: "카페거리" },
         { label: "젊은감성" },
       ],
+      location: "합정동",
       imageUrl: "https://picsum.photos/seed/hongdae/800/400",
     },
     {
@@ -37,6 +38,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
       description:
         "힙한 성수동의 카페와 팝업스토어를 돌아보는 핫플 데이트 코스에요.",
       keywords: [{ label: "성수" }, { label: "힙스터" }, { label: "팝업스토어" }],
+      location: "성수동",
       imageUrl: "https://picsum.photos/seed/seongsu/800/400",
     },
   ],
