@@ -21,7 +21,9 @@
       "Bash(git checkout *)",
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\\\\src\\\\features\\\\courses\" -Recurse -Force)",
       "Bash(Select-Object FullName, PSIsContainer)",
-      "Bash(Sort-Object FullName)"
+      "Bash(Sort-Object FullName)",
+      "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory)",
+      "Bash(Select-Object Name)"
     ]
   }
 }
