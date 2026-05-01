@@ -1,5 +1,6 @@
 import { Course } from "@/courses/types/course";
 import MainCourseImage from "@/courses/ui/components/main_course_image/MainCourseImage";
+import MainCourseLocation from "@/courses/ui/components/main_course_location/MainCourseLocation";
 
 interface MainCourseProps {
   course: Course;
@@ -14,10 +15,11 @@ export default function MainCourse({ course, onClick }: MainCourseProps) {
     >
       <MainCourseImage imageUrl={course.imageUrl} alt={course.name} />
 
-      <div className="mb-4 mt-4">
+      <div className="mb-4 mt-4 flex items-center justify-between">
         <span className="text-xs font-medium bg-[#2a4874] text-white px-3 py-1 rounded-full">
           메인 코스
         </span>
+        {course.location && <MainCourseLocation location={course.location} />}
       </div>
 
       <h3
