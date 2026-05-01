@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
@@ -19,6 +21,15 @@ interface CourseDetailPageProps {
 
 export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
   const { data, isLoading, error } = useSuggestedCourses();
+  const router = useRouter();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [courseId]);
+
+  const handleOtherCourseClick = (course: Course) => {
+    router.push(`/courses/detail/${course.id}`);
+  };
 
   if (isLoading) {
     return <DetailCourseSkeleton />;
@@ -128,6 +139,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
                   key={course.id}
                   course={course}
                   label={index === 0 ? "Option A" : "Option B"}
+                  onClick={handleOtherCourseClick}
                 />
               ))}
             </div>

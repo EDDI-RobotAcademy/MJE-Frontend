@@ -11,6 +11,7 @@ import OtherCourseDurationLabel from "./OtherCourseDurationLabel";
 interface OtherCourseCardProps {
   course: Course;
   label: string;
+  onClick: (course: Course) => void;
 }
 
 function CourseImage({ src, alt }: { src?: string; alt: string }) {
@@ -29,11 +30,14 @@ function CourseImage({ src, alt }: { src?: string; alt: string }) {
   );
 }
 
-export default function OtherCourseCard({ course, label }: OtherCourseCardProps) {
+export default function OtherCourseCard({ course, label, onClick }: OtherCourseCardProps) {
   const locations = course.locations ?? (course.location ? [course.location] : []);
 
   return (
-    <div className="flex flex-col gap-2 rounded-[20px] bg-white p-3 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
+    <button
+      onClick={() => onClick(course)}
+      className="flex w-full cursor-pointer flex-col gap-2 rounded-[20px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
+    >
       <CourseImage src={course.imageUrl} alt={course.name} />
 
       <div className="flex flex-col gap-1.5 px-0.5">
@@ -48,6 +52,6 @@ export default function OtherCourseCard({ course, label }: OtherCourseCardProps)
           {course.duration && <OtherCourseDurationLabel duration={course.duration} />}
         </div>
       </div>
-    </div>
+    </button>
   );
 }
