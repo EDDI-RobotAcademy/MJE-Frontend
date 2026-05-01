@@ -9,6 +9,7 @@ export interface Place {
   location: string;
   time?: string;
   imageUrl?: string;
+  type?: "restaurant" | "cafe";
 }
 
 export interface Course {

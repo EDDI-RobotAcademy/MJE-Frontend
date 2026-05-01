@@ -25,6 +25,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
         location: "용문역",
         time: "14:00",
         imageUrl: "https://picsum.photos/seed/cafe1/400/300",
+        type: "cafe",
       },
       {
         id: "place-1-2",
@@ -33,6 +34,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
         location: "탄방동",
         time: "17:00",
         imageUrl: "https://picsum.photos/seed/restaurant1/400/300",
+        type: "restaurant",
       },
       {
         id: "place-1-3",
@@ -41,6 +43,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
         location: "탄방동",
         time: "19:30",
         imageUrl: "https://picsum.photos/seed/bar1/400/300",
+        type: "restaurant",
       },
     ],
   },
@@ -65,6 +68,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
           location: "죽동",
           time: "14:00",
           imageUrl: "https://picsum.photos/seed/cafe2/400/300",
+          type: "cafe",
         },
         {
           id: "place-2-2",
@@ -73,6 +77,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
           location: "유성온천",
           time: "18:00",
           imageUrl: "https://picsum.photos/seed/restaurant2/400/300",
+          type: "restaurant",
         },
       ],
     },
@@ -93,6 +98,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
           location: "죽동",
           time: "14:00",
           imageUrl: "https://picsum.photos/seed/cafe3/400/300",
+          type: "cafe",
         },
         {
           id: "place-3-2",
@@ -101,6 +107,7 @@ const MOCK_COURSES: SuggestedCoursesData = {
           location: "유성온천",
           time: "20:00",
           imageUrl: "https://picsum.photos/seed/bar2/400/300",
+          type: "restaurant",
         },
       ],
     },
