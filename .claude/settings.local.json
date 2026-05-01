@@ -23,7 +23,8 @@
       "Bash(Select-Object FullName, PSIsContainer)",
       "Bash(Sort-Object FullName)",
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\\\\src\" -Directory)"
     ]
   }
 }
