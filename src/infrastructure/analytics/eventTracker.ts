@@ -13,9 +13,12 @@ export class EventTrackingError extends Error {
   }
 }
 
-export async function trackEvent(event: AnalyticsEvent): Promise<void> {
+export async function trackEvent(
+  event: AnalyticsEvent,
+  endpoint: string = "/home/events",
+): Promise<void> {
   try {
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/home/events`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(event),
