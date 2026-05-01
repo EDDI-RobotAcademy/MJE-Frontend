@@ -7,12 +7,12 @@ export default function MainCourseExplainText({ name, description }: MainCourseE
   return (
     <div className="flex flex-col gap-2">
       <h3
-        className="text-xl font-bold text-[#2a4874] group-hover:text-[#1a3254] transition-colors"
-        style={{ fontFamily: "Prompt, sans-serif" }}
+        className="text-2xl font-medium text-black transition-colors group-hover:text-[#2a4874]"
+        style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
       >
         {name}
       </h3>
-      <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">{description}</p>
+      <p className="text-xs leading-relaxed text-[#6a7282] line-clamp-2">{description}</p>
     </div>
   );
 }

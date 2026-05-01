@@ -12,7 +12,7 @@ export default function MainCourseHashtag({ keywords }: MainCourseHashtagProps) 
       {keywords.slice(0, MAX_HASHTAG_COUNT).map((kw, i) => (
         <span
           key={i}
-          className="rounded-full bg-[#D0E2F4] px-3 py-1 text-xs text-[#2a4874]"
+          className="rounded-full border border-[#2a4874] px-3 py-0.5 text-[10px] text-[#2a4874]"
         >
           #{kw.label}
         </span>
