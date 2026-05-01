@@ -1,4 +1,5 @@
 import { Course } from "@/courses/types/course";
+import SubCourseImage from "@/courses/ui/components/sub_course_image/SubCourseImage";
 
 interface SubCourseProps {
   course: Course;
@@ -11,7 +12,9 @@ export default function SubCourse({ course, onClick }: SubCourseProps) {
       onClick={() => onClick(course)}
       className="w-full text-left rounded-xl bg-white border border-[#d0d0d0] shadow-sm hover:shadow-md hover:border-[#8aaee6] transition-all duration-200 p-4 cursor-pointer group"
     >
-      <div className="mb-3">
+      <SubCourseImage imageUrl={course.imageUrl} alt={course.name} />
+
+      <div className="mb-3 mt-3">
         <span className="text-xs font-medium bg-[#D0E2F4] text-[#2a4874] px-2.5 py-1 rounded-full">
           이런 코스는 어때요?
         </span>

@@ -2,6 +2,7 @@ import { Course } from "@/courses/types/course";
 import MainCourseImage from "@/courses/ui/components/main_course_image/MainCourseImage";
 import MainCourseLocation from "@/courses/ui/components/main_course_location/MainCourseLocation";
 import MainCourseExplainText from "@/courses/ui/components/main_course_explain_text/MainCourseExplainText";
+import MainCourseHashtag from "@/courses/ui/components/main_course_hashtag/MainCourseHashtag";
 
 interface MainCourseProps {
   course: Course;
@@ -25,15 +26,8 @@ export default function MainCourse({ course, onClick }: MainCourseProps) {
 
       <MainCourseExplainText name={course.name} description={course.description} />
 
-      <div className="mt-4 flex flex-wrap gap-2">
-        {course.keywords.map((kw, i) => (
-          <span
-            key={i}
-            className="text-xs bg-[#D0E2F4] text-[#2a4874] px-3 py-1 rounded-full"
-          >
-            #{kw.label}
-          </span>
-        ))}
+      <div className="mt-4">
+        <MainCourseHashtag keywords={course.keywords} />
       </div>
     </button>
   );
