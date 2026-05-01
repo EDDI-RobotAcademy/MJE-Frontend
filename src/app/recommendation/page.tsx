@@ -1,5 +1,5 @@
-import Link from "next/link";
 import SuggestedCourses from "@/courses/ui/components/suggested_courses/SuggestedCourses";
+import TryAgain from "@/courses/ui/components/try_again/TryAgain";
 
 export default function RecommendationPage() {
   return (
@@ -55,19 +55,8 @@ export default function RecommendationPage() {
         </section>
 
         {/* 다시 검색하기 */}
-        <div className="flex justify-center pb-20">
-          <Link
-            href="/"
-            className="flex items-center justify-center rounded-[28px] text-[15px] font-light text-white"
-            style={{
-              width: "200px",
-              height: "52px",
-              background: "linear-gradient(135deg, #8aaee6 0%, #8aaee6 65%, #d5e6f6 100%)",
-              boxShadow: "0px 4px 16px 0px rgba(138,174,230,0.45)",
-            }}
-          >
-            다시 검색하기
-          </Link>
+        <div className="pb-20">
+          <TryAgain />
         </div>
       </div>
     </main>

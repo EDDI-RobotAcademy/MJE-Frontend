@@ -18,8 +18,10 @@
       "Bash(Format-Table -AutoSize)",
       "Bash(Remove-Item *)",
       "Bash(npx tsc *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\\\\src\\\\features\\\\courses\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)"
     ]
   }
 }
-
