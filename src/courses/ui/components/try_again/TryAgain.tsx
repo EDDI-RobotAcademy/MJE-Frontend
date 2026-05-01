@@ -1,6 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { trackTryAgainClick } from "@/courses/ui/components/try_again/event_tracking";
 
 export default function TryAgain() {
+  const pathname = usePathname();
+
+  const handleClick = () => {
+    void trackTryAgainClick(pathname);
+  };
+
   return (
     <div className="group relative flex justify-center">
       <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#6a7282]/80 px-3.5 py-1.5 text-[12px] text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
@@ -9,6 +19,7 @@ export default function TryAgain() {
 
       <Link
         href="/"
+        onClick={handleClick}
         className="flex items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90"
         style={{
           width: "200px",
