@@ -1,6 +1,7 @@
 import { Course } from "@/courses/types/course";
 import SubCourseImage from "@/courses/ui/components/sub_course_image/SubCourseImage";
 import SubCourseLocation from "@/courses/ui/components/sub_course_location/SubCourseLocation";
+import SubCourseExplainText from "@/courses/ui/components/sub_course_explain_text/SubCourseExplainText";
 
 interface SubCourseProps {
   course: Course;
@@ -22,15 +23,9 @@ export default function SubCourse({ course, onClick }: SubCourseProps) {
         {course.location && <SubCourseLocation location={course.location} />}
       </div>
 
-      <h4 className="text-sm font-semibold text-gray-800 mb-2 group-hover:text-[#2a4874] transition-colors line-clamp-2">
-        {course.name}
-      </h4>
+      <SubCourseExplainText name={course.name} description={course.description} />
 
-      <p className="text-xs text-gray-500 mb-3 line-clamp-2 leading-relaxed">
-        {course.description}
-      </p>
-
-      <div className="flex flex-wrap gap-1.5">
+      <div className="mt-3 flex flex-wrap gap-1.5">
         {course.keywords.map((kw, i) => (
           <span
             key={i}
