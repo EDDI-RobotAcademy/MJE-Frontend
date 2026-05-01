@@ -2,7 +2,7 @@
 
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
-import AlternativeCourseCard from "./AlternativeCourseCard";
+import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
@@ -101,33 +101,39 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
         )}
       </div>
 
-      {selectedCourse.places && selectedCourse.places.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <p className="text-[12px] text-brand-text-muted">코스 상세 일정</p>
+      <div className="grid grid-cols-[1fr_200px] items-start gap-4">
+        {/* Left: 코스 상세 일정 */}
+        {selectedCourse.places && selectedCourse.places.length > 0 ? (
           <div className="flex flex-col gap-3">
-            {selectedCourse.places.map((place) => {
-              if (place.type === "cafe") return <CafeCard key={place.id} place={place} />;
-              if (place.type === "activity") return <ActivityCard key={place.id} place={place} />;
-              return <RestaurantCard key={place.id} place={place} />;
-            })}
+            <p className="text-[12px] text-brand-text-muted">코스 상세 일정</p>
+            <div className="flex flex-col gap-3">
+              {selectedCourse.places.map((place) => {
+                if (place.type === "cafe") return <CafeCard key={place.id} place={place} />;
+                if (place.type === "activity") return <ActivityCard key={place.id} place={place} />;
+                return <RestaurantCard key={place.id} place={place} />;
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div />
+        )}
 
-      {alternatives.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <p className="text-[12px] text-brand-text-muted">다른 코스도 있어요</p>
-          <div className="grid grid-cols-2 gap-4">
-            {alternatives.map((course, index) => (
-              <AlternativeCourseCard
-                key={course.id}
-                course={course}
-                label={index === 0 ? "Option A" : "Option B"}
-              />
-            ))}
+        {/* Right: 다른 추천 코스 */}
+        {alternatives.length > 0 && (
+          <div className="flex flex-col gap-3">
+            <p className="text-[12px] text-brand-text-muted">다른 추천 코스</p>
+            <div className="flex flex-col gap-3">
+              {alternatives.map((course, index) => (
+                <OtherCourseCard
+                  key={course.id}
+                  course={course}
+                  label={index === 0 ? "Option A" : "Option B"}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
