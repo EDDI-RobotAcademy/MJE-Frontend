@@ -28,18 +28,25 @@ export default function SuggestedCourses() {
   }
 
   return (
-    <section className="flex w-full flex-col gap-4">
+    <div className="grid w-full grid-cols-2 gap-4">
+      {/* Left: main course */}
       {data.mainCourse && (
         <MainCourse course={data.mainCourse} onClick={handleCourseClick} />
       )}
 
+      {/* Right: sub courses stacked */}
       {data.subCourses.length > 0 && (
-        <div className="grid grid-cols-2 gap-3">
-          {data.subCourses.slice(0, 2).map((course) => (
-            <SubCourse key={course.id} course={course} onClick={handleCourseClick} />
+        <div className="flex flex-col gap-4">
+          {data.subCourses.slice(0, 2).map((course, index) => (
+            <SubCourse
+              key={course.id}
+              course={course}
+              onClick={handleCourseClick}
+              label={index === 0 ? "Option A" : "Option B"}
+            />
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }

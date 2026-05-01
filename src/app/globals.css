@@ -2,6 +2,29 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 @import "tailwindcss";
 
+@theme {
+  /* Brand primary */
+  --color-brand-navy: #2a4874;
+  --color-brand-blue-mid: #8aaee6;
+  --color-brand-blue-light: #d5e6f6;
+  --color-brand-blue-sky: #a8ccf0;
+  --color-brand-blue-soft: #d0e2f4;
+
+  /* Brand accent */
+  --color-brand-coral: #fcad9e;
+
+  /* Text scale */
+  --color-brand-text-dark: #333333;
+  --color-brand-text-mid: #555555;
+  --color-brand-text-gray: #757575;
+  --color-brand-text-light: #797979;
+  --color-brand-text-muted: #6a7282;
+
+  /* UI chrome */
+  --color-brand-border: #d0d0d0;
+  --color-brand-placeholder: #d9d9d9;
+}
+
 body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
