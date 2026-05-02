@@ -13,10 +13,16 @@ export class EventTrackingError extends Error {
   }
 }
 
-export async function trackEvent(event: AnalyticsEvent): Promise<void> {
+export async function trackEvent(
+  event: AnalyticsEvent,
+  endpoint: string = "/home/events",
+): Promise<void> {
   try {
-    // TODO: Replace with actual analytics endpoint (e.g. navigator.sendBeacon or GA4)
-    console.info("[Analytics]", JSON.stringify(event));
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(event),
+    });
   } catch (error) {
     throw new EventTrackingError(
       `Failed to track event: ${event.event_name}`,
