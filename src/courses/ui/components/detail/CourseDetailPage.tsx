@@ -7,13 +7,13 @@ import { Course } from "@/courses/types/course";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
+import ScheduleCard from "./ScheduleCard";
+import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
+import ExportCard from "./ExportCard";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
 import HeadlineCourseExplain from "@/courses/ui/components/headline_course_explain/HeadlineCourseExplain";
-import RestaurantCard from "@/courses/ui/components/list_restaurant/RestaurantCard";
-import CafeCard from "@/courses/ui/components/list_cafe/CafeCard";
-import ActivityCard from "@/courses/ui/components/list_activity/ActivityCard";
 
 interface CourseDetailPageProps {
   courseId: string;
@@ -61,90 +61,76 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
   }
 
   const locations = selectedCourse.locations ?? (selectedCourse.location ? [selectedCourse.location] : []);
-
   const headlineLocation = locations[0];
+  const places = selectedCourse.places ?? [];
 
   return (
     <div className="flex flex-col gap-6">
+      {/* Page header */}
       <div className="flex flex-col gap-2">
-        <BestCourseLabel />
         <div className="flex flex-wrap gap-2">
           {headlineLocation && <HeadlineLocation location={headlineLocation} />}
           {selectedCourse.startTime && <HeadlineStartTime time={selectedCourse.startTime} />}
         </div>
+        <HeadlineCourseTitle title={selectedCourse.name} />
+        <HeadlineCourseExplain description={selectedCourse.description} />
       </div>
 
-      <div className="flex flex-col gap-4 rounded-[24px] bg-white p-5 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
-        <div className="relative h-[280px] w-full overflow-hidden rounded-[18px] bg-brand-placeholder">
-          <img
-            src={selectedCourse.imageUrl ?? "https://picsum.photos/seed/main/800/600"}
-            alt={selectedCourse.name}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-
-        {locations.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {locations.map((loc, i) => (
-              <span
-                key={i}
-                className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-[10px] text-white"
-              >
-                {loc}
+      {/* Two-column layout */}
+      <div className="grid grid-cols-[1fr_220px] items-start gap-4">
+        {/* Left: schedule timeline */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <BestCourseLabel />
+            {selectedCourse.duration && (
+              <span className="text-[11px] text-brand-text-muted">
+                상세 일정 · {selectedCourse.duration}
               </span>
-            ))}
+            )}
           </div>
-        )}
 
-        <div className="flex flex-col gap-1.5">
-          <HeadlineCourseTitle title={selectedCourse.name} />
-          <HeadlineCourseExplain description={selectedCourse.description} />
-        </div>
-
-        {selectedCourse.keywords.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {selectedCourse.keywords.slice(0, 3).map((kw, i) => (
-              <span key={i} className="text-[12px] text-brand-navy">
-                #{kw.label}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="grid grid-cols-[1fr_200px] items-start gap-4">
-        {/* Left: 코스 상세 일정 */}
-        {selectedCourse.places && selectedCourse.places.length > 0 ? (
-          <div className="flex flex-col gap-3">
-            <p className="text-[12px] text-brand-text-muted">코스 상세 일정</p>
-            <div className="flex flex-col gap-3">
-              {selectedCourse.places.map((place) => {
-                if (place.type === "cafe") return <CafeCard key={place.id} place={place} />;
-                if (place.type === "activity") return <ActivityCard key={place.id} place={place} />;
-                return <RestaurantCard key={place.id} place={place} />;
-              })}
-            </div>
-          </div>
-        ) : (
-          <div />
-        )}
-
-        {/* Right: 다른 추천 코스 */}
-        {alternatives.length > 0 && (
-          <div className="flex flex-col gap-3">
-            <p className="text-[12px] text-brand-text-muted">다른 추천 코스</p>
-            <div className="flex flex-col gap-3">
-              {alternatives.map((course, index) => (
-                <OtherCourseCard
-                  key={course.id}
-                  course={course}
-                  label={index === 0 ? "Option A" : "Option B"}
-                  onClick={handleOtherCourseClick}
-                />
+          {places.length > 0 ? (
+            <div className="flex flex-col gap-1.5">
+              {places.map((place, index) => (
+                <div key={place.id} className="flex flex-col">
+                  <ScheduleCard place={place} />
+                  {index < places.length - 1 && (
+                    <ScheduleTimelineConnector
+                      fromName={place.name}
+                      toName={places[index + 1].name}
+                      walkingTime={place.walkingTimeTo}
+                    />
+                  )}
+                </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <p className="text-[12px] text-brand-text-muted">상세 일정이 없어요</p>
+          )}
+        </div>
+
+        {/* Right: sidebar */}
+        <div className="flex flex-col gap-4">
+          <ExportCard />
+
+          {alternatives.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <span className="inline-block w-fit rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
+                다른 추천 코스!
+              </span>
+              <div className="flex flex-col gap-3">
+                {alternatives.map((course, index) => (
+                  <OtherCourseCard
+                    key={course.id}
+                    course={course}
+                    label={index === 0 ? "Option A" : "Option B"}
+                    onClick={handleOtherCourseClick}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
