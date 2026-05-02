@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
 import MainCourse from "@/courses/ui/components/main_course/MainCourse";
@@ -12,6 +12,7 @@ import { trackCourseCreate } from "@/courses/ui/components/CourseCreation/event_
 export default function SuggestedCourses() {
   const { data, isLoading, error } = useSuggestedCourses();
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (data && (data.mainCourse || data.subCourses.length > 0)) {
@@ -21,6 +22,7 @@ export default function SuggestedCourses() {
 
   const handleCourseClick = (course: Course, card_type: "main" | "sub") => {
     void trackCardClick(pathname, course.id, course.name, card_type);
+    router.push(`/courses/detail/${course.id}`);
   };
 
   if (isLoading) {
