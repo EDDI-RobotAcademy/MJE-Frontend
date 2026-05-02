@@ -1,6 +1,7 @@
 interface CourseCreationButtonProps {
   onClick: () => void;
   isShaking: boolean;
+  isLoading?: boolean;
 }
 
 function WandStarsIcon() {
@@ -11,25 +12,52 @@ function WandStarsIcon() {
   );
 }
 
+function Spinner() {
+  return (
+    <svg
+      className="h-4 w-4 animate-spin shrink-0"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="white"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="white"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
+  );
+}
+
 export default function CourseCreationButton({
   onClick,
   isShaking,
+  isLoading = false,
 }: CourseCreationButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`flex w-full items-center justify-center gap-2 rounded-full h-[43px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 ${
+      disabled={isLoading}
+      className={`flex w-full items-center justify-center gap-2 rounded-full h-[43px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 ${
         isShaking ? "animate-shake" : ""
       }`}
       style={{ background: "linear-gradient(114deg, #8aaee6 0%, #d5e6f6 100%)" }}
     >
-      <WandStarsIcon />
+      {isLoading ? <Spinner /> : <WandStarsIcon />}
       <span
         className="text-[14px] text-white"
         style={{ fontFamily: "'Prompt', sans-serif" }}
       >
-        Create Course !
+        {isLoading ? "코스 생성 중..." : "Create Course !"}
       </span>
     </button>
   );

@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
-import { Course } from "@/courses/types/course";
+import { useRestaurants } from "@/courses/hooks/useRestaurants";
+import { useCafes } from "@/courses/hooks/useCafes";
+import { useActivities } from "@/courses/hooks/useActivities";
+import { useOtherCourses } from "@/courses/hooks/useOtherCourses";
+import { Course, Place } from "@/courses/types/course";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
@@ -20,7 +24,11 @@ interface CourseDetailPageProps {
 }
 
 export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
-  const { data, isLoading, error } = useSuggestedCourses();
+  const { data, isLoading: isSessionLoading, error } = useSuggestedCourses();
+  const { places: restaurants } = useRestaurants(courseId);
+  const { places: cafes } = useCafes(courseId);
+  const { places: activities } = useActivities(courseId);
+  const { courses: otherCourses } = useOtherCourses(courseId);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +39,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     router.push(`/courses/detail/${course.id}`);
   };
 
-  if (isLoading) {
+  if (isSessionLoading) {
     return <DetailCourseSkeleton />;
   }
 
@@ -49,7 +57,6 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     ...data.subCourses,
   ];
   const selectedCourse = allCourses.find((c) => c.id === courseId);
-  const alternatives = allCourses.filter((c) => c.id !== courseId).slice(0, 2);
 
   if (!selectedCourse) {
     return (
@@ -60,9 +67,34 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     );
   }
 
+  // API places를 visitOrder(id) 기준으로 정렬 후 합산
+  // API가 비어있으면(서브코스 등) 저장된 places 사용
+  const apiPlaces: Place[] = [...restaurants, ...cafes, ...activities].sort(
+    (a, b) => {
+      const aIdx = parseInt(a.id.split("-").pop() ?? "0");
+      const bIdx = parseInt(b.id.split("-").pop() ?? "0");
+      return aIdx - bIdx;
+    },
+  );
+  const places = apiPlaces.length > 0 ? apiPlaces : (selectedCourse.places ?? []);
+
+  // 다른 추천 코스: API 결과 우선, 없으면 저장된 서브코스 사용
+  const alternatives: Course[] =
+    otherCourses.length > 0
+      ? otherCourses.slice(0, 2)
+      : allCourses.filter((c) => c.id !== courseId).slice(0, 2);
+
   const locations = selectedCourse.locations ?? (selectedCourse.location ? [selectedCourse.location] : []);
   const headlineLocation = locations[0];
-  const places = selectedCourse.places ?? [];
+
+  // keyword 중복 제거 (API hashtag 연동 전까지 stored 데이터 사용)
+  const keywords = useMemo(
+    () =>
+      selectedCourse.keywords.filter(
+        (kw, i, arr) => arr.findIndex((k) => k.label === kw.label) === i,
+      ),
+    [selectedCourse.keywords],
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -132,6 +164,20 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
           )}
         </div>
       </div>
+
+      {/* keywords — 하단 노출 (선택적 활용) */}
+      {keywords.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {keywords.map((kw) => (
+            <span
+              key={kw.label}
+              className="rounded-full bg-brand-blue-light px-3 py-1 text-[11px] text-[#2a4874]"
+            >
+              {kw.label}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

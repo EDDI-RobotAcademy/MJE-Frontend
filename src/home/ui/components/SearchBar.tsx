@@ -34,7 +34,7 @@ function ShakeWrapper({
 export default function SearchBar() {
   const { params, errors, setPlace, setMeetTime, setTransport, clearFieldError, validate } =
     useSearchBox();
-  const { handleCreate, isShaking, shakeKey } = useCourseCreation(validate);
+  const { handleCreate, isLoading, isShaking, shakeKey } = useCourseCreation(validate, params);
 
   return (
     <div className="w-full max-w-[1028px] rounded-[30px] bg-white px-[25px] pb-[17px] pt-[24px] shadow-[3px_6px_10px_rgba(187,199,211,0.54)]">
@@ -97,7 +97,7 @@ export default function SearchBar() {
             </div>
 
             {/* Create Course button */}
-            <CourseCreationButton onClick={handleCreate} isShaking={isShaking} />
+            <CourseCreationButton onClick={handleCreate} isShaking={isShaking} isLoading={isLoading} />
           </div>
         </div>
 
