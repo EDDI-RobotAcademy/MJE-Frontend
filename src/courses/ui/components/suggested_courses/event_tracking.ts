@@ -29,7 +29,7 @@ export async function trackCardClick(
 ): Promise<void> {
   const event = buildCardClickEvent(page_path, course_id, course_name, card_type);
   try {
-    await trackEvent(event);
+    await trackEvent(event, "/courses/events");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(

@@ -1,1 +1,1 @@
-export { clientEnv } from './env';
+export { clientEnv, serverEnv } from './env';
