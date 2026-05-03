@@ -4,7 +4,7 @@ import { Course } from "@/courses/types/course";
 export const OTHER_COURSES_NOT_FOUND: Course[] = [];
 
 interface OtherCourseApiResponse {
-  courseId: string;
+  courseId?: string;
   id?: string;
   name: string;
   locations: string[];
@@ -40,8 +40,10 @@ function bindDuration(course: OtherCourseApiResponse): string | undefined {
 }
 
 function mapToCourse(course: OtherCourseApiResponse): Course {
+  const resolvedCourseId = course.courseId ?? course.id;
+
   return {
-    id: course.courseId,
+    id: resolvedCourseId ?? "",
     name: bindTitle(course),
     locations: bindLocations(course),
     description: course.description,

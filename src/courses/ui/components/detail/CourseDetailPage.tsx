@@ -51,6 +51,10 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
   );
 
   const handleOtherCourseClick = (course: Course) => {
+    if (!course.id) {
+      return;
+    }
+
     router.push(`/courses/detail/${course.id}`);
   };
 
