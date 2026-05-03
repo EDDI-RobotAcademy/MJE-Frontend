@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { useCourseDetail } from "@/courses/hooks/useCourseDetail";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { useRestaurants } from "@/courses/hooks/useRestaurants";
 import { useCafes } from "@/courses/hooks/useCafes";
@@ -24,7 +25,11 @@ interface CourseDetailPageProps {
 }
 
 export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
-  const { data, isLoading: isSessionLoading, error } = useSuggestedCourses();
+  const { data, isLoading: isSessionLoading } = useSuggestedCourses();
+  const {
+    data: detailData,
+    isLoading: isDetailLoading,
+  } = useCourseDetail(courseId);
   const { places: restaurants } = useRestaurants(courseId);
   const { places: cafes } = useCafes(courseId);
   const { places: activities } = useActivities(courseId);
@@ -35,17 +40,23 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [courseId]);
 
-  const allCourses: Course[] = useMemo(() => [
-    ...(data?.mainCourse ? [data.mainCourse] : []),
-    ...(data?.subCourses ?? []),
-  ], [data]);
+  const allCourses: Course[] = useMemo(
+    () => [
+      ...(data?.mainCourse ? [data.mainCourse] : []),
+      ...(data?.subCourses ?? []),
+    ],
+    [data],
+  );
 
-  const selectedCourse = allCourses.find((c) => c.id === courseId);
+  const selectedCourse =
+    allCourses.find((course) => course.id === courseId) ??
+    detailData?.selectedCourse;
 
   const keywords = useMemo(
     () =>
       (selectedCourse?.keywords ?? []).filter(
-        (kw, i, arr) => arr.findIndex((k) => k.label === kw.label) === i,
+        (keyword, index, items) =>
+          items.findIndex((item) => item.label === keyword.label) === index,
       ),
     [selectedCourse?.keywords],
   );
@@ -58,63 +69,54 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     router.push(`/courses/detail/${course.id}`);
   };
 
-  if (isSessionLoading) {
+  if (isSessionLoading || isDetailLoading) {
     return <DetailCourseSkeleton />;
-  }
-
-  if (error || !data) {
-    return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-base text-brand-text-gray">추천 코스를 불러올 수 없어요</p>
-        <p className="mt-1 text-sm text-brand-text-muted">잠시 후 다시 시도해 보세요</p>
-      </div>
-    );
   }
 
   if (!selectedCourse) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-base text-brand-text-gray">코스를 찾을 수 없어요</p>
-        <p className="mt-1 text-sm text-brand-text-muted">다시 검색해 보세요</p>
+        <p className="text-base text-brand-text-gray">코스 상세 정보를 불러올 수 없어요.</p>
+        <p className="mt-1 text-sm text-brand-text-muted">다시 시도해 주세요.</p>
       </div>
     );
   }
 
-  // API places를 visitOrder(id) 기준으로 정렬 후 합산
-  // API가 비어있으면(서브코스 등) 저장된 places 사용
   const apiPlaces: Place[] = [...restaurants, ...cafes, ...activities].sort(
     (a, b) => {
-      const aIdx = parseInt(a.id.split("-").pop() ?? "0");
-      const bIdx = parseInt(b.id.split("-").pop() ?? "0");
+      const aIdx = parseInt(a.id.split("-").pop() ?? "0", 10);
+      const bIdx = parseInt(b.id.split("-").pop() ?? "0", 10);
       return aIdx - bIdx;
     },
   );
   const places = apiPlaces.length > 0 ? apiPlaces : (selectedCourse.places ?? []);
 
-  // 다른 추천 코스: API 결과 우선, 없으면 저장된 서브코스 사용
+  const fallbackAlternatives =
+    allCourses.length > 0 ? allCourses : (detailData?.subCourses ?? []);
   const alternatives: Course[] =
     otherCourses.length > 0
       ? otherCourses.slice(0, 2)
-      : allCourses.filter((c) => c.id !== courseId).slice(0, 2);
+      : fallbackAlternatives.filter((course) => course.id !== courseId).slice(0, 2);
 
-  const locations = selectedCourse.locations ?? (selectedCourse.location ? [selectedCourse.location] : []);
+  const locations =
+    selectedCourse.locations ??
+    (selectedCourse.location ? [selectedCourse.location] : []);
   const headlineLocation = locations[0];
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Page header */}
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-2">
           {headlineLocation && <HeadlineLocation location={headlineLocation} />}
-          {selectedCourse.startTime && <HeadlineStartTime time={selectedCourse.startTime} />}
+          {selectedCourse.startTime && (
+            <HeadlineStartTime time={selectedCourse.startTime} />
+          )}
         </div>
         <HeadlineCourseTitle title={selectedCourse.name} />
         <HeadlineCourseExplain description={selectedCourse.description} />
       </div>
 
-      {/* Two-column layout */}
       <div className="grid grid-cols-[1fr_220px] items-start gap-4">
-        {/* Left: schedule timeline */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <BestCourseLabel />
@@ -141,11 +143,12 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
               ))}
             </div>
           ) : (
-            <p className="text-[12px] text-brand-text-muted">상세 일정이 없어요</p>
+            <p className="text-[12px] text-brand-text-muted">
+              상세 일정 정보가 없어요.
+            </p>
           )}
         </div>
 
-        {/* Right: sidebar */}
         <div className="flex flex-col gap-4">
           <ExportCard />
 
@@ -169,15 +172,14 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
         </div>
       </div>
 
-      {/* keywords — 하단 노출 (선택적 활용) */}
       {keywords.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {keywords.map((kw) => (
+          {keywords.map((keyword) => (
             <span
-              key={kw.label}
+              key={keyword.label}
               className="rounded-full bg-brand-blue-light px-3 py-1 text-[11px] text-[#2a4874]"
             >
-              {kw.label}
+              {keyword.label}
             </span>
           ))}
         </div>
