@@ -64,7 +64,8 @@ function mapPlace(p: BackendPlaceItem, courseId: string): Place {
 }
 
 function mapCourse(item: BackendCourseItem, courseId: string): Course {
-  const places = item.places.map((p) => mapPlace(p, courseId));
+  const resolvedCourseId = item.courseId || courseId;
+  const places = item.places.map((p) => mapPlace(p, resolvedCourseId));
   const locations = [...new Set(item.places.map((p) => p.area))];
   const keywords = [
     ...new Set(item.places.flatMap((p) => p.keywords)),
@@ -78,7 +79,7 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
   const imageUrl = item.places[0]?.imageUrl;
 
   return {
-    id: courseId,
+    id: resolvedCourseId,
     name: item.name ?? `${locations[0] ?? ""} ${item.courseType} 코스`,
     description:
       item.description ??
@@ -98,12 +99,13 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
 export function mapSessionToSuggestedCourses(
   session: CreateCourseApiResponse,
 ): SuggestedCoursesData {
+  const fallbackCourseId = session.courseId ?? session.recommendationId;
   const mainCourse = session.mainCourse
-    ? mapCourse(session.mainCourse, session.courseId)
+    ? mapCourse(session.mainCourse, fallbackCourseId)
     : null;
 
   const subCourses = session.subCourses.map((item, i) =>
-    mapCourse(item, `${session.courseId}-sub-${i}`),
+    mapCourse(item, `${fallbackCourseId}-sub-${i}`),
   );
 
   return { mainCourse, subCourses };
