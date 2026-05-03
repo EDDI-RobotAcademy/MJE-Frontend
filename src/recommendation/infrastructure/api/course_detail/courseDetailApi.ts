@@ -10,7 +10,7 @@ export interface CourseDetailData {
 export const COURSE_DETAIL_NOT_FOUND: CourseDetailData | null = null;
 
 interface CourseDetailSubCourseApiResponse {
-  courseId?: string;
+  courseId: string;
   id?: string;
   name: string;
   description: string;
