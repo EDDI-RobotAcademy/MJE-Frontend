@@ -81,12 +81,7 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
   return {
     id: resolvedCourseId,
     name: item.title ?? item.name ?? "",
-    description:
-      item.description ??
-      `${places
-        .slice(0, 3)
-        .map((p) => p.name)
-        .join(", ")} 등 ${places.length}곳을 방문하는 코스입니다.`,
+    description: item.description ?? "",
     locations,
     startTime,
     duration,
