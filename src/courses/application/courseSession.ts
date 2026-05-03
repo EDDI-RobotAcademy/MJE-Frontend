@@ -80,13 +80,8 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
 
   return {
     id: resolvedCourseId,
-    name: item.name ?? `${locations[0] ?? ""} ${item.courseType} 코스`,
-    description:
-      item.description ??
-      `${places
-        .slice(0, 3)
-        .map((p) => p.name)
-        .join(", ")} 등 ${places.length}곳을 방문하는 코스입니다.`,
+    name: item.title ?? item.name ?? "",
+    description: item.description ?? "",
     locations,
     startTime,
     duration,
@@ -99,13 +94,12 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
 export function mapSessionToSuggestedCourses(
   session: CreateCourseApiResponse,
 ): SuggestedCoursesData {
-  const fallbackCourseId = session.courseId ?? session.mainCourse?.courseId ?? "";
   const mainCourse = session.mainCourse
-    ? mapCourse(session.mainCourse, fallbackCourseId)
+    ? mapCourse(session.mainCourse, "")
     : null;
 
   const subCourses = session.subCourses.map((item, i) =>
-    mapCourse(item, fallbackCourseId || `sub-${i}`),
+    mapCourse(item, `sub-${i}`),
   );
 
   return { mainCourse, subCourses };

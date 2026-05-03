@@ -4,7 +4,7 @@ import { Course } from "@/courses/types/course";
 export const OTHER_COURSES_NOT_FOUND: Course[] = [];
 
 interface OtherCourseApiResponse {
-  courseId?: string;
+  courseId: string;
   id?: string;
   name: string;
   locations: string[];

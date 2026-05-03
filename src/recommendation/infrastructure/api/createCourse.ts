@@ -22,13 +22,14 @@ export interface BackendCourseItem {
   transport: string;
   totalDurationMinutes: number;
   places: BackendPlaceItem[];
+  title?: string;
   name?: string;
   description?: string;
 }
 
 export interface CreateCourseApiResponse {
   recommendationId: string;
-  courseId?: string;
+  courseId: string;
   mainCourse: BackendCourseItem | null;
   subCourses: BackendCourseItem[];
   message: string | null;
