@@ -50,8 +50,8 @@ export default function CourseDetailPage({
   );
 
   const selectedCourse =
-    allCourses.find((course) => course.id === courseId) ??
-    initialDetailData?.selectedCourse;
+    initialDetailData?.selectedCourse ??
+    allCourses.find((course) => course.id === courseId);
 
   const keywords = useMemo(
     () =>
@@ -71,7 +71,7 @@ export default function CourseDetailPage({
     router.push(`/courses/detail/${course.id}`);
   };
 
-  if (isSessionLoading) {
+  if (isSessionLoading && !initialDetailData) {
     return <DetailCourseSkeleton />;
   }
 
