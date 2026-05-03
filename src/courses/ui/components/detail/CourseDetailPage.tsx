@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { useCourseDetail } from "@/courses/hooks/useCourseDetail";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { useRestaurants } from "@/courses/hooks/useRestaurants";
 import { useCafes } from "@/courses/hooks/useCafes";
 import { useActivities } from "@/courses/hooks/useActivities";
 import { useOtherCourses } from "@/courses/hooks/useOtherCourses";
 import { Course, Place } from "@/courses/types/course";
+import { CourseDetailData } from "@/recommendation/infrastructure/api/course_detail/courseDetailApi";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
@@ -22,14 +22,14 @@ import HeadlineCourseExplain from "@/courses/ui/components/headline_course_expla
 
 interface CourseDetailPageProps {
   courseId: string;
+  initialDetailData: CourseDetailData | null;
 }
 
-export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
+export default function CourseDetailPage({
+  courseId,
+  initialDetailData,
+}: CourseDetailPageProps) {
   const { data, isLoading: isSessionLoading } = useSuggestedCourses();
-  const {
-    data: detailData,
-    isLoading: isDetailLoading,
-  } = useCourseDetail(courseId);
   const { places: restaurants } = useRestaurants(courseId);
   const { places: cafes } = useCafes(courseId);
   const { places: activities } = useActivities(courseId);
@@ -50,7 +50,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
 
   const selectedCourse =
     allCourses.find((course) => course.id === courseId) ??
-    detailData?.selectedCourse;
+    initialDetailData?.selectedCourse;
 
   const keywords = useMemo(
     () =>
@@ -69,7 +69,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     router.push(`/courses/detail/${course.id}`);
   };
 
-  if (isSessionLoading || isDetailLoading) {
+  if (isSessionLoading) {
     return <DetailCourseSkeleton />;
   }
 
@@ -92,7 +92,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
   const places = apiPlaces.length > 0 ? apiPlaces : (selectedCourse.places ?? []);
 
   const fallbackAlternatives =
-    allCourses.length > 0 ? allCourses : (detailData?.subCourses ?? []);
+    allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
   const alternatives: Course[] =
     otherCourses.length > 0
       ? otherCourses.slice(0, 2)
