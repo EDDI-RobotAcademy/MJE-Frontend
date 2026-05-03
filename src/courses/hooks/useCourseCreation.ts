@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { SearchParams } from "@/courses/types/search";
-import { createCourse } from "@/recommendation/infrastructure/api/createCourse";
+import { createCourseAction } from "@/recommendation/application/actions/createCourseAction";
 import { saveCourseSession } from "@/courses/application/courseSession";
 
 export function useCourseCreation(
@@ -25,7 +25,7 @@ export function useCourseCreation(
 
     setIsLoading(true);
     try {
-      const response = await createCourse({
+      const response = await createCourseAction({
         area: params.place,
         start_time: params.meetTime ?? "",
         transport: params.transport ?? "walk",

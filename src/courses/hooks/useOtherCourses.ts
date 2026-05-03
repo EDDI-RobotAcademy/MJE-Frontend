@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Course } from "@/courses/types/course";
-import { fetchOtherCourses } from "@/recommendation/infrastructure/api/other_course/otherCourseApi";
+import { fetchOtherCoursesAction } from "@/recommendation/application/actions/fetchOtherCoursesAction";
 
 interface UseOtherCoursesResult {
   courses: Course[];
@@ -21,7 +21,7 @@ export function useOtherCourses(courseId: string): UseOtherCoursesResult {
     setIsLoading(true);
     setError(null);
 
-    fetchOtherCourses(courseId)
+    fetchOtherCoursesAction(courseId)
       .then((data) => {
         if (!cancelled) {
           setCourses(data);

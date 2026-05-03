@@ -35,6 +35,21 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [courseId]);
 
+  const allCourses: Course[] = useMemo(() => [
+    ...(data?.mainCourse ? [data.mainCourse] : []),
+    ...(data?.subCourses ?? []),
+  ], [data]);
+
+  const selectedCourse = allCourses.find((c) => c.id === courseId);
+
+  const keywords = useMemo(
+    () =>
+      (selectedCourse?.keywords ?? []).filter(
+        (kw, i, arr) => arr.findIndex((k) => k.label === kw.label) === i,
+      ),
+    [selectedCourse?.keywords],
+  );
+
   const handleOtherCourseClick = (course: Course) => {
     router.push(`/courses/detail/${course.id}`);
   };
@@ -51,12 +66,6 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
       </div>
     );
   }
-
-  const allCourses: Course[] = [
-    ...(data.mainCourse ? [data.mainCourse] : []),
-    ...data.subCourses,
-  ];
-  const selectedCourse = allCourses.find((c) => c.id === courseId);
 
   if (!selectedCourse) {
     return (
@@ -86,15 +95,6 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
 
   const locations = selectedCourse.locations ?? (selectedCourse.location ? [selectedCourse.location] : []);
   const headlineLocation = locations[0];
-
-  // keyword 중복 제거 (API hashtag 연동 전까지 stored 데이터 사용)
-  const keywords = useMemo(
-    () =>
-      selectedCourse.keywords.filter(
-        (kw, i, arr) => arr.findIndex((k) => k.label === kw.label) === i,
-      ),
-    [selectedCourse.keywords],
-  );
 
   return (
     <div className="flex flex-col gap-6">
