@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
-import { loadCourseSession } from "@/courses/application/courseSession";
 import MainCourse from "@/courses/ui/components/main_course/MainCourse";
 import SubCourse from "@/courses/ui/components/sub_course/SubCourse";
 import { trackCardClick } from "@/courses/ui/components/suggested_courses/event_tracking";
@@ -25,24 +24,21 @@ export default function SuggestedCourses() {
   }, [data]);
 
   const handleMainCourseClick = (course: Course) => {
-    const targetCourseId = loadCourseSession()?.mainCourse?.courseId ?? course.id;
-    if (!targetCourseId) {
+    if (!course.id) {
       return;
     }
 
-    void trackCardClick(pathname, targetCourseId, course.name, "main");
-    router.push(`/courses/detail/${targetCourseId}`);
+    void trackCardClick(pathname, course.id, course.name, "main");
+    router.push(`/courses/detail/${course.id}`);
   };
 
-  const handleSubCourseClick = (course: Course, index: number) => {
-    const targetCourseId =
-      loadCourseSession()?.subCourses[index]?.courseId ?? course.id;
-    if (!targetCourseId) {
+  const handleSubCourseClick = (course: Course) => {
+    if (!course.id) {
       return;
     }
 
-    void trackCardClick(pathname, targetCourseId, course.name, "sub");
-    router.push(`/courses/detail/${targetCourseId}`);
+    void trackCardClick(pathname, course.id, course.name, "sub");
+    router.push(`/courses/detail/${course.id}`);
   };
 
   if (isLoading) {
@@ -79,7 +75,7 @@ export default function SuggestedCourses() {
             <SubCourse
               key={course.id || `sub-course-${index}`}
               course={course}
-              onClick={(c) => handleSubCourseClick(c, index)}
+              onClick={handleSubCourseClick}
               label={index === 0 ? "Option A" : "Option B"}
             />
           ))}
