@@ -4,10 +4,11 @@ import { Course } from "@/courses/types/course";
 export const OTHER_COURSES_NOT_FOUND: Course[] = [];
 
 interface OtherCourseApiResponse {
-  id: string;
+  courseId?: string;
+  id?: string;
   name: string;
   locations: string[];
-  duration?: string;
+  duration?: number | string | null;
   description: string;
   imageUrl?: string;
 }
@@ -29,12 +30,20 @@ function bindLocations(course: OtherCourseApiResponse): string[] {
 }
 
 function bindDuration(course: OtherCourseApiResponse): string | undefined {
-  return course.duration;
+  if (course.duration == null) {
+    return undefined;
+  }
+
+  return typeof course.duration === "number"
+    ? `${Math.ceil(course.duration / 60)}시간`
+    : course.duration;
 }
 
 function mapToCourse(course: OtherCourseApiResponse): Course {
+  const resolvedCourseId = course.courseId ?? course.id;
+
   return {
-    id: course.id,
+    id: resolvedCourseId ?? "",
     name: bindTitle(course),
     locations: bindLocations(course),
     description: course.description,

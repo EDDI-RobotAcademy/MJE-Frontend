@@ -17,6 +17,7 @@ export interface BackendPlaceItem {
 }
 
 export interface BackendCourseItem {
+  courseId: string;
   courseType: string;
   transport: string;
   totalDurationMinutes: number;
@@ -26,7 +27,8 @@ export interface BackendCourseItem {
 }
 
 export interface CreateCourseApiResponse {
-  courseId: string;
+  recommendationId: string;
+  courseId?: string;
   mainCourse: BackendCourseItem | null;
   subCourses: BackendCourseItem[];
   message: string | null;

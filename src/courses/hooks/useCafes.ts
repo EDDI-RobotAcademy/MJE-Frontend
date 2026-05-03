@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Place } from "@/courses/types/course";
-import { fetchCourseCafes } from "@/recommendation/infrastructure/api/cafe/cafeApi";
+import { fetchCafesAction } from "@/recommendation/application/actions/fetchCafesAction";
 
 interface UseCafesResult {
   places: Place[];
@@ -21,7 +21,7 @@ export function useCafes(courseId: string): UseCafesResult {
     setIsLoading(true);
     setError(null);
 
-    fetchCourseCafes(courseId)
+    fetchCafesAction(courseId)
       .then((data) => {
         if (!cancelled) {
           setPlaces(data);

@@ -16,7 +16,7 @@ export function buildTryAgainClickEvent(page_path: string): TryAgainClickEvent {
 export async function trackTryAgainClick(page_path: string): Promise<void> {
   const event = buildTryAgainClickEvent(page_path);
   try {
-    await trackEvent(event);
+    await trackEvent(event, "/courses/events");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(

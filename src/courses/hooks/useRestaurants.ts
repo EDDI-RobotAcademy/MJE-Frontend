@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Place } from "@/courses/types/course";
-import { fetchCourseRestaurants } from "@/recommendation/infrastructure/api/restaurant/restaurantApi";
+import { fetchRestaurantsAction } from "@/recommendation/application/actions/fetchRestaurantsAction";
 
 interface UseRestaurantsResult {
   places: Place[];
@@ -21,7 +21,7 @@ export function useRestaurants(courseId: string): UseRestaurantsResult {
     setIsLoading(true);
     setError(null);
 
-    fetchCourseRestaurants(courseId)
+    fetchRestaurantsAction(courseId)
       .then((data) => {
         if (!cancelled) {
           setPlaces(data);

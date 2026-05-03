@@ -1,5 +1,6 @@
 import HeroSection from "@/home/ui/components/HeroSection";
 import SearchBar from "@/home/ui/components/SearchBar";
+import ViewHomeTracker from "@/home/ui/components/ViewHomeTracker";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
 
       {/* 콘텐츠 래퍼 — 블롭보다 위에 렌더링 보장 */}
       <div className="relative z-10">
+        <ViewHomeTracker />
         <HeroSection />
         <section className="flex justify-center px-[206px] pb-24">
           <SearchBar />

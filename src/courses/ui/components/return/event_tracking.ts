@@ -16,7 +16,7 @@ export function buildReturnClickEvent(page_path: string): ReturnClickEvent {
 export async function trackReturnClick(page_path: string): Promise<void> {
   const event = buildReturnClickEvent(page_path);
   try {
-    await trackEvent(event);
+    await trackEvent(event, "/courses/events");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(

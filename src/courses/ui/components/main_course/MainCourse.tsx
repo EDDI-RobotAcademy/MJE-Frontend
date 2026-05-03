@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Course } from "@/courses/types/course";
 import MainCourseExplainText from "@/courses/ui/components/main_course_explain_text/MainCourseExplainText";
 import MainCourseHashtag from "@/courses/ui/components/main_course_hashtag/MainCourseHashtag";
@@ -26,19 +27,27 @@ interface MainCourseProps {
 }
 
 export default function MainCourse({ course, onClick }: MainCourseProps) {
+  const [errored, setErrored] = useState(false);
   const locations = course.locations ?? (course.location ? [course.location] : []);
+  const imageSrc =
+    errored || !course.imageUrl
+      ? "https://picsum.photos/seed/main/800/600"
+      : course.imageUrl;
 
   return (
     <button
+      type="button"
+      disabled={!course.id}
       onClick={() => onClick(course)}
       className="group relative flex h-[594px] w-full cursor-pointer flex-col overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >
       {/* Image — upper ~55% of card */}
       <div className="relative h-[315px] w-full flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
         <img
-          src={course.imageUrl ?? "https://picsum.photos/seed/main/800/600"}
+          src={imageSrc}
           alt={course.name}
           className="absolute inset-0 h-full w-full object-cover"
+          onError={() => setErrored(true)}
         />
         {/* Badge — top-left inside image */}
         <span className="absolute left-4 top-4 rounded-full bg-brand-blue-light px-3 py-1 text-[11px] font-medium text-[#2a4874] shadow-sm">

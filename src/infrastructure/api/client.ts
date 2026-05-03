@@ -1,3 +1,4 @@
+import 'server-only';
 import { clientEnv } from '../config';
 
 const BASE_URL = clientEnv.apiBaseUrl;
