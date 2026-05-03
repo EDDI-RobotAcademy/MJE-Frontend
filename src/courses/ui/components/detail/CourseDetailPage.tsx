@@ -10,6 +10,7 @@ import { useOtherCourses } from "@/courses/hooks/useOtherCourses";
 import { Course, Place } from "@/courses/types/course";
 import { CourseDetailData } from "@/recommendation/infrastructure/api/course_detail/courseDetailApi";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
+import { trackOptionCardClick } from "@/courses/ui/components/other_course/event_tracking";
 import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
@@ -66,6 +67,7 @@ export default function CourseDetailPage({
       return;
     }
 
+    trackOptionCardClick();
     router.push(`/courses/detail/${course.id}`);
   };
 
