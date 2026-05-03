@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Course } from "@/courses/types/course";
 import SubCourseExplainText from "@/courses/ui/components/sub_course_explain_text/SubCourseExplainText";
 import SubCourseHashtag from "@/courses/ui/components/sub_course_hashtag/SubCourseHashtag";
@@ -27,19 +28,27 @@ interface SubCourseProps {
 }
 
 export default function SubCourse({ course, onClick, label }: SubCourseProps) {
+  const [errored, setErrored] = useState(false);
   const locations = course.locations ?? (course.location ? [course.location] : []);
+  const imageSrc =
+    errored || !course.imageUrl
+      ? "https://picsum.photos/seed/sub/800/600"
+      : course.imageUrl;
 
   return (
     <button
+      type="button"
+      disabled={!course.id}
       onClick={() => onClick(course)}
       className="group relative flex h-[289px] w-full cursor-pointer flex-row overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >
       {/* Left: Image — square-ish, fills full inner height */}
       <div className="relative h-full w-[47%] flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
         <img
-          src={course.imageUrl ?? "https://picsum.photos/seed/sub/800/600"}
+          src={imageSrc}
           alt={course.name}
           className="absolute inset-0 h-full w-full object-cover"
+          onError={() => setErrored(true)}
         />
         {/* Badge — top-left of image */}
         <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-0.5 text-[10px] font-medium text-black shadow-sm">

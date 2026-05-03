@@ -14,6 +14,9 @@ export default function SuggestedCourses() {
   const { data, isLoading, error } = useSuggestedCourses();
   const pathname = usePathname();
   const router = useRouter();
+  const hasMainCourse = Boolean(data?.mainCourse);
+  const hasSubCourses = (data?.subCourses.length ?? 0) > 0;
+  const hasEnoughRecommendations = hasMainCourse && hasSubCourses;
 
   useEffect(() => {
     if (data && (data.mainCourse || data.subCourses.length > 0)) {
@@ -23,6 +26,9 @@ export default function SuggestedCourses() {
 
   const handleMainCourseClick = (course: Course) => {
     const targetCourseId = loadCourseSession()?.mainCourse?.courseId ?? course.id;
+    if (!targetCourseId) {
+      return;
+    }
 
     void trackCardClick(pathname, targetCourseId, course.name, "main");
     router.push(`/courses/detail/${targetCourseId}`);
@@ -31,6 +37,9 @@ export default function SuggestedCourses() {
   const handleSubCourseClick = (course: Course, index: number) => {
     const targetCourseId =
       loadCourseSession()?.subCourses[index]?.courseId ?? course.id;
+    if (!targetCourseId) {
+      return;
+    }
 
     void trackCardClick(pathname, targetCourseId, course.name, "sub");
     router.push(`/courses/detail/${targetCourseId}`);
@@ -44,7 +53,7 @@ export default function SuggestedCourses() {
     );
   }
 
-  if (error || !data || (!data.mainCourse && data.subCourses.length === 0)) {
+  if (error || !data || (!hasMainCourse && !hasSubCourses)) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <p className="text-base text-gray-500">아직 추천 코스가 없어요</p>
@@ -68,12 +77,18 @@ export default function SuggestedCourses() {
         <div className="flex flex-col gap-4">
           {data.subCourses.slice(0, 2).map((course, index) => (
             <SubCourse
-              key={course.id}
+              key={course.id || `sub-course-${index}`}
               course={course}
               onClick={(c) => handleSubCourseClick(c, index)}
               label={index === 0 ? "Option A" : "Option B"}
             />
           ))}
+        </div>
+      )}
+
+      {!hasEnoughRecommendations && (
+        <div className="col-span-2 rounded-[20px] bg-white px-4 py-3 text-center shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
+          <p className="text-sm text-gray-500">추천 코스가 아직 충분하지 않아요.</p>
         </div>
       )}
     </div>

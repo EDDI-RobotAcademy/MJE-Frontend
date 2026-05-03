@@ -35,6 +35,8 @@ export default function OtherCourseCard({ course, label, onClick }: OtherCourseC
 
   return (
     <button
+      type="button"
+      disabled={!course.id}
       onClick={() => onClick(course)}
       className="flex w-full cursor-pointer flex-col gap-2 rounded-[20px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >

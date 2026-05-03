@@ -97,6 +97,7 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
     otherCourses.length > 0
       ? otherCourses.slice(0, 2)
       : fallbackAlternatives.filter((course) => course.id !== courseId).slice(0, 2);
+  const safeAlternatives = alternatives.filter((course) => course.name);
 
   const locations =
     selectedCourse.locations ??
@@ -152,15 +153,15 @@ export default function CourseDetailPage({ courseId }: CourseDetailPageProps) {
         <div className="flex flex-col gap-4">
           <ExportCard />
 
-          {alternatives.length > 0 && (
+          {safeAlternatives.length > 0 && (
             <div className="flex flex-col gap-3">
               <span className="inline-block w-fit rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
                 다른 추천 코스!
               </span>
               <div className="flex flex-col gap-3">
-                {alternatives.map((course, index) => (
+                {safeAlternatives.map((course, index) => (
                   <OtherCourseCard
-                    key={course.id}
+                    key={course.id || `alternative-course-${index}`}
                     course={course}
                     label={index === 0 ? "Option A" : "Option B"}
                     onClick={handleOtherCourseClick}
