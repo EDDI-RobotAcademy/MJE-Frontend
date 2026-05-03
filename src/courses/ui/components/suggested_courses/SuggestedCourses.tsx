@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
 import { Course } from "@/courses/types/course";
+import { loadCourseSession } from "@/courses/application/courseSession";
 import MainCourse from "@/courses/ui/components/main_course/MainCourse";
 import SubCourse from "@/courses/ui/components/sub_course/SubCourse";
 import { trackCardClick } from "@/courses/ui/components/suggested_courses/event_tracking";
@@ -20,9 +21,19 @@ export default function SuggestedCourses() {
     }
   }, [data]);
 
-  const handleCourseClick = (course: Course, card_type: "main" | "sub") => {
-    void trackCardClick(pathname, course.id, course.name, card_type);
-    router.push(`/courses/detail/${course.id}`);
+  const handleMainCourseClick = (course: Course) => {
+    const targetCourseId = loadCourseSession()?.mainCourse?.courseId ?? course.id;
+
+    void trackCardClick(pathname, targetCourseId, course.name, "main");
+    router.push(`/courses/detail/${targetCourseId}`);
+  };
+
+  const handleSubCourseClick = (course: Course, index: number) => {
+    const targetCourseId =
+      loadCourseSession()?.subCourses[index]?.courseId ?? course.id;
+
+    void trackCardClick(pathname, targetCourseId, course.name, "sub");
+    router.push(`/courses/detail/${targetCourseId}`);
   };
 
   if (isLoading) {
@@ -48,7 +59,7 @@ export default function SuggestedCourses() {
       {data.mainCourse && (
         <MainCourse
           course={data.mainCourse}
-          onClick={(course) => handleCourseClick(course, "main")}
+          onClick={handleMainCourseClick}
         />
       )}
 
@@ -59,7 +70,7 @@ export default function SuggestedCourses() {
             <SubCourse
               key={course.id}
               course={course}
-              onClick={(c) => handleCourseClick(c, "sub")}
+              onClick={(c) => handleSubCourseClick(c, index)}
               label={index === 0 ? "Option A" : "Option B"}
             />
           ))}
