@@ -80,7 +80,7 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
 
   return {
     id: resolvedCourseId,
-    name: item.name ?? `${locations[0] ?? ""} ${item.courseType} 코스`,
+    name: item.title ?? item.name ?? "",
     description:
       item.description ??
       `${places

@@ -22,6 +22,7 @@ export interface BackendCourseItem {
   transport: string;
   totalDurationMinutes: number;
   places: BackendPlaceItem[];
+  title?: string;
   name?: string;
   description?: string;
 }
