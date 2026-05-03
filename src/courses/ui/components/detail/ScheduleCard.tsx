@@ -57,9 +57,11 @@ export default function ScheduleCard({ place }: ScheduleCardProps) {
         <p className="line-clamp-2 text-[11px] leading-snug text-brand-text-gray">
           {place.description}
         </p>
-        <span className="mt-0.5 inline-block w-fit rounded-full bg-brand-blue-light px-2 py-0.5 text-[9px] text-brand-navy">
-          {place.location}
-        </span>
+        {place.location && (
+          <span className="mt-0.5 inline-block w-fit rounded-full bg-brand-blue-light px-2 py-0.5 text-[9px] text-brand-navy">
+            {place.location}
+          </span>
+        )}
       </div>
 
       {/* Chevron */}

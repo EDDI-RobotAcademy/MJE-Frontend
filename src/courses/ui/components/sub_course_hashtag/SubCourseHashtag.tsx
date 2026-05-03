@@ -14,7 +14,7 @@ export default function SubCourseHashtag({ keywords }: SubCourseHashtagProps) {
           key={i}
           className="rounded-full border border-[#2a4874] px-2 py-0.5 text-[10px] text-[#2a4874]"
         >
-          #{kw.label}
+          {kw.label}
         </span>
       ))}
     </div>
