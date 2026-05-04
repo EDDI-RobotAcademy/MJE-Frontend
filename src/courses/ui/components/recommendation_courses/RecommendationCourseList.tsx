@@ -1,9 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { fetchRecommendations } from "@/recommendation/infrastructure/api/recommendationsApi";
+import { RecommendationsResponse } from "@/recommendation/types";
 import BestCourseCard from "./BestCourseCard";
 import OptionalCourseCard from "./OptionalCourseCard";
+import RecommendationLoading from "./RecommendationLoading";
 
-export default async function RecommendationCourseList() {
-  const data = await fetchRecommendations();
+export default function RecommendationCourseList() {
+  const searchParams = useSearchParams();
+  const [data, setData] = useState<RecommendationsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const area = searchParams.get("area") ?? "";
+    const start_time = searchParams.get("start_time") ?? "";
+    const transport = searchParams.get("transport") ?? "walk";
+
+    fetchRecommendations({ area, start_time, transport })
+      .then(setData)
+      .finally(() => setIsLoading(false));
+  }, [searchParams]);
+
+  if (isLoading) return <RecommendationLoading />;
+
+  if (!data) return null;
 
   const bestCourse = data.courses.find((c) => c.grade === "best") ?? null;
   const optionalCourses = data.courses.filter((c) => c.grade === "optional").slice(0, 2);
@@ -21,36 +43,24 @@ export default async function RecommendationCourseList() {
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      {/* Best section */}
-      {bestCourse && (
-        <section>
-          <div className="mb-3 flex items-center gap-2">
-            <span className="text-[13px] font-semibold text-brand-navy">Best</span>
-            <span className="text-[12px] text-brand-text-muted">가장 잘 맞는 코스예요</span>
+    <div className="flex w-full flex-col gap-4">
+      <p className="self-end text-right text-[10px] text-[#797979]">
+        * 왼쪽은 맞춤 메인 코스, 오른쪽은 대안 코스입니다. 좁은 화면에서는 위 아래로 정렬됩니다.
+      </p>
+      <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-stretch">
+        {bestCourse && (
+          <div className="w-full lg:flex-1">
+            <BestCourseCard course={bestCourse} />
           </div>
-          <BestCourseCard course={bestCourse} />
-        </section>
-      )}
-
-      {/* Optional section */}
-      {optionalCourses.length > 0 && (
-        <section>
-          <div className="mb-3 flex items-center gap-2">
-            <span className="text-[13px] font-semibold text-brand-navy">Optional</span>
-            <span className="text-[12px] text-brand-text-muted">다른 스타일도 골라보세요</span>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
+        )}
+        {optionalCourses.length > 0 && (
+          <div className="flex w-full flex-col gap-4 lg:flex-1">
             {optionalCourses.map((course, index) => (
-              <OptionalCourseCard
-                key={`optional-${index}`}
-                course={course}
-                index={index}
-              />
+              <OptionalCourseCard key={`optional-${index}`} course={course} index={index} />
             ))}
           </div>
-        </section>
-      )}
+        )}
+      </div>
     </div>
   );
 }

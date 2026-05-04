@@ -6,51 +6,98 @@ interface BestCourseCardProps {
   course: RecommendationCourseItem;
 }
 
-function PlaceRow({ name, category }: { name: string; category: string }) {
+function extractArea(address: string): string {
+  const parts = address.split(" ").filter(Boolean);
+  return parts[parts.length - 1] ?? address;
+}
+
+function ArrowIcon() {
   return (
-    <div className="flex items-center gap-2">
-      <span className="w-[42px] shrink-0 rounded-full bg-brand-blue-light px-2 py-0.5 text-center text-[10px] font-medium text-brand-navy">
-        {category}
-      </span>
-      <span className="truncate text-[15px] font-medium text-brand-text-dark">{name}</span>
-    </div>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      style={{ transform: "rotate(-45deg)" }}
+    >
+      <path
+        d="M5 12H19M19 12L13 6M19 12L13 18"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
 export default function BestCourseCard({ course }: BestCourseCardProps) {
-  const keyword = course.restaurant.keyword;
-  const title = `${keyword} 데이트 코스`;
+  const fromArea = extractArea(course.restaurant.address);
+  const toArea = extractArea(course.activity.address);
+  const hashtags = [course.restaurant.keyword, course.cafe.keyword, course.activity.keyword].filter(
+    Boolean,
+  );
+  const title = `${fromArea}에서 ${toArea}까지, 가볍게 걷는 하루`;
+  const description =
+    `${course.restaurant.name}에서 출발해 ${course.activity.name}까지 이어지는,\n` +
+    `가볍게 이동하며 즐기기 좋은 도심 데이트 코스`;
+  const imageUrl = `https://picsum.photos/seed/${course.restaurant.id}/500/300`;
 
   return (
-    <div className="w-full overflow-hidden rounded-[30px] bg-white shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
-      {/* Top gradient band */}
-      <div
-        className="flex h-[140px] w-full items-end px-8 pb-6"
-        style={{ background: "linear-gradient(135deg, #d0e2f4 0%, #eaf2fb 60%, #f7fbff 100%)" }}
-      >
-        <div className="flex w-full items-end justify-between">
-          <div>
-            <span className="mb-2 inline-block rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
-              ★ Best Course
-            </span>
-            <h2
-              className="text-[22px] font-semibold leading-tight text-brand-navy"
-              style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
-            >
-              {title}
-            </h2>
-          </div>
-          <span className="mb-1 inline-block rounded-full bg-white/70 px-3 py-1 text-[11px] text-brand-text-gray">
-            📍 {keyword}
-          </span>
-        </div>
+    <div className="relative flex h-full flex-col rounded-[30px] bg-white shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+      {/* Image with 12px inset padding */}
+      <div className="p-[12px] pb-0">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="h-[293px] w-full rounded-[22px] object-cover"
+        />
       </div>
 
-      {/* Place list */}
-      <div className="flex flex-col gap-3 px-8 py-6">
-        <PlaceRow name={course.restaurant.name} category="식당" />
-        <PlaceRow name={course.cafe.name} category="카페" />
-        <PlaceRow name={course.activity.name} category="활동" />
+      {/* Best Course badge overlaid on image */}
+      <div className="absolute left-[26px] top-[26px] flex items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] py-[5px]">
+        <span className="text-[11px] text-black">Best Course !</span>
+      </div>
+
+      {/* Text content */}
+      <div className="flex flex-1 flex-col gap-[7px] p-[26px]">
+        {/* Location tags */}
+        <div className="flex gap-[10px]">
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+            {fromArea}
+          </span>
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+            {toArea}
+          </span>
+        </div>
+
+        {/* Course title */}
+        <h2 className="text-[24px] leading-normal text-black">{title}</h2>
+
+        {/* Course description */}
+        <p className="whitespace-pre-line text-[12px] leading-normal text-[#6a7282]">
+          {description}
+        </p>
+
+        {/* Hashtags + arrow button */}
+        <div className="mt-auto flex items-end justify-between pt-[16px]">
+          <div className="flex flex-wrap gap-[9px]">
+            {hashtags.map((tag, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center rounded-full border border-[#2a4874] px-[14px] py-[4px] text-[10px] text-[#2a4874]"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="ml-4 flex size-[64px] shrink-0 items-center justify-center rounded-full bg-[#333] shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
+          >
+            <ArrowIcon />
+          </button>
+        </div>
       </div>
     </div>
   );

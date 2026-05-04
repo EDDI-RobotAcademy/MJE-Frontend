@@ -7,47 +7,98 @@ interface OptionalCourseCardProps {
   index: number;
 }
 
-function PlaceRow({ name, category }: { name: string; category: string }) {
+function extractArea(address: string): string {
+  const parts = address.split(" ").filter(Boolean);
+  return parts[parts.length - 1] ?? address;
+}
+
+function SmallArrowIcon() {
   return (
-    <div className="flex items-center gap-2">
-      <span className="w-[42px] shrink-0 rounded-full bg-brand-blue-light px-2 py-0.5 text-center text-[10px] font-medium text-brand-navy">
-        {category}
-      </span>
-      <span className="truncate text-[13px] text-brand-text-dark">{name}</span>
-    </div>
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      style={{ transform: "rotate(-45deg)" }}
+    >
+      <path
+        d="M2 8H14M14 8L9 3M14 8L9 13"
+        stroke="#2a4874"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
 export default function OptionalCourseCard({ course, index }: OptionalCourseCardProps) {
-  const keyword = course.restaurant.keyword;
-  const title = `${keyword} 데이트 코스`;
-  const label = `Option ${index + 1}`;
+  const label = `Option ${String.fromCharCode(65 + index)}`;
+  const fromArea = extractArea(course.restaurant.address);
+  const toArea = extractArea(course.activity.address);
+  const hashtags = [course.restaurant.keyword, course.cafe.keyword, course.activity.keyword]
+    .filter(Boolean)
+    .slice(0, 2);
+  const title = `${fromArea}에서 즐기는 ${course.cafe.keyword} 코스`;
+  const description =
+    `${course.cafe.name}에서 여유롭게 시작해,\n` +
+    `${course.restaurant.name}을 거쳐 ${course.activity.name}로\n` +
+    `마무리하는 하루 코스`;
+  const imageUrl = `https://picsum.photos/seed/${course.restaurant.id + 20}/300/300`;
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[24px] bg-white shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
-      {/* Top band */}
-      <div
-        className="flex items-center justify-between px-6 py-4"
-        style={{ background: "linear-gradient(135deg, #eaf2fb 0%, #f7fbff 100%)" }}
-      >
-        <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[10px] font-medium text-brand-text-gray shadow-sm">
-          {label}
-        </span>
-        <span className="text-[10px] text-brand-text-gray">📍 {keyword}</span>
+    <div className="relative flex h-[289px] overflow-hidden rounded-[30px] bg-white shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+      {/* Left: Image area */}
+      <div className="relative shrink-0 p-[12px]">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="h-[265px] w-[216px] rounded-[22px] object-cover"
+        />
+        {/* Overlay: label badge + arrow button */}
+        <div className="absolute left-[28px] top-[25px] flex w-[187px] items-center justify-between">
+          <div className="rounded-full bg-white px-[13px] py-[4px] text-[10px] text-black shadow-sm">
+            {label}
+          </div>
+          <button
+            type="button"
+            className="flex size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
+          >
+            <SmallArrowIcon />
+          </button>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col gap-2.5 px-6 py-5">
-        <h3
-          className="text-[15px] font-semibold text-brand-navy"
-          style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
-        >
-          {title}
-        </h3>
-        <div className="flex flex-col gap-2 pt-1">
-          <PlaceRow name={course.restaurant.name} category="식당" />
-          <PlaceRow name={course.cafe.name} category="카페" />
-          <PlaceRow name={course.activity.name} category="활동" />
+      {/* Right: Text content */}
+      <div className="flex flex-1 flex-col gap-[10px] py-[25px] pr-[20px]">
+        {/* Location tags */}
+        <div className="flex gap-[14px]">
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+            {fromArea}
+          </span>
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+            {toArea}
+          </span>
+        </div>
+
+        {/* Course title */}
+        <h3 className="text-[20px] leading-normal text-black">{title}</h3>
+
+        {/* Course description */}
+        <p className="whitespace-pre-line text-[10px] leading-normal text-[#6a7282]">
+          {description}
+        </p>
+
+        {/* Hashtags */}
+        <div className="mt-auto flex flex-wrap gap-[9px]">
+          {hashtags.map((tag, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center rounded-full border border-[#2a4874] px-[14px] py-[4px] text-[10px] text-[#2a4874]"
+            >
+              #{tag}
+            </span>
+          ))}
         </div>
       </div>
     </div>

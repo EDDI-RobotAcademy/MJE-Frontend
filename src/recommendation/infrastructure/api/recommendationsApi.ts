@@ -1,15 +1,27 @@
-import { apiClient, ApiError } from "@/infrastructure/api";
 import { RecommendationsResponse } from "@/recommendation/types";
 
-export async function fetchRecommendations(): Promise<RecommendationsResponse> {
+export interface FetchRecommendationsParams {
+  area: string;
+  start_time: string;
+  transport: string;
+}
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export async function fetchRecommendations(
+  params: FetchRecommendationsParams,
+): Promise<RecommendationsResponse> {
   try {
-    return await apiClient.get<RecommendationsResponse>("/courses/recommendations", {
-      cache: "no-store",
+    const response = await fetch(`${BASE_URL}/courses/recommendations`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
     });
-  } catch (error) {
-    if (error instanceof ApiError) {
+    if (!response.ok) {
       return { courses: [], shortage_reasons: ["추천 코스를 불러오는 데 실패했어요."] };
     }
+    return response.json();
+  } catch {
     return { courses: [], shortage_reasons: [] };
   }
 }
