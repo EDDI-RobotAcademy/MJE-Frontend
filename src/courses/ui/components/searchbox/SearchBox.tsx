@@ -10,7 +10,7 @@ import CourseCreationButton from "@/courses/ui/components/CourseCreation/CourseC
 
 export default function SearchBox() {
   const { params, errors, setPlace, setMeetTime, setTransport, validate } = useSearchBox();
-  const { handleCreate, isShaking } = useCourseCreation(validate);
+  const { handleCreate, isShaking } = useCourseCreation(validate, params);
 
   return (
     <div className="w-full max-w-[960px] rounded-[30px] bg-white px-10 pb-6 pt-7 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.54)]">
