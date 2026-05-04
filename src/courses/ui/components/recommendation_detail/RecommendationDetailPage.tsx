@@ -339,7 +339,7 @@ interface Props {
   courseId: string;
 }
 
-export default function RecommendationDetailPage({ courseId: _courseId }: Props) {
+export default function RecommendationDetailPage({ courseId }: Props) {
   const course = DUMMY_COURSE;
 
   return (
@@ -435,7 +435,7 @@ export default function RecommendationDetailPage({ courseId: _courseId }: Props)
           {/* ── Right: sidebar ──────────────────────────────────────────────── */}
           <div className="flex w-[273px] shrink-0 flex-col gap-[77px]">
             {/* Export card */}
-            <ExportCard />
+            <ExportCard courseTitle={course.title} courseId={courseId} />
 
             {/* Alternative courses */}
             <div className="flex flex-col items-center gap-[25px]">
