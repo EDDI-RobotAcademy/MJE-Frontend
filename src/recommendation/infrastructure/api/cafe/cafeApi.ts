@@ -47,7 +47,7 @@ function mapToPlace(cafe: CafeApiResponse): Place {
 export async function fetchCourseCafes(courseId: string): Promise<Place[]> {
   try {
     const response = await apiClient.get<CafesListApiResponse>(
-      `/recommendation/detail/${courseId}/cafes`,
+      `/recommendations/detail/${courseId}/cafes`,
     );
     return response.cafes.map(mapToPlace);
   } catch (error) {

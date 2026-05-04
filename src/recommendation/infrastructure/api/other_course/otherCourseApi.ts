@@ -58,7 +58,7 @@ export { bindRoute };
 export async function fetchOtherCourses(courseId: string): Promise<Course[]> {
   try {
     const response = await apiClient.get<OtherCoursesListApiResponse>(
-      `/recommendation/detail/${courseId}/other-courses`,
+      `/recommendations/detail/${courseId}/other-courses`,
     );
     return response.courses.map(mapToCourse);
   } catch (error) {

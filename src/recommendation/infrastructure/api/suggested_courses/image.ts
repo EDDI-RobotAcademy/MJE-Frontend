@@ -11,7 +11,7 @@ export async function fetchCourseImage(
 ): Promise<string | typeof COURSE_IMAGE_NOT_FOUND> {
   try {
     const response = await apiClient.get<CourseImageResponse>(
-      `/recommendation/suggested-courses/${courseId}/image`,
+      `/recommendations/suggested-courses/${courseId}/image`,
     );
     return response.imageUrl;
   } catch (error) {

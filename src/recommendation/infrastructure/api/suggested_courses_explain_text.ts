@@ -16,7 +16,7 @@ export async function fetchCourseExplainText(
 ): Promise<CourseExplainTextResult> {
   try {
     const response = await apiClient.get<CourseExplainTextResponse>(
-      `/recommendation/suggested-courses/${courseId}/explain-text`,
+      `/recommendations/suggested-courses/${courseId}/explain-text`,
     );
     return response;
   } catch (error) {
