@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { exportCourseAction } from "@/courses/infrastructure/api/export/exportActions";
+import { trackSendClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 const prompt = "'Prompt', sans-serif";
@@ -74,6 +75,7 @@ export default function ExportEmailModal({
       return;
     }
 
+    void trackSendClick(courseId, courseTitle);
     setIsSubmitting(true);
     const result = await exportCourseAction(courseId, email);
     setIsSubmitting(false);
