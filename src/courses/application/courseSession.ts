@@ -38,13 +38,7 @@ export function clearCourseSession(): void {
 
 function classifyType(category: string): "restaurant" | "cafe" | "activity" {
   const cat = category.toLowerCase();
-  const cafeKeywords = [
-    "카페",
-    "cafe",
-    "coffee",
-    "커피",
-    "베이커리",
-  ];
+  const cafeKeywords = ["카페", "cafe", "coffee", "커피", "베이커리"];
   const restaurantKeywords = [
     "음식",
     "맛집",
@@ -88,98 +82,7 @@ function mapPlace(place: BackendPlaceItem, courseId: string): Place {
   };
 }
 
-function normalizeCourseType(courseType: string): "main" | "sub1" | "sub2" {
-  if (courseType === "main" || courseType === "best") {
-    return "main";
-  }
-
-  if (courseType === "sub1" || courseType === "optionA") {
-    return "sub1";
-  }
-
-  return "sub2";
-}
-
-function buildSingleTitle(courseType: string, mainKeyword: string): string {
-  const normalizedType = normalizeCourseType(courseType);
-
-  if (normalizedType === "main") {
-    return `${mainKeyword}를 중심으로 여유롭게 이어지는 데이트`;
-  }
-
-  if (normalizedType === "sub1") {
-    return `${mainKeyword}의 매력을 가볍게 즐기는 데이트`;
-  }
-
-  return `${mainKeyword}에서 천천히 분위기를 즐기는 데이트`;
-}
-
-function buildPairTitle(
-  courseType: string,
-  mainKeyword: string,
-  subKeyword: string,
-): string {
-  const normalizedType = normalizeCourseType(courseType);
-
-  if (normalizedType === "main") {
-    return `${mainKeyword}에서 시작해 ${subKeyword}까지 즐기는 데이트`;
-  }
-
-  if (normalizedType === "sub1") {
-    return `${subKeyword}와 ${mainKeyword}를 함께 담은 데이트`;
-  }
-
-  return `${subKeyword}를 즐기고 ${mainKeyword}에서 쉬어가는 데이트`;
-}
-
-function buildCourseTitle(
-  course: BackendCourseItem,
-  usedTitles: Set<string>,
-): string {
-  const fallbackTitle = course.title ?? course.name ?? "";
-  const mainKeyword = course.mainPlace?.subCategory?.trim();
-
-  if (!mainKeyword) {
-    return fallbackTitle;
-  }
-
-  const candidates =
-    course.subPlaces?.filter(
-      (place) =>
-        place?.subCategory?.trim() &&
-        place?.category &&
-        place.category !== course.mainPlace?.category,
-    ) ?? [];
-
-  for (const place of candidates) {
-    const subKeyword = place.subCategory.trim();
-    const title = buildPairTitle(course.courseType, mainKeyword, subKeyword);
-
-    if (!usedTitles.has(title)) {
-      usedTitles.add(title);
-      return title;
-    }
-  }
-
-  const singleTitle = buildSingleTitle(course.courseType, mainKeyword);
-  if (!usedTitles.has(singleTitle)) {
-    usedTitles.add(singleTitle);
-    return singleTitle;
-  }
-
-  if (fallbackTitle && !usedTitles.has(fallbackTitle)) {
-    usedTitles.add(fallbackTitle);
-    return fallbackTitle;
-  }
-
-  return fallbackTitle;
-}
-
-function mapCourse(
-  item: BackendCourseItem,
-  courseId: string,
-  usedTitles: Set<string>,
-): Course {
+function mapCourse(item: BackendCourseItem, courseId: string): Course {
   const resolvedCourseId = item.courseId || courseId;
   const places = item.places.map((place) => mapPlace(place, resolvedCourseId));
   const locations = [...new Set(item.places.map((place) => place.area))];
@@ -194,7 +97,7 @@ function mapCourse(
 
   return {
     id: resolvedCourseId,
-    name: buildCourseTitle(item, usedTitles),
+    name: item.title ?? item.name ?? "",
     description: item.description ?? "",
     locations,
     startTime,
@@ -208,13 +111,12 @@ function mapCourse(
 export function mapSessionToSuggestedCourses(
   session: CreateCourseApiResponse,
 ): SuggestedCoursesData {
-  const usedTitles = new Set<string>();
   const mainCourse = session.mainCourse
-    ? mapCourse(session.mainCourse, "", usedTitles)
+    ? mapCourse(session.mainCourse, session.courseId)
     : null;
 
   const subCourses = session.subCourses.map((item, index) =>
-    mapCourse(item, `sub-${index}`, usedTitles),
+    mapCourse(item, `sub-${index}`),
   );
 
   return { mainCourse, subCourses };
