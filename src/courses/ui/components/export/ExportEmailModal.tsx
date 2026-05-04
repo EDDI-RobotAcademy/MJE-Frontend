@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { exportCourseAction } from "@/courses/infrastructure/api/export/exportActions";
-import { trackSendClick } from "./event_tracking";
+import { trackSendClick, trackCloseClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 const prompt = "'Prompt', sans-serif";
@@ -56,6 +56,11 @@ export default function ExportEmailModal({
     if (e.target === overlayRef.current) onClose();
   };
 
+  const handleCloseButton = () => {
+    void trackCloseClick(courseId, courseTitle);
+    onClose();
+  };
+
   const triggerShake = (message: string) => {
     setEmailError(message);
     setIsShaking(true);
@@ -103,7 +108,7 @@ export default function ExportEmailModal({
             <div className="flex w-full justify-end">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleCloseButton}
                 className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#f5f5f5] text-[18px] leading-none text-[#757575] transition-colors hover:bg-[#e8e8e8]"
                 aria-label="닫기"
               >
@@ -149,7 +154,7 @@ export default function ExportEmailModal({
               </div>
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleCloseButton}
                 className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full bg-[#f5f5f5] text-[18px] leading-none text-[#757575] transition-colors hover:bg-[#e8e8e8]"
                 aria-label="닫기"
               >

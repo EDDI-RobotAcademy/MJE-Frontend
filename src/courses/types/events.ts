@@ -5,6 +5,7 @@ export const RETURN_CLICK_EVENT_NAME = "return_click" as const;
 export const OPTIONCARD_CLICK_EVENT_NAME = "optioncard_click" as const;
 export const COURSE_EXPORT_EVENT_NAME = "course_export" as const;
 export const COURSE_SEND_EVENT_NAME = "course_send" as const;
+export const EXPORT_CLOSE_EVENT_NAME = "export_close" as const;
 
 export type CoursesEventName =
   | typeof COURSE_CREATE_EVENT_NAME
@@ -13,7 +14,8 @@ export type CoursesEventName =
   | typeof RETURN_CLICK_EVENT_NAME
   | typeof OPTIONCARD_CLICK_EVENT_NAME
   | typeof COURSE_EXPORT_EVENT_NAME
-  | typeof COURSE_SEND_EVENT_NAME;
+  | typeof COURSE_SEND_EVENT_NAME
+  | typeof EXPORT_CLOSE_EVENT_NAME;
 
 export interface CourseCreateEvent {
   event_name: typeof COURSE_CREATE_EVENT_NAME;
@@ -69,6 +71,16 @@ export interface CourseExportEvent {
 
 export interface CourseSendEvent {
   event_name: typeof COURSE_SEND_EVENT_NAME;
+  session_id: string | null;
+  timestamp: string;
+  page_path: string;
+  course_id: string;
+  course_title: string;
+  [key: string]: unknown;
+}
+
+export interface ExportCloseEvent {
+  event_name: typeof EXPORT_CLOSE_EVENT_NAME;
   session_id: string | null;
   timestamp: string;
   page_path: string;
