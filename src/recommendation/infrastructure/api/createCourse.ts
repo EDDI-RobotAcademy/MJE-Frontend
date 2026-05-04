@@ -16,12 +16,21 @@ export interface BackendPlaceItem {
   routePathToNext: [number, number][];
 }
 
+export interface BackendCourseTitlePlace {
+  name: string;
+  category: string;
+  subCategory: string;
+}
+
 export interface BackendCourseItem {
   courseId: string;
   courseType: string;
   transport: string;
   totalDurationMinutes: number;
   places: BackendPlaceItem[];
+  region?: string;
+  mainPlace?: BackendCourseTitlePlace | null;
+  subPlaces?: BackendCourseTitlePlace[];
   title?: string;
   name?: string;
   description?: string;
