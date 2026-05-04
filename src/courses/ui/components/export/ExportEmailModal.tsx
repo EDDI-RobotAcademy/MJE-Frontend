@@ -6,10 +6,37 @@ import { exportCourseAction } from "@/courses/infrastructure/api/export/exportAc
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 const prompt = "'Prompt', sans-serif";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 interface ExportEmailModalProps {
   courseTitle: string;
   courseId: string;
   onClose: () => void;
+}
+
+function Spinner() {
+  return (
+    <svg
+      className="h-[18px] w-[18px] animate-spin text-white"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="3"
+        className="opacity-25"
+      />
+      <path
+        fill="currentColor"
+        className="opacity-80"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
+  );
 }
 
 export default function ExportEmailModal({
@@ -18,6 +45,8 @@ export default function ExportEmailModal({
   onClose,
 }: ExportEmailModalProps) {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [isShaking, setIsShaking] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -26,13 +55,34 @@ export default function ExportEmailModal({
     if (e.target === overlayRef.current) onClose();
   };
 
+  const triggerShake = (message: string) => {
+    setEmailError(message);
+    setIsShaking(true);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    setEmailError(null);
+
+    if (!email.trim()) {
+      triggerShake("이메일을 입력해 주세요");
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      triggerShake("올바른 이메일 형식으로 입력해 주세요");
+      return;
+    }
+
     setIsSubmitting(true);
     const result = await exportCourseAction(courseId, email);
     setIsSubmitting(false);
-    if (result.success) setIsDone(true);
+
+    if (result.success) {
+      setIsDone(true);
+    } else {
+      triggerShake("전송 중 오류가 발생했어요. 다시 시도해 주세요");
+    }
   };
 
   return (
@@ -76,7 +126,7 @@ export default function ExportEmailModal({
           </div>
         ) : (
           /* ── 이메일 입력 폼 ──────────────────────────────── */
-          <form onSubmit={handleSubmit} className="flex flex-col gap-[20px]">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[20px]">
             {/* 헤더: 코스 제목 + 닫기 버튼 */}
             <div className="flex items-start justify-between gap-[12px]">
               <div className="flex flex-col gap-[5px]">
@@ -96,32 +146,50 @@ export default function ExportEmailModal({
             </div>
 
             {/* 이메일 입력 필드 */}
-            <div className="flex flex-col gap-[8px]">
-              <label
-                htmlFor="export-email"
-                className="text-[12px] text-[#757575]"
-              >
+            <div className="flex flex-col gap-[6px]">
+              <label htmlFor="export-email" className="text-[12px] text-[#757575]">
                 이메일 주소
               </label>
               <input
                 id="export-email"
                 type="email"
-                required
+                autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError(null);
+                }}
                 placeholder="example@email.com"
-                className="w-full rounded-[14px] border border-[#e0e0e0] bg-[#fafafa] px-[16px] py-[12px] text-[13px] text-black outline-none transition-colors placeholder:text-[#c0c0c0] focus:border-[#2a4874] focus:bg-white"
+                className={[
+                  "w-full rounded-[14px] border bg-[#fafafa] px-[16px] py-[12px] text-[13px] text-black outline-none transition-colors placeholder:text-[#c0c0c0]",
+                  emailError
+                    ? "border-red-400 focus:border-red-400"
+                    : "border-[#e0e0e0] focus:border-[#2a4874] focus:bg-white",
+                  isShaking ? "animate-shake" : "",
+                ].join(" ")}
+                onAnimationEnd={() => setIsShaking(false)}
               />
+              {/* 인라인 에러 메시지 */}
+              {emailError && (
+                <p className="text-[11px] text-red-500">{emailError}</p>
+              )}
             </div>
 
-            {/* 제출 버튼 */}
+            {/* 이메일 전송하기 버튼 */}
             <button
               type="submit"
-              disabled={isSubmitting || !email}
-              className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] text-[14px] text-white transition-opacity hover:opacity-80 disabled:opacity-40"
+              disabled={isSubmitting}
+              className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] text-[14px] text-white transition-opacity hover:opacity-80 disabled:opacity-60"
               style={{ fontFamily: prompt }}
             >
-              {isSubmitting ? "전송 중…" : "코스 내보내기"}
+              {isSubmitting ? (
+                <>
+                  <Spinner />
+                  <span>전송 중…</span>
+                </>
+              ) : (
+                "이메일 전송하기"
+              )}
             </button>
           </form>
         )}
