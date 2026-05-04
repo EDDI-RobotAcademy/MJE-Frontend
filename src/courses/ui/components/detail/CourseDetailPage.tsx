@@ -3,11 +3,8 @@
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
-import { useRestaurants } from "@/courses/hooks/useRestaurants";
-import { useCafes } from "@/courses/hooks/useCafes";
-import { useActivities } from "@/courses/hooks/useActivities";
 import { useOtherCourses } from "@/courses/hooks/useOtherCourses";
-import { Course, Place } from "@/courses/types/course";
+import { Course } from "@/courses/types/course";
 import { CourseDetailData } from "@/recommendation/infrastructure/api/course_detail/courseDetailApi";
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import { trackOptionCardClick } from "@/courses/ui/components/other_course/event_tracking";
@@ -31,9 +28,6 @@ export default function CourseDetailPage({
   initialDetailData,
 }: CourseDetailPageProps) {
   const { data, isLoading: isSessionLoading } = useSuggestedCourses();
-  const { places: restaurants } = useRestaurants(courseId);
-  const { places: cafes } = useCafes(courseId);
-  const { places: activities } = useActivities(courseId);
   const { courses: otherCourses } = useOtherCourses(courseId);
   const router = useRouter();
 
@@ -84,14 +78,7 @@ export default function CourseDetailPage({
     );
   }
 
-  const apiPlaces: Place[] = [...restaurants, ...cafes, ...activities].sort(
-    (a, b) => {
-      const aIdx = parseInt(a.id.split("-").pop() ?? "0", 10);
-      const bIdx = parseInt(b.id.split("-").pop() ?? "0", 10);
-      return aIdx - bIdx;
-    },
-  );
-  const places = apiPlaces.length > 0 ? apiPlaces : (selectedCourse.places ?? []);
+  const places = selectedCourse.places ?? [];
 
   const fallbackAlternatives =
     allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
