@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ExportCard from "@/courses/ui/components/export/ExportCard";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -277,51 +278,6 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
   );
 }
 
-/** Export card in the sidebar */
-function ExportSideCard() {
-  return (
-    <div className="w-full rounded-[30px] bg-white px-[17px] py-[15px] shadow-[3px_6px_10px_rgba(187,199,211,0.57)]">
-      <div className="flex flex-col items-center gap-[17px]">
-        <p
-          className="text-center text-[14px] text-black"
-          style={{ fontFamily: pretendard }}
-        >
-          이 코스가 마음에 드시나요?
-        </p>
-        <div className="flex w-full flex-col items-center gap-[7px]">
-          <button
-            type="button"
-            className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] shadow-[3px_6px_10px_rgba(187,199,211,0.25)]"
-          >
-            {/* Mail icon */}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <rect x="2" y="4" width="16" height="12" rx="1.5" stroke="white" strokeWidth="1.5" />
-              <path
-                d="M2.5 5.5L10 11.5L17.5 5.5"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span
-              className="text-[14px] text-white"
-              style={{ fontFamily: prompt }}
-            >
-              Export
-            </span>
-          </button>
-          <p
-            className="text-center text-[8px] text-[rgba(117,117,117,0.7)]"
-            style={{ fontFamily: pretendard }}
-          >
-            추천 코스를 이메일로 보내드릴게요
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /** Single alternative course card in the sidebar */
 function AlternativeCard({ course }: { course: AlternativeCourse }) {
@@ -383,7 +339,7 @@ interface Props {
   courseId: string;
 }
 
-export default function RecommendationDetailPage({ courseId: _courseId }: Props) {
+export default function RecommendationDetailPage({ courseId }: Props) {
   const course = DUMMY_COURSE;
 
   return (
@@ -479,7 +435,7 @@ export default function RecommendationDetailPage({ courseId: _courseId }: Props)
           {/* ── Right: sidebar ──────────────────────────────────────────────── */}
           <div className="flex w-[273px] shrink-0 flex-col gap-[77px]">
             {/* Export card */}
-            <ExportSideCard />
+            <ExportCard courseTitle={course.title} courseId={courseId} />
 
             {/* Alternative courses */}
             <div className="flex flex-col items-center gap-[25px]">
