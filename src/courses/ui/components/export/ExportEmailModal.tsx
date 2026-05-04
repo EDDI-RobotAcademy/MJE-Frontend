@@ -100,6 +100,16 @@ export default function ExportEmailModal({
         {isDone ? (
           /* ── 전송 완료 상태 ─────────────────────────────── */
           <div className="flex flex-col items-center gap-[16px]">
+            <div className="flex w-full justify-end">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#f5f5f5] text-[18px] leading-none text-[#757575] transition-colors hover:bg-[#e8e8e8]"
+                aria-label="닫기"
+              >
+                ×
+              </button>
+            </div>
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
               <circle cx="20" cy="20" r="19" stroke="#2a4874" strokeWidth="1.5" />
               <path
