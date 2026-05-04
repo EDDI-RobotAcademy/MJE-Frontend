@@ -60,7 +60,7 @@ export async function createCourse(
   params: CreateCourseParams,
 ): Promise<CreateCourseApiResponse> {
   return apiClient.post<CreateCourseApiResponse>(
-    "/recommendations/create-course",
+    "/recommendation/create-course",
     {
       area: params.area,
       start_time: params.start_time,
