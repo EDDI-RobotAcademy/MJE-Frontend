@@ -38,7 +38,7 @@ export default function RecommendationPage() {
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-[120px]">
         {/* Hero */}
-        <section className="flex flex-col items-center pb-10 pt-[80px] text-center">
+        <section className="flex flex-col items-start pb-10 pt-[80px] text-left">
           {/* 추천 코스 ♥ badge */}
           <div className="relative mb-5 inline-flex items-center gap-[6px] px-1">
             <div
