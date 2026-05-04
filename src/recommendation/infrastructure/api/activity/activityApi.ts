@@ -47,7 +47,7 @@ function mapToPlace(activity: ActivityApiResponse): Place {
 export async function fetchCourseActivities(courseId: string): Promise<Place[]> {
   try {
     const response = await apiClient.get<ActivitiesListApiResponse>(
-      `/recommendation/detail/${courseId}/activities`,
+      `/recommendations/detail/${courseId}/activities`,
     );
     return response.activities.map(mapToPlace);
   } catch (error) {

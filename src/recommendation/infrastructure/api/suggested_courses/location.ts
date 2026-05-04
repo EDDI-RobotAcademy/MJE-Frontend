@@ -11,7 +11,7 @@ export async function fetchCourseLocation(
 ): Promise<string | typeof COURSE_LOCATION_NOT_FOUND> {
   try {
     const response = await apiClient.get<CourseLocationResponse>(
-      `/recommendation/suggested-courses/${courseId}/location`,
+      `/recommendations/suggested-courses/${courseId}/location`,
     );
     return response.location;
   } catch (error) {

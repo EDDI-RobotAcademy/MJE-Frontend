@@ -15,7 +15,7 @@ export async function fetchCourseHashtag(
 ): Promise<CourseHashtagResult> {
   try {
     const response = await apiClient.get<CourseHashtagResponse>(
-      `/recommendation/suggested-courses/${courseId}/hashtag`,
+      `/recommendations/suggested-courses/${courseId}/hashtag`,
     );
     return response;
   } catch (error) {
