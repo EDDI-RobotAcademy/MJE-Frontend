@@ -3,8 +3,12 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { SearchParams } from "@/courses/types/search";
-import { createCourseAction } from "@/recommendation/application/actions/createCourseAction";
-import { saveCourseSession } from "@/courses/application/courseSession";
+
+const TRANSPORT_MAP: Record<string, string> = {
+  walk: "walk",
+  transit: "public_transit",
+  car: "car",
+};
 
 export function useCourseCreation(
   validate: () => boolean,
@@ -15,7 +19,7 @@ export function useCourseCreation(
   const [isShaking, setIsShaking] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
 
-  const handleCreate = useCallback(async () => {
+  const handleCreate = useCallback(() => {
     if (!validate()) {
       setShakeKey((prev) => prev + 1);
       setIsShaking(true);
@@ -24,22 +28,12 @@ export function useCourseCreation(
     }
 
     setIsLoading(true);
-    try {
-      const response = await createCourseAction({
-        area: params.place,
-        start_time: params.meetTime ?? "",
-        transport: params.transport ?? "walk",
-      });
-      saveCourseSession(response);
-      router.push("/recommendation");
-    } catch {
-      // API 오류 시 흔들림 효과로 피드백
-      setShakeKey((prev) => prev + 1);
-      setIsShaking(true);
-      setTimeout(() => setIsShaking(false), 400);
-    } finally {
-      setIsLoading(false);
-    }
+    const query = new URLSearchParams({
+      area: params.place,
+      start_time: params.meetTime ?? "",
+      transport: TRANSPORT_MAP[params.transport ?? "walk"] ?? "walk",
+    });
+    router.push(`/recommendation?${query.toString()}`);
   }, [validate, params, router]);
 
   return { handleCreate, isLoading, isShaking, shakeKey };

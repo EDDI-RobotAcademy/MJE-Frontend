@@ -1,0 +1,66 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { fetchRecommendations } from "@/recommendation/infrastructure/api/recommendationsApi";
+import { RecommendationsResponse } from "@/recommendation/types";
+import BestCourseCard from "./BestCourseCard";
+import OptionalCourseCard from "./OptionalCourseCard";
+import RecommendationLoading from "./RecommendationLoading";
+
+export default function RecommendationCourseList() {
+  const searchParams = useSearchParams();
+  const [data, setData] = useState<RecommendationsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const area = searchParams.get("area") ?? "";
+    const start_time = searchParams.get("start_time") ?? "";
+    const transport = searchParams.get("transport") ?? "walk";
+
+    fetchRecommendations({ area, start_time, transport })
+      .then(setData)
+      .finally(() => setIsLoading(false));
+  }, [searchParams]);
+
+  if (isLoading) return <RecommendationLoading />;
+
+  if (!data) return null;
+
+  const bestCourse = data.courses.find((c) => c.grade === "best") ?? null;
+  const optionalCourses = data.courses.filter((c) => c.grade === "optional").slice(0, 2);
+
+  const isEmpty = !bestCourse && optionalCourses.length === 0;
+  const hasShortage = data.shortage_reasons.length > 0;
+
+  if (isEmpty || hasShortage) {
+    return (
+      <div className="flex flex-col items-center justify-center rounded-[24px] bg-white py-16 text-center shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
+        <p className="text-base text-gray-500">아직 추천 코스가 없어요</p>
+        <p className="mt-1 text-sm text-gray-400">검색 조건을 다시 설정해 보세요</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex w-full flex-col gap-4">
+      <p className="self-end text-right text-[10px] text-[#797979]">
+        * 왼쪽은 맞춤 메인 코스, 오른쪽은 대안 코스입니다. 좁은 화면에서는 위 아래로 정렬됩니다.
+      </p>
+      <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-stretch">
+        {bestCourse && (
+          <div className="w-full lg:flex-1">
+            <BestCourseCard course={bestCourse} />
+          </div>
+        )}
+        {optionalCourses.length > 0 && (
+          <div className="flex w-full flex-col gap-4 lg:flex-1">
+            {optionalCourses.map((course, index) => (
+              <OptionalCourseCard key={`optional-${index}`} course={course} index={index} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
