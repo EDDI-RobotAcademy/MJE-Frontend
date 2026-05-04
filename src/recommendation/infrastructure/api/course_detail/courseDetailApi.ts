@@ -123,7 +123,7 @@ export async function fetchCourseDetail(
 ): Promise<CourseDetailData | null> {
   try {
     const response = await apiClient.get<CourseDetailApiResponse>(
-      `/recommendations/courses/${courseId}`,
+      `/recommendation/courses/${courseId}`,
     );
 
     return {
