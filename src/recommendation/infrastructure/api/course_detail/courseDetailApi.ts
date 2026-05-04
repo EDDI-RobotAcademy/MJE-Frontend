@@ -1,6 +1,5 @@
 import { Course, Place } from "@/courses/types/course";
 import { apiClient, ApiError } from "@/infrastructure/api";
-import { BackendPlaceItem } from "@/recommendation/infrastructure/api/createCourse";
 
 export interface CourseDetailData {
   selectedCourse: Course;
@@ -11,12 +10,24 @@ export const COURSE_DETAIL_NOT_FOUND: CourseDetailData | null = null;
 
 interface CourseDetailSubCourseApiResponse {
   courseId: string;
-  id?: string;
+  courseType: string;
+  title: string;
+  routeSummary: string;
+  locationSummary: string;
+  totalDuration: number;
+}
+
+interface CourseDetailPlaceApiResponse {
+  visitOrder: number;
   name: string;
-  description: string;
-  locations: string[];
-  totalDurationMinutes: number;
-  imageUrl?: string;
+  category: string;
+  durationMinutes: number;
+  photoUrl?: string;
+  description?: string;
+  routeDistanceM?: number;
+  routeDurationMin?: number;
+  routeTransport?: string;
+  routePolyline?: string;
 }
 
 interface CourseDetailApiResponse {
@@ -26,7 +37,7 @@ interface CourseDetailApiResponse {
   totalDuration: number;
   locationSummary: string;
   routeSummary: string;
-  places: BackendPlaceItem[];
+  places: CourseDetailPlaceApiResponse[];
   subCourses: CourseDetailSubCourseApiResponse[];
 }
 
@@ -34,16 +45,17 @@ function classifyType(category: string): "restaurant" | "cafe" | "activity" {
   const cat = category.toLowerCase();
   const cafeKeywords = ["카페", "디저트", "cafe", "coffee", "커피", "베이커리"];
   const restaurantKeywords = [
-    "한식",
+    "음식점",
     "맛집",
     "레스토랑",
-    "양식",
+    "한식",
     "중식",
     "일식",
-    "분식",
+    "양식",
     "치킨",
+    "피자",
     "술집",
-    "bar",
+    "바",
   ];
 
   if (cafeKeywords.some((keyword) => cat.includes(keyword))) {
@@ -62,61 +74,46 @@ function formatDuration(totalDurationMinutes: number): string | undefined {
     return undefined;
   }
 
-  return `${Math.ceil(totalDurationMinutes / 60)}시간`;
+  return `약 ${Math.ceil(totalDurationMinutes / 60)}시간`;
 }
 
-function mapPlace(place: BackendPlaceItem, courseId: string): Place {
+function mapPlace(place: CourseDetailPlaceApiResponse, courseId: string): Place {
   return {
     id: `${courseId}-${place.visitOrder}`,
     name: place.name,
-    description: place.mainDescription,
-    location: place.area,
-    time: place.recommendedTimeSlot,
-    imageUrl: place.imageUrl,
+    description: place.description ?? "",
+    location: "",
+    imageUrl: place.photoUrl,
     type: classifyType(place.category),
     category: place.category,
     walkingTimeTo:
-      place.travelTimeToNextMinutes != null
-        ? `${place.travelTimeToNextMinutes}분`
-        : undefined,
+      place.routeDurationMin != null ? `${place.routeDurationMin}분` : undefined,
   };
 }
 
 function mapSelectedCourse(response: CourseDetailApiResponse): Course {
   const places = response.places.map((place) => mapPlace(place, response.courseId));
-  const locations = [...new Set(response.places.map((place) => place.area))];
-  const keywords = [
-    ...new Set(response.places.flatMap((place) => place.keywords)),
-  ]
-    .slice(0, 5)
-    .map((label) => ({ label: label.startsWith("#") ? label : `#${label}` }));
+  const locations = response.locationSummary ? [response.locationSummary] : [];
 
   return {
     id: response.courseId,
     name: response.title,
     description: response.description,
-    locations:
-      locations.length > 0
-        ? locations
-        : response.locationSummary
-          ? [response.locationSummary]
-          : [],
-    startTime: response.places[0]?.recommendedTimeSlot,
+    locations,
     duration: formatDuration(response.totalDuration),
-    keywords,
-    imageUrl: response.places[0]?.imageUrl,
+    keywords: [],
+    imageUrl: response.places[0]?.photoUrl,
     places,
   };
 }
 
 function mapSubCourse(course: CourseDetailSubCourseApiResponse): Course {
   return {
-    id: course.courseId ?? course.id ?? "",
-    name: course.name,
-    description: course.description,
-    locations: course.locations,
-    duration: formatDuration(course.totalDurationMinutes),
-    imageUrl: course.imageUrl,
+    id: course.courseId,
+    name: course.title,
+    description: course.routeSummary,
+    locations: course.locationSummary ? [course.locationSummary] : [],
+    duration: formatDuration(course.totalDuration),
     keywords: [],
   };
 }
