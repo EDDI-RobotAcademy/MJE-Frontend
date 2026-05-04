@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { exportCourseAction } from "@/recommendation/infrastructure/api/export/exportActions";
+import { exportCourseAction } from "@/courses/infrastructure/api/export/exportActions";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 const prompt = "'Prompt', sans-serif";

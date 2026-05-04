@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ExportEmailModal from "./ExportEmailModal";
+import { trackExportClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 const prompt = "'Prompt', sans-serif";
@@ -42,7 +43,10 @@ export default function ExportCard({ courseTitle, courseId }: ExportCardProps) {
             {/* Export 버튼 (이메일 아이콘 포함) */}
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                void trackExportClick(courseId, courseTitle);
+                setIsModalOpen(true);
+              }}
               className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] shadow-[3px_6px_10px_rgba(187,199,211,0.25)] transition-opacity hover:opacity-80"
             >
               <MailIcon />
