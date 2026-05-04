@@ -1,5 +1,9 @@
-import SuggestedCourses from "@/courses/ui/components/suggested_courses/SuggestedCourses";
+import { Suspense } from "react";
+
+export const dynamic = "force-dynamic";
 import TryAgain from "@/courses/ui/components/try_again/TryAgain";
+import RecommendationCourseList from "@/courses/ui/components/recommendation_courses/RecommendationCourseList";
+import RecommendationLoading from "@/courses/ui/components/recommendation_courses/RecommendationLoading";
 
 export default function RecommendationPage() {
   return (
@@ -32,7 +36,6 @@ export default function RecommendationPage() {
             당신을 위한 데이트 코스를 준비했어요
           </h1>
 
-          {/* Subtitle with heart icon */}
           <p
             className="mt-3 flex items-center gap-1.5 text-[13px] text-[#6a7282]"
             style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
@@ -42,16 +45,11 @@ export default function RecommendationPage() {
           </p>
         </section>
 
-        {/* Hint */}
-        <div className="mb-2 flex justify-end">
-          <p className="text-[10px] text-[#aaa]">
-            * 왼쪽은 맞춤 메인 코스, 오른쪽은 대안 코스입니다. 좁은 화면에서는 위 아래로 정렬됩니다.
-          </p>
-        </div>
-
         {/* Cards */}
         <section className="pb-14">
-          <SuggestedCourses />
+          <Suspense fallback={<RecommendationLoading />}>
+            <RecommendationCourseList />
+          </Suspense>
         </section>
 
         {/* 다시 검색하기 */}
