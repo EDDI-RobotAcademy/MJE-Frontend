@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { RecommendationCourseItem } from "@/recommendation/types";
 
 interface BestCourseCardProps {
@@ -59,7 +60,12 @@ function ArrowIcon() {
 }
 
 export default function BestCourseCard({ course }: BestCourseCardProps) {
+  const router = useRouter();
   const display = toBestCourseDisplay(course);
+
+  const handleDetailClick = () => {
+    router.push(`/recommendation/${course.restaurant.id}`);
+  };
 
   return (
     <div className="relative flex h-full flex-col rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
@@ -118,6 +124,7 @@ export default function BestCourseCard({ course }: BestCourseCardProps) {
             <button
               type="button"
               aria-label="코스 상세 보기"
+              onClick={handleDetailClick}
               className="ml-4 flex size-[64px] shrink-0 items-center justify-center rounded-full bg-[#333] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
             >
               <ArrowIcon />
