@@ -24,7 +24,7 @@ export async function trackExportClick(
 ): Promise<void> {
   const event = buildCourseExportEvent(courseId, courseTitle);
   try {
-    await trackEvent(event, "/courses/events");
+    await trackEvent(event, "/export-logs");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(
@@ -56,7 +56,7 @@ export async function trackSendClick(
 ): Promise<void> {
   const event = buildCourseSendEvent(courseId, courseTitle);
   try {
-    await trackEvent(event, "/courses/events");
+    await trackEvent(event, "/export-logs");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(
@@ -88,7 +88,7 @@ export async function trackCloseClick(
 ): Promise<void> {
   const event = buildExportCloseEvent(courseId, courseTitle);
   try {
-    await trackEvent(event, "/courses/events");
+    await trackEvent(event, "/export-logs");
   } catch (error) {
     if (error instanceof EventTrackingError) {
       console.error(

@@ -5,6 +5,7 @@ import { RecommendationCourseItem } from "@/recommendation/types";
 interface OptionalCourseCardProps {
   course: RecommendationCourseItem;
   index: number;
+  onDetailClick?: () => void;
 }
 
 interface OptionalCourseDisplay {
@@ -29,7 +30,7 @@ function toOptionalCourseDisplay(
   const locationStart = extractArea(course.cafe.address);
   const locationEnd = extractArea(course.restaurant.address);
   return {
-    imageUrl: `https://picsum.photos/seed/${course.restaurant.id + 20 + index}/300/300`,
+    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id + 20 + index}/300/300`,
     label: `Option ${String.fromCharCode(65 + index)}`,
     locationStart,
     locationEnd,
@@ -65,7 +66,7 @@ function SmallArrowIcon() {
   );
 }
 
-export default function OptionalCourseCard({ course, index }: OptionalCourseCardProps) {
+export default function OptionalCourseCard({ course, index, onDetailClick }: OptionalCourseCardProps) {
   const display = toOptionalCourseDisplay(course, index);
 
   return (
@@ -85,6 +86,7 @@ export default function OptionalCourseCard({ course, index }: OptionalCourseCard
           <button
             type="button"
             aria-label="코스 상세 보기"
+            onClick={onDetailClick}
             className="flex size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
           >
             <SmallArrowIcon />

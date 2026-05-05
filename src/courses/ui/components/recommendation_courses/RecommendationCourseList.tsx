@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { fetchRecommendations } from "@/recommendation/infrastructure/api/recommendationsApi";
 import { RecommendationsResponse } from "@/recommendation/types";
 import BestCourseCard from "./BestCourseCard";
@@ -10,13 +10,33 @@ import RecommendationLoading from "./RecommendationLoading";
 
 export default function RecommendationCourseList() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [data, setData] = useState<RecommendationsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const area = searchParams.get("area") ?? "";
-    const start_time = searchParams.get("start_time") ?? "";
-    const transport = searchParams.get("transport") ?? "walk";
+    let area = searchParams.get("area") ?? "";
+    let start_time = searchParams.get("start_time") ?? "";
+    let transport = searchParams.get("transport") ?? "walk";
+
+    if (area) {
+      sessionStorage.setItem("mje_search_params", JSON.stringify({ area, start_time, transport }));
+    } else {
+      const saved = sessionStorage.getItem("mje_search_params");
+      if (saved) {
+        try {
+          const params = JSON.parse(saved);
+          area = params.area ?? "";
+          start_time = params.start_time ?? "";
+          transport = params.transport ?? "walk";
+        } catch {}
+      }
+    }
+
+    if (!area) {
+      setIsLoading(false);
+      return;
+    }
 
     fetchRecommendations({ area, start_time, transport })
       .then(setData)
@@ -50,13 +70,21 @@ export default function RecommendationCourseList() {
       <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-stretch">
         {bestCourse && (
           <div className="w-full lg:flex-1">
-            <BestCourseCard course={bestCourse} />
+            <BestCourseCard
+              course={bestCourse}
+              onDetailClick={() => router.push(`/courses/detail/${bestCourse.course_id}`)}
+            />
           </div>
         )}
         {optionalCourses.length > 0 && (
           <div className="flex w-full flex-col gap-4 lg:flex-1">
             {optionalCourses.map((course, index) => (
-              <OptionalCourseCard key={`optional-${index}`} course={course} index={index} />
+              <OptionalCourseCard
+                key={`optional-${index}`}
+                course={course}
+                index={index}
+                onDetailClick={() => router.push(`/courses/detail/${course.course_id}`)}
+              />
             ))}
           </div>
         )}
