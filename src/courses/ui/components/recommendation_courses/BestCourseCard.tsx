@@ -9,26 +9,26 @@ interface BestCourseCardProps {
 
 interface BestCourseDisplay {
   imageUrl: string;
-  locationStart: string;
-  locationEnd: string;
+  locationGu: string;
+  locationDong: string;
   title: string;
   description: string;
   hashtags: string[];
 }
 
-function extractArea(address: string): string {
-  const parts = address.split(" ").filter(Boolean);
-  return parts[parts.length - 1] ?? address;
+function extractAreaParts(address: string): { gu: string; dong: string } {
+  const gu = address.match(/\S+구/)?.[0] ?? "";
+  const dong = address.match(/\S+동/)?.[0] ?? "";
+  return { gu, dong };
 }
 
 function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDisplay {
-  const locationStart = extractArea(course.restaurant.address);
-  const locationEnd = extractArea(course.activity.address);
+  const { gu, dong } = extractAreaParts(course.restaurant.address);
   return {
     imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id}/500/300`,
-    locationStart,
-    locationEnd,
-    title: `${locationStart}에서 ${locationEnd}까지, ${course.activity.keyword} 코스`,
+    locationGu: gu,
+    locationDong: dong,
+    title: `${gu}에서 ${dong}까지, ${course.activity.keyword} 코스`,
     description:
       `${course.restaurant.name}에서 출발해 ${course.activity.name}까지 이어지는,\n` +
       `${course.cafe.keyword}을 즐기기 좋은 데이트 코스`,
@@ -88,10 +88,10 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
         {/* Location tags */}
         <div className="flex gap-[10px]">
           <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationStart}
+            {display.locationGu}
           </span>
           <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationEnd}
+            {display.locationDong}
           </span>
         </div>
 
