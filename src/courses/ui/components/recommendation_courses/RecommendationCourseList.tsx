@@ -52,12 +52,12 @@ export default function RecommendationCourseList() {
   }, [searchParams]);
 
   const handleBestCourseClick = (course: RecommendationCourseItem) => {
-    void trackCardClick(pathname, course.course_id, course.restaurant.keyword, "main");
+    void trackCardClick(pathname, course.course_id, course.places[0]?.keyword ?? "", "main");
     router.push(`/courses/detail/${course.course_id}`);
   };
 
   const handleOptionalCourseClick = (course: RecommendationCourseItem) => {
-    void trackCardClick(pathname, course.course_id, course.restaurant.keyword, "sub");
+    void trackCardClick(pathname, course.course_id, course.places[0]?.keyword ?? "", "sub");
     router.push(`/courses/detail/${course.course_id}`);
   };
 

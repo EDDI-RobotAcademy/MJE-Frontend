@@ -23,18 +23,17 @@ function extractAreaParts(address: string): { gu: string; dong: string } {
 }
 
 function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDisplay {
-  const { gu, dong } = extractAreaParts(course.restaurant.address);
+  const [first, second, third] = course.places;
+  const { gu, dong } = extractAreaParts(first?.address ?? "");
   return {
-    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id}/500/300`,
+    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.course_id}/500/300`,
     locationGu: gu,
     locationDong: dong,
-    title: `${gu}에서 ${dong}까지, ${course.activity.keyword} 코스`,
+    title: `${gu}에서 ${dong}까지, ${third?.keyword ?? ""} 코스`,
     description:
-      `${course.restaurant.name}에서 출발해 ${course.activity.name}까지 이어지는,\n` +
-      `${course.cafe.keyword}을 즐기기 좋은 데이트 코스`,
-    hashtags: [course.restaurant.keyword, course.cafe.keyword, course.activity.keyword].filter(
-      Boolean,
-    ),
+      `${first?.name ?? ""}에서 출발해 ${third?.name ?? ""}까지 이어지는,\n` +
+      `${second?.keyword ?? ""}을 즐기기 좋은 데이트 코스`,
+    hashtags: [first?.keyword, second?.keyword, third?.keyword].filter(Boolean) as string[],
   };
 }
 
