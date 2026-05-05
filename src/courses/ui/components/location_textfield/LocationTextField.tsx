@@ -24,7 +24,7 @@ export default function LocationTextField({
 }: LocationTextFieldProps) {
   return (
     <div
-      className={`flex h-[46px] items-center rounded-full border px-3.5 gap-2 transition-colors ${
+      className={`w-full flex h-[46px] items-center rounded-full border px-3.5 gap-2 transition-colors ${
         error
           ? "border-dashed border-[#FF4D4F]"
           : "border-[#d0d0d0]"
