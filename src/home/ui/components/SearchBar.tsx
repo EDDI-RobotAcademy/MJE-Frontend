@@ -41,52 +41,50 @@ export default function SearchBar() {
       <div className="flex flex-col gap-[9px]">
         {/* Fields section */}
         <div className="flex flex-col gap-[18px]">
-          {/* Label row */}
-          <div className="flex items-center gap-[200px]">
-            <div className="flex items-center justify-between w-[407.475px]">
-              <FieldPillLabel tooltip="만날 지역이나 역 이름을 입력하세요">
-                장소
-              </FieldPillLabel>
-              <FieldPillLabel tooltip="데이트를 즐길 시간대를 선택하세요">
-                시간대
-              </FieldPillLabel>
-            </div>
-            <FieldPillLabel tooltip="코스 이동 시 주로 사용할 교통수단을 선택하세요">
-              이동 방식
-            </FieldPillLabel>
-          </div>
 
-          {/* Input + button section */}
-          <div className="flex flex-col gap-[28px]">
-            {/* Input row */}
-            <div className="flex items-center gap-[36px]">
-              <div className="flex items-center gap-[35px]">
-                {/* 장소 */}
-                <div className="w-[268.123px]">
-                  <ShakeWrapper shakeKey={shakeKey} error={errors.place}>
-                    <LocationTextField
-                      id="place"
-                      value={params.place}
-                      onChange={setPlace}
-                      error={errors.place}
-                      onClearError={() => clearFieldError("place")}
-                    />
-                  </ShakeWrapper>
-                </div>
-                {/* 시간대 */}
-                <div className="w-[268.123px]">
-                  <ShakeWrapper shakeKey={shakeKey} error={errors.meetTime}>
-                    <TimeDropdown
-                      id="meet-time"
-                      value={params.meetTime}
-                      onChange={setMeetTime}
-                      error={errors.meetTime}
-                      onClearError={() => clearFieldError("meetTime")}
-                    />
-                  </ShakeWrapper>
-                </div>
+          {/* Fields row: max-width:768px → 세로, min-width:768px → 가로 */}
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-[36px]">
+
+            {/* 장소 + 시간대 */}
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-[35px] md:shrink-0">
+              {/* 장소 */}
+              <div className="flex flex-col gap-3 md:w-[268px]">
+                <FieldPillLabel tooltip="만날 지역이나 역 이름을 입력하세요">
+                  장소
+                </FieldPillLabel>
+                <ShakeWrapper shakeKey={shakeKey} error={errors.place}>
+                  <LocationTextField
+                    id="place"
+                    value={params.place}
+                    onChange={setPlace}
+                    error={errors.place}
+                    onClearError={() => clearFieldError("place")}
+                  />
+                </ShakeWrapper>
               </div>
-              {/* 이동 방식 */}
+
+              {/* 시간대 */}
+              <div className="flex flex-col gap-3 md:w-[268px]">
+                <FieldPillLabel tooltip="데이트를 즐길 시간대를 선택하세요">
+                  시간대
+                </FieldPillLabel>
+                <ShakeWrapper shakeKey={shakeKey} error={errors.meetTime}>
+                  <TimeDropdown
+                    id="meet-time"
+                    value={params.meetTime}
+                    onChange={setMeetTime}
+                    error={errors.meetTime}
+                    onClearError={() => clearFieldError("meetTime")}
+                  />
+                </ShakeWrapper>
+              </div>
+            </div>
+
+            {/* 이동 방식 */}
+            <div className="flex flex-col gap-3">
+              <FieldPillLabel tooltip="코스 이동 시 주로 사용할 교통수단을 선택하세요">
+                이동 방식
+              </FieldPillLabel>
               <ShakeWrapper shakeKey={shakeKey} error={errors.transport}>
                 <TransportCheckboxGroup
                   value={params.transport}
@@ -95,10 +93,10 @@ export default function SearchBar() {
                 />
               </ShakeWrapper>
             </div>
-
-            {/* Create Course button */}
-            <CourseCreationButton onClick={handleCreate} isShaking={isShaking} isLoading={isLoading} />
           </div>
+
+          {/* Create Course button */}
+          <CourseCreationButton onClick={handleCreate} isShaking={isShaking} isLoading={isLoading} />
         </div>
 
         {/* Footer hint */}

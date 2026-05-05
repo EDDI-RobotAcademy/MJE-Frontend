@@ -60,4 +60,23 @@ body {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .scrollbar-timepicker {
+    scrollbar-width: thin;
+    scrollbar-color: #c5d8ee transparent;
+  }
+  .scrollbar-timepicker::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-timepicker::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+  }
+  .scrollbar-timepicker::-webkit-scrollbar-thumb {
+    background: #c5d8ee;
+    border-radius: 999px;
+  }
+  .scrollbar-timepicker::-webkit-scrollbar-thumb:hover {
+    background: #8aaee6;
+  }
 }
