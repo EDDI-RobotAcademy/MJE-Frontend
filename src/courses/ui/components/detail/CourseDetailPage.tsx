@@ -12,7 +12,7 @@ import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
-import ExportCard from "./ExportCard";
+import ExportCard from "@/courses/ui/components/export/ExportCard";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
@@ -140,7 +140,7 @@ export default function CourseDetailPage({
         </div>
 
         <div className="flex flex-col gap-4">
-          <ExportCard />
+          <ExportCard courseTitle={selectedCourse.name} courseId={courseId} />
 
           {safeAlternatives.length > 0 && (
             <div className="flex flex-col gap-3">
