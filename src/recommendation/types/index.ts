@@ -1,5 +1,6 @@
 export interface RecommendationPlace {
-  id: number;
+  order: number;
+  place_type: "restaurant" | "cafe" | "activity";
   name: string;
   category: string;
   road_address: string;
@@ -11,13 +12,12 @@ export interface RecommendationPlace {
   keyword: string;
   collected_at: string;
   image_url: string | null;
+  duration_minutes: number;
 }
 
 export interface RecommendationCourseItem {
   course_id: string;
-  restaurant: RecommendationPlace;
-  cafe: RecommendationPlace;
-  activity: RecommendationPlace;
+  places: RecommendationPlace[];
   grade: "best" | "optional";
   image_url: string | null;
 }

@@ -28,20 +28,21 @@ function toOptionalCourseDisplay(
   course: RecommendationCourseItem,
   index: number,
 ): OptionalCourseDisplay {
-  const { gu, dong } = extractAreaParts(course.cafe.address);
+  const [first, second, third] = course.places;
+  const { gu, dong } = extractAreaParts(second?.address ?? "");
   return {
-    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id + 20 + index}/300/300`,
+    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.course_id}-${index}/300/300`,
     label: `Option ${String.fromCharCode(65 + index)}`,
     locationGu: gu,
     locationDong: dong,
     title:
-      `${course.cafe.category}, ${course.restaurant.category},\n` +
-      `그리고 ${course.activity.keyword} 코스`,
+      `${second?.category ?? ""}, ${first?.category ?? ""},\n` +
+      `그리고 ${third?.keyword ?? ""} 코스`,
     description:
-      `${course.cafe.name}에서 여유롭게 시작해,\n` +
-      `${course.restaurant.name}을 거쳐 ${course.activity.name}로\n` +
+      `${second?.name ?? ""}에서 여유롭게 시작해,\n` +
+      `${first?.name ?? ""}을 거쳐 ${third?.name ?? ""}로\n` +
       `마무리하는 하루 코스`,
-    hashtags: [course.cafe.keyword, course.activity.keyword].filter(Boolean),
+    hashtags: [second?.keyword, third?.keyword].filter(Boolean) as string[],
   };
 }
 
