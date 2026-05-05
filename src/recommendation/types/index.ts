@@ -10,13 +10,16 @@ export interface RecommendationPlace {
   telephone: string;
   keyword: string;
   collected_at: string;
+  image_url: string | null;
 }
 
 export interface RecommendationCourseItem {
+  course_id: string;
   restaurant: RecommendationPlace;
   cafe: RecommendationPlace;
   activity: RecommendationPlace;
   grade: "best" | "optional";
+  image_url: string | null;
 }
 
 export interface RecommendationsResponse {
