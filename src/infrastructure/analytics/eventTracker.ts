@@ -22,6 +22,7 @@ export async function trackEvent(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(event),
+      keepalive: true,
     });
   } catch (error) {
     throw new EventTrackingError(
