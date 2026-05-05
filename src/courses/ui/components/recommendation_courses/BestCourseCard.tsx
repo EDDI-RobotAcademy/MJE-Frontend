@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { RecommendationCourseItem } from "@/recommendation/types";
 
 interface BestCourseCardProps {
   course: RecommendationCourseItem;
+  onDetailClick?: () => void;
 }
 
 interface BestCourseDisplay {
@@ -25,7 +25,7 @@ function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDispla
   const locationStart = extractArea(course.restaurant.address);
   const locationEnd = extractArea(course.activity.address);
   return {
-    imageUrl: `https://picsum.photos/seed/${course.restaurant.id}/500/300`,
+    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id}/500/300`,
     locationStart,
     locationEnd,
     title: `${locationStart}에서 ${locationEnd}까지, ${course.activity.keyword} 코스`,
@@ -59,13 +59,8 @@ function ArrowIcon() {
   );
 }
 
-export default function BestCourseCard({ course }: BestCourseCardProps) {
-  const router = useRouter();
+export default function BestCourseCard({ course, onDetailClick }: BestCourseCardProps) {
   const display = toBestCourseDisplay(course);
-
-  const handleDetailClick = () => {
-    router.push(`/recommendation/${course.restaurant.id}`);
-  };
 
   return (
     <div className="relative flex h-full flex-col rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
@@ -124,7 +119,7 @@ export default function BestCourseCard({ course }: BestCourseCardProps) {
             <button
               type="button"
               aria-label="코스 상세 보기"
-              onClick={handleDetailClick}
+              onClick={onDetailClick}
               className="ml-4 flex size-[64px] shrink-0 items-center justify-center rounded-full bg-[#333] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
             >
               <ArrowIcon />

@@ -10,7 +10,6 @@ interface OtherCourseApiResponse {
   locations: string[];
   duration?: number | string | null;
   description: string;
-  imageUrl?: string;
 }
 
 interface OtherCoursesListApiResponse {
@@ -48,7 +47,6 @@ function mapToCourse(course: OtherCourseApiResponse): Course {
     locations: bindLocations(course),
     description: course.description,
     duration: bindDuration(course),
-    imageUrl: course.imageUrl,
     keywords: [],
   };
 }

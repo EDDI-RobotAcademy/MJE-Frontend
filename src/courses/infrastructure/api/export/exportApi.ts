@@ -13,7 +13,10 @@ export async function exportCourse(
   request: ExportCourseRequest,
 ): Promise<ExportCourseResult> {
   try {
-    await apiClient.post<void>("/recommendations/export", request);
+    await apiClient.post<void>("/api/v1/emails/send-course", {
+      email: request.email,
+      course_id: request.courseId,
+    });
     return { success: true };
   } catch (error) {
     if (error instanceof ApiError) {
