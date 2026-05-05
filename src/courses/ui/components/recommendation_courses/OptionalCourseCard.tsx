@@ -35,9 +35,7 @@ function toOptionalCourseDisplay(
     label: `Option ${String.fromCharCode(65 + index)}`,
     locationGu: gu,
     locationDong: dong,
-    title:
-      `${second?.category ?? ""}, ${first?.category ?? ""},\n` +
-      `그리고 ${third?.keyword ?? ""} 코스`,
+    title: `${second?.name ?? ""} 코스`,
     description:
       `${second?.name ?? ""}에서 여유롭게 시작해,\n` +
       `${first?.name ?? ""}을 거쳐 ${third?.name ?? ""}로\n` +

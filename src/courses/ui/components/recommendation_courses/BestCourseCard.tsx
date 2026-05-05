@@ -29,7 +29,7 @@ function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDispla
     imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.course_id}/500/300`,
     locationGu: gu,
     locationDong: dong,
-    title: `${gu}에서 ${dong}까지, ${third?.keyword ?? ""} 코스`,
+    title: `${first?.name ?? ""} 코스`,
     description:
       `${first?.name ?? ""}에서 출발해 ${third?.name ?? ""}까지 이어지는,\n` +
       `${second?.keyword ?? ""}을 즐기기 좋은 데이트 코스`,
