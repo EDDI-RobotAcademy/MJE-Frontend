@@ -70,7 +70,10 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
   const display = toOptionalCourseDisplay(course, index);
 
   return (
-    <div className="relative flex h-[289px] overflow-hidden rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+    <div
+      className="relative flex h-[289px] overflow-hidden rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer"
+      onClick={onDetailClick}
+    >
       {/* Left: Image */}
       <div className="relative shrink-0 p-[12px]">
         <img
@@ -86,7 +89,7 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
           <button
             type="button"
             aria-label="코스 상세 보기"
-            onClick={onDetailClick}
+            onClick={(e) => { e.stopPropagation(); onDetailClick?.(); }}
             className="flex size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
           >
             <SmallArrowIcon />
