@@ -20,7 +20,7 @@ export default function Home() {
       <div className="relative z-10">
         <ViewHomeTracker />
         <HeroSection />
-        <section className="flex justify-center px-4 md:px-[206px] pb-24">
+        <section className="flex justify-center px-4 pb-24">
           <SearchBar />
         </section>
       </div>

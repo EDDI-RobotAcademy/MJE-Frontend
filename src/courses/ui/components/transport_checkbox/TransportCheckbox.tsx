@@ -23,7 +23,7 @@ export default function TransportCheckbox({
       role="checkbox"
       aria-checked={checked}
       onClick={() => onChange(value)}
-      className={`flex h-[43.675px] w-full md:w-[115px] items-center justify-center gap-[5px] rounded-full border bg-white text-xs transition-colors ${
+      className={`flex h-[43.675px] w-full lg:w-[115px] items-center justify-center gap-[5px] rounded-full border bg-white text-xs transition-colors ${
         checked
           ? "border-[#2a4874] text-[#2a4874]"
           : error
