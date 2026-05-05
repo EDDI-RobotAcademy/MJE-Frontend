@@ -121,13 +121,13 @@ export default function CourseDetailPage({
             <div className="flex flex-col gap-1.5">
               {places.map((place, index) => (
                 <div key={place.id} className="flex flex-col">
-                  <ScheduleCard place={place} />
+                  <ScheduleCard
+                    place={place}
+                    previousPlaceName={index > 0 ? places[index - 1].name : undefined}
+                    walkingTimeFromPrevious={index > 0 ? places[index - 1].walkingTimeTo : undefined}
+                  />
                   {index < places.length - 1 && (
-                    <ScheduleTimelineConnector
-                      fromName={place.name}
-                      toName={places[index + 1].name}
-                      walkingTime={place.walkingTimeTo}
-                    />
+                    <ScheduleTimelineConnector />
                   )}
                 </div>
               ))}

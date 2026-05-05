@@ -398,28 +398,30 @@ export default function RecommendationDetailPage({ courseId }: Props) {
         </section>
 
         {/* ── 2-column content ─────────────────────────────────────────────── */}
-        <section className="flex items-start gap-6 pb-20">
-          {/* ── Left: timeline ─────────────────────────────────────────────── */}
-          <div className="flex min-w-0 flex-1 flex-col gap-[26px]">
-            {/* Header row: "Best Course!" badge + "상세 일정" + duration */}
-            <div className="flex items-center gap-[17px]">
-              <span
-                className="flex h-[26px] items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] py-[5px] text-[11px] text-black"
-                style={{ fontFamily: prompt }}
-              >
-                Best Course !
-              </span>
-              <div className="flex items-center gap-[8px]" style={{ fontFamily: pretendard }}>
-                <span className="text-[20px] font-medium text-black">상세 일정</span>
-                <div className="flex items-end gap-[3px]">
-                  <IconClock />
-                  <span className="text-[12px] text-[#757575]">{course.totalDuration}</span>
+        <section className="flex items-start gap-[25px] pb-20">
+          {/* ── Left: timeline card ─────────────────────────────────────────── */}
+          <div className="flex min-w-0 flex-1 flex-col">
+            {/* White outer card: badge + title header + all stops */}
+            <div className="w-full rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+
+              {/* ── Card header: "Best Course!" + "상세 일정" (stacked) ──── */}
+              <div className="mb-[22px] flex flex-col gap-[26px]">
+                <span
+                  className="flex h-[26px] w-fit items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] text-[11px] text-black"
+                  style={{ fontFamily: prompt }}
+                >
+                  Best Course !
+                </span>
+                <div className="flex items-center gap-[17px]" style={{ fontFamily: pretendard }}>
+                  <span className="text-[20px] font-medium text-black">상세 일정</span>
+                  <div className="flex items-end gap-[3px]">
+                    <IconClock />
+                    <span className="text-[12px] text-[#757575]">{course.totalDuration}</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* White outer card wrapping all stops */}
-            <div className="w-full rounded-[30px] bg-white px-[19px] py-[22px] shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+              {/* ── Stop timeline ─────────────────────────────────────────── */}
               <div className="flex flex-col">
                 {course.stops.map((stop, idx) => (
                   <StopCard
