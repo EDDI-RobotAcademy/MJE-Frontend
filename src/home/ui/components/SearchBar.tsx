@@ -43,12 +43,12 @@ export default function SearchBar() {
         <div className="flex flex-col gap-[18px]">
 
           {/* Fields row: max-width:768px → 세로, min-width:768px → 가로 */}
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-[36px]">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-[36px]">
 
             {/* 장소 + 시간대 */}
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-[35px] md:shrink-0">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-[35px] lg:shrink-0">
               {/* 장소 */}
-              <div className="flex flex-col gap-3 md:w-[268px]">
+              <div className="flex flex-col gap-3 lg:w-[268px]">
                 <FieldPillLabel tooltip="만날 지역이나 역 이름을 입력하세요">
                   장소
                 </FieldPillLabel>
@@ -64,7 +64,7 @@ export default function SearchBar() {
               </div>
 
               {/* 시간대 */}
-              <div className="flex flex-col gap-3 md:w-[268px]">
+              <div className="flex flex-col gap-3 lg:w-[268px]">
                 <FieldPillLabel tooltip="데이트를 즐길 시간대를 선택하세요">
                   시간대
                 </FieldPillLabel>
