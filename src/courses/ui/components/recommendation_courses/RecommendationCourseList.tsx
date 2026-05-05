@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { fetchRecommendations } from "@/recommendation/infrastructure/api/recommendationsApi";
-import { RecommendationsResponse } from "@/recommendation/types";
+import { RecommendationsResponse, RecommendationCourseItem } from "@/recommendation/types";
 import BestCourseCard from "./BestCourseCard";
 import OptionalCourseCard from "./OptionalCourseCard";
 import RecommendationLoading from "./RecommendationLoading";
+import { trackCourseCreate } from "@/courses/ui/components/CourseCreation/event_tracking";
+import { trackCardClick } from "@/courses/ui/components/suggested_courses/event_tracking";
 
 export default function RecommendationCourseList() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
   const [data, setData] = useState<RecommendationsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,9 +42,24 @@ export default function RecommendationCourseList() {
     }
 
     fetchRecommendations({ area, start_time, transport })
-      .then(setData)
+      .then((result) => {
+        setData(result);
+        if (result.courses.length > 0) {
+          void trackCourseCreate();
+        }
+      })
       .finally(() => setIsLoading(false));
   }, [searchParams]);
+
+  const handleBestCourseClick = (course: RecommendationCourseItem) => {
+    void trackCardClick(pathname, course.course_id, course.restaurant.keyword, "main");
+    router.push(`/courses/detail/${course.course_id}`);
+  };
+
+  const handleOptionalCourseClick = (course: RecommendationCourseItem) => {
+    void trackCardClick(pathname, course.course_id, course.restaurant.keyword, "sub");
+    router.push(`/courses/detail/${course.course_id}`);
+  };
 
   if (isLoading) return <RecommendationLoading />;
 
@@ -72,7 +90,7 @@ export default function RecommendationCourseList() {
           <div className="w-full lg:flex-1">
             <BestCourseCard
               course={bestCourse}
-              onDetailClick={() => router.push(`/courses/detail/${bestCourse.course_id}`)}
+              onDetailClick={() => handleBestCourseClick(bestCourse)}
             />
           </div>
         )}
@@ -83,7 +101,7 @@ export default function RecommendationCourseList() {
                 key={`optional-${index}`}
                 course={course}
                 index={index}
-                onDetailClick={() => router.push(`/courses/detail/${course.course_id}`)}
+                onDetailClick={() => handleOptionalCourseClick(course)}
               />
             ))}
           </div>
