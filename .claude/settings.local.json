@@ -25,7 +25,11 @@
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory)",
       "Bash(Select-Object Name)",
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\\\\src\" -Directory)",
-      "Bash(Test-Path *)"
+      "Bash(Test-Path *)",
+      "Bash(del \"d:\\\\미정이\\\\MJE-Frontend\\\\src\\\\courses\\\\ui\\\\components\\\\detail\\\\ExportCard.tsx\")"
+    ],
+    "additionalDirectories": [
+      "d:\\������\\MJE-Frontend\\src\\courses\\ui\\components\\detail"
     ]
   }
 }
