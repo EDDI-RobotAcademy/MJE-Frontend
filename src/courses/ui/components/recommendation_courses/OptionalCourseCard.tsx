@@ -11,29 +11,29 @@ interface OptionalCourseCardProps {
 interface OptionalCourseDisplay {
   imageUrl: string;
   label: string;
-  locationStart: string;
-  locationEnd: string;
+  locationGu: string;
+  locationDong: string;
   title: string;
   description: string;
   hashtags: string[];
 }
 
-function extractArea(address: string): string {
-  const parts = address.split(" ").filter(Boolean);
-  return parts[parts.length - 1] ?? address;
+function extractAreaParts(address: string): { gu: string; dong: string } {
+  const gu = address.match(/\S+구/)?.[0] ?? "";
+  const dong = address.match(/\S+동/)?.[0] ?? "";
+  return { gu, dong };
 }
 
 function toOptionalCourseDisplay(
   course: RecommendationCourseItem,
   index: number,
 ): OptionalCourseDisplay {
-  const locationStart = extractArea(course.cafe.address);
-  const locationEnd = extractArea(course.restaurant.address);
+  const { gu, dong } = extractAreaParts(course.cafe.address);
   return {
     imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.restaurant.id + 20 + index}/300/300`,
     label: `Option ${String.fromCharCode(65 + index)}`,
-    locationStart,
-    locationEnd,
+    locationGu: gu,
+    locationDong: dong,
     title:
       `${course.cafe.category}, ${course.restaurant.category},\n` +
       `그리고 ${course.activity.keyword} 코스`,
@@ -99,10 +99,10 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
         {/* Location tags */}
         <div className="mb-[7px] flex gap-[14px]">
           <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationStart}
+            {display.locationGu}
           </span>
           <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationEnd}
+            {display.locationDong}
           </span>
         </div>
 

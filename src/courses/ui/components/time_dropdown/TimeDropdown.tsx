@@ -131,7 +131,7 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
         >
           <ul
             ref={listRef}
-            className="scrollbar-hide py-1"
+            className="scrollbar-timepicker py-1"
             style={{
               maxHeight: `${ITEM_HEIGHT * VISIBLE_COUNT}px`,
               overflowY: "scroll",
