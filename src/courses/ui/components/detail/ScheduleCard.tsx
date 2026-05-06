@@ -65,17 +65,24 @@ export default function ScheduleCard({
 
           {/* Content */}
           <div className="flex flex-col gap-[10px]">
-            <div className="flex flex-col gap-[4px]">
-              {place.time && (
-                <div className="flex items-center gap-[3px]">
+            {/* 시간 + 주소 — 장소명 위 */}
+            <div className="flex flex-col gap-[5px]">
+              {(place.startTime ?? place.time) && (
+                <div className="flex items-center gap-[4px]">
                   <IconClock />
-                  <span className="text-[8px] text-[#707070]">{place.time}</span>
+                  <span className="text-[11px] text-[#959595]">
+                    {place.startTime && place.endTime
+                      ? `${place.startTime} ~ ${place.endTime}`
+                      : (place.startTime ?? place.time)}
+                  </span>
                 </div>
               )}
-              {place.location && (
-                <div className="flex items-center gap-[3px]">
+              {(place.address ?? place.location) && (
+                <div className="flex items-center gap-[4px]">
                   <IconPin />
-                  <span className="text-[8px] text-[#707070]">{place.location}</span>
+                  <span className="text-[11px] text-[#959595]">
+                    {place.address ?? place.location}
+                  </span>
                 </div>
               )}
             </div>

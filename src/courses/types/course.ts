@@ -7,7 +7,10 @@ export interface Place {
   name: string;
   description: string;
   location: string;
+  address?: string;
   time?: string;
+  startTime?: string;
+  endTime?: string;
   imageUrl?: string;
   imageUrl2?: string;
   type?: "restaurant" | "cafe" | "activity";
