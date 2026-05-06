@@ -58,6 +58,15 @@ function classifyType(category: string): "restaurant" | "cafe" | "activity" {
     "바",
   ];
 
+  if (
+    category.includes("북카페") ||
+    category.includes("만화카페") ||
+    category.includes("코믹카페") ||
+    category.includes("야경카페")
+  ) {
+    return "activity";
+  }
+
   if (cafeKeywords.some((keyword) => cat.includes(keyword))) {
     return "cafe";
   }
