@@ -103,7 +103,7 @@ export default function CourseDetailPage({
     const idx = allCourses.findIndex((c) => c.id === id);
     if (idx === 1) return "Option A";
     if (idx === 2) return "Option B";
-    return "Test Course !";
+    return "Best Course !";
   };
 
   const courseLabel = getCourseLabel(courseId);
