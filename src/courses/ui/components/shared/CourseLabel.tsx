@@ -13,7 +13,7 @@ interface CourseLabelProps {
 }
 
 export default function CourseLabel({ type }: CourseLabelProps) {
-  const isBest = type === "진강아 확인해줘 !";
+  const isBest = type === "Best Course !";
 
   return (
     <span
