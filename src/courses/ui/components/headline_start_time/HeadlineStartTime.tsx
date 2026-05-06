@@ -22,7 +22,7 @@ interface HeadlineStartTimeProps {
 
 export default function HeadlineStartTime({ time }: HeadlineStartTimeProps) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-brand-blue-light px-3 py-1 text-[12px] text-brand-navy">
+    <span className="inline-flex items-center gap-[5px] text-[12px] text-[#757575]">
       <ClockIcon />
       {time} 시작
     </span>

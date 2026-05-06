@@ -184,8 +184,23 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
     <div className="flex flex-col">
       {/* Gray outer container */}
       <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px]">
-        {/* White inner card */}
-        <div className="rounded-[18px] bg-white px-[9px] py-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
+        {/* White inner card — relative so badges can be anchored to its top-left */}
+        <div className="relative rounded-[18px] bg-white px-[9px] pt-[30px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
+          {/* Category badges — overlapping top-left corner of the white card */}
+          <div
+            className="absolute top-[8px] left-[9px] flex gap-[8px]"
+            style={{ fontFamily: pretendard }}
+          >
+            {stop.categories.map((cat) => (
+              <span
+                key={cat}
+                className="flex h-[20px] items-center justify-center rounded-full bg-[#2a4874] px-[14px] text-[10px] text-white"
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
+
           <div className="flex items-center gap-5">
             <PlaceImages image1={stop.image1} image2={stop.image2} name={stop.name} />
 
@@ -231,21 +246,11 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
           </div>
         </div>
 
-        {/* Bottom row: category badges (left) + transit info (right) */}
+        {/* Bottom row: transit info (centered) */}
         <div
-          className="mt-[10px] flex items-center justify-between px-[3px]"
+          className="mt-[10px] flex items-center justify-center px-[3px]"
           style={{ fontFamily: pretendard }}
         >
-          <div className="flex gap-[8px]">
-            {stop.categories.map((cat) => (
-              <span
-                key={cat}
-                className="flex h-[20px] items-center justify-center rounded-full bg-[#2a4874] px-[14px] text-[10px] text-white"
-              >
-                {cat}
-              </span>
-            ))}
-          </div>
           <div className="flex items-center gap-[8px] text-[10px] text-[#959595]">
             <span className="whitespace-nowrap">
               {stop.transitFrom} → {stop.transitTo}
@@ -360,38 +365,36 @@ export default function RecommendationDetailPage({ courseId }: Props) {
       <div className="relative z-10 mx-auto max-w-[1200px] px-[120px]">
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <section
-          className="flex flex-col gap-[7px] pb-[32px] pt-[60px]"
+          className="flex flex-col pb-[32px] pt-[48px]"
           style={{ fontFamily: pretendard }}
         >
-          <div className="flex flex-col gap-[34px]">
-            {/* Back link */}
-            <Link
-              href="/recommendation"
-              className="w-fit text-[17px] text-[#2a4874] transition-opacity hover:opacity-75"
-            >
-              ← 추천 코스로 돌아가기
-            </Link>
+          {/* Back link — text link at very top */}
+          <Link
+            href="/recommendation"
+            className="mb-[20px] w-fit text-[14px] text-[#2a4874] transition-opacity hover:opacity-75"
+          >
+            ← 추천 코스 돌아가기
+          </Link>
 
-            {/* Location & start time */}
-            <div className="flex items-center gap-[23px]">
-              <div className="flex items-end gap-[3px]">
-                <IconPin />
-                <span className="text-[12px] text-[#757575]">{course.location}</span>
-              </div>
-              <div className="flex items-end gap-[3px]">
-                <IconClock />
-                <span className="text-[12px] text-[#757575]">{course.startTime}</span>
-              </div>
+          {/* Location & start time */}
+          <div className="mb-[10px] flex items-center gap-[23px]">
+            <div className="flex items-end gap-[3px]">
+              <IconPin />
+              <span className="text-[12px] text-[#757575]">{course.location}</span>
+            </div>
+            <div className="flex items-end gap-[3px]">
+              <IconClock />
+              <span className="text-[12px] text-[#757575]">{course.startTime}</span>
             </div>
           </div>
 
           {/* Course title */}
-          <h1 className="text-[40px] font-medium leading-tight text-black">
+          <h1 className="mb-[10px] text-[40px] font-medium leading-tight text-black">
             {course.title}
           </h1>
 
           {/* Description with dot-grid accent */}
-          <div className="mt-[5px] flex items-center gap-[12px]">
+          <div className="flex items-center gap-[12px]">
             <DotGrid />
             <p className="text-[14px] text-[#757575]">{course.description}</p>
           </div>
@@ -402,7 +405,7 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           {/* ── Left: timeline card ─────────────────────────────────────────── */}
           <div className="flex min-w-0 flex-1 flex-col">
             {/* White outer card: badge + title header + all stops */}
-            <div className="w-full rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
+            <div className="w-full rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
 
               {/* ── Card header: "Best Course!" + "상세 일정" (stacked) ──── */}
               <div className="mb-[22px] flex flex-col gap-[26px]">

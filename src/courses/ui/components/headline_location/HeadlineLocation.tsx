@@ -22,7 +22,7 @@ interface HeadlineLocationProps {
 
 export default function HeadlineLocation({ location }: HeadlineLocationProps) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-brand-blue-light px-3 py-1 text-[12px] text-brand-navy">
+    <span className="inline-flex items-center gap-[5px] text-[12px] text-[#757575]">
       <MapPinIcon />
       {location}
     </span>

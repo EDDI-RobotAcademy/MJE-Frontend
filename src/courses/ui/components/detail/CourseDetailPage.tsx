@@ -9,6 +9,7 @@ import { CourseDetailData } from "@/recommendation/infrastructure/api/course_det
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import { trackOptionCardClick } from "@/courses/ui/components/other_course/event_tracking";
 import BestCourseLabel from "./BestCourseLabel";
+import { CourseType, labelFromCourseType } from "@/courses/ui/components/shared/CourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
@@ -80,6 +81,33 @@ export default function CourseDetailPage({
 
   const places = selectedCourse.places ?? [];
 
+  const getCourseLabel = (id: string): CourseType => {
+    // Check initialDetailData.subCourses first — real UUIDs + courseType from API
+    const detailSub = initialDetailData?.subCourses?.find((c) => c.id === id);
+    if (detailSub?.courseType) return labelFromCourseType(detailSub.courseType);
+
+    // Check session courses — may have courseType even when IDs are fake
+    const sessionCourse = allCourses.find((c) => c.id === id);
+    if (sessionCourse?.courseType) return labelFromCourseType(sessionCourse.courseType);
+
+    // For the selected course itself, infer from what the subCourses don't cover
+    if (id === courseId && initialDetailData?.subCourses?.length) {
+      const usedTypes = initialDetailData.subCourses.map((c) => labelFromCourseType(c.courseType));
+      const remaining = (["Best Course !", "Option A", "Option B"] as CourseType[]).find(
+        (t) => !usedTypes.includes(t),
+      );
+      if (remaining) return remaining;
+    }
+
+    // Final fallback: position in session allCourses array
+    const idx = allCourses.findIndex((c) => c.id === id);
+    if (idx === 1) return "Option A";
+    if (idx === 2) return "Option B";
+    return "Best Course !";
+  };
+
+  const courseLabel = getCourseLabel(courseId);
+
   const fallbackAlternatives =
     allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
   const alternatives: Course[] =
@@ -95,9 +123,12 @@ export default function CourseDetailPage({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-[10px]">
+        <div className="flex flex-wrap items-center gap-[18px]">
           {headlineLocation && <HeadlineLocation location={headlineLocation} />}
+          {headlineLocation && selectedCourse.startTime && (
+            <span className="inline-block h-[2.5px] w-[2.5px] shrink-0 rounded-full bg-[#c0c0c0]" />
+          )}
           {selectedCourse.startTime && (
             <HeadlineStartTime time={selectedCourse.startTime} />
           )}
@@ -106,14 +137,18 @@ export default function CourseDetailPage({
         <HeadlineCourseExplain description={selectedCourse.description} />
       </div>
 
-      <div className="grid grid-cols-[1fr_220px] items-start gap-4">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <BestCourseLabel />
+      <div className="grid grid-cols-[1fr_250px] items-start gap-5">
+        <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
+          <div className="flex items-center gap-3">
+            <BestCourseLabel label={courseLabel} />
             {selectedCourse.duration && (
-              <span className="text-[11px] text-brand-text-muted">
-                상세 일정 · {selectedCourse.duration}
-              </span>
+              <div className="flex items-center gap-[5px] text-[11px] text-brand-text-muted">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="7" stroke="#959595" strokeWidth="1.5" />
+                  <path d="M8 5V9L10.5 10.5" stroke="#959595" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                <span>상세 일정 · {selectedCourse.duration}</span>
+              </div>
             )}
           </div>
 
@@ -139,20 +174,22 @@ export default function CourseDetailPage({
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-[40px]">
           <ExportCard courseTitle={selectedCourse.name} courseId={courseId} />
 
           {safeAlternatives.length > 0 && (
             <div className="flex flex-col gap-3">
-              <span className="inline-block w-fit rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
-                다른 추천 코스!
-              </span>
+              <div className="flex justify-center">
+                <span className="rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
+                  다른 추천 코스!
+                </span>
+              </div>
               <div className="flex flex-col gap-3">
                 {safeAlternatives.map((course, index) => (
                   <OtherCourseCard
                     key={course.id || `alternative-course-${index}`}
                     course={course}
-                    label={index === 0 ? "Option A" : "Option B"}
+                    label={getCourseLabel(course.id)}
                     onClick={handleOtherCourseClick}
                   />
                 ))}

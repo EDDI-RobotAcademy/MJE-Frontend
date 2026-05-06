@@ -22,7 +22,7 @@ interface OtherCourseLocationLabelProps {
 
 export default function OtherCourseLocationLabel({ location }: OtherCourseLocationLabelProps) {
   return (
-    <span className="inline-flex items-center gap-0.5 rounded-full bg-brand-navy px-2 py-0.5 text-[9px] text-white">
+    <span className="inline-flex items-center gap-[4px] text-[10px] text-[#757575]">
       <MapPinIcon />
       {location}
     </span>
