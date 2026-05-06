@@ -119,6 +119,7 @@ function mapSelectedCourse(response: CourseDetailApiResponse): Course {
 function mapSubCourse(course: CourseDetailSubCourseApiResponse): Course {
   return {
     id: course.courseId,
+    courseType: course.courseType,
     name: course.title,
     description: course.routeSummary,
     locations: course.locationSummary ? [course.locationSummary] : [],

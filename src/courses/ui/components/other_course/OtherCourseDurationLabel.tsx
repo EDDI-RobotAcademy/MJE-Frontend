@@ -22,7 +22,7 @@ interface OtherCourseDurationLabelProps {
 
 export default function OtherCourseDurationLabel({ duration }: OtherCourseDurationLabelProps) {
   return (
-    <span className="inline-flex items-center gap-0.5 rounded-full bg-brand-blue-light px-2 py-0.5 text-[9px] text-brand-navy">
+    <span className="inline-flex items-center gap-[4px] text-[10px] text-[#757575]">
       <TimerIcon />
       {duration}
     </span>

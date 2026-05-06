@@ -38,8 +38,15 @@ export default function ScheduleCard({
 
   return (
     <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px]">
-      {/* White inner card */}
-      <div className="rounded-[18px] bg-white px-[9px] py-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
+      {/* White inner card — relative so category badge can be anchored to top-left */}
+      <div className="relative rounded-[18px] bg-white px-[9px] pt-[30px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
+        {/* Category badge — overlapping top-left corner of white card */}
+        {place.category && (
+          <span className="absolute top-[8px] left-[9px] flex h-[20px] items-center justify-center rounded-full bg-[#2a4874] px-[14px] text-[10px] text-white">
+            {place.category}
+          </span>
+        )}
+
         <div className="flex items-center gap-5">
           {/* Overlapping circles */}
           <div className="relative h-[101px] w-[186px] shrink-0">
@@ -80,15 +87,8 @@ export default function ScheduleCard({
         </div>
       </div>
 
-      {/* Bottom row: category badge left, transit info right */}
-      <div className="mt-[10px] flex items-center justify-between px-[3px]">
-        <div className="flex gap-[6px]">
-          {place.category && (
-            <span className="flex h-[20px] items-center justify-center rounded-full bg-[#2a4874] px-[14px] text-[10px] text-white">
-              {place.category}
-            </span>
-          )}
-        </div>
+      {/* Bottom row: always rendered so all cards share identical structure */}
+      <div className="mt-[10px] flex min-h-[24px] items-center justify-center px-[3px]">
         {previousPlaceName && walkingTimeFromPrevious && (
           <div className="flex items-center gap-[6px] text-[10px] text-[#959595]">
             <span className="whitespace-nowrap">{previousPlaceName} → {place.name}</span>

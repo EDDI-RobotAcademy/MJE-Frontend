@@ -17,6 +17,7 @@ export interface Place {
 
 export interface Course {
   id: string;
+  courseType?: string;
   name: string;
   description: string;
   location?: string;

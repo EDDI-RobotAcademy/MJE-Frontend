@@ -27,7 +27,7 @@ export default function DetailCourseList() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <BestCourseLabel />
+        <BestCourseLabel label="Best Course !" />
       </div>
 
       <div className="flex flex-col gap-4 rounded-[24px] bg-white p-5 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">

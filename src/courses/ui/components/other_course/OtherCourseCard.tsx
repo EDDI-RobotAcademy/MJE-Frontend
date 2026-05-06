@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { Course } from "@/courses/types/course";
+import { CourseType } from "@/courses/ui/components/shared/CourseLabel";
 import OtherCourseOptionLabel from "./OtherCourseOptionLabel";
 import OtherCourseTitle from "./OtherCourseTitle";
 import OtherCourseRoute from "./OtherCourseRoute";
@@ -10,23 +10,21 @@ import OtherCourseDurationLabel from "./OtherCourseDurationLabel";
 
 interface OtherCourseCardProps {
   course: Course;
-  label: string;
+  label: CourseType;
   onClick: (course: Course) => void;
 }
 
-function CourseImage({ src, alt }: { src?: string; alt: string }) {
-  const [errored, setErrored] = useState(false);
-  const imgSrc = errored || !src ? "https://picsum.photos/seed/other/400/300" : src;
-
+function ArrowIcon() {
   return (
-    <div className="relative h-[90px] w-full overflow-hidden rounded-[14px] bg-brand-placeholder">
-      <img
-        src={imgSrc}
-        alt={alt}
-        className="absolute inset-0 h-full w-full object-cover"
-        onError={() => setErrored(true)}
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M3 13L13 3M13 3H7M13 3V9"
+        stroke="#2a4874"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-    </div>
+    </svg>
   );
 }
 
@@ -38,20 +36,23 @@ export default function OtherCourseCard({ course, label, onClick }: OtherCourseC
       type="button"
       disabled={!course.id}
       onClick={() => onClick(course)}
-      className="flex w-full cursor-pointer flex-col gap-2 rounded-[20px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
+      className="flex w-full cursor-pointer flex-col gap-2 rounded-[20px] bg-white p-4 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >
-      <CourseImage src={course.imageUrl} alt={course.name} />
-
-      <div className="flex flex-col gap-1.5 px-0.5">
+      <div className="flex flex-col gap-2">
         <OtherCourseOptionLabel label={label} />
         <OtherCourseTitle title={course.name} />
         <OtherCourseRoute locations={locations} />
 
-        <div className="flex flex-wrap gap-1">
-          {locations.map((loc, i) => (
-            <OtherCourseLocationLabel key={i} location={loc} />
-          ))}
-          {course.duration && <OtherCourseDurationLabel duration={course.duration} />}
+        <div className="flex items-center justify-between gap-1">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            {locations.map((loc, i) => (
+              <OtherCourseLocationLabel key={i} location={loc} />
+            ))}
+            {course.duration && <OtherCourseDurationLabel duration={course.duration} />}
+          </div>
+          <div className="flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full bg-[#d5e6f6] shadow-[0px_2px_2.5px_rgba(0,0,0,0.07)]">
+            <ArrowIcon />
+          </div>
         </div>
       </div>
     </button>

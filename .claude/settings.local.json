@@ -27,7 +27,9 @@
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\\\\src\" -Directory)",
       "Bash(Test-Path *)",
       "Bash(del \"d:\\\\미정이\\\\MJE-Frontend\\\\src\\\\courses\\\\ui\\\\components\\\\detail\\\\ExportCard.tsx\")",
-      "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory -Force)"
+      "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory -Force)",
+      "Bash(Get-Content \"C:\\\\Users\\\\uns\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D------MJE-Frontend\\\\a5c102d7-6251-451e-9a50-a0954d8fdb5a\\\\tasks\\\\bmv33x0e3.output\" -Wait)",
+      "Bash(Select-String --line-buffered \"ready|error|localhost|Error|Failed|warn\" -i)"
     ],
     "additionalDirectories": [
       "d:\\������\\MJE-Frontend\\src\\courses\\ui\\components\\detail"
