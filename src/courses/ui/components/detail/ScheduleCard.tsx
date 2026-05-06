@@ -39,12 +39,23 @@ export default function ScheduleCard({
   return (
     <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px]">
       {/* White inner card — relative so category badge can be anchored to top-left */}
-      <div className="relative rounded-[18px] bg-white px-[9px] pt-[30px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
-        {/* Category badge — overlapping top-left corner of white card */}
+      <div className="relative rounded-[18px] bg-white px-[9px] pt-[36px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
+        {/* Category pills — split by , or > into individual navy pills */}
         {place.category && (
-          <span className="absolute top-[8px] left-[9px] flex h-[20px] items-center justify-center rounded-full bg-[#2a4874] px-[14px] text-[10px] text-white">
-            {place.category}
-          </span>
+          <div className="absolute top-[8px] left-[9px] flex flex-wrap gap-[4px]">
+            {place.category
+              .split(/[,>]/)
+              .map((t) => t.trim())
+              .filter(Boolean)
+              .map((tag, i) => (
+                <span
+                  key={i}
+                  className="flex h-[20px] items-center justify-center whitespace-nowrap rounded-full bg-[#2a4874] px-[10px] text-[10px] text-white"
+                >
+                  {tag}
+                </span>
+              ))}
+          </div>
         )}
 
         <div className="flex items-center gap-5">
