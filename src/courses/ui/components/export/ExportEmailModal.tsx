@@ -5,9 +5,10 @@ import { exportCourseAction } from "@/courses/infrastructure/api/export/exportAc
 import { trackSendClick, trackCloseClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
-const prompt = "'Prompt', sans-serif";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type ModalStep = "input" | "loading" | "success";
 
 interface ExportEmailModalProps {
   courseTitle: string;
@@ -15,26 +16,81 @@ interface ExportEmailModalProps {
   onClose: () => void;
 }
 
-function Spinner() {
+/* ── 전송 중 로딩 UI ───────────────────────────── */
+function SendingLoader() {
   return (
-    <svg
-      className="h-[18px] w-[18px] animate-spin text-white"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="3"
-        className="opacity-25"
+    <div className="flex w-full flex-col items-center gap-[14px]">
+      <div className="flex items-center gap-[8px]">
+        <span
+          className="text-[14px] font-medium text-[#2a4874]"
+          style={{ fontFamily: "'Prompt', sans-serif" }}
+        >
+          Sending your course..
+        </span>
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="2" y="4" width="16" height="12" rx="1.5" stroke="#2a4874" strokeWidth="1.5" />
+          <path
+            d="M2.5 5.5L10 11.5L17.5 5.5"
+            stroke="#2a4874"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <div className="w-full border-b border-dotted border-[#d0d0d0]" />
+      <p className="text-[11px] text-[#b8b8b8]">이메일 전송 중...</p>
+    </div>
+  );
+}
+
+/* ── 전송 완료 성공 UI ─────────────────────────── */
+function SuccessCheck() {
+  return (
+    <div className="flex flex-col items-center gap-[12px]">
+      <div className="flex h-[58px] w-[58px] items-center justify-center rounded-full bg-[#2a4874]">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          {/* 뒤 체크 (연하게) */}
+          <path
+            d="M4 14.5L10 20.5L20.5 9"
+            stroke="rgba(255,255,255,0.45)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* 앞 체크 (밝은 흰색) */}
+          <path
+            d="M9 14.5L15 20.5L25.5 9"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <p className="text-[11px] text-[#b8b8b8]">이메일함을 확인해주세요.</p>
+    </div>
+  );
+}
+
+/* ── 전송 버튼 아이콘 ──────────────────────────── */
+function SendMailIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="1.5" y="5" width="15" height="11" rx="1.8" stroke="white" strokeWidth="1.6" />
+      <path
+        d="M2 6.5L9 11.5L16 6.5"
+        stroke="white"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        fill="currentColor"
-        className="opacity-80"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+        d="M19 12H23M23 12L21 10M23 12L21 14"
+        stroke="white"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -48,8 +104,7 @@ export default function ExportEmailModal({
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isShaking, setIsShaking] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [step, setStep] = useState<ModalStep>("input");
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -66,7 +121,7 @@ export default function ExportEmailModal({
     setIsShaking(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     setEmailError(null);
 
@@ -81,13 +136,13 @@ export default function ExportEmailModal({
     }
 
     void trackSendClick(courseId, courseTitle);
-    setIsSubmitting(true);
+    setStep("loading");
     const result = await exportCourseAction(courseId, email);
-    setIsSubmitting(false);
 
     if (result.success) {
-      setIsDone(true);
+      setStep("success");
     } else {
+      setStep("input");
       triggerShake("전송 중 오류가 발생했어요. 다시 시도해 주세요");
     }
   };
@@ -95,121 +150,82 @@ export default function ExportEmailModal({
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       onClick={handleOverlayClick}
     >
       <div
-        className="w-[360px] rounded-[30px] bg-white px-[28px] py-[28px] shadow-[3px_6px_20px_rgba(187,199,211,0.6)]"
+        className="relative w-[420px] rounded-[28px] bg-white px-[36px] pb-[44px] pt-[44px] shadow-[0px_20px_60px_rgba(0,0,0,0.15)]"
         style={{ fontFamily: pretendard }}
       >
-        {isDone ? (
-          /* ── 전송 완료 상태 ─────────────────────────────── */
-          <div className="flex flex-col items-center gap-[16px]">
-            <div className="flex w-full justify-end">
-              <button
-                type="button"
-                onClick={handleCloseButton}
-                className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#f5f5f5] text-[18px] leading-none text-[#757575] transition-colors hover:bg-[#e8e8e8]"
-                aria-label="닫기"
-              >
-                ×
-              </button>
-            </div>
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <circle cx="20" cy="20" r="19" stroke="#2a4874" strokeWidth="1.5" />
-              <path
-                d="M12 20.5L17.5 26L28 14"
-                stroke="#2a4874"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <p className="text-center text-[16px] font-medium text-black">
-              이메일로 전송했어요!
+        {/* X 닫기 버튼 — 모든 step에서 고정 */}
+        <button
+          type="button"
+          onClick={handleCloseButton}
+          className="absolute right-[18px] top-[18px] flex h-[28px] w-[28px] items-center justify-center text-[22px] leading-none text-[#bbbbbb] transition-colors hover:text-[#757575]"
+          aria-label="닫기"
+        >
+          ×
+        </button>
+
+        <div className="flex flex-col items-center gap-[28px]">
+          {/* 타이틀 + 서브타이틀 — 항상 노출 / 서브타이틀만 step별 변경 */}
+          <div className="flex flex-col items-center gap-[10px] text-center">
+            <p className="text-[22px] font-semibold leading-snug text-[#2a4874]">
+              &lsquo;&nbsp;{courseTitle}&nbsp;&rsquo;
             </p>
-            <p className="text-center text-[12px] text-[#757575]">
-              <span className="text-[#2a4874]">{email}</span>
-              {" "}주소로 코스를 보내드렸어요
+            <p className="text-[14px] text-[#9a9a9a]">
+              {step === "success"
+                ? "이메일 전송이 완료 되었습니다."
+                : "이메일로 보내드릴게요."}
             </p>
-            <button
-              type="button"
-              onClick={onClose}
-              className="mt-[6px] flex h-[44px] w-full items-center justify-center rounded-full bg-[#2a4874] text-[14px] text-white transition-opacity hover:opacity-80"
-              style={{ fontFamily: prompt }}
-            >
-              확인
-            </button>
           </div>
-        ) : (
-          /* ── 이메일 입력 폼 ──────────────────────────────── */
-          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[20px]">
-            {/* 헤더: 코스 제목 + 닫기 버튼 */}
-            <div className="flex items-start justify-between gap-[12px]">
-              <div className="flex flex-col gap-[5px]">
-                <span className="text-[11px] text-[#757575]">데이트 코스 내보내기</span>
-                <p className="text-[18px] font-medium leading-snug text-black">
-                  {courseTitle}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={handleCloseButton}
-                className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full bg-[#f5f5f5] text-[18px] leading-none text-[#757575] transition-colors hover:bg-[#e8e8e8]"
-                aria-label="닫기"
-              >
-                ×
-              </button>
-            </div>
 
-            {/* 이메일 입력 필드 */}
-            <div className="flex flex-col gap-[6px]">
-              <label htmlFor="export-email" className="text-[12px] text-[#757575]">
-                이메일 주소
-              </label>
-              <input
-                id="export-email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError(null);
-                }}
-                placeholder="example@email.com"
-                className={[
-                  "w-full rounded-[14px] border bg-[#fafafa] px-[16px] py-[12px] text-[13px] text-black outline-none transition-colors placeholder:text-[#c0c0c0]",
-                  emailError
-                    ? "border-red-400 focus:border-red-400"
-                    : "border-[#e0e0e0] focus:border-[#2a4874] focus:bg-white",
-                  isShaking ? "animate-shake" : "",
-                ].join(" ")}
-                onAnimationEnd={() => setIsShaking(false)}
-              />
-              {/* 인라인 에러 메시지 */}
-              {emailError && (
-                <p className="text-[11px] text-red-500">{emailError}</p>
-              )}
-            </div>
-
-            {/* 이메일 전송하기 버튼 */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] text-[14px] text-white transition-opacity hover:opacity-80 disabled:opacity-60"
-              style={{ fontFamily: prompt }}
-            >
-              {isSubmitting ? (
-                <>
-                  <Spinner />
-                  <span>전송 중…</span>
-                </>
-              ) : (
-                "이메일 전송하기"
-              )}
-            </button>
-          </form>
-        )}
+          {/* 콘텐츠 영역 — min-h 고정으로 모달 크기 유지 */}
+          <div className="flex min-h-[90px] w-full items-center justify-center">
+            {step === "loading" && <SendingLoader />}
+            {step === "success" && <SuccessCheck />}
+            {step === "input" && (
+              <form onSubmit={handleSubmit} noValidate className="w-full">
+                <div className="flex w-full flex-col gap-[8px]">
+                  <div
+                    className={isShaking ? "animate-shake" : ""}
+                    onAnimationEnd={() => setIsShaking(false)}
+                  >
+                    <div className="flex items-center gap-[10px]">
+                      <input
+                        id="export-email"
+                        type="email"
+                        autoComplete="email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          if (emailError) setEmailError(null);
+                        }}
+                        placeholder="example@gmail.com"
+                        className={[
+                          "min-w-0 flex-1 rounded-full border bg-[#f4f6f8] px-[20px] py-[13px] text-[13px] text-black outline-none transition-colors placeholder:text-[#c0c0c0]",
+                          emailError
+                            ? "border-red-400"
+                            : "border-[#e8eaed] focus:border-[#2a4874] focus:bg-white",
+                        ].join(" ")}
+                      />
+                      <button
+                        type="submit"
+                        className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-[#7baed4] shadow-[0px_4px_12px_rgba(123,174,212,0.5)] transition-opacity hover:opacity-85"
+                        aria-label="이메일 전송"
+                      >
+                        <SendMailIcon />
+                      </button>
+                    </div>
+                  </div>
+                  {emailError && (
+                    <p className="pl-[4px] text-[11px] text-red-500">{emailError}</p>
+                  )}
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
