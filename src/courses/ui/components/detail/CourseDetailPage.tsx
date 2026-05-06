@@ -9,7 +9,6 @@ import { CourseDetailData } from "@/recommendation/infrastructure/api/course_det
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import { trackOptionCardClick } from "@/courses/ui/components/other_course/event_tracking";
 import BestCourseLabel from "./BestCourseLabel";
-import { CourseType, labelFromCourseType } from "@/courses/ui/components/shared/CourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
@@ -81,33 +80,6 @@ export default function CourseDetailPage({
 
   const places = selectedCourse.places ?? [];
 
-  const getCourseLabel = (id: string): CourseType => {
-    // Check initialDetailData.subCourses first — real UUIDs + courseType from API
-    const detailSub = initialDetailData?.subCourses?.find((c) => c.id === id);
-    if (detailSub?.courseType) return labelFromCourseType(detailSub.courseType);
-
-    // Check session courses — may have courseType even when IDs are fake
-    const sessionCourse = allCourses.find((c) => c.id === id);
-    if (sessionCourse?.courseType) return labelFromCourseType(sessionCourse.courseType);
-
-    // For the selected course itself, infer from what the subCourses don't cover
-    if (id === courseId && initialDetailData?.subCourses?.length) {
-      const usedTypes = initialDetailData.subCourses.map((c) => labelFromCourseType(c.courseType));
-      const remaining = (["Best Course !", "Option A", "Option B"] as CourseType[]).find(
-        (t) => !usedTypes.includes(t),
-      );
-      if (remaining) return remaining;
-    }
-
-    // Final fallback: position in session allCourses array
-    const idx = allCourses.findIndex((c) => c.id === id);
-    if (idx === 1) return "Option A";
-    if (idx === 2) return "Option B";
-    return "Best Course !";
-  };
-
-  const courseLabel = getCourseLabel(courseId);
-
   const fallbackAlternatives =
     allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
   const alternatives: Course[] =
@@ -140,7 +112,7 @@ export default function CourseDetailPage({
       <div className="grid grid-cols-[1fr_250px] items-start gap-5">
         <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
           <div className="flex flex-col gap-[10px]">
-            <BestCourseLabel label={courseLabel} />
+            <BestCourseLabel label="Best Course !" />
             <div className="flex items-baseline gap-[8px]">
               <span className="text-[18px] font-bold text-black">상세 일정</span>
               {selectedCourse.duration && (
@@ -192,7 +164,7 @@ export default function CourseDetailPage({
                   <OtherCourseCard
                     key={course.id || `alternative-course-${index}`}
                     course={course}
-                    label={getCourseLabel(course.id)}
+                    label={index === 0 ? "Option A" : "Option B"}
                     onClick={handleOtherCourseClick}
                   />
                 ))}
