@@ -139,17 +139,20 @@ export default function CourseDetailPage({
 
       <div className="grid grid-cols-[1fr_250px] items-start gap-5">
         <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-[10px]">
             <BestCourseLabel label={courseLabel} />
-            {selectedCourse.duration && (
-              <div className="flex items-center gap-[5px] text-[11px] text-brand-text-muted">
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="7" stroke="#959595" strokeWidth="1.5" />
-                  <path d="M8 5V9L10.5 10.5" stroke="#959595" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                <span>상세 일정 · {selectedCourse.duration}</span>
-              </div>
-            )}
+            <div className="flex items-baseline gap-[8px]">
+              <span className="text-[18px] font-bold text-black">상세 일정</span>
+              {selectedCourse.duration && (
+                <div className="flex items-center gap-[5px] text-[12px] text-[#959595]">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7" stroke="#959595" strokeWidth="1.5" />
+                    <path d="M8 5V9L10.5 10.5" stroke="#959595" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  <span>{selectedCourse.duration}</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {places.length > 0 ? (

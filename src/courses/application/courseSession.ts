@@ -74,13 +74,24 @@ function classifyType(category: string): "restaurant" | "cafe" | "activity" {
   return "activity";
 }
 
+function parseTimeSlot(slot?: string): { startTime?: string; endTime?: string } {
+  if (!slot) return {};
+  const match = slot.match(/^(\S+)\s*[-~]\s*(\S+)$/);
+  if (match) return { startTime: match[1], endTime: match[2] };
+  return { startTime: slot };
+}
+
 function mapPlace(place: BackendPlaceItem, courseId: string): Place {
+  const { startTime, endTime } = parseTimeSlot(place.recommendedTimeSlot);
   return {
     id: `${courseId}-${place.visitOrder}`,
     name: place.name,
     description: place.mainDescription,
     location: place.area,
+    address: place.address ?? place.area,
     time: place.recommendedTimeSlot,
+    startTime,
+    endTime,
     imageUrl: place.imageUrl,
     type: classifyType(place.category),
     category: place.category,

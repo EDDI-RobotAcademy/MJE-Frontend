@@ -4,6 +4,7 @@ export interface BackendPlaceItem {
   visitOrder: number;
   name: string;
   area: string;
+  address?: string;
   category: string;
   imageUrl?: string;
   mainDescription: string;
