@@ -7,7 +7,7 @@ export default function SubCourseExplainText({ name, description }: SubCourseExp
   return (
     <div className="flex flex-col gap-1.5">
       <h4
-        className="text-xl font-medium text-black transition-colors group-hover:text-[#2a4874] line-clamp-2"
+        className="text-base md:text-lg lg:text-xl font-medium text-black transition-colors group-hover:text-[#2a4874] line-clamp-2"
         style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
       >
         {name}

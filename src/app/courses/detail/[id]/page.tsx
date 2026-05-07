@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       className="relative min-h-screen"
       style={{ background: "linear-gradient(180deg, #ffffff 50%, #eaf2fb 100%)" }}
     >
-      <div className="mx-auto max-w-[1100px] px-10 py-[60px]">
+      <div className="mx-auto max-w-[1100px] px-4 md:px-8 lg:px-10 py-8 md:py-[60px]">
         <div className="mb-5">
           <ReturnToRecommendation />
         </div>

@@ -154,14 +154,14 @@ export default function ExportEmailModal({
       onClick={handleOverlayClick}
     >
       <div
-        className="relative w-[420px] rounded-[28px] bg-white px-[36px] pb-[44px] pt-[44px] shadow-[0px_20px_60px_rgba(0,0,0,0.15)]"
+        className="relative w-[90vw] max-w-[420px] rounded-[28px] bg-white px-5 md:px-[36px] pb-[36px] md:pb-[44px] pt-[36px] md:pt-[44px] shadow-[0px_20px_60px_rgba(0,0,0,0.15)]"
         style={{ fontFamily: pretendard }}
       >
-        {/* X 닫기 버튼 — 모든 step에서 고정 */}
+        {/* X 닫기 버튼 — 터치 영역 44px 이상 확보 */}
         <button
           type="button"
           onClick={handleCloseButton}
-          className="absolute right-[18px] top-[18px] flex h-[28px] w-[28px] items-center justify-center text-[22px] leading-none text-[#bbbbbb] transition-colors hover:text-[#757575]"
+          className="absolute right-[12px] top-[12px] flex h-[44px] w-[44px] items-center justify-center text-[24px] leading-none text-[#bbbbbb] transition-colors hover:text-[#757575]"
           aria-label="닫기"
         >
           ×
