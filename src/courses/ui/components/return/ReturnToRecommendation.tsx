@@ -25,8 +25,8 @@ export default function ReturnToRecommendation() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleClick = () => {
-    void trackReturnClick(pathname);
+  const handleClick = async () => {
+    await trackReturnClick(pathname);
     router.push("/recommendation");
   };
 
