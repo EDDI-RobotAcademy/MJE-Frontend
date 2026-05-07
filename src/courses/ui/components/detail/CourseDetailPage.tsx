@@ -109,7 +109,9 @@ export default function CourseDetailPage({
         <HeadlineCourseExplain description={selectedCourse.description} />
       </div>
 
-      <div className="grid grid-cols-[1fr_250px] items-start gap-5">
+      {/* ── 메인 그리드: mobile = 1열(일정만), lg+ = 1fr/250px ── */}
+      <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[1fr_250px]">
+        {/* 상세 일정 카드 */}
         <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
           <div className="flex flex-col gap-[10px]">
             <BestCourseLabel label="Best Course !" />
@@ -149,9 +151,9 @@ export default function CourseDetailPage({
           )}
         </div>
 
-        <div className="flex flex-col gap-[40px]">
+        {/* 데스크탑 사이드바 — lg+ 에서만 노출 */}
+        <div className="hidden lg:flex flex-col gap-[40px]">
           <ExportCard courseTitle={selectedCourse.name} courseId={courseId} />
-
           {safeAlternatives.length > 0 && (
             <div className="flex flex-col gap-3">
               <div className="flex justify-center">
@@ -172,6 +174,31 @@ export default function CourseDetailPage({
             </div>
           )}
         </div>
+      </div>
+
+      {/* ── Mobile/tablet 전용: Export 바 + 2열 대안 코스 ── */}
+      <div className="flex flex-col gap-5 lg:hidden">
+        <ExportCard courseTitle={selectedCourse.name} courseId={courseId} />
+
+        {safeAlternatives.length > 0 && (
+          <div className="flex flex-col gap-3">
+            <div className="flex justify-center">
+              <span className="rounded-full bg-brand-navy px-3 py-1 text-[11px] font-semibold text-white">
+                다른 추천 코스!
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {safeAlternatives.map((course, index) => (
+                <OtherCourseCard
+                  key={course.id || `alternative-course-${index}`}
+                  course={course}
+                  label={index === 0 ? "Option A" : "Option B"}
+                  onClick={handleOtherCourseClick}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {keywords.length > 0 && (

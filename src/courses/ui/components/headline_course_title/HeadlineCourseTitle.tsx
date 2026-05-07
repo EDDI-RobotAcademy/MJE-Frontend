@@ -15,7 +15,7 @@ export default function HeadlineCourseTitle({ title }: HeadlineCourseTitleProps)
 
   return (
     <h2
-      className="line-clamp-1 text-[34px] font-bold leading-tight text-brand-text-dark"
+      className="line-clamp-1 text-[22px] md:text-[28px] lg:text-[34px] font-bold leading-tight text-brand-text-dark"
       style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
       title={title}
     >

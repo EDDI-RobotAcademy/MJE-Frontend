@@ -39,10 +39,10 @@ export default function MainCourse({ course, onClick }: MainCourseProps) {
       type="button"
       disabled={!course.id}
       onClick={() => onClick(course)}
-      className="group relative flex h-[594px] w-full cursor-pointer flex-col overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
+      className="group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >
-      {/* Image — upper ~55% of card */}
-      <div className="relative h-[315px] w-full flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
+      {/* Image — upper portion of card */}
+      <div className="relative h-[200px] md:h-[260px] lg:h-[315px] w-full flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
         <img
           src={imageSrc}
           alt={course.name}
@@ -56,7 +56,7 @@ export default function MainCourse({ course, onClick }: MainCourseProps) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col px-4 pt-5 pb-14">
+      <div className="flex flex-1 flex-col px-4 pt-4 pb-10 md:pb-14">
         {locations.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-2">
             {locations.map((loc, i) => (

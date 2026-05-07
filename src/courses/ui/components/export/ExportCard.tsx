@@ -30,23 +30,23 @@ interface ExportCardProps {
 export default function ExportCard({ courseTitle, courseId }: ExportCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleClick = () => {
+    void trackExportClick(courseId, courseTitle);
+    setIsModalOpen(true);
+  };
+
   return (
     <>
+      {/* 모든 화면: 화이트 카드 */}
       <div className="w-full rounded-[30px] bg-white px-[17px] py-[15px] shadow-[3px_6px_10px_rgba(187,199,211,0.57)]">
         <div className="flex flex-col items-center gap-[17px]">
-          {/* 상단 문구 */}
           <p className="text-center text-[14px] text-black" style={{ fontFamily: pretendard }}>
             이 코스가 마음에 드시나요?
           </p>
-
           <div className="flex w-full flex-col items-center gap-[7px]">
-            {/* Export 버튼 (이메일 아이콘 포함) */}
             <button
               type="button"
-              onClick={() => {
-                void trackExportClick(courseId, courseTitle);
-                setIsModalOpen(true);
-              }}
+              onClick={handleClick}
               className="flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full bg-[#333] shadow-[3px_6px_10px_rgba(187,199,211,0.25)] transition-opacity hover:opacity-80"
             >
               <MailIcon />
@@ -54,8 +54,6 @@ export default function ExportCard({ courseTitle, courseId }: ExportCardProps) {
                 Export
               </span>
             </button>
-
-            {/* 하단 안내 문구 */}
             <p
               className="text-center text-[8px] text-[rgba(117,117,117,0.7)]"
               style={{ fontFamily: pretendard }}
