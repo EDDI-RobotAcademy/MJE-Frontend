@@ -65,6 +65,6 @@ jobs:
             echo "mje-frontend is UP"
           else
             echo "Health check failed"
-            docker logs multi-agent-ui --tail 200
+            docker logs mje-frontend --tail 200
             exit 1
           fi
