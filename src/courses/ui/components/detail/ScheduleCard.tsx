@@ -58,24 +58,25 @@ export default function ScheduleCard({
           </div>
         )}
 
-        <div className="flex items-center gap-5">
+        {/* 모바일: 이미지 상단·텍스트 하단 / md+: 가로 배치 */}
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
           {/* Overlapping circles */}
-          <div className="relative h-[101px] w-[186px] shrink-0">
+          <div className="relative h-[70px] w-[130px] shrink-0 md:h-[101px] md:w-[186px]">
             <img
               src={img1}
               alt={place.name}
-              className="absolute left-0 top-[3px] z-[2] h-[95px] w-[95px] rounded-full border-[2.5px] border-white object-cover"
+              className="absolute left-0 top-[2px] z-[2] h-[64px] w-[64px] rounded-full border-[2px] border-white object-cover md:top-[3px] md:h-[95px] md:w-[95px] md:border-[2.5px]"
             />
             <img
               src={img2}
               alt={place.name}
-              className="absolute top-[3px] z-[1] h-[95px] w-[95px] rounded-full border-[2.5px] border-white object-cover"
-              style={{ left: 85 }}
+              className="absolute top-[2px] z-[1] h-[64px] w-[64px] rounded-full border-[2px] border-white object-cover md:top-[3px] md:h-[95px] md:w-[95px] md:border-[2.5px]"
+              style={{ left: 56 }}
             />
           </div>
 
           {/* Content */}
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[8px] md:gap-[10px]">
             {/* 시간 + 주소 — 장소명 위 */}
             <div className="flex flex-col gap-[5px]">
               {(place.startTime ?? place.time) && (
@@ -91,13 +92,13 @@ export default function ScheduleCard({
               {(place.address ?? place.location) && (
                 <div className="flex items-center gap-[4px]">
                   <IconPin />
-                  <span className="text-[11px] text-[#959595]">
+                  <span className="text-[11px] text-[#959595] line-clamp-1">
                     {place.address ?? place.location}
                   </span>
                 </div>
               )}
             </div>
-            <p className="text-[18px] text-black">{place.name}</p>
+            <p className="text-[16px] md:text-[18px] text-black">{place.name}</p>
             <p className="text-[10px] font-light leading-[15px] text-[#2d2d2d]">
               {place.description}
             </p>

@@ -72,12 +72,12 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
         <img
           src={display.imageUrl}
           alt={display.title}
-          className="h-[293px] w-full rounded-[22px] object-cover"
+          className="h-[200px] md:h-[250px] lg:h-[293px] w-full rounded-[22px] object-cover"
         />
       </div>
 
       {/* Best Course badge overlaid on image */}
-      <div className="absolute left-[26px] top-[26px] flex items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] py-[5px]">
+      <div className="absolute left-[18px] top-[18px] md:left-[26px] md:top-[26px] flex items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] py-[5px]">
         <span
           className="text-[11px] text-black"
           style={{ fontFamily: "'Prompt', sans-serif" }}
@@ -87,7 +87,7 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
       </div>
 
       {/* Text content */}
-      <div className="flex flex-1 flex-col gap-[7px] p-[26px]">
+      <div className="flex flex-1 flex-col gap-[7px] p-4 md:p-5 lg:p-[26px]">
         {/* Location tags */}
         <div className="flex gap-[10px]">
           <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
@@ -99,10 +99,10 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
         </div>
 
         {/* Title */}
-        <h2 className="text-[24px] font-normal leading-normal text-black">{display.title}</h2>
+        <h2 className="text-[20px] md:text-[22px] lg:text-[24px] font-normal leading-normal text-black">{display.title}</h2>
 
         {/* Description + hashtags+button */}
-        <div className="flex flex-1 flex-col gap-[64px]">
+        <div className="flex flex-1 flex-col gap-8 md:gap-[64px]">
           <p className="whitespace-pre-line text-[12px] leading-normal text-[#6a7282]">
             {display.description}
           </p>
@@ -123,7 +123,7 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
               type="button"
               aria-label="코스 상세 보기"
               onClick={(e) => { e.stopPropagation(); onDetailClick?.(); }}
-              className="ml-4 flex size-[64px] shrink-0 items-center justify-center rounded-full bg-[#333] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
+              className="ml-4 flex size-[50px] md:size-[58px] lg:size-[64px] shrink-0 items-center justify-center rounded-full bg-[#333] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
             >
               <ArrowIcon />
             </button>

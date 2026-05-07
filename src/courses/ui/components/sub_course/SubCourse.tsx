@@ -40,10 +40,10 @@ export default function SubCourse({ course, onClick, label }: SubCourseProps) {
       type="button"
       disabled={!course.id}
       onClick={() => onClick(course)}
-      className="group relative flex h-[289px] w-full cursor-pointer flex-row overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
+      className="group relative flex w-full cursor-pointer flex-col md:flex-row overflow-hidden rounded-[30px] bg-white p-3 text-left shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)] transition-all duration-200 hover:shadow-[3px_6px_28px_0px_rgba(42,72,116,0.18)]"
     >
-      {/* Left: Image — square-ish, fills full inner height */}
-      <div className="relative h-full w-[47%] flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
+      {/* Image — top on mobile, left on md+ */}
+      <div className="relative h-[180px] md:h-full w-full md:w-[47%] flex-shrink-0 overflow-hidden rounded-[22px] bg-brand-placeholder">
         <img
           src={imageSrc}
           alt={course.name}
@@ -63,8 +63,8 @@ export default function SubCourse({ course, onClick, label }: SubCourseProps) {
         </div>
       </div>
 
-      {/* Right: Content */}
-      <div className="flex flex-1 flex-col pl-4 pt-2">
+      {/* Content — below image on mobile, right on md+ */}
+      <div className="flex flex-1 flex-col p-3 md:pl-4 md:pt-2 md:pr-0 md:pb-0">
         {locations.length > 0 && (
           <div className="mb-2 flex flex-wrap gap-1.5">
             {locations.map((loc, i) => (
