@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { trackReturnClick } from "@/courses/ui/components/return/event_tracking";
 
 function ArrowLeftIcon() {
@@ -24,15 +23,16 @@ function ArrowLeftIcon() {
 
 export default function ReturnToRecommendation() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleClick = () => {
     void trackReturnClick(pathname);
+    router.push("/recommendation");
   };
 
   return (
     <div className="flex justify-center">
-      <Link
-        href="/recommendation"
+      <button
         onClick={handleClick}
         className="flex items-center gap-2 rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90"
         style={{
@@ -45,7 +45,7 @@ export default function ReturnToRecommendation() {
       >
         <ArrowLeftIcon />
         추천 코스로 돌아가기
-      </Link>
+      </button>
     </div>
   );
 }
