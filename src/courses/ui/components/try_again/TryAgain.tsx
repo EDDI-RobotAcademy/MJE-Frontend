@@ -7,8 +7,8 @@ export default function TryAgain() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleClick = () => {
-    void trackTryAgainClick(pathname);
+  const handleClick = async () => {
+    await trackTryAgainClick(pathname);
     router.push("/");
   };
 
