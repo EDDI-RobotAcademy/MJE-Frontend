@@ -31,21 +31,12 @@ export default function ReturnToRecommendation() {
   };
 
   return (
-    <div className="flex justify-center">
-      <button
-        onClick={handleClick}
-        className="flex items-center gap-2 rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90"
-        style={{
-          width: "220px",
-          height: "52px",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #2a4874 0%, #8aaee6 100%)",
-          boxShadow: "0px 4px 16px 0px rgba(42,72,116,0.30)",
-        }}
-      >
-        <ArrowLeftIcon />
-        추천 코스로 돌아가기
-      </button>
-    </div>
+    <button
+      onClick={handleClick}
+      className="flex w-fit items-center gap-1.5 text-[14px] text-[#2a4874] transition-opacity hover:opacity-75"
+    >
+      <ArrowLeftIcon />
+      추천 코스로 돌아가기
+    </button>
   );
 }

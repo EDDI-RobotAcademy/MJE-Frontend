@@ -96,6 +96,7 @@ export default function CourseDetailPage({
 
   return (
     <div className="flex flex-col gap-6">
+      <ReturnToRecommendation />
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-wrap items-center gap-[18px]">
           {headlineLocation && <HeadlineLocation location={headlineLocation} />}
@@ -215,9 +216,6 @@ export default function CourseDetailPage({
         </div>
       )}
 
-      <div className="pb-8">
-        <ReturnToRecommendation />
-      </div>
     </div>
   );
 }
