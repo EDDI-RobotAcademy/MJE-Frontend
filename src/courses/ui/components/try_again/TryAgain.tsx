@@ -1,14 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { trackTryAgainClick } from "@/courses/ui/components/try_again/event_tracking";
 
 export default function TryAgain() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleClick = () => {
     void trackTryAgainClick(pathname);
+    router.push("/");
   };
 
   return (
@@ -17,8 +18,7 @@ export default function TryAgain() {
         새로운 조건으로 다시 검색해볼까요?
       </span>
 
-      <Link
-        href="/"
+      <button
         onClick={handleClick}
         className="flex items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90"
         style={{
@@ -29,7 +29,7 @@ export default function TryAgain() {
         }}
       >
         다시 검색하기
-      </Link>
+      </button>
     </div>
   );
 }

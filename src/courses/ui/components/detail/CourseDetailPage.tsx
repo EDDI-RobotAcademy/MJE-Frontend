@@ -13,6 +13,7 @@ import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
 import ExportCard from "@/courses/ui/components/export/ExportCard";
+import ReturnToRecommendation from "@/courses/ui/components/return/ReturnToRecommendation";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
@@ -213,6 +214,10 @@ export default function CourseDetailPage({
           ))}
         </div>
       )}
+
+      <div className="pb-8">
+        <ReturnToRecommendation />
+      </div>
     </div>
   );
 }
