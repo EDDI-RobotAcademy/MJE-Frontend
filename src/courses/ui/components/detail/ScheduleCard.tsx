@@ -82,7 +82,7 @@ export default function ScheduleCard({
               {(place.startTime ?? place.time) && (
                 <div className="flex items-center gap-[4px]">
                   <IconClock />
-                  <span className="text-[11px] text-[#959595]">
+                  <span className="whitespace-nowrap text-[10px] text-[#959595]">
                     {place.startTime && place.endTime
                       ? `${place.startTime} ~ ${place.endTime}`
                       : (place.startTime ?? place.time)}
