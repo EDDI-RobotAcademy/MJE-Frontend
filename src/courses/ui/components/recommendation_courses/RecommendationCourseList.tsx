@@ -41,9 +41,29 @@ export default function RecommendationCourseList() {
       return;
     }
 
+    try {
+      const cached = sessionStorage.getItem("mje_recommendation_cache");
+      if (cached) {
+        const { params, data: cachedData } = JSON.parse(cached);
+        if (
+          params.area === area &&
+          params.start_time === start_time &&
+          params.transport === transport
+        ) {
+          setData(cachedData);
+          setIsLoading(false);
+          return;
+        }
+      }
+    } catch {}
+
     fetchRecommendations({ area, start_time, transport })
       .then((result) => {
         setData(result);
+        sessionStorage.setItem(
+          "mje_recommendation_cache",
+          JSON.stringify({ params: { area, start_time, transport }, data: result }),
+        );
         if (result.courses.length > 0) {
           void trackCourseCreate();
         }
