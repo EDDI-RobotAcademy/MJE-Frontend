@@ -1,6 +1,7 @@
 "use client";
 
 import { RecommendationCourseItem } from "@/recommendation/types";
+import { getRandomCoupleImage } from "@/recommendation/ui/utils/coupleImages";
 
 interface BestCourseCardProps {
   course: RecommendationCourseItem;
@@ -26,7 +27,7 @@ function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDispla
   const [first, second, third] = course.places;
   const { gu, dong } = extractAreaParts(first?.address ?? "");
   return {
-    imageUrl: course.image_url ?? `https://picsum.photos/seed/${course.course_id}/500/300`,
+    imageUrl: course.image_url ?? getRandomCoupleImage(course.course_id),
     locationGu: gu,
     locationDong: dong,
     title: `${first?.name ?? ""} 코스`,
