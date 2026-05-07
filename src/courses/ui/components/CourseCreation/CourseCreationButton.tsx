@@ -47,7 +47,7 @@ export default function CourseCreationButton({
       type="button"
       onClick={onClick}
       disabled={isLoading}
-      className={`flex w-full items-center justify-center gap-2 rounded-full h-[43px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 ${
+      className={`flex w-full items-center justify-center gap-2 rounded-full h-12 md:h-[43px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 ${
         isShaking ? "animate-shake" : ""
       }`}
       style={{ background: "linear-gradient(114deg, #8aaee6 0%, #d5e6f6 100%)" }}

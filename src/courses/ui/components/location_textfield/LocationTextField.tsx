@@ -24,7 +24,7 @@ export default function LocationTextField({
 }: LocationTextFieldProps) {
   return (
     <div
-      className={`w-full flex h-[46px] items-center rounded-full border px-3.5 gap-2 transition-colors ${
+      className={`w-full flex h-12 md:h-[46px] items-center rounded-full border px-3.5 gap-2 transition-colors ${
         error
           ? "border-dashed border-[#FF4D4F]"
           : "border-[#d0d0d0]"
@@ -38,7 +38,7 @@ export default function LocationTextField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onFocus={onClearError}
-        className="flex-1 bg-transparent text-xs text-gray-900 placeholder-[#b0b0b0] outline-none min-w-0"
+        className="flex-1 bg-transparent text-sm md:text-xs text-gray-900 placeholder-[#b0b0b0] outline-none min-w-0"
       />
     </div>
   );

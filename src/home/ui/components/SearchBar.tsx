@@ -37,7 +37,7 @@ export default function SearchBar() {
   const { handleCreate, isLoading, isShaking, shakeKey } = useCourseCreation(validate, params);
 
   return (
-    <div className="w-full max-w-[1028px] rounded-[30px] bg-white px-[25px] pb-[17px] pt-[24px] shadow-[3px_6px_10px_rgba(187,199,211,0.54)]">
+    <div className="w-full max-w-[1028px] rounded-[30px] bg-white px-4 pb-[17px] pt-[24px] md:px-[25px] shadow-[3px_6px_10px_rgba(187,199,211,0.54)]">
       <div className="flex flex-col gap-[9px]">
         {/* Fields section */}
         <div className="flex flex-col gap-[18px]">
@@ -95,8 +95,10 @@ export default function SearchBar() {
             </div>
           </div>
 
-          {/* Create Course button */}
-          <CourseCreationButton onClick={handleCreate} isShaking={isShaking} isLoading={isLoading} />
+          {/* Create Course button — fixed at bottom on mobile, in-card on desktop */}
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 px-4 pb-4 pt-3 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] backdrop-blur-sm md:static md:bg-transparent md:px-0 md:pb-0 md:pt-0 md:shadow-none md:backdrop-blur-none">
+            <CourseCreationButton onClick={handleCreate} isShaking={isShaking} isLoading={isLoading} />
+          </div>
         </div>
 
         {/* Footer hint */}
