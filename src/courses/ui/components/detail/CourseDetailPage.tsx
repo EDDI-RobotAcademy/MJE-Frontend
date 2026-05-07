@@ -109,7 +109,7 @@ export default function CourseDetailPage({
         <HeadlineCourseExplain description={selectedCourse.description} />
       </div>
 
-      <div className="grid grid-cols-[1fr_250px] items-start gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_250px] items-start gap-5">
         <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
           <div className="flex flex-col gap-[10px]">
             <BestCourseLabel label="Best Course !" />

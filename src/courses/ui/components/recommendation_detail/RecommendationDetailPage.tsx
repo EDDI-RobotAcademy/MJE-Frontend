@@ -362,10 +362,10 @@ export default function RecommendationDetailPage({ courseId }: Props) {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1200px] px-[120px]">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-[120px]">
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <section
-          className="flex flex-col pb-[32px] pt-[48px]"
+          className="flex flex-col pb-[24px] md:pb-[32px] pt-[32px] md:pt-[48px]"
           style={{ fontFamily: pretendard }}
         >
           {/* Back link — text link at very top */}
@@ -377,7 +377,7 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           </Link>
 
           {/* Location & start time */}
-          <div className="mb-[10px] flex items-center gap-[23px]">
+          <div className="mb-[10px] flex flex-wrap items-center gap-[14px] md:gap-[23px]">
             <div className="flex items-end gap-[3px]">
               <IconPin />
               <span className="text-[12px] text-[#757575]">{course.location}</span>
@@ -389,19 +389,19 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           </div>
 
           {/* Course title */}
-          <h1 className="mb-[10px] text-[40px] font-medium leading-tight text-black">
+          <h1 className="mb-[10px] text-[22px] md:text-[32px] lg:text-[40px] font-medium leading-tight text-black">
             {course.title}
           </h1>
 
           {/* Description with dot-grid accent */}
-          <div className="flex items-center gap-[12px]">
+          <div className="flex items-start gap-[12px]">
             <DotGrid />
-            <p className="text-[14px] text-[#757575]">{course.description}</p>
+            <p className="text-[12px] md:text-[14px] text-[#757575]">{course.description}</p>
           </div>
         </section>
 
-        {/* ── 2-column content ─────────────────────────────────────────────── */}
-        <section className="flex items-start gap-[25px] pb-20">
+        {/* ── 2-column (lg+) / 1-column (mobile·tablet) ───────────────────── */}
+        <section className="flex flex-col lg:flex-row lg:items-start lg:gap-[25px] pb-20 gap-6">
           {/* ── Left: timeline card ─────────────────────────────────────────── */}
           <div className="flex min-w-0 flex-1 flex-col">
             {/* White outer card: badge + title header + all stops */}
@@ -437,8 +437,8 @@ export default function RecommendationDetailPage({ courseId }: Props) {
             </div>
           </div>
 
-          {/* ── Right: sidebar ──────────────────────────────────────────────── */}
-          <div className="flex w-[273px] shrink-0 flex-col gap-[77px]">
+          {/* ── Right: sidebar — 모바일에서 아래로, lg+에서 우측 고정 ────── */}
+          <div className="flex w-full lg:w-[273px] lg:shrink-0 flex-col gap-[40px] lg:gap-[77px]">
             {/* Export card */}
             <ExportCard courseTitle={course.title} courseId={courseId} />
 

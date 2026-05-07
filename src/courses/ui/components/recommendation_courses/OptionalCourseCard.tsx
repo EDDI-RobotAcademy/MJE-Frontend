@@ -71,7 +71,7 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
 
   return (
     <div
-      className="relative flex h-[289px] overflow-hidden rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer"
+      className="relative flex overflow-hidden rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer min-h-[220px] md:h-[289px]"
       onClick={onDetailClick}
     >
       {/* Left: Image */}
@@ -79,18 +79,19 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
         <img
           src={display.imageUrl}
           alt={display.title}
-          className="h-[265px] w-[216px] rounded-[22px] object-cover"
+          className="h-full w-[160px] md:w-[216px] rounded-[22px] object-cover"
+          style={{ minHeight: "196px", maxHeight: "265px" }}
         />
         {/* Label badge + arrow button overlay */}
-        <div className="absolute left-[28px] top-[25px] flex w-[187px] items-center justify-between">
-          <div className="rounded-full bg-white px-[13px] py-[4px] text-[10px] text-black shadow-sm">
+        <div className="absolute left-[20px] top-[20px] md:left-[28px] md:top-[25px] flex w-[135px] md:w-[187px] items-center justify-between">
+          <div className="rounded-full bg-white px-[10px] md:px-[13px] py-[4px] text-[10px] text-black shadow-sm">
             {display.label}
           </div>
           <button
             type="button"
             aria-label="코스 상세 보기"
             onClick={(e) => { e.stopPropagation(); onDetailClick?.(); }}
-            className="flex size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
+            className="flex size-[36px] md:size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
           >
             <SmallArrowIcon />
           </button>
@@ -98,19 +99,19 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
       </div>
 
       {/* Right: Text content */}
-      <div className="flex flex-1 flex-col py-[25px] pr-[20px]">
+      <div className="flex flex-1 flex-col py-4 md:py-[25px] pr-3 md:pr-[20px]">
         {/* Location tags */}
-        <div className="mb-[7px] flex gap-[14px]">
-          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+        <div className="mb-[7px] flex flex-wrap gap-[8px] md:gap-[14px]">
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[10px] md:px-[14px] py-[2px] text-[9px] md:text-[10px] text-white">
             {display.locationGu}
           </span>
-          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[14px] py-[2px] text-[10px] text-white">
+          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[10px] md:px-[14px] py-[2px] text-[9px] md:text-[10px] text-white">
             {display.locationDong}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="mb-[10px] whitespace-pre-line text-[20px] font-normal leading-normal text-black">
+        <h3 className="mb-[8px] md:mb-[10px] whitespace-pre-line text-[17px] md:text-[20px] font-normal leading-normal text-black">
           {display.title}
         </h3>
 
@@ -120,11 +121,11 @@ export default function OptionalCourseCard({ course, index, onDetailClick }: Opt
         </p>
 
         {/* Hashtags pushed to bottom */}
-        <div className="mt-auto flex flex-wrap gap-[9px]">
+        <div className="mt-auto flex flex-wrap gap-[6px] md:gap-[9px]">
           {display.hashtags.map((tag, i) => (
             <span
               key={i}
-              className="inline-flex items-center rounded-full border border-[#2a4874] px-[14px] py-[4px] text-[10px] text-[#2a4874]"
+              className="inline-flex items-center rounded-full border border-[#2a4874] px-[10px] md:px-[14px] py-[4px] text-[9px] md:text-[10px] text-[#2a4874]"
               style={{ borderWidth: "0.7px" }}
             >
               #{tag}
