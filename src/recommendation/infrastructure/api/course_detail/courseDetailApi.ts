@@ -1,5 +1,6 @@
 import { Course, Place } from "@/courses/types/course";
 import { apiClient, ApiError } from "@/infrastructure/api";
+import { recommendationEndpoints } from "@/recommendation/infrastructure/api/endpoints";
 
 export interface CourseDetailData {
   selectedCourse: Course;
@@ -133,7 +134,7 @@ export async function fetchCourseDetail(
 ): Promise<CourseDetailData | null> {
   try {
     const response = await apiClient.get<CourseDetailApiResponse>(
-      `/recommendations/courses/${courseId}`,
+      recommendationEndpoints.detail(courseId),
     );
 
     return {
