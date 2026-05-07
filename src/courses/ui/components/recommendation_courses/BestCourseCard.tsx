@@ -32,8 +32,8 @@ function toBestCourseDisplay(course: RecommendationCourseItem): BestCourseDispla
     title: `${first?.name ?? ""} 코스`,
     description:
       `${first?.name ?? ""}에서 출발해 ${third?.name ?? ""}까지 이어지는,\n` +
-      `${second?.keyword ?? ""}을 즐기기 좋은 데이트 코스`,
-    hashtags: [first?.keyword, second?.keyword, third?.keyword].filter(Boolean) as string[],
+      `${second?.category ?? ""}을 즐기기 좋은 데이트 코스`,
+    hashtags: [first?.category, second?.category, third?.category].filter(Boolean) as string[],
   };
 }
 

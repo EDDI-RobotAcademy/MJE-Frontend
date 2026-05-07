@@ -5,14 +5,23 @@ export interface RecommendationPlace {
   category: string;
   road_address: string;
   address: string;
-  mapx: string;
-  mapy: string;
+  latitude: number;
+  longitude: number;
   link: string;
   telephone: string;
-  keyword: string;
-  collected_at: string;
+  activity_type:
+    | "WALK"
+    | "PARK"
+    | "MOVIE"
+    | "EXHIBITION"
+    | "EXPERIENCE"
+    | "SHOPPING"
+    | "NIGHTLIFE"
+    | null;
   image_url: string | null;
   duration_minutes: number;
+  start_time: string;
+  end_time: string;
 }
 
 export interface RecommendationCourseItem {

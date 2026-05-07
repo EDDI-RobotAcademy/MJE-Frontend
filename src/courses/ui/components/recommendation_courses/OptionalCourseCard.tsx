@@ -40,7 +40,7 @@ function toOptionalCourseDisplay(
       `${second?.name ?? ""}에서 여유롭게 시작해,\n` +
       `${first?.name ?? ""}을 거쳐 ${third?.name ?? ""}로\n` +
       `마무리하는 하루 코스`,
-    hashtags: [second?.keyword, third?.keyword].filter(Boolean) as string[],
+    hashtags: [second?.category, third?.category].filter(Boolean) as string[],
   };
 }
 
