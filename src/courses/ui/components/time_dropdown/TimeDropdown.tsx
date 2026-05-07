@@ -98,7 +98,7 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
           if (error) onClearError?.();
           setOpen((prev) => !prev);
         }}
-        className={`flex h-[46px] w-full items-center rounded-full border px-3.5 gap-2 transition-colors ${
+        className={`flex h-12 md:h-[46px] w-full items-center rounded-full border px-3.5 gap-2 transition-colors ${
           error
             ? "border-dashed border-[#FF4D4F]"
             : open
@@ -108,7 +108,7 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
       >
         <CalendarIcon />
         <span
-          className={`flex-1 text-left text-xs ${value ? "text-gray-900" : "text-[#b0b0b0]"}`}
+          className={`flex-1 text-left text-sm md:text-xs ${value ? "text-gray-900" : "text-[#b0b0b0]"}`}
           style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
         >
           {value ? toDisplay(value) : "언제 만날까요?"}

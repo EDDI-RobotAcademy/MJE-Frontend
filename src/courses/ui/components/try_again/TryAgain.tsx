@@ -20,9 +20,8 @@ export default function TryAgain() {
 
       <button
         onClick={handleClick}
-        className="flex items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90"
+        className="flex w-full items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90 sm:w-[200px]"
         style={{
-          width: "200px",
           height: "52px",
           background: "linear-gradient(135deg, #8aaee6 0%, #8aaee6 65%, #d5e6f6 100%)",
           boxShadow: "0px 4px 16px 0px rgba(138,174,230,0.45)",
