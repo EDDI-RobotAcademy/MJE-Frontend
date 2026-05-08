@@ -119,7 +119,7 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
       {/* Custom dropdown */}
       {open && (
         <div
-          className="animate-dropdown-open absolute left-0 top-full mt-2 w-full z-50 rounded-2xl overflow-hidden"
+          className="animate-dropdown-open absolute left-0 top-full mt-2 w-full z-[999] rounded-2xl overflow-hidden"
           style={{
             background: "#ffffff",
             border: "1px solid #e0e0e0",
