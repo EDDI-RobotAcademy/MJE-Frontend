@@ -15,7 +15,7 @@ export default function SearchBox() {
   return (
     <div className="w-full max-w-[960px] rounded-[30px] bg-white px-10 pb-6 pt-7 shadow-[3px_6px_20px_0px_rgba(187,199,211,0.54)]">
       {/* 세 개의 필드 (가로 배치) */}
-      <div className="mb-4 flex items-start gap-6">
+      <div className="mb-4 flex items-start gap-6 relative z-10">
         {/* 장소 */}
         <div className="flex flex-1 flex-col gap-2.5">
           <FieldPillLabel tooltip="만날 지역이나 역 이름을 입력하세요">장소</FieldPillLabel>

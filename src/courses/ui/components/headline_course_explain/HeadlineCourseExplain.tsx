@@ -32,7 +32,7 @@ export default function HeadlineCourseExplain({ description }: HeadlineCourseExp
     <div className="flex items-center gap-[10px]">
       <DotGrid />
       <p
-        className="line-clamp-1 text-[13px] leading-relaxed text-brand-text-muted"
+        className="line-clamp-none md:line-clamp-1 text-[13px] leading-relaxed text-brand-text-muted break-keep"
         title={description}
       >
         {displayText}
