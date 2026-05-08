@@ -12,7 +12,7 @@ export default function MainCourseExplainText({ name, description }: MainCourseE
       >
         {name}
       </h3>
-      <p className="text-xs leading-relaxed text-[#6a7282] line-clamp-3 md:line-clamp-2 break-keep">{description}</p>
+      <p className="text-xs leading-relaxed text-[#6a7282] line-clamp-2">{description}</p>
     </div>
   );
 }
