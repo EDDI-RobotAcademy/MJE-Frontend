@@ -92,7 +92,7 @@ export default function ScheduleCard({
               {(place.address ?? place.location) && (
                 <div className="flex items-center gap-[4px]">
                   <IconPin />
-                  <span className="text-[11px] text-[#959595] line-clamp-1">
+                  <span className="text-[11px] text-[#959595] line-clamp-2 break-keep">
                     {place.address ?? place.location}
                   </span>
                 </div>
