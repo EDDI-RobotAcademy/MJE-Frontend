@@ -121,12 +121,10 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
         <div
           className="animate-dropdown-open absolute left-0 top-full mt-2 w-full z-50 rounded-2xl overflow-hidden"
           style={{
-            background: "rgba(255, 255, 255, 0.92)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
-            border: "1px solid rgba(255, 255, 255, 0.6)",
+            background: "#ffffff",
+            border: "1px solid #e0e0e0",
             boxShadow:
-              "0 8px 32px rgba(42, 72, 116, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05)",
+              "0 8px 32px rgba(42, 72, 116, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08)",
           }}
         >
           <ul
@@ -176,7 +174,10 @@ export default function TimeDropdown({ id, value, onChange, error, onClearError 
 
                     {/* 선택 pill 배경 — 흰색 + 그림자로 호버와 명확히 구분 */}
                     {isSelected && (
-                      <span className="absolute inset-x-3 inset-y-[6px] rounded-full bg-white shadow-sm" />
+                      <span
+                        className="absolute inset-x-3 inset-y-[6px] rounded-full"
+                        style={{ background: "#D0E2F4", opacity: 0.7 }}
+                      />
                     )}
 
                     {/* 선택 표시 파란 점 — 선택 상태에만 표시 */}
