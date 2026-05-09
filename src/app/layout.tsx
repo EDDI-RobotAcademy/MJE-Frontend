@@ -3,8 +3,8 @@ import "./globals.css";
 import Header from "@/home/ui/layout/Header";
 
 export const metadata: Metadata = {
-  title: "MJE Frontend",
-  description: "MJE Frontend Application",
+  title: "Dehangsa",
+  description: "Dehangsa",
 };
 
 export const viewport: Viewport = {
