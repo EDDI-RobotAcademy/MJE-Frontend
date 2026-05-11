@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { exportCourseAction } from "@/courses/infrastructure/api/export/exportActions";
 import { trackSendClick, trackCloseClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
@@ -25,7 +24,7 @@ function SendingLoader() {
           className="text-[14px] font-medium text-[#2a4874]"
           style={{ fontFamily: "'Prompt', sans-serif" }}
         >
-          Sending your course..
+          기능을 준비하고 있습니다..
         </span>
         <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <rect x="2" y="4" width="16" height="12" rx="1.5" stroke="#2a4874" strokeWidth="1.5" />
@@ -39,7 +38,7 @@ function SendingLoader() {
         </svg>
       </div>
       <div className="w-full border-b border-dotted border-[#d0d0d0]" />
-      <p className="text-[11px] text-[#b8b8b8]">이메일 전송 중...</p>
+      <p className="text-center text-xs text-red-400">아직 지원되지 않는 서비스입니다.</p>
     </div>
   );
 }
@@ -121,7 +120,7 @@ export default function ExportEmailModal({
     setIsShaking(true);
   };
 
-  const handleSubmit = async (e: React.BaseSyntheticEvent) => {
+  const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     setEmailError(null);
 
@@ -137,14 +136,7 @@ export default function ExportEmailModal({
 
     void trackSendClick(courseId, courseTitle);
     setStep("loading");
-    const result = await exportCourseAction(courseId, email);
-
-    if (result.success) {
-      setStep("success");
-    } else {
-      setStep("input");
-      triggerShake("전송 중 오류가 발생했어요. 다시 시도해 주세요");
-    }
+    setTimeout(() => onClose(), 3000);
   };
 
   return (
