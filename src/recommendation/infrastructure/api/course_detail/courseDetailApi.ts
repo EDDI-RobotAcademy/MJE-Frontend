@@ -33,6 +33,7 @@ interface CourseDetailPlaceApiResponse {
 
 interface CourseDetailApiResponse {
   courseId: string;
+  transport?: string;
   title: string;
   description: string;
   totalDuration: number;
@@ -114,6 +115,7 @@ function mapSelectedCourse(response: CourseDetailApiResponse): Course {
     keywords: [],
     imageUrl: response.places[0]?.photoUrl,
     places,
+    transport: response.transport,
   };
 }
 

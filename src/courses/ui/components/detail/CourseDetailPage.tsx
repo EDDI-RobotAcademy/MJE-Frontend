@@ -81,6 +81,15 @@ export default function CourseDetailPage({
 
   const places = selectedCourse.places ?? [];
 
+  const transportLabelMap: Record<string, string> = {
+    walk: "도보",
+    public_transit: "대중교통",
+    car: "자동차",
+  };
+  const transportLabel = selectedCourse.transport
+    ? (transportLabelMap[selectedCourse.transport] ?? selectedCourse.transport)
+    : undefined;
+
   const fallbackAlternatives =
     allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
   const alternatives: Course[] =
@@ -139,6 +148,7 @@ export default function CourseDetailPage({
                     place={place}
                     previousPlaceName={index > 0 ? places[index - 1].name : undefined}
                     walkingTimeFromPrevious={index > 0 ? places[index - 1].walkingTimeTo : undefined}
+                    transportLabel={transportLabel}
                   />
                   {index < places.length - 1 && (
                     <ScheduleTimelineConnector />
