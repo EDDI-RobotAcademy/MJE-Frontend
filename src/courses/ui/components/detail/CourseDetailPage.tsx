@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSuggestedCourses } from "@/courses/hooks/useSuggestedCourses";
+import { loadCourseSession } from "@/courses/application/courseSession";
 import { useOtherCourses } from "@/courses/hooks/useOtherCourses";
 import { Course } from "@/courses/types/course";
 import { CourseDetailData } from "@/recommendation/infrastructure/api/course_detail/courseDetailApi";
@@ -84,10 +85,21 @@ export default function CourseDetailPage({
   const transportLabelMap: Record<string, string> = {
     walk: "도보",
     public_transit: "대중교통",
+    transit: "대중교통",
     car: "자동차",
   };
-  const transportLabel = selectedCourse.transport
-    ? (transportLabelMap[selectedCourse.transport] ?? selectedCourse.transport)
+  const sessionTransport = useMemo(() => {
+    const session = loadCourseSession();
+    if (!session) return undefined;
+    const course =
+      session.mainCourse?.courseId === courseId
+        ? session.mainCourse
+        : session.subCourses.find((c) => c.courseId === courseId);
+    return course?.transport;
+  }, [courseId]);
+  const resolvedTransport = selectedCourse.transport ?? sessionTransport;
+  const transportLabel = resolvedTransport
+    ? (transportLabelMap[resolvedTransport] ?? resolvedTransport)
     : undefined;
 
   const fallbackAlternatives =
