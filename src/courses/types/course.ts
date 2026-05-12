@@ -30,6 +30,7 @@ export interface Course {
   keywords: CourseKeyword[];
   imageUrl?: string;
   places?: Place[];
+  transport?: string;
 }
 
 export interface SuggestedCoursesData {

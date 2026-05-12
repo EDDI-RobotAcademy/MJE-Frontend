@@ -4,6 +4,7 @@ interface ScheduleCardProps {
   place: Place;
   previousPlaceName?: string;
   walkingTimeFromPrevious?: string;
+  transportLabel?: string;
 }
 
 function IconClock() {
@@ -32,6 +33,7 @@ export default function ScheduleCard({
   place,
   previousPlaceName,
   walkingTimeFromPrevious,
+  transportLabel = "도보",
 }: ScheduleCardProps) {
   const img1 = place.imageUrl ?? `https://picsum.photos/seed/${place.id}-a/200/200`;
   const img2 = place.imageUrl2 ?? `https://picsum.photos/seed/${place.id}-b/200/200`;
@@ -112,7 +114,7 @@ export default function ScheduleCard({
           <div className="flex items-center gap-[6px] text-[10px] text-[#959595]">
             <span className="whitespace-nowrap">{previousPlaceName} → {place.name}</span>
             <span className="inline-block h-[2.6px] w-[2.6px] shrink-0 rounded-full bg-[#959595]" />
-            <span className="whitespace-nowrap">도보 {walkingTimeFromPrevious}</span>
+            <span className="whitespace-nowrap">{transportLabel} {walkingTimeFromPrevious}</span>
           </div>
         )}
       </div>
