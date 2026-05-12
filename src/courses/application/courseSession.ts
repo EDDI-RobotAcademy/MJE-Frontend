@@ -126,6 +126,7 @@ function mapCourse(item: BackendCourseItem, courseId: string): Course {
     keywords,
     imageUrl,
     places,
+    transport: item.transport,
   };
 }
 
