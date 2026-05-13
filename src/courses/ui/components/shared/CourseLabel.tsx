@@ -17,8 +17,8 @@ export default function CourseLabel({ type }: CourseLabelProps) {
 
   return (
     <span
-      className={`inline-flex w-fit items-center rounded-full px-4 py-1.5 text-[13px] font-semibold ${
-        isBest ? "bg-[#d5e6f6] text-black" : "bg-[#333333] text-white"
+      className={`inline-flex w-fit items-center rounded-full px-4 py-1.5 font-semibold ${
+        isBest ? "text-[14px] bg-[#d5e6f6] text-black" : "text-[12px] bg-[#333333] text-white"
       }`}
     >
       {type}
