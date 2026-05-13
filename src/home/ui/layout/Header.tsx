@@ -13,13 +13,6 @@ export default function Header() {
         <Logo />
         <nav className="flex items-center gap-4 md:gap-6 lg:w-[170.66px] lg:justify-between">
           <HomeTab />
-          <Link
-            href="/courses"
-            className="text-[15px] md:text-[17px] text-[#5e5e5e] hover:text-black transition-colors"
-            style={{ fontFamily: "'Prompt', sans-serif" }}
-          >
-            Courses
-          </Link>
         </nav>
       </div>
 
