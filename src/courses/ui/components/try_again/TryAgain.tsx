@@ -23,7 +23,7 @@ export default function TryAgain() {
         className="flex w-full items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90 sm:w-[200px]"
         style={{
           height: "52px",
-          background: "linear-gradient(135deg, #8aaee6 0%, #8aaee6 65%, #d5e6f6 100%)",
+          background: "linear-gradient(135deg, #6e9dd9 0%, #8aaee6 50%, #b8d4f0 100%)",
           boxShadow: "0px 4px 16px 0px rgba(138,174,230,0.45)",
         }}
       >
