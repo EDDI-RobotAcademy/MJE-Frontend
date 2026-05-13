@@ -102,7 +102,7 @@ export default function RecommendationCourseList() {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <p className="self-end text-right text-[10px] text-[#797979]">
+      <p className="self-end text-right text-[11px] text-[#797979]">
         * 왼쪽은 맞춤 메인 코스, 오른쪽은 대안 코스입니다. 좁은 화면에서는 위 아래로 정렬됩니다.
       </p>
       <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-stretch">

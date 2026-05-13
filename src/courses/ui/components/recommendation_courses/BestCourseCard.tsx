@@ -79,7 +79,7 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
       {/* Best Course badge overlaid on image */}
       <div className="absolute left-[18px] top-[18px] md:left-[26px] md:top-[26px] flex items-center justify-center rounded-full bg-[#d5e6f6] px-[13px] py-[5px]">
         <span
-          className="text-[11px] text-black"
+          className="text-[12px] text-black"
           style={{ fontFamily: "'Prompt', sans-serif" }}
         >
           Best Course !
@@ -99,11 +99,11 @@ export default function BestCourseCard({ course, onDetailClick }: BestCourseCard
         </div>
 
         {/* Title */}
-        <h2 className="text-[20px] md:text-[22px] lg:text-[24px] font-normal leading-normal text-black">{display.title}</h2>
+        <h2 className="text-[20px] md:text-[22px] lg:text-[24px] font-medium leading-normal text-black">{display.title}</h2>
 
         {/* Description + hashtags+button */}
         <div className="flex flex-1 flex-col gap-8 md:gap-[64px]">
-          <p className="whitespace-pre-line text-[12px] leading-normal text-[#6a7282]">
+          <p className="whitespace-pre-line text-[12.5px] leading-normal text-[#6a7282]">
             {display.description}
           </p>
 
