@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="flex flex-col items-center pt-[80px] md:pt-[130px] lg:pt-[184px] pb-[40px] md:pb-[52px] px-4">
+    <section className="flex flex-col items-center pt-[80px] md:pt-[130px] lg:pt-[184px] pb-[20px] md:pb-[28px] px-4">
       {/* Subtitle line: "Click! 몇 번으로 완성되는 데이트 ♥" with blue highlight */}
       <div className="relative mb-[10px]">
         <div

@@ -47,17 +47,17 @@ export default function CourseCreationButton({
       type="button"
       onClick={onClick}
       disabled={isLoading}
-      className={`flex w-full items-center justify-center gap-2 rounded-full h-12 md:h-[43px] shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 ${
+      className={`flex w-full items-center justify-center gap-2 rounded-full h-12 md:h-[43px] shadow-[0px_3px_10px_0px_rgba(0,0,0,0.18)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0px_8px_24px_0px_rgba(138,175,230,0.55)] active:scale-[0.98] active:shadow-[0px_2px_8px_0px_rgba(138,175,230,0.3)] disabled:cursor-not-allowed disabled:opacity-70 ${
         isShaking ? "animate-shake" : ""
       }`}
-      style={{ background: "linear-gradient(114deg, #8aaee6 0%, #d5e6f6 100%)" }}
+      style={{ background: "#8AAFE6" }}
     >
       {isLoading ? <Spinner /> : <WandStarsIcon />}
       <span
         className="text-[14px] text-white"
         style={{ fontFamily: "'Prompt', sans-serif" }}
       >
-        {isLoading ? "코스 생성 중..." : "나만의 코스 추천받기!"}
+        {isLoading ? "코스 생성 중..." : "나만의 코스 추천받기 !"}
       </span>
     </button>
   );
