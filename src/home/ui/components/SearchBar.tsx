@@ -106,7 +106,7 @@ export default function SearchBar() {
           className="text-center text-[11px] leading-[22px] text-[#797979]"
           style={{ fontFamily: "'Prompt', 'Noto Sans KR', sans-serif", fontWeight: 300 }}
         >
-          필수 항목을 채운 뒤 전송 버튼을 누르면 추천 결과 페이지로 이동합니다.
+          필수 항목을 선택한 뒤 클릭하면 데이트 완성
         </p>
       </div>
     </div>

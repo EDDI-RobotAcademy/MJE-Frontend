@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="flex flex-col items-center pt-[80px] md:pt-[130px] lg:pt-[184px] pb-[40px] md:pb-[52px] px-4">
+    <section className="flex flex-col items-center pt-[80px] md:pt-[130px] lg:pt-[184px] pb-[20px] md:pb-[28px] px-4">
       {/* Subtitle line: "Click! 몇 번으로 완성되는 데이트 ♥" with blue highlight */}
       <div className="relative mb-[10px]">
         <div
@@ -9,7 +9,7 @@ export default function HeroSection() {
         />
         <div className="flex items-center gap-[6px] px-[6px]">
           <span
-            className="text-[14.5px] md:text-[16.5px] text-[#2a4874]"
+            className="text-[17.5px] md:text-[19.5px] text-[#2a4874]"
             style={{ fontFamily: "'Prompt', sans-serif" }}
           >
             Click!
@@ -18,7 +18,7 @@ export default function HeroSection() {
             className="text-[13px] md:text-[15px] font-light text-black"
             style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
           >
-            몇 번으로 완성되는 데이트
+            3번으로 완성되는 우리만의 특별한 데이트
           </span>
           <span
             className="text-[15px] md:text-[17px] text-[#fcad9e]"
@@ -38,40 +38,28 @@ export default function HeroSection() {
           className="text-[26px] md:text-[34px] lg:text-[40px] font-medium leading-normal text-[#333333]"
           style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
         >
-          당신에게 딱 맞는 데이트 코스
+          데이트 고민 끝,  설렘 시작
         </p>
         <p
           className="text-[34px] md:text-[46px] lg:text-[55px] font-semibold leading-normal text-[#2a4874]"
           style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
         >
-          대신 준비해드릴게요
+          데행사가 짜주는 데이트 코스
         </p>
       </div>
 
       {/* Sub-description */}
-      <div className="flex flex-col items-center gap-px mt-[18px]">
+      <div className="flex flex-col items-center gap-px mt-[26px]">
         <div className="flex items-center gap-[8px]">
           <span className="text-[15px] text-[#fcad9e]">♥</span>
           <p
             className="text-[13px] md:text-[15px] leading-[22px] text-[#797979]"
             style={{
               fontFamily: "'Prompt', 'Noto Sans KR', sans-serif",
-              fontWeight: 300,
+              fontWeight: 500,
             }}
           >
-            원하는 조건을 선택해 주세요
-          </p>
-        </div>
-        <div className="flex items-center gap-[8px]">
-          <span className="text-[15px] text-[#fcad9e]">♥</span>
-          <p
-            className="text-[13px] md:text-[15px] leading-[22px] text-[#797979]"
-            style={{
-              fontFamily: "'Prompt', 'Noto Sans KR', sans-serif",
-              fontWeight: 300,
-            }}
-          >
-            취향에 맞는 데이트 코스를 준비해드릴게요
+            원하는 조건만 선택하면, 오늘 어디 갈지 고민은 끝
           </p>
         </div>
       </div>
