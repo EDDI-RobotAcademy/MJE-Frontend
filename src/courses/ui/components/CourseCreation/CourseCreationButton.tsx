@@ -54,7 +54,7 @@ export default function CourseCreationButton({
     >
       {isLoading ? <Spinner /> : <WandStarsIcon />}
       <span
-        className="text-[14px] text-white"
+        className="text-[12px] md:text-[14px] text-white whitespace-nowrap"
         style={{ fontFamily: "'Prompt', sans-serif" }}
       >
         {isLoading ? "코스 생성 중..." : "나만의 코스 추천받기 !"}
