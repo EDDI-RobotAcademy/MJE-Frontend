@@ -57,7 +57,7 @@ export default function CourseCreationButton({
         className="text-[14px] text-white"
         style={{ fontFamily: "'Prompt', sans-serif" }}
       >
-        {isLoading ? "코스 생성 중..." : "Create Course !"}
+        {isLoading ? "코스 생성 중..." : "나만의 코스 추천받기!"}
       </span>
     </button>
   );
