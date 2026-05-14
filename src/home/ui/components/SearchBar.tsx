@@ -37,18 +37,18 @@ export default function SearchBar() {
   const { handleCreate, isLoading, isShaking, shakeKey } = useCourseCreation(validate, params);
 
   return (
-    <div className="w-full max-w-[1028px] rounded-[30px] bg-white px-4 pb-[17px] pt-[24px] md:px-[25px] shadow-[3px_6px_10px_rgba(187,199,211,0.54)]">
-      <div className="flex flex-col gap-[9px]">
+    <div className="w-full max-w-[1028px] rounded-[20px] md:rounded-[30px] bg-white px-4 pb-[12px] pt-[16px] md:px-[25px] md:pb-[17px] md:pt-[24px] shadow-[3px_6px_10px_rgba(187,199,211,0.54)]">
+      <div className="flex flex-col gap-[6px] md:gap-[9px]">
         {/* Fields section */}
-        <div className="flex flex-col gap-[18px]">
+        <div className="flex flex-col gap-[12px] md:gap-[18px]">
 
           {/* Fields row: max-width:768px → 세로, min-width:768px → 가로 */}
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-[36px]">
+          <div className="flex flex-col gap-3 md:gap-4 lg:flex-row lg:items-center lg:gap-[36px]">
 
             {/* 장소 + 시간대 */}
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-[35px] lg:shrink-0">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-[35px] lg:shrink-0">
               {/* 장소 */}
-              <div className="flex flex-col gap-3 lg:w-[268px]">
+              <div className="flex flex-col gap-2 md:gap-3 lg:w-[268px]">
                 <FieldPillLabel tooltip="만날 지역이나 역 이름을 입력하세요">
                   장소
                 </FieldPillLabel>
@@ -64,7 +64,7 @@ export default function SearchBar() {
               </div>
 
               {/* 시간대 */}
-              <div className="flex flex-col gap-3 lg:w-[268px]">
+              <div className="flex flex-col gap-2 md:gap-3 lg:w-[268px]">
                 <FieldPillLabel tooltip="데이트를 즐길 시간대를 선택하세요">
                   시간대
                 </FieldPillLabel>
@@ -81,7 +81,7 @@ export default function SearchBar() {
             </div>
 
             {/* 이동 방식 */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 md:gap-3">
               <FieldPillLabel tooltip="코스 이동 시 주로 사용할 교통수단을 선택하세요">
                 이동 방식
               </FieldPillLabel>

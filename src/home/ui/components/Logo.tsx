@@ -9,7 +9,7 @@ export default function Logo() {
 
   return (
     <Link href="/" aria-label="홈으로 이동" onClick={handleLogoClick}>
-      <Image src="/logo.png" alt="dahangsa" width={120} height={24} priority style={{ objectFit: "contain" }} />
+      <Image src="/logo.png" alt="dahangsa" width={120} height={24} priority className="w-[90px] md:w-[120px]" style={{ objectFit: "contain" }} />
     </Link>
   );
 }

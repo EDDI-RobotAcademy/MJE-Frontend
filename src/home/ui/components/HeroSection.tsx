@@ -35,13 +35,13 @@ export default function HeroSection() {
       {/* Main headline */}
       <div className="flex flex-col items-center text-center gap-[2px]">
         <p
-          className="text-[26px] md:text-[34px] lg:text-[40px] font-medium leading-normal text-[#333333]"
+          className="text-[20px] md:text-[34px] lg:text-[40px] font-medium leading-normal text-[#333333]"
           style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
         >
           데이트 고민 끝,  설렘 시작
         </p>
         <p
-          className="text-[34px] md:text-[46px] lg:text-[55px] font-semibold leading-normal text-[#2a4874]"
+          className="text-[26px] md:text-[46px] lg:text-[55px] font-semibold leading-normal text-[#2a4874]"
           style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
         >
           데행사가 짜주는 데이트 코스
