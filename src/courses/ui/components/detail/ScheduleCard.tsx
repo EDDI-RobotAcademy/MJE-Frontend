@@ -52,7 +52,7 @@ export default function ScheduleCard({
               .map((tag, i) => (
                 <span
                   key={i}
-                  className="flex h-[20px] items-center justify-center whitespace-nowrap rounded-full bg-[#2a4874] px-[10px] text-[10px] text-white"
+                  className="flex h-[20px] items-center justify-center whitespace-nowrap rounded-full bg-[#2a4874] px-[10px] text-[11px] text-white"
                 >
                   {tag}
                 </span>
@@ -63,17 +63,17 @@ export default function ScheduleCard({
         {/* 모바일: 이미지 상단·텍스트 하단 / md+: 가로 배치 */}
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
           {/* Overlapping circles */}
-          <div className="relative h-[70px] w-[130px] shrink-0 md:h-[101px] md:w-[186px]">
+          <div className="relative h-[100px] w-[180px] shrink-0 md:h-[130px] md:w-[230px]">
             <img
               src={img1}
               alt={place.name}
-              className="absolute left-0 top-[2px] z-[2] h-[64px] w-[64px] rounded-full border-[2px] border-white object-cover md:top-[3px] md:h-[95px] md:w-[95px] md:border-[2.5px]"
+              className="absolute left-0 top-0 z-[2] h-[95px] w-[95px] rounded-full border-[2px] border-white object-cover md:h-[125px] md:w-[125px] md:border-[2.5px]"
             />
             <img
               src={img2}
               alt={place.name}
-              className="absolute top-[2px] z-[1] h-[64px] w-[64px] rounded-full border-[2px] border-white object-cover md:top-[3px] md:h-[95px] md:w-[95px] md:border-[2.5px]"
-              style={{ left: 56 }}
+              className="absolute top-0 z-[1] h-[95px] w-[95px] rounded-full border-[2px] border-white object-cover md:h-[125px] md:w-[125px] md:border-[2.5px]"
+              style={{ left: 82 }}
             />
           </div>
 
@@ -100,8 +100,8 @@ export default function ScheduleCard({
                 </div>
               )}
             </div>
-            <p className="text-[16px] md:text-[18px] text-black">{place.name}</p>
-            <p className="text-[10px] font-light leading-[15px] text-[#2d2d2d]">
+            <p className="text-[20px] font-medium text-black">{place.name}</p>
+            <p className="text-[12.5px] font-light leading-[15px] text-[#2d2d2d]">
               {place.description}
             </p>
           </div>
@@ -111,7 +111,7 @@ export default function ScheduleCard({
       {/* Bottom row: always rendered so all cards share identical structure */}
       <div className="mt-[10px] flex min-h-[24px] items-center justify-center px-[3px]">
         {previousPlaceName && walkingTimeFromPrevious && (
-          <div className="flex items-center gap-[6px] text-[10px] text-[#959595]">
+          <div className="flex items-center gap-[6px] text-[11.5px] text-[#959595]">
             <span className="whitespace-nowrap">{previousPlaceName} → {place.name}</span>
             <span className="inline-block h-[2.6px] w-[2.6px] shrink-0 rounded-full bg-[#959595]" />
             <span className="whitespace-nowrap">{transportLabel} {walkingTimeFromPrevious}</span>

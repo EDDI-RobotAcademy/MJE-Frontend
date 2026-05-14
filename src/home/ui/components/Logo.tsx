@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLogoTracking } from "@/home/hooks/useLogoTracking";
 
 export default function Logo() {
@@ -8,12 +9,7 @@ export default function Logo() {
 
   return (
     <Link href="/" aria-label="홈으로 이동" onClick={handleLogoClick}>
-      <span
-        className="text-xl font-bold tracking-tight text-gray-900"
-        style={{ fontFamily: "'Prompt', sans-serif" }}
-      >
-        Dehangsa
-      </span>
+      <Image src="/logo.png" alt="dahangsa" width={120} height={24} priority style={{ objectFit: "contain" }} />
     </Link>
   );
 }

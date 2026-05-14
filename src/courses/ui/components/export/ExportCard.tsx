@@ -55,7 +55,7 @@ export default function ExportCard({ courseTitle, courseId }: ExportCardProps) {
               </span>
             </button>
             <p
-              className="text-center text-[8px] text-[rgba(117,117,117,0.7)]"
+              className="text-center text-[9.5px] text-[rgba(117,117,117,0.7)]"
               style={{ fontFamily: pretendard }}
             >
               추천 코스를 이메일로 보내드릴게요

@@ -103,7 +103,7 @@ export default function SearchBar() {
 
         {/* Footer hint */}
         <p
-          className="text-center text-[10px] leading-[22px] text-[#797979]"
+          className="text-center text-[11px] leading-[22px] text-[#797979]"
           style={{ fontFamily: "'Prompt', 'Noto Sans KR', sans-serif", fontWeight: 300 }}
         >
           필수 항목을 채운 뒤 전송 버튼을 누르면 추천 결과 페이지로 이동합니다.

@@ -229,7 +229,7 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
               </div>
 
               {/* Place name */}
-              <p className="text-[18px] text-black">
+              <p className="text-[20px] text-black">
                 {stop.name}
                 {stop.nameEn && (
                   <span className="ml-1" style={{ fontFamily: prompt }}>
@@ -371,7 +371,7 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           {/* Back link — text link at very top */}
           <Link
             href="/recommendation"
-            className="mb-[20px] w-fit text-[14px] text-[#2a4874] transition-opacity hover:opacity-75"
+            className="mb-[20px] w-fit text-[16px] text-[#2a4874] transition-opacity hover:opacity-75"
           >
             ← 추천 코스 돌아가기
           </Link>

@@ -33,7 +33,7 @@ export default function ReturnToRecommendation() {
   return (
     <button
       onClick={handleClick}
-      className="flex w-fit items-center gap-1.5 text-[14px] text-[#2a4874] transition-opacity hover:opacity-75"
+      className="flex w-fit items-center gap-1.5 text-[16px] text-[#2a4874] transition-opacity hover:opacity-75"
     >
       <ArrowLeftIcon />
       추천 코스로 돌아가기

@@ -9,7 +9,7 @@ export default function HeroSection() {
         />
         <div className="flex items-center gap-[6px] px-[6px]">
           <span
-            className="text-[13px] md:text-[15px] text-[#2a4874]"
+            className="text-[14.5px] md:text-[16.5px] text-[#2a4874]"
             style={{ fontFamily: "'Prompt', sans-serif" }}
           >
             Click!
@@ -51,7 +51,7 @@ export default function HeroSection() {
       {/* Sub-description */}
       <div className="flex flex-col items-center gap-px mt-[18px]">
         <div className="flex items-center gap-[8px]">
-          <span className="text-[14px] text-[#fcad9e]">✦</span>
+          <span className="text-[15px] text-[#fcad9e]">♥</span>
           <p
             className="text-[13px] md:text-[15px] leading-[22px] text-[#797979]"
             style={{
@@ -63,7 +63,7 @@ export default function HeroSection() {
           </p>
         </div>
         <div className="flex items-center gap-[8px]">
-          <span className="text-[14px] text-[#fcad9e]">✦</span>
+          <span className="text-[15px] text-[#fcad9e]">♥</span>
           <p
             className="text-[13px] md:text-[15px] leading-[22px] text-[#797979]"
             style={{
