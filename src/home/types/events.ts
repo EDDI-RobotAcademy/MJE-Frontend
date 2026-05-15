@@ -28,5 +28,8 @@ export interface ViewHomeEvent {
   session_id: string | null;
   timestamp: string;
   page_path: string;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  referrer?: string | null;
   [key: string]: unknown;
 }
