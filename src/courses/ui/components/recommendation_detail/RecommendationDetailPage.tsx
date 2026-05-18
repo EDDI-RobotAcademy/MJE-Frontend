@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ExportCard from "@/courses/ui/components/export/ExportCard";
+import ExportCard from "@/courses/ui/components/export/ShareCard";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 

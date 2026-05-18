@@ -13,7 +13,7 @@ import BestCourseLabel from "./BestCourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
-import ExportCard from "@/courses/ui/components/export/ExportCard";
+import ExportCard from "@/courses/ui/components/export/ShareCard";
 import ReturnToRecommendation from "@/courses/ui/components/return/ReturnToRecommendation";
 import HeadlineLocation from "@/courses/ui/components/headline_location/HeadlineLocation";
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
