@@ -24,7 +24,7 @@ interface ShareCardProps {
   courseId: string;
 }
 
-export default function ExportCard({ courseTitle, courseId }: ShareCardProps) {
+export default function ShareCard({ courseTitle, courseId }: ShareCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleShareClick = () => {

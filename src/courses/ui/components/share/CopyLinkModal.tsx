@@ -5,17 +5,17 @@ import { trackShareCloseClick, trackCopyLinkClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
 
-interface ExportEmailModalProps {
+interface CopyLinkModalProps {
   courseTitle: string;
   courseId: string;
   onClose: () => void;
 }
 
-export default function ExportEmailModal({
+export default function CopyLinkModal({
   courseTitle,
   courseId,
   onClose,
-}: ExportEmailModalProps) {
+}: CopyLinkModalProps) {
   const [copied, setCopied] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
 
