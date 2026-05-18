@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ShareEmailModal from "./ShareEmailModal";
+import CopyLinkModal from "./CopyLinkModal";
 import { trackShareClick } from "./event_tracking";
 
 const pretendard = "'Pretendard Variable', Pretendard, sans-serif";
@@ -61,7 +61,7 @@ export default function ExportCard({ courseTitle, courseId }: ShareCardProps) {
       </div>
 
       {isModalOpen && (
-        <ShareEmailModal
+        <CopyLinkModal
           courseTitle={courseTitle}
           courseId={courseId}
           onClose={() => setIsModalOpen(false)}

@@ -64,21 +64,46 @@ export default function ExportEmailModal({
           </p>
 
           {/* Shareable URL */}
-          <div className="flex w-full items-center gap-[8px] rounded-[12px] bg-[#f4f6f8] px-[14px] py-[10px]">
+          <div className="w-full rounded-[12px] bg-[#f4f6f8] px-[14px] py-[10px]">
             <span
-              className="min-w-0 flex-1 truncate text-[11px] text-[#555]"
+              className="block min-w-0 truncate text-[11px] text-[#555]"
               style={{ fontFamily: pretendard }}
             >
               {shareUrl}
             </span>
+          </div>
+
+          {/* 링크 복사하기 버튼 */}
+          <div className="flex w-full flex-col items-center gap-[10px]">
             <button
               type="button"
               onClick={handleCopyUrl}
-              className="shrink-0 rounded-full bg-[#2a4874] px-[12px] py-[5px] text-[11px] text-white transition-opacity hover:opacity-80"
+              className={`flex h-[44px] w-full items-center justify-center gap-[8px] rounded-full text-[14px] text-white shadow-[0px_4px_12px_rgba(138,175,230,0.25)] transition-all hover:opacity-80 ${copied ? "bg-[#D5E6F6]" : "bg-[#8AAFE6]"}`}
               style={{ fontFamily: pretendard }}
             >
-              {copied ? "복사됨" : "복사"}
+              {copied ? (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8L6.5 11.5L13 5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  링크 복사 완료!
+                </>
+              ) : (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M6.5 9.5L9.5 6.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+                    <path d="M9.5 4.5L10.5 3.5C11.6 2.4 13.3 2.4 14.4 3.5C15.5 4.6 15.5 6.3 14.4 7.4L13.4 8.4C12.5 9.3 11.1 9.5 10 9" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+                    <path d="M6.5 11.5L5.5 12.5C4.4 13.6 2.7 13.6 1.6 12.5C0.5 11.4 0.5 9.7 1.6 8.6L2.6 7.6C3.5 6.7 4.9 6.5 6 7" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                  링크 복사하기
+                </>
+              )}
             </button>
+            {copied && (
+              <p className="text-center text-[11px] text-[#2a4874]" style={{ fontFamily: pretendard }}>
+                링크 복사 완료! 자유롭게 붙여넣어 공유해보세요!
+              </p>
+            )}
           </div>
         </div>
       </div>
