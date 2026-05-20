@@ -13,7 +13,7 @@ interface CourseLabelProps {
 }
 
 const LABEL_TEXT: Record<CourseType, string> = {
-  "Best Course !": "Today pick!",
+  "Best Course !": "Today Pick!",
   "Option A": "Course A",
   "Option B": "Course B",
 };

@@ -73,12 +73,13 @@ export default function RecommendationCourseList() {
 
   const handleBestCourseClick = (course: RecommendationCourseItem) => {
     void trackCardClick(pathname, course.course_id, course.places[0]?.name ?? "", "main");
-    router.push(`/courses/detail/${course.course_id}`);
+    router.push(`/courses/detail/${course.course_id}?grade=best`);
   };
 
-  const handleOptionalCourseClick = (course: RecommendationCourseItem) => {
+  const handleOptionalCourseClick = (course: RecommendationCourseItem, index: number) => {
     void trackCardClick(pathname, course.course_id, course.places[0]?.name ?? "", "sub");
-    router.push(`/courses/detail/${course.course_id}`);
+    const grade = index === 0 ? "optional_a" : "optional_b";
+    router.push(`/courses/detail/${course.course_id}?grade=${grade}`);
   };
 
   if (isLoading) return <RecommendationLoading />;
@@ -121,7 +122,7 @@ export default function RecommendationCourseList() {
                 key={`optional-${index}`}
                 course={course}
                 index={index}
-                onDetailClick={() => handleOptionalCourseClick(course)}
+                onDetailClick={() => handleOptionalCourseClick(course, index)}
               />
             ))}
           </div>

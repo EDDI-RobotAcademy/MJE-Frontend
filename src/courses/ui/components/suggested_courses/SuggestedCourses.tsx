@@ -29,16 +29,17 @@ export default function SuggestedCourses() {
     }
 
     void trackCardClick(pathname, course.id, course.name, "main");
-    router.push(`/courses/detail/${course.id}`);
+    router.push(`/courses/detail/${course.id}?grade=best`);
   };
 
-  const handleSubCourseClick = (course: Course) => {
+  const handleSubCourseClick = (course: Course, index: number) => {
     if (!course.id) {
       return;
     }
 
     void trackCardClick(pathname, course.id, course.name, "sub");
-    router.push(`/courses/detail/${course.id}`);
+    const grade = index === 0 ? "optional_a" : "optional_b";
+    router.push(`/courses/detail/${course.id}?grade=${grade}`);
   };
 
   if (isLoading) {
@@ -75,7 +76,7 @@ export default function SuggestedCourses() {
             <SubCourse
               key={course.id || `sub-course-${index}`}
               course={course}
-              onClick={handleSubCourseClick}
+              onClick={(course) => handleSubCourseClick(course, index)}
               label={index === 0 ? "Option A" : "Option B"}
             />
           ))}

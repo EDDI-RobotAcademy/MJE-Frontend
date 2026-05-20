@@ -6,6 +6,7 @@ export const OTHER_COURSES_NOT_FOUND: Course[] = [];
 interface OtherCourseApiResponse {
   courseId: string;
   id?: string;
+  courseType?: string;
   name: string;
   locations: string[];
   duration?: number | string | null;
@@ -43,6 +44,7 @@ function mapToCourse(course: OtherCourseApiResponse): Course {
 
   return {
     id: resolvedCourseId ?? "",
+    courseType: course.courseType,
     name: bindTitle(course),
     locations: bindLocations(course),
     description: course.description,
