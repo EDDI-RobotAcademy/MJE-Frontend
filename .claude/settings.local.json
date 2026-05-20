@@ -29,7 +29,10 @@
       "Bash(del \"d:\\\\미정이\\\\MJE-Frontend\\\\src\\\\courses\\\\ui\\\\components\\\\detail\\\\ExportCard.tsx\")",
       "Bash(Get-ChildItem -Path \"D:\\\\미정이\\\\MJE-Frontend\" -Directory -Force)",
       "Bash(Get-Content \"C:\\\\Users\\\\uns\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D------MJE-Frontend\\\\a5c102d7-6251-451e-9a50-a0954d8fdb5a\\\\tasks\\\\bmv33x0e3.output\" -Wait)",
-      "Bash(Select-String --line-buffered \"ready|error|localhost|Error|Failed|warn\" -i)"
+      "Bash(Select-String --line-buffered \"ready|error|localhost|Error|Failed|warn\" -i)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(gh pr create --repo EDDI-RobotAcademy/MJE-Frontend --base main --head imjina067-hue:main --title 'fix : [임진아] 로고 이미지 height auto 추가로 비율 경고 해결 [MJE-FE-149]' --body ' *)"
     ],
     "additionalDirectories": [
       "d:\\������\\MJE-Frontend\\src\\courses\\ui\\components\\detail"
