@@ -40,6 +40,7 @@ function mapRecommendationItemToCourse(item: RecommendationCourseItem): Course {
 
   return {
     id: item.course_id,
+    courseType: item.grade,
     name: (item.places ?? []).map((p) => p.name).join(" → "),
     description: "",
     locations,

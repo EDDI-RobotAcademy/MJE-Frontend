@@ -19,6 +19,7 @@ import HeadlineLocation from "@/courses/ui/components/headline_location/Headline
 import HeadlineStartTime from "@/courses/ui/components/headline_start_time/HeadlineStartTime";
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
 import HeadlineCourseExplain from "@/courses/ui/components/headline_course_explain/HeadlineCourseExplain";
+import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
 
 interface CourseDetailPageProps {
     courseId: string;
@@ -45,9 +46,13 @@ export default function CourseDetailPage({
         [data],
     );
 
-    const selectedCourse =
+    const sessionCourse = allCourses.find((c) => c.id === courseId);
+    const rawCourse =
         initialDetailData?.selectedCourse ??
-        allCourses.find((course) => course.id === courseId);
+        sessionCourse;
+    const selectedCourse = rawCourse && !rawCourse.courseType && sessionCourse?.courseType
+        ? { ...rawCourse, courseType: sessionCourse.courseType }
+        : rawCourse;
 
     const keywords = useMemo(
         () =>
@@ -113,7 +118,9 @@ export default function CourseDetailPage({
         .filter((course) => course.name)
         .map((course) => {
             const sessionCourse = allCourses.find((c) => c.id === course.id);
-            return sessionCourse ? { ...course, name: sessionCourse.name } : course;
+            return sessionCourse
+                ? { ...course, name: sessionCourse.name, places: sessionCourse.places, courseType: sessionCourse.courseType }
+                : course;
         });
 
     const locations =
@@ -134,7 +141,7 @@ export default function CourseDetailPage({
                         <HeadlineStartTime time={selectedCourse.startTime} />
                     )}
                 </div>
-                <HeadlineCourseTitle title={selectedCourse.name} />
+                <HeadlineCourseTitle title={generateCourseTitle(selectedCourse.places, selectedCourse.courseType) || selectedCourse.name} />
                 <HeadlineCourseExplain description={selectedCourse.description} />
             </div>
 
