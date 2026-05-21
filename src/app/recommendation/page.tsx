@@ -22,19 +22,11 @@ function DotGrid() {
 
 export default function RecommendationPage() {
   return (
-    <main
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #ffffff 50%, #eaf2fb 100%)" }}
-    >
-      {/* Decorative background blob */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-[160px] -z-0 h-[860px] w-[860px] -translate-x-1/2 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(213,230,246,0.65) 0%, rgba(255,255,255,0) 68%)",
-          filter: "blur(70px)",
-        }}
-      />
+    <main className="relative min-h-screen overflow-hidden bg-white">
+      {/* 파란빛 블롭 — 세로 타원 */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[1100px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#daeaf8] opacity-70 blur-[220px]" />
+      {/* 분홍빛 블롭 */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[850px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f0d5d5] opacity-50 blur-[180px]" />
 
       <div className="relative z-10 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-[120px]">
         {/* Hero */}
