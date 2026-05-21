@@ -2,6 +2,7 @@
 
 import { Course } from "@/courses/types/course";
 import { CourseType } from "@/courses/ui/components/shared/CourseLabel";
+import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
 import OtherCourseOptionLabel from "./OtherCourseOptionLabel";
 import OtherCourseTitle from "./OtherCourseTitle";
 import OtherCourseLocationLabel from "./OtherCourseLocationLabel";
@@ -39,7 +40,7 @@ export default function OtherCourseCard({ course, label, onClick }: OtherCourseC
     >
       <div className="flex flex-col gap-2">
         <OtherCourseOptionLabel label={label} />
-        <OtherCourseTitle title={course.name} />
+        <OtherCourseTitle title={generateCourseTitle(course.places, course.courseType) || course.name} />
 
         <div className="flex items-center justify-between gap-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
