@@ -3,8 +3,8 @@ export type CourseType = "Best Course !" | "Option A" | "Option B";
 export function labelFromCourseType(courseType?: string): CourseType {
   if (!courseType) return "Best Course !";
   const t = courseType.toUpperCase().replace(/[-\s]/g, "_");
-  if (t.includes("OPTION_A") || t === "A" || t === "SUB_A") return "Option A";
-  if (t.includes("OPTION_B") || t === "B" || t === "SUB_B") return "Option B";
+  if (t.includes("OPTION_A") || t.includes("OPTIONAL_A") || t === "A" || t === "SUB_A") return "Option A";
+  if (t.includes("OPTION_B") || t.includes("OPTIONAL_B") || t === "B" || t === "SUB_B") return "Option B";
   return "Best Course !";
 }
 

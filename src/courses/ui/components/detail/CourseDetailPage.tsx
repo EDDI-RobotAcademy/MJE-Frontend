@@ -10,6 +10,7 @@ import { CourseDetailData } from "@/recommendation/infrastructure/api/course_det
 import OtherCourseCard from "@/courses/ui/components/other_course/OtherCourseCard";
 import { trackOptionCardClick } from "@/courses/ui/components/other_course/event_tracking";
 import BestCourseLabel from "./BestCourseLabel";
+import { labelFromCourseType } from "@/courses/ui/components/shared/CourseLabel";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
@@ -24,11 +25,13 @@ import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
 interface CourseDetailPageProps {
     courseId: string;
     initialDetailData: CourseDetailData | null;
+    grade?: string;
 }
 
 export default function CourseDetailPage({
                                              courseId,
                                              initialDetailData,
+                                             grade,
                                          }: CourseDetailPageProps) {
     const { data, isLoading: isSessionLoading } = useSuggestedCourses();
     const { courses: otherCourses } = useOtherCourses(courseId);
@@ -78,8 +81,10 @@ export default function CourseDetailPage({
             return;
         }
 
+        const label = getCourseLabel(course.id, course.courseType);
+        const gradeParam = label === "Best Course !" ? "best" : label === "Option A" ? "optional_a" : "optional_b";
         trackOptionCardClick();
-        router.push(`/courses/detail/${course.id}`);
+        router.push(`/courses/detail/${course.id}?grade=${gradeParam}`);
     };
 
     if (isSessionLoading && !initialDetailData) {
@@ -108,12 +113,21 @@ export default function CourseDetailPage({
         ? (transportLabelMap[resolvedTransport] ?? resolvedTransport)
         : undefined;
 
+    const getCourseLabel = (id: string, fallbackCourseType?: string): "Best Course !" | "Option A" | "Option B" => {
+        if (data?.mainCourse?.id === id) return "Best Course !";
+        const subIndex = data?.subCourses.findIndex((c) => c.id === id) ?? -1;
+        if (subIndex === 0) return "Option A";
+        if (subIndex === 1) return "Option B";
+        return labelFromCourseType(fallbackCourseType);
+    };
+
     const fallbackAlternatives =
         allCourses.length > 0 ? allCourses : (initialDetailData?.subCourses ?? []);
     const alternatives: Course[] =
         otherCourses.length > 0
             ? otherCourses.slice(0, 2)
             : fallbackAlternatives.filter((course) => course.id !== courseId).slice(0, 2);
+    const labelOrder = { "Best Course !": 0, "Option A": 1, "Option B": 2 };
     const safeAlternatives = alternatives
         .filter((course) => course.name)
         .map((course) => {
@@ -121,7 +135,8 @@ export default function CourseDetailPage({
             return sessionCourse
                 ? { ...course, name: sessionCourse.name, places: sessionCourse.places, courseType: sessionCourse.courseType }
                 : course;
-        });
+        })
+        .sort((a, b) => labelOrder[getCourseLabel(a.id)] - labelOrder[getCourseLabel(b.id)]);
 
     const locations =
         selectedCourse.locations ??
@@ -150,7 +165,7 @@ export default function CourseDetailPage({
                 {/* 상세 일정 카드 */}
                 <div className="flex flex-col gap-3 rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
                     <div className="flex flex-col gap-[10px]">
-                        <BestCourseLabel label="Best Course !" />
+                        <BestCourseLabel label={labelFromCourseType(grade ?? selectedCourse.courseType)} />
                         <div className="flex items-baseline gap-[8px]">
                             <span className="text-[18px] font-bold text-black">상세 일정</span>
                             {selectedCourse.duration && (
@@ -203,7 +218,7 @@ export default function CourseDetailPage({
                                     <OtherCourseCard
                                         key={course.id || `alternative-course-${index}`}
                                         course={course}
-                                        label={index === 0 ? "Option A" : "Option B"}
+                                        label={getCourseLabel(course.id, course.courseType)}
                                         onClick={handleOtherCourseClick}
                                     />
                                 ))}
