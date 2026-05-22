@@ -20,14 +20,21 @@ export default function TryAgain() {
 
       <button
         onClick={handleClick}
-        className="flex w-full items-center justify-center rounded-[28px] text-[15px] font-light text-white transition-opacity hover:opacity-90 sm:w-[200px]"
+        className="relative flex w-full items-center justify-center overflow-hidden rounded-full text-[15px] font-normal transition-all duration-200 ease-out hover:scale-[1.02] hover:-translate-y-[2px] active:scale-[0.98] active:translate-y-0 shadow-[3px_5px_8px_0px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.75)] hover:shadow-[3px_10px_18px_0px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.75)] sm:w-[200px]"
         style={{
           height: "52px",
-          background: "linear-gradient(135deg, #6e9dd9 0%, #8aaee6 50%, #b8d4f0 100%)",
-          boxShadow: "0px 4px 16px 0px rgba(138,174,230,0.45)",
+          background: "radial-gradient(ellipse at center, rgba(138,175,230,1) 0%, rgba(213,230,246,1) 100%)",
+          border: "1px solid rgba(255,255,255,0.8)",
         }}
       >
-        다시 검색하기
+        <div
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0.0) 100%)",
+            backdropFilter: "blur(2px)",
+          }}
+        />
+        <span className="relative z-10" style={{ color: "#2A4874" }}>다시 검색하기</span>
       </button>
     </div>
   );
