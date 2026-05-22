@@ -39,7 +39,7 @@ export default function ScheduleCard({
   const img2 = place.imageUrl2 ?? `https://picsum.photos/seed/${place.id}-b/200/200`;
 
   return (
-    <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px]">
+    <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px] border border-[#D4D4D4] shadow-[0px_2px_8px_rgba(0,0,0,0.06)]">
       {/* White inner card — relative so category badge can be anchored to top-left */}
       <div className="relative rounded-[18px] bg-white px-[9px] pt-[36px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
         {/* Category pills — split by , or > into individual navy pills */}
