@@ -164,7 +164,15 @@ export default function CourseDetailPage({
                 </div>
             </div>
 
-            {places.length > 0 && <CourseMap places={places} />}
+            {places.length > 0 && (
+              <CourseMap
+                places={places}
+                location={headlineLocation}
+                totalDistanceM={selectedCourse.totalDistanceM}
+                transport={resolvedTransport}
+
+              />
+            )}
 
             {places.length > 0 ? (
                 <div className="flex flex-col gap-1.5">
