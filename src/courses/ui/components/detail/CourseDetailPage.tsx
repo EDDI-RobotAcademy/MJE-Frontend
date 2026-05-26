@@ -21,6 +21,7 @@ import HeadlineStartTime from "@/courses/ui/components/headline_start_time/Headl
 import HeadlineCourseTitle from "@/courses/ui/components/headline_course_title/HeadlineCourseTitle";
 import HeadlineCourseExplain from "@/courses/ui/components/headline_course_explain/HeadlineCourseExplain";
 import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
+import CourseMap from "./CourseMap";
 
 interface CourseDetailPageProps {
     courseId: string;
@@ -162,6 +163,8 @@ export default function CourseDetailPage({
                     )}
                 </div>
             </div>
+
+            {places.length > 0 && <CourseMap places={places} />}
 
             {places.length > 0 ? (
                 <div className="flex flex-col gap-1.5">

@@ -4,10 +4,13 @@ export interface CourseKeyword {
 
 export interface Place {
   id: string;
+  order?: number;
   name: string;
   description: string;
   location: string;
   address?: string;
+  latitude?: number;
+  longitude?: number;
   time?: string;
   startTime?: string;
   endTime?: string;

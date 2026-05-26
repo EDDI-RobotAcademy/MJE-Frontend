@@ -29,6 +29,9 @@ interface CourseDetailPlaceApiResponse {
   routeDurationMin?: number;
   routeTransport?: string;
   routePolyline?: string;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
 }
 
 interface CourseDetailApiResponse {
@@ -92,9 +95,13 @@ function formatDuration(totalDurationMinutes: number): string | undefined {
 function mapPlace(place: CourseDetailPlaceApiResponse, courseId: string): Place {
   return {
     id: `${courseId}-${place.visitOrder}`,
+    order: place.visitOrder,
     name: place.name,
     description: place.description ?? "",
-    location: "",
+    location: place.address ?? "",
+    address: place.address,
+    latitude: place.latitude,
+    longitude: place.longitude,
     imageUrl: place.photoUrl,
     type: classifyType(place.category),
     category: place.category,

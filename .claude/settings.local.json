@@ -32,7 +32,11 @@
       "Bash(Select-String --line-buffered \"ready|error|localhost|Error|Failed|warn\" -i)",
       "Bash(git diff *)",
       "Bash(git log *)",
-      "Bash(gh pr create --repo EDDI-RobotAcademy/MJE-Frontend --base main --head imjina067-hue:main --title 'fix : [임진아] 로고 이미지 height auto 추가로 비율 경고 해결 [MJE-FE-149]' --body ' *)"
+      "Bash(gh pr create --repo EDDI-RobotAcademy/MJE-Frontend --base main --head imjina067-hue:main --title 'fix : [임진아] 로고 이미지 height auto 추가로 비율 경고 해결 [MJE-FE-149]' --body ' *)",
+      "PowerShell(node -e \"require\\('playwright'\\)\" 2>&1; npx playwright --version 2>&1)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill /PID 21564 /F)",
+      "PowerShell(Stop-Process *)"
     ],
     "additionalDirectories": [
       "d:\\������\\MJE-Frontend\\src\\courses\\ui\\components\\detail"
