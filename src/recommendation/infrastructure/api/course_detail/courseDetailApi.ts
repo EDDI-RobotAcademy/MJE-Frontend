@@ -113,6 +113,10 @@ function mapPlace(place: CourseDetailPlaceApiResponse, courseId: string): Place 
 function mapSelectedCourse(response: CourseDetailApiResponse): Course {
   const places = response.places.map((place) => mapPlace(place, response.courseId));
   const locations = response.locationSummary ? [response.locationSummary] : [];
+  const totalDistanceM = response.places.reduce(
+    (sum, p) => sum + (p.routeDistanceM ?? 0),
+    0,
+  );
 
   return {
     id: response.courseId,
@@ -125,6 +129,7 @@ function mapSelectedCourse(response: CourseDetailApiResponse): Course {
     imageUrl: response.places[0]?.photoUrl,
     places,
     transport: response.transport,
+    totalDistanceM: totalDistanceM > 0 ? totalDistanceM : undefined,
   };
 }
 

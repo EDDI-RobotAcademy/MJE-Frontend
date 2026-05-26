@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Place } from "@/courses/types/course";
 import CourseMapSkeleton from "./CourseMapSkeleton";
 import { sortPlacesByOrder } from "@/courses/utils/sortPlaces";
+import { formatDistance } from "@/courses/utils/formatDistance";
 
 interface KakaoLatLng {
   getLat(): number;
@@ -67,8 +68,18 @@ const POLYLINE_STYLE = "solid";
 
 type Status = "loading" | "ready" | "error";
 
+const TRANSPORT_LABEL: Record<string, string> = {
+  walk: "도보",
+  public_transit: "대중교통",
+  transit: "대중교통",
+  car: "자동차",
+};
+
 interface CourseMapProps {
   places: Place[];
+  location?: string;
+  totalDistanceM?: number;
+  transport?: string;
 }
 
 
@@ -91,14 +102,17 @@ async function fetchOsrmRoute(
   fromLng: number,
   toLat: number,
   toLng: number,
-): Promise<Array<[number, number]> | null> {
+): Promise<{ coords: Array<[number, number]>; distanceM: number } | null> {
   try {
     const url = `https://router.project-osrm.org/route/v1/foot/${fromLng},${fromLat};${toLng},${toLat}?overview=full&geometries=geojson`;
     const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();
     if (data.code === "Ok" && data.routes?.[0]?.geometry?.coordinates) {
-      return data.routes[0].geometry.coordinates as Array<[number, number]>;
+      return {
+        coords: data.routes[0].geometry.coordinates as Array<[number, number]>,
+        distanceM: data.routes[0].distance as number,
+      };
     }
   } catch {
     // fall back to direct line
@@ -128,9 +142,10 @@ function geocodeAll(
   );
 }
 
-export default function CourseMap({ places }: CourseMapProps) {
+export default function CourseMap({ places, location, totalDistanceM, transport }: CourseMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<Status>("loading");
+  const [osrmDistanceM, setOsrmDistanceM] = useState<number | null>(null);
 
   useEffect(() => {
     setStatus("loading");
@@ -162,17 +177,18 @@ export default function CourseMap({ places }: CourseMapProps) {
       });
 
       if (positions.length >= 2) {
+        let totalDist = 0;
         for (let i = 0; i < positions.length - 1; i++) {
           if (cancelled) return;
           const from = positions[i].pos;
           const to = positions[i + 1].pos;
-          const coords = await fetchOsrmRoute(from.getLat(), from.getLng(), to.getLat(), to.getLng());
+          const result = await fetchOsrmRoute(from.getLat(), from.getLng(), to.getLat(), to.getLng());
           if (cancelled) return;
-          const path = coords
-            ? coords.map(([lng, lat]) => new maps.LatLng(lat, lng))
+          const path = result
+            ? result.coords.map(([lng, lat]) => new maps.LatLng(lat, lng))
             : [from, to];
+          if (result) totalDist += result.distanceM;
           const color = SEGMENT_COLORS[i] ?? SEGMENT_COLORS[SEGMENT_COLORS.length - 1];
-
           const polyline = new maps.Polyline({
             path,
             strokeWeight: POLYLINE_WEIGHT,
@@ -183,6 +199,7 @@ export default function CourseMap({ places }: CourseMapProps) {
           polyline.setMap(map);
           polylines.push(polyline);
         }
+        if (!cancelled && totalDist > 0) setOsrmDistanceM(totalDist);
       }
 
       if (positions.length === 1) {
@@ -275,7 +292,7 @@ export default function CourseMap({ places }: CourseMapProps) {
     } else {
       const script = document.createElement("script");
       script.id = SCRIPT_ID;
-      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${MAP_KEY}&libraries=services&autoload=false`;
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${MAP_KEY}&libraries=services&autoload=false&lang=en`;
       script.onload = initMap;
       script.onerror = () => {
         if (!cancelled) setStatus("error");
@@ -307,6 +324,60 @@ export default function CourseMap({ places }: CourseMapProps) {
         className="h-full w-full"
         style={{ visibility: status === "ready" ? "visible" : "hidden" }}
       />
+
+      {status === "ready" && location && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 16,
+            left: 16,
+            zIndex: 10,
+            backdropFilter: "blur(5px)",
+            WebkitBackdropFilter: "blur(5px)",
+            background: "rgba(0,0,0,0.05)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+            borderRadius: 9999,
+            padding: "5px 12px",
+            fontSize: 11,
+            fontWeight: 600,
+            color: "#1A1A1A",
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+          }}
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="#1A1A1A" style={{ display: "inline", marginRight: 4, flexShrink: 0 }}>
+            <path d="M2 12L22 2L12 22L10 14L2 12Z"/>
+          </svg>
+          {location}
+        </div>
+      )}
+
+      {status === "ready" && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 12,
+            right: 12,
+            zIndex: 10,
+            background: "#fff",
+            borderRadius: 12,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+            padding: "8px 10px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+            minWidth: 72,
+          }}
+        >
+          <span style={{ fontSize: 13, fontWeight: 700, color: "#1A1A1A", lineHeight: 1.2 }}>
+            {osrmDistanceM != null ? formatDistance(osrmDistanceM) : totalDistanceM != null ? formatDistance(totalDistanceM) : "—"}
+          </span>
+          <span style={{ fontSize: 10, color: "#959595", lineHeight: 1.3, textAlign: "center", whiteSpace: "nowrap" }}>
+            {(transport ? (TRANSPORT_LABEL[transport] ?? transport) : "이동")} 이동 기준
+          </span>
+        </div>
+      )}
     </div>
   );
 }

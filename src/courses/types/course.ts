@@ -34,6 +34,7 @@ export interface Course {
   imageUrl?: string;
   places?: Place[];
   transport?: string;
+  totalDistanceM?: number;
 }
 
 export interface SuggestedCoursesData {
