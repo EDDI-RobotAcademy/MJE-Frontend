@@ -89,6 +89,8 @@ function mapPlace(place: BackendPlaceItem, courseId: string): Place {
     description: place.mainDescription,
     location: place.area,
     address: place.address ?? place.area,
+    latitude: place.latitude,
+    longitude: place.longitude,
     time: place.recommendedTimeSlot,
     startTime,
     endTime,
