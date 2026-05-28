@@ -18,6 +18,8 @@ function mapRecommendationItemToCourse(item: RecommendationCourseItem): Course {
     description: "",
     location: (p.road_address || p.address).split(" ").slice(0, 2).join(" "),
     address: p.road_address || p.address,
+    latitude: p.latitude,
+    longitude: p.longitude,
     time: `${p.start_time} ~ ${p.end_time}`,
     startTime: p.start_time,
     endTime: p.end_time,

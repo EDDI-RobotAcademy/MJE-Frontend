@@ -5,6 +5,8 @@ export interface BackendPlaceItem {
   name: string;
   area: string;
   address?: string;
+  latitude?: number;
+  longitude?: number;
   category: string;
   imageUrl?: string;
   mainDescription: string;
