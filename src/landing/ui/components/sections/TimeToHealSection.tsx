@@ -329,8 +329,7 @@ function StepGuideContents() {
 
       {/* Heading */}
       <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-['Prompt:Medium','Noto_Sans_KR:Medium',sans-serif] leading-[0] left-[calc(50%-1.08px)] text-[#2d2e30] text-[40px] text-center top-[2747.61px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 500" }}
+        className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[0] left-[calc(50%-1.08px)] text-[#2d2e30] text-[40px] text-center top-[2747.61px] whitespace-nowrap"
       >
         <span className="leading-[55px]">{`복잡한 서치는 끝, `}</span>
         <span className="leading-[55px] text-[#2a4874]">터치 3번</span>
@@ -347,9 +346,9 @@ function StepGuideContents() {
       </div>
 
       {/* Card titles */}
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard:Medium',sans-serif] leading-[25px] left-[392.39px] not-italic text-[#2a4874] text-[20px] text-center top-[2931.73px] whitespace-nowrap">장소입력</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard:Medium',sans-serif] leading-[25px] left-[calc(50%-0.58px)] not-italic text-[#2a4874] text-[20px] text-center top-[2937.73px] whitespace-nowrap">시간대 선택</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard:Medium',sans-serif] leading-[25px] left-[1046.94px] not-italic text-[#2a4874] text-[20px] text-center top-[2937.73px] whitespace-nowrap">이동방식 선택</p>
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[25px] left-[392.39px] not-italic text-[#2a4874] text-[20px] text-center top-[2931.73px] whitespace-nowrap">장소입력</p>
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[25px] left-[calc(50%-0.58px)] not-italic text-[#2a4874] text-[20px] text-center top-[2937.73px] whitespace-nowrap">시간대 선택</p>
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[25px] left-[1046.94px] not-italic text-[#2a4874] text-[20px] text-center top-[2937.73px] whitespace-nowrap">이동방식 선택</p>
 
       {/* Card descriptions */}
       <p
