@@ -15,23 +15,23 @@ function PainCard({ number, title, subtitle, cardTop, titleTop, subtitleTop, num
     <>
       <div
         className="absolute bg-white border-[#d9d9d9] border-[1.5px] border-solid h-[112.378px] left-[721.96px] rounded-[56.189px] w-[470.688px]"
-        style={{ top: cardTop }}
+        style={{ top: cardTop, boxShadow: "0px 3px 15.6px 0px rgba(84,84,84,0.08)" }}
       />
       <p
-        className="[word-break:break-word] absolute font-['Prompt:Medium',sans-serif] leading-[51px] left-[751.46px] not-italic text-[#8aafe6] text-[40px] whitespace-nowrap"
+        className="[word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[51px] left-[751.46px] not-italic text-[#8aafe6] text-[40px] whitespace-nowrap"
         style={{ top: numberTop }}
       >
         {number}
       </p>
       <p
-        className="[word-break:break-word] absolute font-['Prompt:Medium','Noto_Sans_KR:Medium',sans-serif] leading-[51px] left-[820.19px] text-[#2a4874] text-[22px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 500", top: titleTop }}
+        className="[word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[51px] left-[820.19px] text-[#2a4874] text-[22px] whitespace-nowrap"
+        style={{ top: titleTop }}
       >
         {title}
       </p>
       <p
-        className="[word-break:break-word] absolute font-['Prompt:Medium','Noto_Sans_KR:Medium',sans-serif] leading-[51px] left-[820.19px] text-[#7d7d7d] text-[16px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 500", top: subtitleTop }}
+        className="[word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[51px] left-[820.19px] text-[#7d7d7d] text-[16px] whitespace-nowrap"
+        style={{ top: subtitleTop }}
       >
         {subtitle}
       </p>
@@ -45,20 +45,16 @@ function StressQuote() {
       className="-translate-x-1/2 absolute font-['Prompt:Regular','Noto_Sans_KR:Regular',sans-serif] leading-[32.064px] left-1/2 text-[#2d2e30] text-[21.862px] text-center top-[1603.96px] whitespace-nowrap"
       style={{ fontVariationSettings: "'wght' 400" }}
     >
-      <span>{"“ 아직도 데이트코스 계획 때문에 "}</span>
+      <span>아직도 데이트코스 계획 때문에 </span>
       <span
-        className="relative inline-block align-middle bg-[#333] rounded-[5px]"
-        style={{ width: 79.617, height: 21.379 }}
+        className={"relative inline-block bg-[#333] rounded-[3px]"}
+        style={{ width: 97, height: 26, verticalAlign: "-3px" }}
       >
-        <span
-          aria-hidden="true"
-          className="absolute border border-[#333] border-solid inset-[-0.5px] pointer-events-none rounded-[5.5px]"
-        />
-        <span className="absolute inset-0 flex items-center justify-center text-white text-[18px] leading-none">
+        <span className={"absolute inset-0 flex items-center justify-center text-white text-[21.862px] leading-none pb-[2px]"}>
           스트레스
         </span>
       </span>
-      <span>{" 받고 계신가요? “"}</span>
+      <span> 받고 계신가요?</span>
     </div>
   );
 }
@@ -71,8 +67,7 @@ export default function PainPointSection() {
 
       {/* Heading */}
       <div
-        className="[word-break:break-word] absolute font-['Prompt:Medium','Noto_Sans_KR:Medium',sans-serif] leading-[0] left-[130px] text-[#2d2e30] text-[40px] top-[930.95px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 500" }}
+        className="[word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[0] left-[130px] text-[#2d2e30] text-[40px] top-[930.95px] whitespace-nowrap"
       >
         <p className="leading-[51px] mb-0">혹시...</p>
         <p className="leading-[51px] mb-0">이런 대화,</p>
