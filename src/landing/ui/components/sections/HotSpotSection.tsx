@@ -479,7 +479,8 @@ function PinkStarsLabel() {
 
 function YellowStarBadge() {
   return (
-    <div className="absolute contents left-[1110.96px] top-[2403.44px]">
+    <>
+      {/* Star background (15° rotated) */}
       <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px]">
         <div className="flex-none rotate-15">
           <div className="relative size-[183.591px]">
@@ -494,44 +495,28 @@ function YellowStarBadge() {
           </div>
         </div>
       </div>
-      <div className="absolute flex h-[34.178px] items-center justify-center left-[1177.03px] top-[2485.39px] w-[95.317px]">
-        <div className="flex-none rotate-[4.74deg]">
-          <p className="[word-break:break-word] font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] h-[26.546px] italic leading-[normal] relative text-[15.79px] text-black tracking-[0.6316px] w-[93.443px]" style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}>
+
+      {/* Text + underlines (4.74° rotated) — flex column with explicit gaps to avoid font-metric drift */}
+      <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px] pointer-events-none">
+        <div className="flex-none rotate-[4.74deg] flex flex-col items-center gap-[5px]">
+          <div className="h-px w-[60.547px] bg-black" />
+          <p
+            className="font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] italic text-[15.79px] text-black tracking-[0.6316px] leading-none whitespace-nowrap"
+            style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}
+          >
             don&rsquo;t worry
           </p>
-        </div>
-      </div>
-      <div className="absolute flex h-[34.266px] items-center justify-center left-[1174.07px] top-[2511.39px] w-[96.375px]">
-        <div className="flex-none rotate-[4.74deg]">
-          <p className="[word-break:break-word] font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] h-[26.546px] italic leading-[0] relative text-[0px] text-black w-[94.504px]" style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}>
-            <span className="leading-[normal] text-[7.545px]">with</span>
-            <span className="leading-[normal] text-[15.79px]">{` Dehangsa`}</span>
+          <p
+            className="font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] italic text-black leading-none whitespace-nowrap inline-flex items-baseline gap-[2px]"
+            style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}
+          >
+            <span className="text-[7.545px]">with</span>
+            <span className="text-[15.79px]">Dehangsa</span>
           </p>
+          <div className="h-px w-[60.547px] bg-black" />
         </div>
       </div>
-      <div className="absolute flex h-[5.021px] items-center justify-center left-[1195.55px] top-[2483.2px] w-[60.547px]">
-        <div className="flex-none rotate-[4.74deg]">
-          <div className="h-0 relative w-[60.755px]">
-            <div className="absolute inset-[-0.25px_0_0_0]">
-              <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 60.7548 0.253214">
-                <line stroke="black" strokeWidth="0.253214" x2="60.7548" y1="0.126607" y2="0.126607" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute flex h-[5.021px] items-center justify-center left-[1190.44px] top-[2544.77px] w-[60.547px]">
-        <div className="flex-none rotate-[4.74deg]">
-          <div className="h-0 relative w-[60.755px]">
-            <div className="absolute inset-[-0.25px_0_0_0]">
-              <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 60.7548 0.253214">
-                <line stroke="black" strokeWidth="0.253214" x2="60.7548" y1="0.126607" y2="0.126607" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -596,7 +581,6 @@ export default function HotSpotSection() {
       </div>
 
       <HotSpotLabel />
-      <PinkStarsLabel />
 
       <CourseCardYeonnam />
       <CourseCardSeochon />
@@ -605,6 +589,9 @@ export default function HotSpotSection() {
 
       <DateCircleCta />
       <YellowStarBadge />
+
+      {/* 카드 위에 떠 있어야 하는 라벨은 마지막에 렌더 */}
+      <PinkStarsLabel />
     </>
   );
 }
