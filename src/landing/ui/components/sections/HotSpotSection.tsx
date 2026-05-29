@@ -37,15 +37,18 @@ function HotSpotLabel() {
 /* Card 1 — Green / 연남동 (rotate -11.58°) */
 function CourseCardYeonnam() {
   return (
-    <div className="absolute contents h-[480.292px] left-[976.88px] top-[1963.21px] w-[395.677px]">
-      {/* card base */}
-      <div className="absolute flex h-[480.292px] items-center justify-center left-[976.88px] top-[1963.21px] w-[395.677px]">
+    <div
+      className="absolute transition-transform duration-300 ease-out hover:-translate-y-[6px]"
+      style={{ left: 976.88, top: 1963.21, width: 395.677, height: 480.292 }}
+    >
+{/* card base */}
+      <div className="absolute flex h-[480.292px] items-center justify-center left-[0px] top-[0px] w-[395.677px]">
         <div className="flex-none rotate-[-11.58deg]">
           <div className="bg-[#cae594] border border-[#9bab79] border-solid h-[425.372px] relative rounded-[30px] shadow-[0px_4px_18.1px_0px_rgba(0,0,0,0.11)] w-[316.742px]" />
         </div>
       </div>
       {/* map image */}
-      <div className="absolute flex h-[186.164px] items-center justify-center left-[990.35px] top-[1976.67px] w-[313.998px]">
+      <div className="absolute flex h-[186.164px] items-center justify-center left-[13.47px] top-[13.46px] w-[313.998px]">
         <div className="flex-none rotate-[-11.58deg]">
           <div className="h-[129.809px] overflow-hidden relative rounded-[24px] w-[293.925px]">
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgKakaoMap2} />
@@ -53,24 +56,24 @@ function CourseCardYeonnam() {
         </div>
       </div>
       {/* map border */}
-      <div className="absolute flex h-[186.164px] items-center justify-center left-[990.35px] top-[1976.67px] w-[313.998px]">
+      <div className="absolute flex h-[186.164px] items-center justify-center left-[13.47px] top-[13.46px] w-[313.998px]">
         <div className="flex-none rotate-[-11.58deg]">
           <div className="border border-[#9bab79] border-solid h-[129.809px] relative rounded-[24px] w-[293.925px]" />
         </div>
       </div>
       {/* location pill */}
-      <div className="absolute flex h-[46.239px] items-center justify-center left-[1024.66px] top-[2154.66px] w-[86.301px]">
+      <div className="absolute flex h-[46.239px] items-center justify-center left-[47.78px] top-[191.45px] w-[86.301px]">
         <div className="flex-none rotate-[-11.58deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[24.482px] items-center justify-center left-[1067.81px] top-[2165.54px] w-[41.619px]">
+      <div className="-translate-x-1/2 absolute flex h-[24.482px] items-center justify-center left-[90.93px] top-[202.33px] w-[41.619px]">
         <div className="flex-none rotate-[-11.58deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">연남동</p>
         </div>
       </div>
       {/* title */}
-      <div className="absolute flex h-[98.264px] items-center justify-center left-[1038.89px] top-[2159.23px] w-[232.239px]">
+      <div className="absolute flex h-[98.264px] items-center justify-center left-[62.01px] top-[196.02px] w-[232.239px]">
         <div className="flex-none rotate-[-11.58deg]">
           <div className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[0] not-italic relative text-[#2d2e30] text-[22px] whitespace-nowrap">
             <p className="leading-[normal] mb-0 whitespace-pre">{`힙스터들의 숨은 아지트, `}</p>
@@ -79,12 +82,12 @@ function CourseCardYeonnam() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex items-center gap-[10px] left-[1054px] top-[2270px]" style={{ transform: "rotate(-11.58deg)", transformOrigin: "left center" }}>
+      <div className="absolute flex items-center gap-[10px] left-[77.12px] top-[306.79px]" style={{ transform: "rotate(-11.58deg)", transformOrigin: "left center" }}>
         <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
         <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
       </div>
       {/* dotted line */}
-      <div className="absolute flex h-[49.062px] items-center justify-center left-[1089.73px] top-[2327.95px] w-[10.052px]">
+      <div className="absolute flex h-[49.062px] items-center justify-center left-[112.85px] top-[364.74px] w-[10.052px]">
         <div className="flex-none rotate-[78.42deg]">
           <div className="h-0 relative w-[50.081px]">
             <div className="absolute inset-[-1px_0_0_0]">
@@ -94,25 +97,25 @@ function CourseCardYeonnam() {
         </div>
       </div>
       {/* spot names */}
-      <div className="absolute flex h-[23.254px] items-center justify-center left-[1169.48px] top-[2282.07px] w-[31.043px]">
+      <div className="absolute flex h-[23.254px] items-center justify-center left-[192.6px] top-[318.86px] w-[31.043px]">
         <div className="flex-none rotate-[-11.58deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">소점</p>
         </div>
       </div>
-      <div className="absolute flex h-[28.874px] items-center justify-center left-[1177.53px] top-[2315.75px] w-[58.473px]">
+      <div className="absolute flex h-[28.874px] items-center justify-center left-[200.65px] top-[352.54px] w-[58.473px]">
         <div className="flex-none rotate-[-11.58deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">사운즈굿</p>
         </div>
       </div>
-      <div className="absolute flex h-[34.294px] items-center justify-center left-[1185.48px] top-[2349.13px] w-[84.924px]">
+      <div className="absolute flex h-[34.294px] items-center justify-center left-[208.6px] top-[385.92px] w-[84.924px]">
         <div className="flex-none rotate-[-11.58deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">턴다운서비스</p>
         </div>
       </div>
       {/* tag pills: 식사, 쇼핑, 카페 */}
-      <CardTagPill leftBox={1052.07} topBox={2291.94} leftText={1086.84} topText={2303.56} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="식사" />
-      <CardTagPill leftBox={1060.12} topBox={2331.24} leftText={1094.89} topText={2342.86} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="쇼핑" />
-      <CardTagPill leftBox={1068.18} topBox={2370.53} leftText={1102.8} topText={2381.68} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="카페" />
+      <CardTagPill leftBox={75.19} topBox={328.73} leftText={109.96} topText={340.35} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="식사" />
+      <CardTagPill leftBox={83.24} topBox={368.03} leftText={118.01} topText={379.65} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="쇼핑" />
+      <CardTagPill leftBox={91.30} topBox={407.32} leftText={125.92} topText={418.47} rotate="-11.58deg" boxW={69.327} boxH={42.762} label="카페" />
     </div>
   );
 }
@@ -148,15 +151,18 @@ function CardTagPill({ leftBox, topBox, leftText, topText, rotate, boxW, boxH, l
 /* Card 2 — Beige / 서촌 (rotate 5.73°) */
 function CourseCardSeochon() {
   return (
-    <div className="absolute contents h-[454.849px] left-[675.53px] top-[2046.5px] w-[357.599px]">
-      {/* card base */}
-      <div className="absolute flex h-[454.849px] items-center justify-center left-[675.53px] top-[2046.5px] w-[357.599px]">
+    <div
+      className="absolute transition-transform duration-300 ease-out hover:-translate-y-[6px]"
+      style={{ left: 675.53, top: 2046.5, width: 357.599, height: 454.849 }}
+    >
+{/* card base */}
+      <div className="absolute flex h-[454.849px] items-center justify-center left-[0px] top-[0px] w-[357.599px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="bg-[#ffe9ca] border border-[#e2c69e] border-solid h-[425.372px] relative rounded-[30px] shadow-[0px_4px_18.1px_0px_rgba(0,0,0,0.11)] w-[316.742px]" />
         </div>
       </div>
       {/* map */}
-      <div className="absolute flex h-[158.484px] items-center justify-center left-[715.22px] top-[2058.99px] w-[305.409px]">
+      <div className="absolute flex h-[158.484px] items-center justify-center left-[39.69px] top-[12.49px] w-[305.409px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="h-[129.809px] overflow-hidden relative rounded-[24px] w-[293.925px]">
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgKakaoMap3} />
@@ -164,34 +170,34 @@ function CourseCardSeochon() {
         </div>
       </div>
       {/* map border */}
-      <div className="absolute flex h-[158.484px] items-center justify-center left-[715.22px] top-[2058.99px] w-[305.409px]">
+      <div className="absolute flex h-[158.484px] items-center justify-center left-[39.69px] top-[12.49px] w-[305.409px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="border border-[#e2c69e] border-solid h-[129.809px] relative rounded-[24px] w-[293.925px]" />
         </div>
       </div>
       {/* location pills 종로구 + 서촌 */}
-      <div className="absolute flex h-[38.443px] items-center justify-center left-[717.62px] top-[2198.49px] w-[84.487px]">
+      <div className="absolute flex h-[38.443px] items-center justify-center left-[42.09px] top-[151.99px] w-[84.487px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="absolute flex h-[38.443px] items-center justify-center left-[810.28px] top-[2207.78px] w-[84.487px]">
+      <div className="absolute flex h-[38.443px] items-center justify-center left-[134.75px] top-[161.28px] w-[84.487px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[20.806px] items-center justify-center left-[759.86px] top-[2207.31px] w-[40.501px]">
+      <div className="-translate-x-1/2 absolute flex h-[20.806px] items-center justify-center left-[84.33px] top-[160.81px] w-[40.501px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">종로구</p>
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[19.509px] items-center justify-center left-[852.02px] top-[2217.2px] w-[27.566px]">
+      <div className="-translate-x-1/2 absolute flex h-[19.509px] items-center justify-center left-[176.49px] top-[170.7px] w-[27.566px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">서촌</p>
         </div>
       </div>
       {/* title */}
-      <div className="absolute flex h-[74.88px] items-center justify-center left-[718.88px] top-[2234.71px] w-[216.33px]">
+      <div className="absolute flex h-[74.88px] items-center justify-center left-[43.35px] top-[188.21px] w-[216.33px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[0] not-italic relative text-[#2d2e30] text-[22px] whitespace-nowrap">
             <p className="leading-[normal] mb-0 whitespace-pre">{`이국적인 감성 한 스푼, `}</p>
@@ -200,12 +206,12 @@ function CourseCardSeochon() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex items-center gap-[10px] left-[719px] top-[2302.5px]" style={{ transform: "rotate(5.73deg)", transformOrigin: "left center" }}>
+      <div className="absolute flex items-center gap-[10px] left-[43.47px] top-[256px]" style={{ transform: "rotate(5.73deg)", transformOrigin: "left center" }}>
         <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
         <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
       </div>
       {/* dotted line */}
-      <div className="absolute flex h-[49.831px] items-center justify-center left-[731.13px] top-[2367.6px] w-[4.996px]">
+      <div className="absolute flex h-[49.831px] items-center justify-center left-[55.6px] top-[321.1px] w-[4.996px]">
         <div className="flex-none rotate-[95.73deg]">
           <div className="h-0 relative w-[50.081px]">
             <div className="absolute inset-[-1px_0_0_0]">
@@ -215,30 +221,30 @@ function CourseCardSeochon() {
         </div>
       </div>
       {/* spot names */}
-      <div className="absolute flex h-[23.497px] items-center justify-center left-[822.44px] top-[2352.89px] w-[57.516px]">
+      <div className="absolute flex h-[23.497px] items-center justify-center left-[146.91px] top-[306.39px] w-[57.516px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">칸다소바</p>
         </div>
       </div>
-      <div className="absolute flex h-[27.986px] items-center justify-center left-[818.44px] top-[2392.8px] w-[102.292px]">
+      <div className="absolute flex h-[27.986px] items-center justify-center left-[142.91px] top-[346.3px] w-[102.292px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">포뮬라 아뜰리에</p>
         </div>
       </div>
-      <div className="absolute flex h-[19.307px] items-center justify-center left-[814.48px] top-[2432.21px] w-[15.726px]">
+      <div className="absolute flex h-[19.307px] items-center justify-center left-[138.95px] top-[385.71px] w-[15.726px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">참</p>
         </div>
       </div>
       {/* tag pills */}
-      <CardTagPill leftBox={703.99} topBox={2334.39} leftText={737.57} topText={2344.08} rotate="5.73deg" boxW={67.247} boxH={36.714} label="식사" />
-      <CardTagPill leftBox={699.99} topBox={2374.3} leftText={733.56} topText={2384} rotate="5.73deg" boxW={67.247} boxH={36.714} label="카페" />
-      <div className="absolute flex h-[36.714px] items-center justify-center left-[695.99px] top-[2414.21px] w-[67.247px]">
+      <CardTagPill leftBox={28.46} topBox={287.89} leftText={62.04} topText={297.58} rotate="5.73deg" boxW={67.247} boxH={36.714} label="식사" />
+      <CardTagPill leftBox={24.46} topBox={327.80} leftText={58.03} topText={337.50} rotate="5.73deg" boxW={67.247} boxH={36.714} label="카페" />
+      <div className="absolute flex h-[36.714px] items-center justify-center left-[20.46px] top-[367.71px] w-[67.247px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[64.533px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[20.709px] items-center justify-center left-[729.57px] top-[2422.21px] w-[49.357px]">
+      <div className="-translate-x-1/2 absolute flex h-[20.709px] items-center justify-center left-[54.04px] top-[375.71px] w-[49.357px]">
         <div className="flex-none rotate-[5.73deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[13px] text-center whitespace-nowrap">칵테일바</p>
         </div>
@@ -250,47 +256,50 @@ function CourseCardSeochon() {
 /* Card 3 — Light blue / 해방촌 (rotate -1.99°) */
 function CourseCardHaebangchon() {
   return (
-    <div className="absolute contents h-[436.112px] left-[377.21px] top-[1978.5px] w-[331.318px]">
-      <div className="absolute flex h-[436.112px] items-center justify-center left-[377.21px] top-[1978.5px] w-[331.318px]">
+    <div
+      className="absolute transition-transform duration-300 ease-out hover:-translate-y-[6px]"
+      style={{ left: 377.21, top: 1978.5, width: 331.318, height: 436.112 }}
+    >
+<div className="absolute flex h-[436.112px] items-center justify-center left-[0px] top-[0px] w-[331.318px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="bg-[#dbecfe] border border-[#9db9d6] border-solid h-[425.372px] relative rounded-[30px] shadow-[0px_4px_18.1px_0px_rgba(0,0,0,0.11)] w-[316.742px]" />
         </div>
       </div>
-      <div className="absolute flex h-[139.934px] items-center justify-center left-[389.01px] top-[1990.29px] w-[298.254px]">
+      <div className="absolute flex h-[139.934px] items-center justify-center left-[11.8px] top-[11.79px] w-[298.254px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="h-[129.809px] overflow-hidden relative rounded-[24px] w-[293.925px]">
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgKakaoMap4} />
           </div>
         </div>
       </div>
-      <div className="absolute flex h-[139.934px] items-center justify-center left-[389.01px] top-[1990.29px] w-[298.254px]">
+      <div className="absolute flex h-[139.934px] items-center justify-center left-[11.8px] top-[11.79px] w-[298.254px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="border border-[#acc5e0] border-solid h-[129.809px] relative rounded-[24px] w-[293.925px]" />
         </div>
       </div>
       {/* location pills */}
-      <div className="absolute flex h-[33.251px] items-center justify-center left-[400.28px] top-[2136.9px] w-[82.866px]">
+      <div className="absolute flex h-[33.251px] items-center justify-center left-[23.07px] top-[158.4px] w-[82.866px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="absolute flex h-[33.251px] items-center justify-center left-[493.35px] top-[2133.67px] w-[82.866px]">
+      <div className="absolute flex h-[33.251px] items-center justify-center left-[116.14px] top-[155.17px] w-[82.866px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[18.344px] items-center justify-center left-[441.71px] top-[2144.36px] w-[39.567px]">
+      <div className="-translate-x-1/2 absolute flex h-[18.344px] items-center justify-center left-[64.5px] top-[165.86px] w-[39.567px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">용산구</p>
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[18.344px] items-center justify-center left-[534.78px] top-[2141.12px] w-[39.567px]">
+      <div className="-translate-x-1/2 absolute flex h-[18.344px] items-center justify-center left-[157.57px] top-[162.62px] w-[39.567px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">해방촌</p>
         </div>
       </div>
       {/* title */}
-      <div className="absolute flex h-[61.327px] items-center justify-center left-[408.73px] top-[2167.79px] w-[213.747px]">
+      <div className="absolute flex h-[61.327px] items-center justify-center left-[31.52px] top-[189.29px] w-[213.747px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[0] not-italic relative text-[#2d2e30] text-[22px] whitespace-nowrap">
             <p className="leading-[normal] mb-0 whitespace-pre">{`이국적인 감성 한 스푼, `}</p>
@@ -299,12 +308,12 @@ function CourseCardHaebangchon() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex items-center gap-[10px] left-[414px] top-[2244px]" style={{ transform: "rotate(-1.99deg)", transformOrigin: "left center" }}>
+      <div className="absolute flex items-center gap-[10px] left-[36.79px] top-[265.5px]" style={{ transform: "rotate(-1.99deg)", transformOrigin: "left center" }}>
         <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
         <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
       </div>
       {/* dotted line */}
-      <div className="absolute flex h-[50.051px] items-center justify-center left-[438.31px] top-[2305.25px] w-[1.739px]">
+      <div className="absolute flex h-[50.051px] items-center justify-center left-[61.1px] top-[326.75px] w-[1.739px]">
         <div className="flex-none rotate-[88.01deg]">
           <div className="h-0 relative w-[50.081px]">
             <div className="absolute inset-[-1px_0_0_0]">
@@ -314,30 +323,30 @@ function CourseCardHaebangchon() {
         </div>
       </div>
       {/* spot names */}
-      <div className="absolute flex h-[18.961px] items-center justify-center left-[523.65px] top-[2277.87px] w-[28.608px]">
+      <div className="absolute flex h-[18.961px] items-center justify-center left-[146.44px] top-[299.37px] w-[28.608px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">애일</p>
         </div>
       </div>
-      <div className="absolute flex h-[20.871px] items-center justify-center left-[525.04px] top-[2316.05px] w-[83.575px]">
+      <div className="absolute flex h-[20.871px] items-center justify-center left-[147.83px] top-[337.55px] w-[83.575px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">소프커피앤바</p>
         </div>
       </div>
-      <div className="absolute flex h-[19.447px] items-center justify-center left-[526.42px] top-[2357.06px] w-[42.6px]">
+      <div className="absolute flex h-[19.447px] items-center justify-center left-[149.21px] top-[378.56px] w-[42.6px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">길바닥</p>
         </div>
       </div>
       {/* tag pills */}
-      <CardTagPill leftBox={405.02} topBox={2274} leftText={437.81} topText={2279.41} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="식사" />
-      <CardTagPill leftBox={406.41} topBox={2314.09} leftText={439.21} topText={2319.5} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="카페" />
-      <div className="absolute flex h-[32.65px] items-center justify-center left-[407.81px] top-[2354.18px] w-[65.551px]">
+      <CardTagPill leftBox={27.81} topBox={295.50} leftText={60.60} topText={300.91} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="식사" />
+      <CardTagPill leftBox={29.20} topBox={335.59} leftText={62.00} topText={341.00} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="카페" />
+      <div className="absolute flex h-[32.65px] items-center justify-center left-[30.6px] top-[375.68px] w-[65.551px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[64.533px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[17.657px] items-center justify-center left-[440.54px] top-[2358.68px] w-[48.527px]">
+      <div className="-translate-x-1/2 absolute flex h-[17.657px] items-center justify-center left-[63.33px] top-[380.18px] w-[48.527px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[13px] text-center whitespace-nowrap">칵테일바</p>
         </div>
@@ -349,37 +358,40 @@ function CourseCardHaebangchon() {
 /* Card 4 — Pink / 성수 (rotate 9.11°) */
 function CourseCardSeongsu() {
   return (
-    <div className="absolute contents h-[470.154px] left-[36.18px] top-[2057.42px] w-[380.093px]">
-      <div className="absolute flex h-[470.154px] items-center justify-center left-[36.18px] top-[2057.42px] w-[380.093px]">
+    <div
+      className="absolute transition-transform duration-300 ease-out hover:-translate-y-[6px]"
+      style={{ left: 36.18, top: 2057.42, width: 380.093, height: 470.154 }}
+    >
+<div className="absolute flex h-[470.154px] items-center justify-center left-[0px] top-[0px] w-[380.093px]">
         <div className="flex-none rotate-[9.11deg]">
           <div className="bg-[#f9ddf6] border border-[#d5a6d0] border-solid h-[425.372px] relative rounded-[30px] shadow-[0px_4px_18.1px_0px_rgba(0,0,0,0.11)] w-[316.742px]" />
         </div>
       </div>
-      <div className="absolute flex h-[174.706px] items-center justify-center left-[92.44px] top-[2070.49px] w-[310.769px]">
+      <div className="absolute flex h-[174.706px] items-center justify-center left-[56.26px] top-[13.07px] w-[310.769px]">
         <div className="flex-none rotate-[9.11deg]">
           <div className="h-[129.809px] overflow-hidden relative rounded-[24px] w-[293.925px]">
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgKakaoMap5} />
           </div>
         </div>
       </div>
-      <div className="absolute flex h-[174.706px] items-center justify-center left-[92.44px] top-[2070.49px] w-[310.769px]">
+      <div className="absolute flex h-[174.706px] items-center justify-center left-[56.26px] top-[13.07px] w-[310.769px]">
         <div className="flex-none rotate-[9.11deg]">
           <div className="border border-[#d5a6cf] border-solid h-[129.809px] relative rounded-[24px] w-[293.925px]" />
         </div>
       </div>
       {/* location pill */}
-      <div className="absolute flex h-[43.004px] items-center justify-center left-[92.43px] top-[2209.3px] w-[85.644px]">
+      <div className="absolute flex h-[43.004px] items-center justify-center left-[56.25px] top-[151.88px] w-[85.644px]">
         <div className="flex-none rotate-[9.11deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[81.859px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[22.96px] items-center justify-center left-[135.25px] top-[2219.32px] w-[41.2px]">
+      <div className="-translate-x-1/2 absolute flex h-[22.96px] items-center justify-center left-[99.07px] top-[161.9px] w-[41.2px]">
         <div className="flex-none rotate-[9.11deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[14px] text-center whitespace-nowrap">성수동</p>
         </div>
       </div>
       {/* title */}
-      <div className="absolute flex h-[93.216px] items-center justify-center left-[90.17px] top-[2245.67px] w-[257.371px]">
+      <div className="absolute flex h-[93.216px] items-center justify-center left-[53.99px] top-[188.25px] w-[257.371px]">
         <div className="flex-none rotate-[9.11deg]">
           <div className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[0] not-italic relative text-[#2d2e30] text-[22px] whitespace-nowrap">
             <p className="leading-[normal] mb-0 whitespace-pre">{`피자 장인과 스페셜티 커피, `}</p>
@@ -388,12 +400,12 @@ function CourseCardSeongsu() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex items-center gap-[10px] left-[89px] top-[2312.5px]" style={{ transform: "rotate(9.11deg)", transformOrigin: "left center" }}>
+      <div className="absolute flex items-center gap-[10px] left-[52.82px] top-[255.08px]" style={{ transform: "rotate(9.11deg)", transformOrigin: "left center" }}>
         <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
         <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
       </div>
       {/* dotted line */}
-      <div className="absolute flex h-[49.449px] items-center justify-center left-[94.78px] top-[2379.03px] w-[7.929px]">
+      <div className="absolute flex h-[49.449px] items-center justify-center left-[58.6px] top-[321.61px] w-[7.929px]">
         <div className="flex-none rotate-[99.11deg]">
           <div className="h-0 relative w-[50.081px]">
             <div className="absolute inset-[-1px_0_0_0]">
@@ -403,25 +415,25 @@ function CourseCardSeongsu() {
         </div>
       </div>
       {/* spot names */}
-      <div className="absolute flex h-[26.639px] items-center justify-center left-[162.02px] top-[2365.27px] w-[58.143px]">
+      <div className="absolute flex h-[26.639px] items-center justify-center left-[125.84px] top-[307.85px] w-[58.143px]">
         <div className="flex-none rotate-[9.11deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">마리오네</p>
         </div>
       </div>
-      <div className="absolute flex h-[24.422px] items-center justify-center left-[155.67px] top-[2404.87px] w-[44.32px]">
+      <div className="absolute flex h-[24.422px] items-center justify-center left-[119.49px] top-[347.45px] w-[44.32px]">
         <div className="flex-none rotate-[9.11deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">로우키</p>
         </div>
       </div>
-      <div className="absolute flex h-[26.639px] items-center justify-center left-[149.4px] top-[2443.99px] w-[58.143px]">
+      <div className="absolute flex h-[26.639px] items-center justify-center left-[113.22px] top-[386.57px] w-[58.143px]">
         <div className="flex-none rotate-[9.11deg]">
           <p className="[word-break:break-word] font-['Inter:Medium','Noto_Sans_KR:Medium',sans-serif] font-medium leading-[normal] not-italic relative text-[#2d2e30] text-[15px] whitespace-nowrap">성수연방</p>
         </div>
       </div>
       {/* tag pills */}
-      <CardTagPill leftBox={70.76} topBox={2344.15} leftText={104.95} topText={2354.97} rotate="9.11deg" boxW={68.537} boxH={40.261} label="식사" />
-      <CardTagPill leftBox={64.45} topBox={2383.76} leftText={98.64} topText={2394.59} rotate="9.11deg" boxW={68.537} boxH={40.261} label="카페" />
-      <CardTagPill leftBox={58.1} topBox={2423.37} leftText={92.33} topText={2433.69} rotate="9.11deg" boxW={68.537} boxH={40.261} label="팝업" />
+      <CardTagPill leftBox={34.58} topBox={286.73} leftText={68.77} topText={297.55} rotate="9.11deg" boxW={68.537} boxH={40.261} label="식사" />
+      <CardTagPill leftBox={28.27} topBox={326.34} leftText={62.46} topText={337.17} rotate="9.11deg" boxW={68.537} boxH={40.261} label="카페" />
+      <CardTagPill leftBox={21.92} topBox={365.95} leftText={56.15} topText={376.27} rotate="9.11deg" boxW={68.537} boxH={40.261} label="팝업" />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+import { useEffect, useRef } from 'react';
 import { imgCtaBottomPhoto } from "@/landing/ui/components/assets/images";
 import BottomCtaButton from "@/landing/ui/components/sections/BottomCtaButton";
 
@@ -79,8 +81,32 @@ function HotSpotsTag() {
 }
 
 function BottomImageBackdrop() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+
+    // 이미지 div 자체를 관찰 — 이미지가 20% 보이면 트리거
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        el.style.transition = 'opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        observer.disconnect();
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="absolute left-[20.52px] top-[3797.78px] w-[1388.96px]">
+    <div ref={ref} className="absolute left-[20.52px] top-[3797.78px] w-[1388.96px]">
       <img
         alt=""
         className="w-full rounded-[30px] pointer-events-none"
