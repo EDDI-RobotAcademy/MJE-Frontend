@@ -1,5 +1,6 @@
 import svgPaths from "@/landing/ui/components/assets/svgPaths";
-import { imgHeroOverlay, imgLogo1102 } from "@/landing/ui/components/assets/images";
+import { imgHeroOverlay } from "@/landing/ui/components/assets/images";
+import LandingNavbar from "@/landing/ui/components/sections/LandingNavbar";
 
 function DecorativeBlobs() {
   return (
@@ -29,27 +30,6 @@ function DecorativeBlobs() {
         </svg>
       </div>
     </div>
-  );
-}
-
-function Navbar() {
-  return (
-    <>
-      <div className="absolute bg-white border-[#d7d7d7] border-b-[1.5px] border-solid h-[73.622px] left-0 top-0 w-[1440px]" />
-      <div className="absolute h-0 left-[281.89px] top-[73.62px] w-[49.241px]">
-        <div className="absolute inset-[-2px_0_0_0]">
-          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 49.2406 2">
-            <line stroke="black" strokeWidth="2" x2="49.2406" y1="1" y2="1" />
-          </svg>
-        </div>
-      </div>
-      <div className="absolute bg-[#333] h-[41.802px] left-[1283.99px] rounded-[20.901px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] top-[15.91px] w-[106.012px]" />
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Prompt:Regular',sans-serif] leading-[22px] left-[1337.49px] not-italic text-[12px] text-center text-white top-[25.81px] whitespace-nowrap">Get Started</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Prompt:Regular',sans-serif] leading-[normal] left-[calc(50%-413.91px)] not-italic text-[17px] text-black text-center top-[26.81px] whitespace-nowrap">Home</p>
-      <div className="absolute h-[29.264px] left-[50px] top-[25.18px] w-[141.492px]">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLogo1102} />
-      </div>
-    </>
   );
 }
 
@@ -206,7 +186,7 @@ export default function HeroSection() {
       <div className="-translate-x-1/2 absolute h-[849.985px] left-1/2 top-0 w-[1501.959px]">
         <img alt="" className="absolute inset-0 max-w-none mix-blend-overlay object-cover pointer-events-none size-full" src={imgHeroOverlay} />
       </div>
-      <Navbar />
+      <LandingNavbar />
       {/* Light-blue highlight under sub-copy */}
       <div className="-translate-x-1/2 absolute bg-[#d5e6f6] h-[13.861px] left-[calc(50%-421.46px)] top-[254.12px] w-[337.083px]" />
       {/* Sub-copy under main heading */}

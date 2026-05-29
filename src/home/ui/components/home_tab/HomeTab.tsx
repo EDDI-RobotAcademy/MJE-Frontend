@@ -6,12 +6,12 @@ import { useHomeTabTracking } from "@/home/hooks/useHomeTabTracking";
 
 export default function HomeTab() {
   const pathname = usePathname();
-  const isActive = pathname === "/";
+  const isActive = pathname === "/home";
   const { handleHomeTabClick } = useHomeTabTracking();
 
   return (
     <Link
-      href="/"
+      href="/home"
       className={`pb-1 text-[17px] transition-colors ${
         isActive
           ? "text-black border-b-2 border-black"
