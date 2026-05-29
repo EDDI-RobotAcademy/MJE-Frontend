@@ -79,15 +79,9 @@ function CourseCardYeonnam() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex h-[23.727px] items-center justify-center left-[1073.72px] top-[2253.82px] w-[47.095px]">
-        <div className="flex-none rotate-[-11.58deg]">
-          <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[14.43px] items-center justify-center left-[1056px] top-[2257px] w-[14.43px]">
-        <div className="flex-none rotate-[-11.58deg] size-full relative">
-          <AvgPaceIcon />
-        </div>
+      <div className="absolute flex items-center gap-[10px] left-[1054px] top-[2270px]" style={{ transform: "rotate(-11.58deg)", transformOrigin: "left center" }}>
+        <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
+        <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
       </div>
       {/* dotted line */}
       <div className="absolute flex h-[49.062px] items-center justify-center left-[1089.73px] top-[2327.95px] w-[10.052px]">
@@ -206,15 +200,9 @@ function CourseCardSeochon() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex h-[19.415px] items-center justify-center left-[738.7px] top-[2300.69px] w-[46.272px]">
-        <div className="flex-none rotate-[5.73deg]">
-          <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[14.43px] items-center justify-center left-[721px] top-[2302px] w-[14.43px]">
-        <div className="flex-none rotate-[5.73deg] size-full relative">
-          <AvgPaceIcon />
-        </div>
+      <div className="absolute flex items-center gap-[10px] left-[719px] top-[2302.5px]" style={{ transform: "rotate(5.73deg)", transformOrigin: "left center" }}>
+        <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
+        <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
       </div>
       {/* dotted line */}
       <div className="absolute flex h-[49.831px] items-center justify-center left-[731.13px] top-[2367.6px] w-[4.996px]">
@@ -311,15 +299,9 @@ function CourseCardHaebangchon() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex h-[16.553px] items-center justify-center left-[433.37px] top-[2236.83px] w-[45.494px]">
-        <div className="flex-none rotate-[-1.99deg]">
-          <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[14.43px] items-center justify-center left-[416px] top-[2238px] w-[14.43px]">
-        <div className="flex-none rotate-[-1.99deg] size-full relative">
-          <AvgPaceIcon />
-        </div>
+      <div className="absolute flex items-center gap-[10px] left-[414px] top-[2244px]" style={{ transform: "rotate(-1.99deg)", transformOrigin: "left center" }}>
+        <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
+        <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">5~6시간</p>
       </div>
       {/* dotted line */}
       <div className="absolute flex h-[50.051px] items-center justify-center left-[438.31px] top-[2305.25px] w-[1.739px]">
@@ -348,14 +330,14 @@ function CourseCardHaebangchon() {
         </div>
       </div>
       {/* tag pills */}
-      <CardTagPill leftBox={405.02} topBox={2274} leftText={437.81} topText={2282.41} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="식사" />
-      <CardTagPill leftBox={406.41} topBox={2314.09} leftText={439.21} topText={2322.5} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="카페" />
+      <CardTagPill leftBox={405.02} topBox={2274} leftText={437.81} topText={2279.41} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="식사" />
+      <CardTagPill leftBox={406.41} topBox={2314.09} leftText={439.21} topText={2319.5} rotate="-1.99deg" boxW={65.551} boxH={32.65} label="카페" />
       <div className="absolute flex h-[32.65px] items-center justify-center left-[407.81px] top-[2354.18px] w-[65.551px]">
         <div className="flex-none rotate-[-1.99deg]">
           <div className="bg-white h-[30.428px] relative rounded-[21.169px] w-[64.533px]" />
         </div>
       </div>
-      <div className="-translate-x-1/2 absolute flex h-[17.657px] items-center justify-center left-[440.54px] top-[2361.68px] w-[48.527px]">
+      <div className="-translate-x-1/2 absolute flex h-[17.657px] items-center justify-center left-[440.54px] top-[2358.68px] w-[48.527px]">
         <div className="flex-none rotate-[-1.99deg]">
           <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#2d2e30] text-[13px] text-center whitespace-nowrap">칵테일바</p>
         </div>
@@ -406,15 +388,9 @@ function CourseCardSeongsu() {
         </div>
       </div>
       {/* duration */}
-      <div className="absolute flex h-[21.935px] items-center justify-center left-[108.35px] top-[2312.47px] w-[46.807px]">
-        <div className="flex-none rotate-[9.11deg]">
-          <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[normal] not-italic relative text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[14.43px] items-center justify-center left-[91px] top-[2316px] w-[14.43px]">
-        <div className="flex-none rotate-[9.11deg] size-full relative">
-          <AvgPaceIcon />
-        </div>
+      <div className="absolute flex items-center gap-[10px] left-[89px] top-[2312.5px]" style={{ transform: "rotate(9.11deg)", transformOrigin: "left center" }}>
+        <div className="size-[14.43px] relative flex-none"><AvgPaceIcon /></div>
+        <p className="font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none text-[#707070] text-[12px] whitespace-nowrap">4~5시간</p>
       </div>
       {/* dotted line */}
       <div className="absolute flex h-[49.449px] items-center justify-center left-[94.78px] top-[2379.03px] w-[7.929px]">
@@ -455,7 +431,7 @@ function PinkStarsLabel() {
     <div className="absolute contents h-[47.026px] left-[657.63px] top-[2007.17px] w-[143.88px]">
       <div className="absolute flex h-[47.026px] items-center justify-center left-[657.63px] top-[2007.17px] w-[143.88px]">
         <div className="flex-none rotate-[-6.33deg]">
-          <div className="bg-[#f7bdf7] h-[31.642px] relative rounded-[15.821px] w-[141.252px]" />
+          <div className="bg-[#f7bdf7] h-[31.642px] relative rounded-[15.821px] w-[141.252px]" style={{ boxShadow: "0px 4px 8px rgba(0,0,0,0.1)" }} />
         </div>
       </div>
       <div className="absolute flex h-[37.317px] items-center justify-center left-[666.78px] top-[2012.02px] w-[125.59px]">
@@ -481,7 +457,7 @@ function YellowStarBadge() {
   return (
     <>
       {/* Star background (15° rotated) */}
-      <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px]">
+      <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px] z-10">
         <div className="flex-none rotate-15">
           <div className="relative size-[183.591px]">
             <div className="absolute inset-[0.77%_0.69%_0.64%_0.77%]">
@@ -497,19 +473,13 @@ function YellowStarBadge() {
       </div>
 
       {/* Text + underlines (4.74° rotated) — flex column with explicit gaps to avoid font-metric drift */}
-      <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px] pointer-events-none">
-        <div className="flex-none rotate-[4.74deg] flex flex-col items-center gap-[5px]">
+      <div className="absolute flex items-center justify-center left-[1110.96px] size-[224.853px] top-[2403.44px] pointer-events-none z-10">
+        <div className="flex-none rotate-[4.74deg] flex flex-col items-center gap-[8px]">
           <div className="h-px w-[60.547px] bg-black" />
-          <p
-            className="font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] italic text-[15.79px] text-black tracking-[0.6316px] leading-none whitespace-nowrap"
-            style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}
-          >
+          <p className="font-['Prompt',sans-serif] italic font-light text-[15.79px] text-black tracking-[0.6316px] leading-none whitespace-nowrap">
             don&rsquo;t worry
           </p>
-          <p
-            className="font-['Noto_Serif_Tamil_Slanted:Regular','Noto_Sans:Italic',sans-serif] italic text-black leading-none whitespace-nowrap inline-flex items-baseline gap-[2px]"
-            style={{ fontVariationSettings: "'CTGR' 0, 'wdth' 100, 'wght' 400" }}
-          >
+          <p className="font-['Prompt',sans-serif] italic font-light text-black leading-none whitespace-nowrap inline-flex items-baseline gap-[2px]">
             <span className="text-[7.545px]">with</span>
             <span className="text-[15.79px]">Dehangsa</span>
           </p>
@@ -522,7 +492,7 @@ function YellowStarBadge() {
 
 function DateCircleCta() {
   return (
-    <div className="absolute left-[309.16px] size-[136.101px] top-[2371.1px]">
+    <div className="absolute left-[309.16px] size-[136.101px] top-[2371.1px]" style={{ filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.12))" }}>
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 136.101 136.101">
         <g>
           <g>
@@ -560,12 +530,11 @@ export default function HotSpotSection() {
   return (
     <>
       {/* Gray section background (#f7f7f7) covering y=1697.99 to y=2547.99 */}
-      <div className="-translate-x-1/2 absolute bg-[#f7f7f7] h-[850px] left-[calc(50%-0.5px)] top-[1697.99px] w-[1441px]" />
+      <div className="-translate-x-1/2 absolute bg-[#f7f7f7] h-[960px] left-[calc(50%-0.5px)] top-[1697.99px] w-[1441px]" />
 
       {/* Main heading */}
       <div
-        className="[word-break:break-word] absolute font-['Prompt:Medium','Noto_Sans_KR:Medium',sans-serif] leading-[0] left-[130px] text-[#2d2e30] text-[40px] top-[1780.95px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 500" }}
+        className="[word-break:break-word] absolute font-['Pretendard',sans-serif] font-medium leading-[0] left-[130px] text-[#2d2e30] text-[40px] top-[1780.95px] whitespace-nowrap"
       >
         <p className="leading-[55px] mb-0 whitespace-pre">{`요즘 가장 핫한 코스만 `}</p>
         <p className="leading-[55px] whitespace-pre">쏙쏙 골라드려요 !</p>
