@@ -3,6 +3,7 @@ import HeroSection from "@/landing/ui/components/sections/HeroSection";
 import PainPointSection from "@/landing/ui/components/sections/PainPointSection";
 import HotSpotSection from "@/landing/ui/components/sections/HotSpotSection";
 import TimeToHealSection from "@/landing/ui/components/sections/TimeToHealSection";
+import CtaSection from "@/landing/ui/components/sections/CtaSection";
 
 export default function LandingPage() {
   return (
@@ -11,6 +12,7 @@ export default function LandingPage() {
       <PainPointSection />
       <HotSpotSection />
       <TimeToHealSection />
+      <CtaSection />
     </LandingLayout>
   );
 }
