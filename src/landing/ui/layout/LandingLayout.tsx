@@ -29,7 +29,7 @@ export default function LandingLayout({ children, height }: Props) {
   }, [height]);
 
   return (
-    <div ref={wrapperRef} className="w-full overflow-x-hidden bg-white">
+    <div ref={wrapperRef} className="w-full overflow-hidden bg-white">
       <div
         ref={canvasRef}
         className="relative origin-top-left"

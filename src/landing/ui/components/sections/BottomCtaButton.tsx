@@ -12,7 +12,7 @@ export default function BottomCtaButton() {
       href="/home"
       onClick={handleLandingBottomClick}
       aria-label="데이트 코스 만들러가기"
-      className="-translate-x-1/2 absolute left-1/2 top-[3673.41px] block h-[69.37px] w-[319.69px] rounded-[34.685px] border border-black shadow-[0px_3px_10.9px_0px_rgba(0,0,0,0.22)] transition-transform active:scale-[0.98]"
+      className="-translate-x-1/2 absolute left-1/2 top-[3673.41px] block h-[69.37px] w-[319.69px] rounded-[34.685px] border border-black shadow-[0px_3px_10.9px_0px_rgba(0,0,0,0.22)] transition-all duration-200 ease-out hover:-translate-y-[3px] hover:shadow-[0px_6px_16px_0px_rgba(0,0,0,0.28)] active:scale-[0.98] active:translate-y-0"
     >
       {/* Inner black pill */}
       <span className="-translate-x-1/2 absolute bg-[#333] h-[59.371px] left-1/2 rounded-[45.361px] top-[5px] w-[309.919px] pointer-events-none" />

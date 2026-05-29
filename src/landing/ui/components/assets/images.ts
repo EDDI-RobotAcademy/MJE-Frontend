@@ -13,3 +13,4 @@ export const imgImage188 = `${BASE}/2726c470a5536ae347c5a08fa1223ae61c3419a3.png
 export const imgObject = `${BASE}/e60be95663da15b30eb06389b1ee9b9af977e2e0.png`;
 export const imgObject1 = `${BASE}/54a22b7b87385ed2110e26867f7cb46687cba711.png`;
 export const imgIMockupIPhone14 = `${BASE}/d0e555624b48b799928c55f336d450aae8f5fad9.png`;
+export const imgCtaBottomPhoto = `${BASE}/Mask group.png`;

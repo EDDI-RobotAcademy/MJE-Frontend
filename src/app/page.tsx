@@ -12,7 +12,7 @@ export default function RootPage() {
     <>
       <ViewHomeTracker />
       <ViewLandingTracker />
-      <LandingLayout height={4750}>
+      <LandingLayout height={4650}>
         <HeroSection />
         <PainPointSection />
         <HotSpotSection />
