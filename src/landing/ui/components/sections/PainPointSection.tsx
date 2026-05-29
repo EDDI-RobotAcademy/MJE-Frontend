@@ -41,21 +41,25 @@ function PainCard({ number, title, subtitle, cardTop, titleTop, subtitleTop, num
 
 function StressQuote() {
   return (
-    <>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-['Prompt:Regular','Noto_Sans_KR:Regular',sans-serif] leading-[32.064px] left-1/2 text-[#2d2e30] text-[21.862px] text-center top-[1603.96px] whitespace-pre"
-        style={{ fontVariationSettings: "'wght' 400" }}
-      >{`“ 아직도 데이트코스 계획 때문에            받고 계신가요? “`}</p>
-      <div className="absolute bg-[#333] h-[21.379px] left-[758.7px] rounded-[5px] top-[1607.77px] w-[79.617px]">
-        <div aria-hidden="true" className="absolute border border-[#333] border-solid inset-[-0.5px] pointer-events-none rounded-[5.5px]" />
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-['Prompt:Regular','Noto_Sans_KR:Regular',sans-serif] leading-[32.064px] left-[798.5px] text-[18px] text-center text-white top-[1602.96px] whitespace-nowrap"
-        style={{ fontVariationSettings: "'wght' 400" }}
+    <div
+      className="-translate-x-1/2 absolute font-['Prompt:Regular','Noto_Sans_KR:Regular',sans-serif] leading-[32.064px] left-1/2 text-[#2d2e30] text-[21.862px] text-center top-[1603.96px] whitespace-nowrap"
+      style={{ fontVariationSettings: "'wght' 400" }}
+    >
+      <span>{"“ 아직도 데이트코스 계획 때문에 "}</span>
+      <span
+        className="relative inline-block align-middle bg-[#333] rounded-[5px]"
+        style={{ width: 79.617, height: 21.379 }}
       >
-        스트레스
-      </p>
-    </>
+        <span
+          aria-hidden="true"
+          className="absolute border border-[#333] border-solid inset-[-0.5px] pointer-events-none rounded-[5.5px]"
+        />
+        <span className="absolute inset-0 flex items-center justify-center text-white text-[18px] leading-none">
+          스트레스
+        </span>
+      </span>
+      <span>{" 받고 계신가요? “"}</span>
+    </div>
   );
 }
 
