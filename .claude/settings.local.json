@@ -36,7 +36,23 @@
       "PowerShell(node -e \"require\\('playwright'\\)\" 2>&1; npx playwright --version 2>&1)",
       "Bash(taskkill /F /IM node.exe)",
       "Bash(taskkill /PID 21564 /F)",
-      "PowerShell(Stop-Process *)"
+      "PowerShell(Stop-Process *)",
+      "Bash(mkdir -p /tmp/mobile-design)",
+      "Read(//tmp/**)",
+      "Bash(unzip -o \"C:/Users/user/Downloads/프론트엔드 디자인 완성.zip\")",
+      "Bash(mkdir -p \"C:/lecture/MJE-Frontend/src/landing/ui/components/mobile/sections\" \"C:/lecture/MJE-Frontend/src/landing/ui/components/mobile/assets\")",
+      "Bash(cp /tmp/mobile-design/src/imports/IPhone1617Pro6/527499531ab58cc5897f9aa43b849266a7720445.png \"C:/lecture/MJE-Frontend/public/landing/\")",
+      "Bash(cp /tmp/mobile-design/src/imports/IPhone1617Pro6/c7729eb51624efa3a7f803a9b80a9eec41afb334.png \"C:/lecture/MJE-Frontend/public/landing/\")",
+      "Bash(cp /tmp/mobile-design/src/imports/IPhone1617Pro6/f0f95b6c202ad9287526fb62a70477ce0faeb4c8.png \"C:/lecture/MJE-Frontend/public/landing/\")",
+      "Bash(cp /tmp/mobile-design/src/imports/IPhone1617Pro6/svg-11vzu3g7x5.ts \"C:/lecture/MJE-Frontend/src/landing/ui/components/mobile/assets/svgPaths.ts\")",
+      "Bash(sed -n '151,158p' /tmp/mobile-source.tsx)",
+      "Bash(sed -n '186,194p' /tmp/mobile-source.tsx)",
+      "Bash(sed -n '195,203p' /tmp/mobile-source.tsx)",
+      "Bash(sed -n '2031,2046p' /tmp/mobile-source.tsx)",
+      "Bash(sed -n '2013,2022p' /tmp/mobile-source.tsx)",
+      "Bash(npx eslint *)",
+      "Bash(npx playwright *)",
+      "Bash(node verify-mobile.mjs)"
     ],
     "additionalDirectories": [
       "d:\\������\\MJE-Frontend\\src\\courses\\ui\\components\\detail"
