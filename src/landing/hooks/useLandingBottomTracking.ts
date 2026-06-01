@@ -23,7 +23,7 @@ export function useLandingBottomTracking() {
         );
       }
     });
-  }, [pathname]);
+  }, []);
 
   return { handleLandingBottomClick };
 }

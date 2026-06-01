@@ -23,7 +23,7 @@ export function useLandingTopTracking() {
         );
       }
     });
-  }, [pathname]);
+  }, []);
 
   return { handleLandingTopClick };
 }
