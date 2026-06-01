@@ -5,9 +5,10 @@ type Props = {
   top: number;
   height: number;
   color: string;
+  width?: number;
 };
 
-export default function SectionReveal({ top, height, color }: Props) {
+export default function SectionReveal({ top, height, color, width = 1440 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function SectionReveal({ top, height, color }: Props) {
       style={{
         top,
         left: 0,
-        width: 1440,
+        width,
         height,
         background: color,
         opacity: 1,

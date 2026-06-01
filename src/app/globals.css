@@ -52,6 +52,16 @@ body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+@media (max-width: 767px) {
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   15%, 45%, 75% { transform: translateX(-5px); }
