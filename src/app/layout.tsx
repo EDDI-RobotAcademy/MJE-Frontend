@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Header from "@/home/ui/layout/Header";
+import ConditionalHeader from "@/home/ui/layout/ConditionalHeader";
 
 export const metadata: Metadata = {
   title: "Dehangsa",
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Header />
+        <ConditionalHeader />
         {children}
       </body>
     </html>

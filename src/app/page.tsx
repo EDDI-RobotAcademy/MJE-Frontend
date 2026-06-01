@@ -1,29 +1,29 @@
-import HeroSection from "@/home/ui/components/HeroSection";
-import SearchBar from "@/home/ui/components/SearchBar";
+import LandingLayout from "@/landing/ui/layout/LandingLayout";
+import HeroSection from "@/landing/ui/components/sections/HeroSection";
+import PainPointSection from "@/landing/ui/components/sections/PainPointSection";
+import HotSpotSection from "@/landing/ui/components/sections/HotSpotSection";
+import TimeToHealSection from "@/landing/ui/components/sections/TimeToHealSection";
+import CtaSection from "@/landing/ui/components/sections/CtaSection";
+import SectionReveal from "@/landing/ui/components/SectionReveal";
 import ViewHomeTracker from "@/home/ui/components/ViewHomeTracker";
+import ViewLandingTracker from "@/landing/ui/components/ViewLandingTracker";
 
-export default function Home() {
+export default function RootPage() {
   return (
-    <main className="relative min-h-screen bg-white overflow-hidden">
-      {/* Blob 1: 하단 블루 글로우 */}
-      <div
-        className="pointer-events-none absolute bottom-[-250px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
-        style={{ background: "#A8CCF0", filter: "blur(500px)", opacity: 0.85 }}
-      />
-      {/* Blob 2: 중앙 핑크 글로우 */}
-      <div
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
-        style={{ background: "#FCAD9E", filter: "blur(400px)", opacity: 0.45 }}
-      />
-
-      {/* 콘텐츠 래퍼 — 블롭보다 위에 렌더링 보장 */}
-      <div className="relative z-10">
-        <ViewHomeTracker />
+    <>
+      <ViewHomeTracker />
+      <ViewLandingTracker />
+      <LandingLayout height={4650}>
         <HeroSection />
-        <section className="flex justify-center px-4 pb-24">
-          <SearchBar />
-        </section>
-      </div>
-    </main>
+        <SectionReveal top={847.99}  height={850}  color="#ffffff" />
+        <PainPointSection />
+        <SectionReveal top={1697.99} height={960}  color="#f7f7f7" />
+        <HotSpotSection />
+        <SectionReveal top={2547.99} height={850}  color="#ffffff" />
+        <TimeToHealSection />
+        <SectionReveal top={3397.99} height={1252} color="#f5f5f5" />
+        <CtaSection />
+      </LandingLayout>
+    </>
   );
 }

@@ -25,6 +25,29 @@
   --color-brand-placeholder: #d9d9d9;
 }
 
+/* Page transition — CSS View Transitions API */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 200ms ease-out page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 350ms ease-out page-fade-in;
+}
+
+@keyframes page-fade-out {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
 body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -46,12 +69,20 @@ body {
   }
 }
 
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
 @layer utilities {
   .animate-shake {
     animation: shake 0.4s ease-in-out;
   }
   .animate-dropdown-open {
     animation: dropdownOpen 0.18s ease-out forwards;
+  }
+  .animate-float-y {
+    animation: floatY 2.2s ease-in-out infinite;
   }
   .scrollbar-hide {
     scrollbar-width: none;

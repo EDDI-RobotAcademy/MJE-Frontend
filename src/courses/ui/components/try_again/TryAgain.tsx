@@ -9,7 +9,7 @@ export default function TryAgain() {
 
   const handleClick = async () => {
     await trackTryAgainClick(pathname);
-    router.push("/");
+    router.push("/home");
   };
 
   return (
