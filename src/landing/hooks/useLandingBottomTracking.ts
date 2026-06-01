@@ -1,20 +1,17 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { trackEvent, getSessionId, EventTrackingError } from "@/infrastructure/analytics";
 import { LANDING_BOTTOM_EVENT_NAME } from "@/landing/types/events";
 import type { LandingBottomEvent } from "@/landing/types/events";
 
 export function useLandingBottomTracking() {
-  const pathname = usePathname();
-
   const handleLandingBottomClick = useCallback(() => {
     const event: LandingBottomEvent = {
       event_name: LANDING_BOTTOM_EVENT_NAME,
       session_id: getSessionId(),
       timestamp: new Date().toISOString(),
-      page_path: pathname,
+      page_path: "/landing",
     };
 
     trackEvent(event, "/landing/events").catch((error) => {

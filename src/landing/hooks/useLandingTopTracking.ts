@@ -1,20 +1,17 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { trackEvent, getSessionId, EventTrackingError } from "@/infrastructure/analytics";
 import { LANDING_TOP_EVENT_NAME } from "@/landing/types/events";
 import type { LandingTopEvent } from "@/landing/types/events";
 
 export function useLandingTopTracking() {
-  const pathname = usePathname();
-
   const handleLandingTopClick = useCallback(() => {
     const event: LandingTopEvent = {
       event_name: LANDING_TOP_EVENT_NAME,
       session_id: getSessionId(),
       timestamp: new Date().toISOString(),
-      page_path: pathname,
+      page_path: "/landing",
     };
 
     trackEvent(event, "/landing/events").catch((error) => {
