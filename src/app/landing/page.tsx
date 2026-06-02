@@ -37,15 +37,17 @@ export default function LandingPage() {
 
       {/* Mobile (< 768px) */}
       <div className="md:hidden">
-        <LandingLayoutMobile height={4310}>
+        <LandingLayoutMobile height={4220}>
           <HeroSectionMobile />
-          <PainPointSectionMobile />
-          <SectionReveal top={1748} height={450} color="#ffffff" width={393} />
-          <HotSpotSectionMobile />
-          <SectionReveal top={2622} height={450} color="#f5f5f5" width={393} />
-          <TimeToHealSectionMobile />
-          <SectionReveal top={3397} height={450} color="#ffffff" width={393} />
-          <CtaSectionMobile />
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', transform: 'translateY(-90px)' }}>
+            <PainPointSectionMobile />
+            <SectionReveal top={1748} height={450} color="#ffffff" width={393} />
+            <HotSpotSectionMobile />
+            <SectionReveal top={2622} height={450} color="#f5f5f5" width={393} />
+            <TimeToHealSectionMobile />
+            <SectionReveal top={3397} height={450} color="#ffffff" width={393} />
+            <CtaSectionMobile />
+          </div>
         </LandingLayoutMobile>
       </div>
     </>

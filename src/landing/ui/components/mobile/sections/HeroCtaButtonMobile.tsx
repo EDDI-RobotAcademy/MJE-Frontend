@@ -12,7 +12,7 @@ export default function HeroCtaButtonMobile() {
       href="/home"
       onClick={handleLandingTopClick}
       aria-label="데이트 코스 만들기"
-      className="absolute left-[49.03px] top-[612.33px] h-[49.39px] w-[303.567px] rounded-[24.695px] z-10 block overflow-hidden transition-all duration-200 ease-out hover:scale-[1.02] hover:-translate-y-[2px] active:scale-[0.98] active:translate-y-0 shadow-[3px_5px_8px_0px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.75)] hover:shadow-[3px_10px_18px_0px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.75)]"
+      className="absolute left-[49.03px] top-[577.33px] h-[49.39px] w-[303.567px] rounded-[24.695px] z-10 block overflow-hidden transition-all duration-200 ease-out hover:scale-[1.02] hover:-translate-y-[2px] active:scale-[0.98] active:translate-y-0 shadow-[3px_5px_8px_0px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.75)] hover:shadow-[3px_10px_18px_0px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.75)]"
       style={{
         background: "linear-gradient(135deg, #6e9dd9 0%, #8aaee6 35%, #b8d4f0 65%, #d5e6f6 100%)",
         border: "1px solid rgba(255,255,255,0.8)",

@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 
 const CANVAS_WIDTH = 393;
-const HERO_HEIGHT = 690; // CTA 버튼 하단(661px) + 여유
+const TOP_CROP = 60;
+const BOTTOM_CROP = 30;
 
 type Props = {
   children: ReactNode;
@@ -17,14 +18,12 @@ export default function LandingLayoutMobile({ children, height }: Props) {
 
   useEffect(() => {
     const update = () => {
-      const widthScale = window.innerWidth / CANVAS_WIDTH;
-      const heightScale = window.innerHeight / HERO_HEIGHT;
-      const scale = Math.min(widthScale, heightScale);
+      const scale = window.innerWidth / CANVAS_WIDTH;
       if (canvasRef.current) {
         canvasRef.current.style.transform = `scale(${scale})`;
       }
       if (wrapperRef.current) {
-        wrapperRef.current.style.height = `${height * scale}px`;
+        wrapperRef.current.style.height = `${(height - TOP_CROP - BOTTOM_CROP) * scale}px`;
       }
     };
 
@@ -55,7 +54,7 @@ export default function LandingLayoutMobile({ children, height }: Props) {
         <div
           ref={canvasRef}
           className="relative origin-top-left"
-          style={{ width: CANVAS_WIDTH, height }}
+          style={{ width: CANVAS_WIDTH, height, marginTop: -TOP_CROP }}
         >
           {children}
         </div>

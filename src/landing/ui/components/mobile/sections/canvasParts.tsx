@@ -14,7 +14,7 @@ import {
 
 export function Group9() {
   return (
-    <div className="-translate-x-1/2 absolute h-[752.628px] left-1/2 top-[142.18px] w-[783.45px]">
+    <div className="-translate-x-1/2 absolute h-[731.82px] left-1/2 top-[120px] w-[783.45px]" style={{ clipPath: 'inset(-1000px -1000px 0 -1000px)' }}>
       <div className="absolute inset-[-39.66%_-38.1%_-39.66%_-34.17%]">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1349.61 1349.61">
           <g id="Group 1171279927">
@@ -46,7 +46,7 @@ export function Group9() {
 export function Group71() {
   return (
     <div className="-translate-x-1/2 absolute contents left-1/2 top-0">
-      <div className="-translate-x-1/2 absolute h-[874px] left-1/2 top-0 w-[1544.393px]" data-name="자산 1@4x 1">
+      <div className="-translate-x-1/2 absolute h-[874px] left-1/2 top-[-60px] w-[1544.393px]" data-name="자산 1@4x 1">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full brightness-0 invert opacity-60" src={imgHeroOverlay} />
       </div>
     </div>
@@ -134,7 +134,7 @@ export function Frame9() {
 
 export function Group5() {
   return (
-    <div className="absolute h-[49.39px] left-[49.03px] top-[612.33px] w-[303.567px] rounded-[24.695px]">
+    <div className="absolute h-[49.39px] left-[49.03px] top-[577.33px] w-[303.567px] rounded-[24.695px]">
       <div className="absolute inset-0 rounded-[24.695px]" style={{ backgroundImage: "linear-gradient(109.889deg, rgba(138, 175, 230, 0.74) 3.3578%, rgba(213, 230, 246, 0.74) 104.08%)" }} />
       <div className="absolute inset-0 bg-[rgba(255,255,255,0.1)] rounded-[24.695px] shadow-[0px_3.353px_19.115px_0px_rgba(255,255,255,0.7)]" />
     </div>
@@ -143,7 +143,7 @@ export function Group5() {
 
 export function Group6() {
   return (
-    <div className="absolute contents left-[49.03px] top-[612.33px]">
+    <div className="absolute contents left-[49.03px] top-[577.33px]">
       <Group5 />
     </div>
   );
@@ -151,8 +151,8 @@ export function Group6() {
 
 export function Group2() {
   return (
-    <div className="absolute contents left-[109.22px] top-[625.85px]">
-      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[109.22px] text-[#2a4874] text-[17.885px] top-[625.85px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
+    <div className="absolute contents left-[109.22px] top-[590.85px]">
+      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[109.22px] text-[#2a4874] text-[17.885px] top-[590.85px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
         데이트 코스 만들기 !
       </p>
     </div>
@@ -161,7 +161,7 @@ export function Group2() {
 
 export function ArrowRightAlt() {
   return (
-    <div className="absolute left-[270.12px] size-[22.293px] top-[627px]" data-name="arrow_right_alt">
+    <div className="absolute left-[270.12px] size-[22.293px] top-[592px]" data-name="arrow_right_alt">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 22.2932 22.2932">
         <g id="arrow_right_alt">
           <mask height="23" id="mask0_1_822" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="23" x="0" y="0">
@@ -178,7 +178,7 @@ export function ArrowRightAlt() {
 
 export function Group11() {
   return (
-    <div className="absolute contents left-[109.22px] top-[625.85px]">
+    <div className="absolute contents left-[109.22px] top-[590.85px]">
       <Group2 />
       <ArrowRightAlt />
     </div>
@@ -187,7 +187,7 @@ export function Group11() {
 
 export function Group16() {
   return (
-    <div className="absolute contents left-[49.03px] top-[612.33px]">
+    <div className="absolute contents left-[49.03px] top-[577.33px]">
       <Group6 />
       <Group11 />
     </div>
@@ -196,7 +196,7 @@ export function Group16() {
 
 export function Group72() {
   return (
-    <div className="-translate-x-1/2 absolute left-1/2 top-[774.66px]">
+    <div className="-translate-x-1/2 absolute left-1/2 top-[709.66px]">
       <div className="animate-float-y flex items-center gap-[6px]">
         <span className="flex items-center justify-center size-[11px] -rotate-45 shrink-0">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.9381 12.9381">
@@ -2009,16 +2009,16 @@ export function Group77() {
 
 export function Group70() {
   return (
-    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4144.93px]">
-      <div className="-translate-x-1/2 absolute bg-[#333] h-[56.308px] left-1/2 rounded-[45.361px] top-[4149.67px] w-[293.926px]" />
-      <div className="-translate-x-1/2 absolute border border-black border-solid h-[65.79px] left-1/2 rounded-[34.685px] shadow-[0px_3px_10.9px_0px_rgba(0,0,0,0.22)] top-[4144.93px] w-[303.193px]" />
+    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4104.93px]">
+      <div className="-translate-x-1/2 absolute bg-[#333] h-[56.308px] left-1/2 rounded-[45.361px] top-[4109.67px] w-[293.926px]" />
+      <div className="-translate-x-1/2 absolute border border-black border-solid h-[65.79px] left-1/2 rounded-[34.685px] shadow-[0px_3px_10.9px_0px_rgba(0,0,0,0.22)] top-[4104.93px] w-[303.193px]" />
     </div>
   );
 }
 
 export function Group69() {
   return (
-    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4144.93px]">
+    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4104.93px]">
       <Group70 />
     </div>
   );
@@ -2026,8 +2026,8 @@ export function Group69() {
 
 export function Group3() {
   return (
-    <div className="absolute contents left-[97.11px] top-[4165.32px]">
-      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[97.11px] text-[17.885px] text-white top-[4165.32px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
+    <div className="absolute contents left-[97.11px] top-[4125.32px]">
+      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[97.11px] text-[17.885px] text-white top-[4125.32px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
         데이트 코스 만들러가기
       </p>
     </div>
@@ -2036,7 +2036,7 @@ export function Group3() {
 
 export function ArrowRightAlt1() {
   return (
-    <div className="absolute left-[282.6px] size-[22.293px] top-[4166.47px]" data-name="arrow_right_alt">
+    <div className="absolute left-[282.6px] size-[22.293px] top-[4126.47px]" data-name="arrow_right_alt">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 22.2932 22.2932">
         <g id="arrow_right_alt">
           <mask height="23" id="mask0_1_692" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="23" x="0" y="0">
@@ -2053,7 +2053,7 @@ export function ArrowRightAlt1() {
 
 export function Group12() {
   return (
-    <div className="absolute contents left-[97.11px] top-[4165.32px]">
+    <div className="absolute contents left-[97.11px] top-[4125.32px]">
       <Group3 />
       <ArrowRightAlt1 />
     </div>
@@ -2062,7 +2062,7 @@ export function Group12() {
 
 export function Group81() {
   return (
-    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4144.93px]">
+    <div className="-translate-x-1/2 absolute contents left-1/2 top-[4104.93px]">
       <Group69 />
       <Group12 />
     </div>
