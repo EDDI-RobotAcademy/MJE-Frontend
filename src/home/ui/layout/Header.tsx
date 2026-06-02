@@ -15,17 +15,6 @@ export default function Header() {
         </nav>
       </div>
 
-      {/* Right: register button */}
-      <button
-        type="button"
-        className="flex items-center justify-center rounded-full bg-[#333] text-[10px] md:text-[11px] text-white transition-colors hover:bg-[#555] px-3 h-[30px] md:h-[41.802px] md:w-[106.012px] md:px-4"
-        style={{
-          fontFamily: "'Prompt', sans-serif",
-          filter: "drop-shadow(0px 4px 5px rgba(0,0,0,0.25))",
-        }}
-      >
-        Register
-      </button>
     </header>
   );
 }
