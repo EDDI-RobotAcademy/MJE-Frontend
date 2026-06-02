@@ -22,7 +22,7 @@ export function Group9() {
               <circle cx="674.803" cy="674.803" fill="var(--fill-0, #D5E6F6)" r="376.314" />
             </g>
             <g filter="url(#filter1_f_1_804)" id="Ellipse 13">
-              <circle cx="438.398" cy="469.221" fill="var(--fill-0, #FCAD9E)" fillOpacity="0.25" r="170.732" />
+              <circle cx="458.398" cy="469.221" fill="var(--fill-0, #FCAD9E)" fillOpacity="0.25" r="170.732" />
             </g>
           </g>
           <defs>
@@ -55,7 +55,7 @@ export function Group71() {
 
 export function Frame7() {
   return (
-    <div className="absolute h-[24.156px] left-[89.49px] top-[203.85px] w-[222.647px]">
+    <div className="absolute h-[24.156px] left-[89.49px] top-[173.85px] w-[222.647px]">
       <div className="absolute bg-[#d5e6f6] h-[9.156px] left-0 right-0 top-[7px]" />
       <p className="[word-break:break-word] absolute font-figma-prompt leading-[14.531px] left-0 right-0 text-[#333] text-[13.21px] text-center top-0" style={{ fontVariationSettings: "'wght' 400" }}>
         데이트코스 고민 30분, 이제 30초로 !
@@ -102,7 +102,7 @@ export function Group1() {
 
 export function Frame8() {
   return (
-    <div className="absolute content-stretch flex gap-[7px] items-center leading-[0] left-[115.68px] top-[322.91px]">
+    <div className="absolute content-stretch flex gap-[7px] items-center leading-[0] left-[115.68px] top-[285.91px]">
       <Group />
       <Group1 />
     </div>
@@ -125,7 +125,7 @@ export function Group10() {
 
 export function Frame9() {
   return (
-    <div className="absolute content-stretch flex gap-[4px] items-center leading-[0] left-[76.96px] top-[343.65px]">
+    <div className="absolute content-stretch flex gap-[4px] items-center leading-[0] left-[76.96px] top-[306.65px]">
       <Group65 />
       <Group10 />
     </div>
@@ -134,16 +134,16 @@ export function Frame9() {
 
 export function Group5() {
   return (
-    <div className="absolute contents left-[49.03px] top-[665.33px]">
-      <div className="absolute h-[49.39px] left-[49.03px] rounded-[24.695px] top-[665.33px] w-[303.567px]" style={{ backgroundImage: "linear-gradient(109.889deg, rgba(138, 175, 230, 0.74) 3.3578%, rgba(213, 230, 246, 0.74) 104.08%)" }} />
-      <div className="absolute bg-[rgba(255,255,255,0.1)] h-[49.39px] left-[49.03px] rounded-[24.695px] shadow-[0px_3.353px_19.115px_0px_rgba(255,255,255,0.7)] top-[665.33px] w-[303.567px]" />
+    <div className="absolute h-[49.39px] left-[49.03px] top-[612.33px] w-[303.567px] rounded-[24.695px]">
+      <div className="absolute inset-0 rounded-[24.695px]" style={{ backgroundImage: "linear-gradient(109.889deg, rgba(138, 175, 230, 0.74) 3.3578%, rgba(213, 230, 246, 0.74) 104.08%)" }} />
+      <div className="absolute inset-0 bg-[rgba(255,255,255,0.1)] rounded-[24.695px] shadow-[0px_3.353px_19.115px_0px_rgba(255,255,255,0.7)]" />
     </div>
   );
 }
 
 export function Group6() {
   return (
-    <div className="absolute contents left-[49.03px] top-[665.33px]">
+    <div className="absolute contents left-[49.03px] top-[612.33px]">
       <Group5 />
     </div>
   );
@@ -151,8 +151,8 @@ export function Group6() {
 
 export function Group2() {
   return (
-    <div className="absolute contents left-[109.22px] top-[678.85px]">
-      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[109.22px] text-[#2a4874] text-[17.885px] top-[678.85px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
+    <div className="absolute contents left-[109.22px] top-[625.85px]">
+      <p className="[word-break:break-word] absolute font-figma-prompt leading-[24.592px] left-[109.22px] text-[#2a4874] text-[17.885px] top-[625.85px] whitespace-nowrap" style={{ fontVariationSettings: "'wght' 500" }}>
         데이트 코스 만들기 !
       </p>
     </div>
@@ -161,7 +161,7 @@ export function Group2() {
 
 export function ArrowRightAlt() {
   return (
-    <div className="absolute left-[270.12px] size-[22.293px] top-[680px]" data-name="arrow_right_alt">
+    <div className="absolute left-[270.12px] size-[22.293px] top-[627px]" data-name="arrow_right_alt">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 22.2932 22.2932">
         <g id="arrow_right_alt">
           <mask height="23" id="mask0_1_822" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="23" x="0" y="0">
@@ -178,7 +178,7 @@ export function ArrowRightAlt() {
 
 export function Group11() {
   return (
-    <div className="absolute contents left-[109.22px] top-[678.85px]">
+    <div className="absolute contents left-[109.22px] top-[625.85px]">
       <Group2 />
       <ArrowRightAlt />
     </div>
@@ -187,7 +187,7 @@ export function Group11() {
 
 export function Group16() {
   return (
-    <div className="absolute contents left-[49.03px] top-[665.33px]">
+    <div className="absolute contents left-[49.03px] top-[612.33px]">
       <Group6 />
       <Group11 />
     </div>
@@ -196,7 +196,7 @@ export function Group16() {
 
 export function Group72() {
   return (
-    <div className="-translate-x-1/2 absolute left-1/2 top-[794.66px]">
+    <div className="-translate-x-1/2 absolute left-1/2 top-[774.66px]">
       <div className="animate-float-y flex items-center gap-[6px]">
         <span className="flex items-center justify-center size-[11px] -rotate-45 shrink-0">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.9381 12.9381">
@@ -211,7 +211,7 @@ export function Group72() {
 
 export function Frame14() {
   return (
-    <div className="absolute h-[96.321px] left-[40.82px] top-[439.3px] w-[318.476px]">
+    <div className="absolute h-[96.321px] left-[40.82px] top-[388.3px] w-[318.476px]">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 318.476 96.3207">
         <g id="Frame 253">
           <ellipse cx="60.1266" cy="33.8994" fill="var(--fill-0, #DBECFE)" id="Ellipse 76" rx="60.1266" ry="33.8994" transform="matrix(0.969403 -0.245473 0.17087 0.985294 0 29.5189)" />
@@ -225,7 +225,7 @@ export function Frame14() {
 
 export function Frame12() {
   return (
-    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[274.36px] not-italic text-[#2d2e30] text-center top-[467.92px] w-[48px]">
+    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[274.36px] not-italic text-[#2d2e30] text-center top-[416.92px] w-[48px]">
       <p className="font-figma-pretendard font-medium relative shrink-0 text-[22.012px] w-full">98%</p>
       <p className="font-figma-pretendard relative shrink-0 text-[7.337px] w-full">만족도</p>
     </div>
@@ -242,7 +242,7 @@ export function Group15() {
 
 export function Frame13() {
   return (
-    <div className="absolute h-[105.514px] left-[37.28px] top-[434.53px] w-[325.709px]">
+    <div className="absolute h-[105.514px] left-[37.28px] top-[383.53px] w-[325.709px]">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 325.709 105.514">
         <g id="Frame 252">
           <path d={svgPaths.p292d3900} fill="var(--stroke-0, #2D2E30)" id="Ellipse 73" />
@@ -256,7 +256,7 @@ export function Frame13() {
 
 export function Frame11() {
   return (
-    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[167.74px] not-italic text-center top-[467.96px] w-[67px]">
+    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[167.74px] not-italic text-center top-[416.96px] w-[67px]">
       <p className="font-figma-pretendard font-medium relative shrink-0 text-[#644160] text-[22.012px] w-full whitespace-nowrap">10 Sec</p>
       <p className="font-figma-pretendard relative shrink-0 text-[#2d2e30] text-[7.337px] w-full">코스 생성 평균 속도</p>
     </div>
@@ -273,7 +273,7 @@ export function Group13() {
 
 export function Frame10() {
   return (
-    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[67.97px] not-italic text-center top-[467.92px] w-[74px]">
+    <div className="[word-break:break-word] absolute content-stretch flex flex-col gap-[4px] items-center leading-[normal] left-[67.97px] not-italic text-center top-[416.92px] w-[74px]">
       <p className="font-figma-pretendard font-medium relative shrink-0 text-[#273b62] text-[22.012px] w-full">9,200+</p>
       <p className="font-figma-pretendard relative shrink-0 text-[#2d2e30] text-[7.337px] w-full">생성된 코스</p>
     </div>
@@ -294,7 +294,7 @@ export function Group78() {
       <Group9 />
       <Group71 />
       <Frame7 />
-      <div className="-translate-x-1/2 [word-break:break-word] absolute font-figma-pretendard font-semibold leading-[0] left-1/2 not-italic text-[0px] text-black text-center top-[239.15px] whitespace-nowrap">
+      <div className="-translate-x-1/2 [word-break:break-word] absolute font-figma-pretendard font-semibold leading-[0] left-1/2 not-italic text-[0px] text-black text-center top-[209.15px] whitespace-nowrap">
         <p className="leading-[normal] mb-0 text-[#2a4874] text-[19.26px]">데이트코스 계획이 어려운 커플들을 위한</p>
         <p className="leading-[normal] text-[#2d2e30] text-[30.816px]">가장 쉬운 데이트코스 플래닝</p>
       </div>
@@ -305,17 +305,17 @@ export function Group78() {
       <Frame14 />
       <Group15 />
       <Frame13 />
-      <div className="absolute h-[25.1px] left-[53.43px] top-[461.27px] w-[14.536px] animate-float-y" style={{ animationDelay: '0s' }}>
+      <div className="absolute h-[25.1px] left-[53.43px] top-[410.27px] w-[14.536px] animate-float-y" style={{ animationDelay: '0s' }}>
         <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.5355 25.1005">
           <path d={svgPaths.pcd35a80} fill="var(--fill-0, #FFC0FC)" id="Star 14" stroke="var(--stroke-0, #2D2E30)" strokeWidth="1.51167" />
         </svg>
       </div>
-      <div className="absolute h-[21.228px] left-[43.76px] top-[477.95px] w-[12.293px] animate-float-y" style={{ animationDelay: '1.3s' }}>
+      <div className="absolute h-[21.228px] left-[43.76px] top-[426.95px] w-[12.293px] animate-float-y" style={{ animationDelay: '1.3s' }}>
         <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.2929 21.2278">
           <path d={svgPaths.p18393400} fill="var(--fill-0, white)" id="Star 15" stroke="var(--stroke-0, #2D2E30)" strokeWidth="1.51167" />
         </svg>
       </div>
-      <div className="absolute h-[21.439px] left-[339.52px] top-[441.52px] w-[12.415px] animate-float-y" style={{ animationDelay: '0.7s' }}>
+      <div className="absolute h-[21.439px] left-[339.52px] top-[390.52px] w-[12.415px] animate-float-y" style={{ animationDelay: '0.7s' }}>
         <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.415 21.4386">
           <path d={svgPaths.p17df0880} fill="var(--fill-0, #ACCAF5)" id="Star 16" stroke="var(--stroke-0, #2D2E30)" strokeWidth="1.29113" />
         </svg>
