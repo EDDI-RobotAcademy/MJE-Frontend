@@ -200,8 +200,8 @@ function CourseCardSeochon() {
       <div className="absolute flex h-[74.88px] items-center justify-center left-[43.35px] top-[188.21px] w-[216.33px]">
         <div className="flex-none rotate-[5.73deg]">
           <div className="[word-break:break-word] font-figma-inter font-medium leading-[0] not-italic relative text-[#2d2e30] text-[22px] whitespace-nowrap">
-            <p className="leading-[normal] mb-0 whitespace-pre">{`이국적인 감성 한 스푼, `}</p>
-            <p className="leading-[normal] whitespace-pre">해방촌 비밀 아지트</p>
+            <p className="leading-[normal] mb-0 whitespace-pre">{`과거와 현재가 머무는 곳, `}</p>
+            <p className="leading-[normal] whitespace-pre">서촌에서의 시간</p>
           </div>
         </div>
       </div>
