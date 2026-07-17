@@ -16,14 +16,9 @@ export function useCourseCreation(
 ) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [isShaking, setIsShaking] = useState(false);
-  const [shakeKey, setShakeKey] = useState(0);
 
   const handleCreate = useCallback(() => {
     if (!validate()) {
-      setShakeKey((prev) => prev + 1);
-      setIsShaking(true);
-      setTimeout(() => setIsShaking(false), 400);
       return;
     }
 
@@ -36,5 +31,5 @@ export function useCourseCreation(
     router.push(`/recommendation?${query.toString()}`);
   }, [validate, params, router]);
 
-  return { handleCreate, isLoading, isShaking, shakeKey };
+  return { handleCreate, isLoading };
 }

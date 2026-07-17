@@ -4,6 +4,7 @@ export const dynamic = "force-dynamic";
 import TryAgain from "@/courses/ui/components/try_again/TryAgain";
 import RecommendationCourseList from "@/courses/ui/components/recommendation_courses/RecommendationCourseList";
 import RecommendationLoading from "@/courses/ui/components/recommendation_courses/RecommendationLoading";
+import CommonLayoutComponent from "@/components/layout/CommonLayoutComponent";
 
 function DotGrid() {
   const positions: [number, number][] = [
@@ -22,60 +23,53 @@ function DotGrid() {
 
 export default function RecommendationPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white">
-      {/* 파란빛 블롭 — 세로 타원 */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[1100px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#daeaf8] opacity-70 blur-[220px]" />
-      {/* 분홍빛 블롭 */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[850px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f0d5d5] opacity-50 blur-[180px]" />
-
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-[120px]">
-        {/* Hero */}
-        <section className="flex flex-col items-start pb-8 md:pb-10 pt-[48px] md:pt-[64px] lg:pt-[80px] text-left">
-          {/* 추천 코스 ♥ badge */}
-          <div className="relative mb-4 md:mb-5 inline-flex items-center gap-[6px] px-1">
-            <div
-              className="absolute bottom-0 left-0 right-0 -z-[1] h-[14px]"
-              style={{ background: "rgba(208,226,244,0.55)" }}
-            />
-            <span
-              className="text-[13px] md:text-[15px] font-light text-black"
-              style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
-            >
-              추천 코스
-            </span>
-            <span className="text-[15px] md:text-[17px] text-[#fcad9e]">♥</span>
-          </div>
-
-          <h1
-            className="text-[24px] md:text-[32px] lg:text-[40px] font-medium leading-tight text-black"
+    <CommonLayoutComponent containerClassName="relative z-10 mx-auto max-w-[1200px] px-4 md:px-10 lg:px-[120px]">
+      {/* Hero */}
+      <section className="flex flex-col items-start pb-8 md:pb-10 pt-[48px] md:pt-[64px] lg:pt-[80px] text-left">
+        {/* 추천 코스 ♥ badge */}
+        <div className="relative mb-4 md:mb-5 inline-flex items-center gap-[6px] px-1">
+          <div
+            className="absolute bottom-0 left-0 right-0 -z-[1] h-[14px]"
+            style={{ background: "rgba(208,226,244,0.55)" }}
+          />
+          <span
+            className="text-[13px] md:text-[15px] font-light text-black"
             style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
           >
-            당신을 위한 데이트 코스를 준비했어요
-          </h1>
-
-          <div className="mt-[11px] flex items-center gap-[11px]">
-            <DotGrid />
-            <p
-              className="text-[12px] md:text-[14px] text-[#757575]"
-              style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
-            >
-              선택하신 조건을 바탕으로 코스를 구성했어요
-            </p>
-          </div>
-        </section>
-
-        {/* Cards */}
-        <section className="pb-14">
-          <Suspense fallback={<RecommendationLoading />}>
-            <RecommendationCourseList />
-          </Suspense>
-        </section>
-
-        {/* 다시 검색하기 */}
-        <div className="pb-20">
-          <TryAgain />
+            추천 코스
+          </span>
+          <span className="text-[15px] md:text-[17px] text-[#fcad9e]">♥</span>
         </div>
+
+        <h1
+          className="text-[24px] md:text-[32px] lg:text-[40px] font-medium leading-tight text-black"
+          style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
+        >
+          당신을 위한 데이트 코스를 준비했어요
+        </h1>
+
+        <div className="mt-[11px] flex items-center gap-[11px]">
+          <DotGrid />
+          <p
+            className="text-[12px] md:text-[14px] text-[#757575]"
+            style={{ fontFamily: "'Pretendard Variable', Pretendard, sans-serif" }}
+          >
+            선택하신 조건을 바탕으로 코스를 구성했어요
+          </p>
+        </div>
+      </section>
+
+      {/* Cards */}
+      <section className="pb-14">
+        <Suspense fallback={<RecommendationLoading />}>
+          <RecommendationCourseList />
+        </Suspense>
+      </section>
+
+      {/* 다시 검색하기 */}
+      <div className="pb-20">
+        <TryAgain />
       </div>
-    </main>
+    </CommonLayoutComponent>
   );
 }

@@ -1,3 +1,4 @@
+import CommonHeaderComponent from "@/components/layout/CommonHeaderComponent";
 import LandingLayout from "@/landing/ui/layout/LandingLayout";
 import LandingLayoutMobile from "@/landing/ui/layout/LandingLayoutMobile";
 import HeroSection from "@/landing/ui/components/sections/HeroSection";
@@ -17,6 +18,7 @@ import ViewLandingTracker from "@/landing/ui/components/ViewLandingTracker";
 export default function LandingPage() {
   return (
     <>
+      <CommonHeaderComponent />
       <ViewHomeTracker />
       <ViewLandingTracker />
 

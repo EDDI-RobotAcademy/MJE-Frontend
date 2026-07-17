@@ -5,10 +5,13 @@ interface FieldPillLabelProps {
   children: React.ReactNode;
 }
 
-export default function FieldPillLabel({ tooltip, children }: FieldPillLabelProps) {
+export default function FieldPillLabel({
+  tooltip,
+  children,
+}: FieldPillLabelProps) {
   return (
     <div className="flex items-center gap-1.5">
-      <span className="inline-flex items-center rounded-full bg-[#2a4874] px-4 py-[5px] text-xs text-white">
+      <span className="font-bold text-[12px] text-[#222222]/90">
         {children}
       </span>
       {tooltip && <IconTooltip message={tooltip} />}

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import ConditionalHeader from "@/home/ui/layout/ConditionalHeader";
 import DwellTimeTracker from "@/dwell_time/ui/DwellTimeTracker";
 import {
   GoogleTagManagerNoScript,
@@ -11,8 +10,8 @@ export const metadata: Metadata = {
   title: "Dehangsa",
   description: "Dehangsa",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/common-images/icon.png",
+    apple: "/common-images/icon.png",
   },
   verification: {
     google: "WbSW1E5j3I0d7rw850rgtcRIW7sJyu0Tj8qm7IaIE78",
@@ -39,9 +38,8 @@ export default function RootLayout({
         <GoogleTagManagerScript />
       </head>
       <body>
-        <DwellTimeTracker />
+        {/* <DwellTimeTracker /> */}
         <GoogleTagManagerNoScript />
-        <ConditionalHeader />
         {children}
       </body>
     </html>

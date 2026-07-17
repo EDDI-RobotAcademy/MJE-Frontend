@@ -23,12 +23,12 @@ export default function TransportCheckbox({
       role="checkbox"
       aria-checked={checked}
       onClick={() => onChange(value)}
-      className={`flex h-12 md:h-[43.675px] w-full lg:w-[115px] items-center justify-center gap-[5px] rounded-full border bg-white text-sm md:text-xs transition-colors ${
+      className={`flex h-12 md:h-[43.675px] w-full lg:w-[115px] items-center justify-center gap-[10px] rounded-[5px] text-[10px] md:text-xs transition-colors ${
         checked
-          ? "border-[#2a4874] text-[#2a4874]"
+          ? "bg-[#FAFAF8] text-[#222222]"
           : error
-          ? "border-dashed border-[#FF4D4F] text-[#b0b0b0]"
-          : "border-[#d0d0d0] text-[#b0b0b0] hover:border-[#2a4874] hover:text-[#2a4874]"
+            ? "text-[#b0b0b0]"
+            : "text-[#222222]/40 bg-[#ffffff]/40"
       }`}
     >
       {icon}

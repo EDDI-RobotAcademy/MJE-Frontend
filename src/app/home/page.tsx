@@ -1,27 +1,41 @@
 import HeroSection from "@/home/ui/components/HeroSection";
 import SearchBar from "@/home/ui/components/SearchBar";
+import CommonLayoutComponent from "@/components/layout/CommonLayoutComponent";
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-white overflow-hidden">
-      {/* Blob 1: 하단 블루 글로우 */}
-      <div
-        className="pointer-events-none absolute bottom-[-250px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
-        style={{ background: "#A8CCF0", filter: "blur(500px)", opacity: 0.85 }}
-      />
-      {/* Blob 2: 중앙 핑크 글로우 */}
-      <div
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
-        style={{ background: "#FCAD9E", filter: "blur(400px)", opacity: 0.45 }}
-      />
+    <CommonLayoutComponent
+      blobs={[
+        {
+          className:
+            "pointer-events-none absolute rounded-full left-[-58px] top-[30px] md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2",
+          style: {
+            width: "849px",
+            height: "849px",
+            background: "rgba(191, 219, 254, 0.5)",
+            filter: "blur(250px)",
+          },
+        },
+      ]}
+    >
+      {/* 소개 문구 */}
+      <HeroSection />
 
-      {/* 콘텐츠 래퍼 — 블롭보다 위에 렌더링 보장 */}
-      <div className="relative z-10">
-        <HeroSection />
-        <section className="flex justify-center px-4 pb-24">
-          <SearchBar />
-        </section>
-      </div>
-    </main>
+      {/* 데이터 입력 구간 */}
+      <section className="flex justify-center px-4">
+        <SearchBar />
+      </section>
+
+      {/* Footer hint */}
+      <p
+        className="pt-[10px] text-center text-[10px] leading-[22px] text-[#222222]/50"
+        style={{
+          fontFamily: "'Prompt', 'Noto Sans KR', sans-serif",
+          fontWeight: 300,
+        }}
+      >
+        필수 항목을 채운 뒤 전송 버튼을 누르면 추천 결과 페이지로 이동합니다.
+      </p>
+    </CommonLayoutComponent>
   );
 }

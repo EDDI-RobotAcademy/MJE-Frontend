@@ -1,3 +1,4 @@
+import CommonHeaderComponent from "@/components/layout/CommonHeaderComponent";
 import LandingLayout from "@/landing/ui/layout/LandingLayout";
 import HeroSection from "@/landing/ui/components/sections/HeroSection";
 import PainPointSection from "@/landing/ui/components/sections/PainPointSection";
@@ -11,6 +12,7 @@ import ViewLandingTracker from "@/landing/ui/components/ViewLandingTracker";
 export default function RootPage() {
   return (
     <>
+      <CommonHeaderComponent />
       <ViewHomeTracker />
       <ViewLandingTracker />
       <LandingLayout height={4650}>

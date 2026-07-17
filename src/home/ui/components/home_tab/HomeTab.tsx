@@ -12,10 +12,10 @@ export default function HomeTab() {
   return (
     <Link
       href="/home"
-      className={`pb-1 text-[17px] transition-colors ${
+      className={`h-full flex items-center justify-center items-start pt-[38px] text-[11px] transition-colors border-b-2 font-semibold w-[46px] ${
         isActive
-          ? "text-black border-b-2 border-black"
-          : "text-[#5e5e5e] hover:text-black"
+          ? "text-black border-black"
+          : "text-[#5e5e5e] border-transparent hover:text-black"
       }`}
       style={{ fontFamily: "'Prompt', sans-serif" }}
       aria-current={isActive ? "page" : undefined}

@@ -55,5 +55,7 @@ export function useSearchBox() {
     return !Object.values(next).some(Boolean);
   };
 
-  return { params, errors, setPlace, setMeetTime, setTransport, clearFieldError, validate };
+  const isComplete = Boolean(params.place.trim() && params.meetTime && params.transport);
+
+  return { params, errors, isComplete, setPlace, setMeetTime, setTransport, clearFieldError, validate };
 }
