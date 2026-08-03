@@ -3,12 +3,61 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { fetchRecommendations } from "@/recommendation/infrastructure/api/recommendationsApi";
-import { RecommendationsResponse, RecommendationCourseItem } from "@/recommendation/types";
-import BestCourseCard from "./BestCourseCard";
-import OptionalCourseCard from "./OptionalCourseCard";
+import {
+  RecommendationsResponse,
+  RecommendationCourseItem,
+} from "@/recommendation/types";
+import RecommendationCourseCard from "./RecommendationCourseCard";
 import RecommendationLoading from "./RecommendationLoading";
 import { trackCourseCreate } from "@/courses/ui/components/CourseCreation/event_tracking";
 import { trackCardClick } from "@/courses/ui/components/suggested_courses/event_tracking";
+import { getRandomCoupleImage } from "@/recommendation/ui/utils/coupleImages";
+import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
+
+function extractAreaParts(address: string): { gu: string; dong: string } {
+  const gu = address.match(/\S+구/)?.[0] ?? "";
+  const dong = address.match(/\S+동/)?.[0] ?? "";
+  return { gu, dong };
+}
+
+function toBestCourseCardProps(course: RecommendationCourseItem) {
+  const [first, second, third] = course.places;
+  const { gu, dong } = extractAreaParts(first?.address ?? "");
+  return {
+    badgeLabel: "Today Pick!",
+    imageUrl: course.image_url ?? getRandomCoupleImage(course.course_id),
+    locationGu: gu,
+    locationDong: dong,
+    title: generateCourseTitle(course.places, "best"),
+    description:
+      `${first?.name ?? ""}에서 출발해 ${third?.name ?? ""}까지 이어지는,\n` +
+      `${second?.category ?? ""}을 즐기기 좋은 데이트 코스`,
+    hashtags: [first?.category, second?.category, third?.category].filter(
+      Boolean,
+    ) as string[],
+  };
+}
+
+function toOptionalCourseCardProps(
+  course: RecommendationCourseItem,
+  index: number,
+) {
+  const [first, second, third] = course.places;
+  const { gu, dong } = extractAreaParts(second?.address ?? "");
+  return {
+    badgeLabel: `Course ${String.fromCharCode(65 + index)}`,
+    imageUrl:
+      course.image_url ?? getRandomCoupleImage(`${course.course_id}-${index}`),
+    locationGu: gu,
+    locationDong: dong,
+    title: generateCourseTitle(course.places, "optional"),
+    description:
+      `${second?.name ?? ""}에서 여유롭게 시작해,\n` +
+      `${first?.name ?? ""}을 거쳐 ${third?.name ?? ""}로\n` +
+      `마무리하는 하루 코스`,
+    hashtags: [second?.category, third?.category].filter(Boolean) as string[],
+  };
+}
 
 export default function RecommendationCourseList() {
   const searchParams = useSearchParams();
@@ -16,6 +65,7 @@ export default function RecommendationCourseList() {
   const pathname = usePathname();
   const [data, setData] = useState<RecommendationsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
 
   useEffect(() => {
     let area = searchParams.get("area") ?? "";
@@ -102,31 +152,32 @@ export default function RecommendationCourseList() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <p className="self-end text-right text-[11px] text-[#797979]">
-        * 왼쪽은 맞춤 메인 코스, 오른쪽은 대안 코스입니다. 좁은 화면에서는 위 아래로 정렬됩니다.
-      </p>
-      <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-stretch">
+    <div className="flex w-full flex-col gap-4 pt-[21px]">
+      <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-center lg:justify-center lg:gap-[20px]">
         {bestCourse && (
-          <div className="w-full lg:flex-1">
-            <BestCourseCard
-              course={bestCourse}
-              onDetailClick={() => handleBestCourseClick(bestCourse)}
+          <RecommendationCourseCard
+            {...toBestCourseCardProps(bestCourse)}
+            onDetailClick={() => handleBestCourseClick(bestCourse)}
+            isActive={activeCardKey === "best"}
+            isDimmed={activeCardKey !== null && activeCardKey !== "best"}
+            onActivate={() => setActiveCardKey("best")}
+            onDeactivate={() => setActiveCardKey(null)}
+          />
+        )}
+        {optionalCourses.map((course, index) => {
+          const key = `optional-${index}`;
+          return (
+            <RecommendationCourseCard
+              key={key}
+              {...toOptionalCourseCardProps(course, index)}
+              onDetailClick={() => handleOptionalCourseClick(course, index)}
+              isActive={activeCardKey === key}
+              isDimmed={activeCardKey !== null && activeCardKey !== key}
+              onActivate={() => setActiveCardKey(key)}
+              onDeactivate={() => setActiveCardKey(null)}
             />
-          </div>
-        )}
-        {optionalCourses.length > 0 && (
-          <div className="flex w-full flex-col gap-4 lg:flex-1">
-            {optionalCourses.map((course, index) => (
-              <OptionalCourseCard
-                key={`optional-${index}`}
-                course={course}
-                index={index}
-                onDetailClick={() => handleOptionalCourseClick(course, index)}
-              />
-            ))}
-          </div>
-        )}
+          );
+        })}
       </div>
     </div>
   );
