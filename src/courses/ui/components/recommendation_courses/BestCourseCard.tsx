@@ -7,6 +7,10 @@ import { generateCourseTitle } from "@/courses/ui/utils/generateCourseTitle";
 interface BestCourseCardProps {
   course: RecommendationCourseItem;
   onDetailClick?: () => void;
+  isActive?: boolean;
+  isDimmed?: boolean;
+  onActivate?: () => void;
+  onDeactivate?: () => void;
 }
 
 interface BestCourseDisplay {
@@ -46,18 +50,35 @@ function toBestCourseDisplay(
 export default function BestCourseCard({
   course,
   onDetailClick,
+  isActive = false,
+  isDimmed = false,
+  onActivate,
+  onDeactivate,
 }: BestCourseCardProps) {
   const display = toBestCourseDisplay(course);
 
   return (
     <div
-      className="relative flex h-full flex-col rounded-[15px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer"
+      tabIndex={0}
       onClick={onDetailClick}
+      onMouseEnter={onActivate}
+      onMouseLeave={onDeactivate}
+      onFocus={onActivate}
+      onBlur={onDeactivate}
+      className={`relative flex flex-col rounded-[15px] border-2 border-dashed drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer transition-all duration-200 outline-none ${
+        isActive ? "border-[#05A66B]" : "border-transparent"
+      } ${
+        isDimmed
+          ? "w-[318.95px] h-[333.15px] bg-[#FAFAF8]/50"
+          : "h-full bg-white"
+      }`}
     >
       {/* Best Course badge overlaid on image */}
       <div className="flex items-center px-[13px] pt-[13px]">
         <span
-          className="flex text-[15px] text-[#222222] font-medium gap-[6px] justify-center items-center"
+          className={`flex font-medium gap-[6px] justify-center items-center ${
+            isDimmed ? "text-[14px]" : "text-[15px]"
+          } text-[#222222]`}
           style={{ fontFamily: "'Prompt', sans-serif" }}
         >
           <svg
@@ -81,7 +102,11 @@ export default function BestCourseCard({
         <img
           src={display.imageUrl}
           alt={display.title}
-          className="h-[166px] md:h-[250px] lg:h-[293px] w-full rounded-[14px] object-cover"
+          className={
+            isDimmed
+              ? "w-[301.92px] h-[157.11px] rounded-[14px] object-cover"
+              : "h-[166px] md:h-[250px] lg:h-[293px] w-full rounded-[14px] object-cover"
+          }
         />
       </div>
 
@@ -89,15 +114,29 @@ export default function BestCourseCard({
       <div className="flex flex-1 flex-col gap-[7px] px-[15px] pt-[11px] pb-[13px] md:p-5 lg:p-[26px]">
         {/* Title + Location tags */}
         <div className="flex items-center justify-between gap-[8px]">
-          <h2 className="min-w-0 text-[18px] md:text-[22px] lg:text-[24px] font-bold leading-normal text-black">
+          <h2
+            className={`min-w-0 font-bold leading-normal text-black ${
+              isDimmed
+                ? "text-[17px] md:text-[21px] lg:text-[23px]"
+                : "text-[18px] md:text-[22px] lg:text-[24px]"
+            }`}
+          >
             {display.title}
           </h2>
 
           <div className="flex shrink-0 gap-[5px]">
-            <span className="inline-flex items-center text-[10px] text-[#222222]/90 underline">
+            <span
+              className={`inline-flex items-center text-[#222222]/90 underline ${
+                isDimmed ? "text-[9px]" : "text-[10px]"
+              }`}
+            >
               # {display.locationGu}
             </span>
-            <span className="inline-flex items-center text-[10px] text-[#222222]/90 underline">
+            <span
+              className={`inline-flex items-center text-[#222222]/90 underline ${
+                isDimmed ? "text-[9px]" : "text-[10px]"
+              }`}
+            >
               # {display.locationDong}
             </span>
           </div>
@@ -105,7 +144,11 @@ export default function BestCourseCard({
 
         {/* Description + hashtags+button */}
         <div className="flex flex-1 flex-col gap-8 gap-[37px] md:gap-[64px]">
-          <p className="whitespace-pre-line text-[11px] leading-normal text-[#222222]/70">
+          <p
+            className={`whitespace-pre-line leading-normal text-[#222222]/70 ${
+              isDimmed ? "text-[10px]" : "text-[11px]"
+            }`}
+          >
             {display.description}
           </p>
 
@@ -114,7 +157,9 @@ export default function BestCourseCard({
               {display.hashtags.map((tag, i) => (
                 <span
                   key={i}
-                  className="bg-[#222222]/5 inline-flex items-center rounded-[15px] px-[13px] py-[4px] text-[9px] text-[#222222]/80 font-semibold"
+                  className={`bg-[#222222]/5 inline-flex items-center rounded-[15px] px-[13px] py-[4px] text-[#222222]/80 font-semibold ${
+                    isDimmed ? "text-[8px]" : "text-[9px]"
+                  }`}
                 >
                   # {tag}
                 </span>

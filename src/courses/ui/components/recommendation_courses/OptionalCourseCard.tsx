@@ -8,6 +8,10 @@ interface OptionalCourseCardProps {
   course: RecommendationCourseItem;
   index: number;
   onDetailClick?: () => void;
+  isActive?: boolean;
+  isDimmed?: boolean;
+  onActivate?: () => void;
+  onDeactivate?: () => void;
 }
 
 interface OptionalCourseDisplay {
@@ -33,7 +37,8 @@ function toOptionalCourseDisplay(
   const [first, second, third] = course.places;
   const { gu, dong } = extractAreaParts(second?.address ?? "");
   return {
-    imageUrl: course.image_url ?? getRandomCoupleImage(`${course.course_id}-${index}`),
+    imageUrl:
+      course.image_url ?? getRandomCoupleImage(`${course.course_id}-${index}`),
     label: `Course ${String.fromCharCode(65 + index)}`,
     locationGu: gu,
     locationDong: dong,
@@ -46,92 +51,126 @@ function toOptionalCourseDisplay(
   };
 }
 
-function SmallArrowIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      style={{ transform: "rotate(-45deg)" }}
-      aria-hidden="true"
-    >
-      <path
-        d="M2 8H14M14 8L9 3M14 8L9 13"
-        stroke="#2a4874"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export default function OptionalCourseCard({ course, index, onDetailClick }: OptionalCourseCardProps) {
+export default function OptionalCourseCard({
+  course,
+  index,
+  onDetailClick,
+  isActive = false,
+  isDimmed = false,
+  onActivate,
+  onDeactivate,
+}: OptionalCourseCardProps) {
   const display = toOptionalCourseDisplay(course, index);
 
   return (
     <div
-      className="relative flex overflow-hidden rounded-[30px] bg-white drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer min-h-[220px] md:h-[289px]"
+      tabIndex={0}
       onClick={onDetailClick}
+      onMouseEnter={onActivate}
+      onMouseLeave={onDeactivate}
+      onFocus={onActivate}
+      onBlur={onDeactivate}
+      className={`relative flex shrink-0 flex-col rounded-[15px] border-2 border-dashed drop-shadow-[3px_6px_10px_rgba(187,199,211,0.25)] cursor-pointer transition-all duration-200 outline-none ${
+        isActive ? "border-[#05A66B]" : "border-transparent"
+      } ${
+        isDimmed
+          ? "w-[318.95px] h-[333.15px] bg-[#FAFAF8]/50"
+          : "h-full bg-white"
+      }`}
     >
-      {/* Left: Image */}
-      <div className="relative shrink-0 p-[12px]">
+      {/* Course label badge overlaid on image */}
+      <div className="flex items-center px-[13px] pt-[13px]">
+        <span
+          className={`flex font-medium gap-[6px] justify-center items-center ${
+            isDimmed ? "text-[14px]" : "text-[15px]"
+          } text-[#222222]`}
+          style={{ fontFamily: "'Prompt', sans-serif" }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.5 17.6347V16.135H20.5V17.6347C16.2042 17.6347 13.7958 17.6347 9.5 17.6347ZM9.5 12.7502V11.2502H20.5V12.7502C16.2042 12.7502 13.7958 12.7502 9.5 12.7502ZM3.5 7.86547V6.36572H20.5V7.86547C13.8611 7.86547 10.1389 7.86547 3.5 7.86547Z"
+              fill="#05A66B"
+            />
+          </svg>
+          {display.label}
+        </span>
+      </div>
+
+      {/* Image */}
+      <div className="p-[9px] pb-0">
         <img
           src={display.imageUrl}
           alt={display.title}
-          className="h-full w-[160px] md:w-[216px] rounded-[22px] object-cover"
-          style={{ minHeight: "196px", maxHeight: "265px" }}
+          className={
+            isDimmed
+              ? "w-[301.92px] h-[157.11px] rounded-[14px] object-cover"
+              : "h-[166px] md:h-[250px] lg:h-[293px] w-full rounded-[14px] object-cover"
+          }
         />
-        {/* Label badge + arrow button overlay */}
-        <div className="absolute left-[20px] top-[20px] md:left-[28px] md:top-[25px] flex w-[135px] md:w-[187px] items-start justify-between">
-          <div className="rounded-full bg-[#E5EAEE] px-[10px] md:px-[13px] py-[4px] text-[12px] text-black font-medium shadow-sm">
-            {display.label}
-          </div>
-          <button
-            type="button"
-            aria-label="코스 상세 보기"
-            onClick={(e) => { e.stopPropagation(); onDetailClick?.(); }}
-            className="flex size-[36px] md:size-[42px] items-center justify-center rounded-full bg-[#d5e6f6] drop-shadow-[2px_3px_2.5px_rgba(0,0,0,0.13)]"
-          >
-            <SmallArrowIcon />
-          </button>
-        </div>
       </div>
 
-      {/* Right: Text content */}
-      <div className="flex flex-1 flex-col py-4 md:py-[25px] pr-3 md:pr-[20px]">
-        {/* Location tags */}
-        <div className="mb-[7px] flex flex-wrap gap-[8px] md:gap-[14px]">
-          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[10px] md:px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationGu}
-          </span>
-          <span className="inline-flex items-center rounded-full bg-[#2a4874] px-[10px] md:px-[14px] py-[2px] text-[10px] text-white">
-            {display.locationDong}
-          </span>
+      {/* Text content */}
+      <div className="flex flex-1 flex-col gap-[7px] px-[15px] pt-[11px] pb-[13px] md:p-5 lg:p-[26px]">
+        {/* Title + Location tags */}
+        <div className="flex items-center justify-between gap-[8px]">
+          <h2
+            className={`min-w-0 font-bold leading-normal text-black ${
+              isDimmed
+                ? "text-[17px] md:text-[21px] lg:text-[23px]"
+                : "text-[18px] md:text-[22px] lg:text-[24px]"
+            }`}
+          >
+            {display.title}
+          </h2>
+
+          <div className="flex shrink-0 gap-[5px]">
+            <span
+              className={`inline-flex items-center text-[#222222]/90 underline ${
+                isDimmed ? "text-[9px]" : "text-[10px]"
+              }`}
+            >
+              # {display.locationGu}
+            </span>
+            <span
+              className={`inline-flex items-center text-[#222222]/90 underline ${
+                isDimmed ? "text-[9px]" : "text-[10px]"
+              }`}
+            >
+              # {display.locationDong}
+            </span>
+          </div>
         </div>
 
-        {/* Title */}
-        <h3 className="mb-[8px] md:mb-[10px] whitespace-pre-line text-[17px] md:text-[20px] font-medium leading-normal text-black">
-          {display.title}
-        </h3>
+        {/* Description + hashtags */}
+        <div className="flex flex-1 flex-col gap-[37px] md:gap-[64px]">
+          <p
+            className={`whitespace-pre-line leading-normal text-[#222222]/70 ${
+              isDimmed ? "text-[10px]" : "text-[11px]"
+            }`}
+          >
+            {display.description}
+          </p>
 
-        {/* Description */}
-        <p className="whitespace-pre-line text-[12.5px] leading-normal text-[#6a7282]">
-          {display.description}
-        </p>
-
-        {/* Hashtags pushed to bottom */}
-        <div className="mt-auto flex flex-wrap gap-[6px] md:gap-[9px]">
-          {display.hashtags.map((tag, i) => (
-            <span
-              key={i}
-              className="inline-flex items-center rounded-full border border-[#2a4874] px-[10px] md:px-[14px] py-[4px] text-[10px] text-[#2a4874]"
-              style={{ borderWidth: "0.7px" }}
-            >
-              #{tag}
-            </span>
-          ))}
+          <div className="mt-auto flex items-end justify-between">
+            <div className="flex flex-wrap gap-[9px]">
+              {display.hashtags.map((tag, i) => (
+                <span
+                  key={i}
+                  className={`bg-[#222222]/5 inline-flex items-center rounded-[15px] px-[13px] py-[4px] text-[#222222]/80 font-semibold ${
+                    isDimmed ? "text-[8px]" : "text-[9px]"
+                  }`}
+                >
+                  # {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

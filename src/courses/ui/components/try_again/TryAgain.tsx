@@ -13,28 +13,47 @@ export default function TryAgain() {
   };
 
   return (
-    <div className="group relative flex justify-center">
-      <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#6a7282]/80 px-3.5 py-1.5 text-[12px] text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-        새로운 조건으로 다시 검색해볼까요?
-      </span>
-
+    <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
       <button
+        type="button"
         onClick={handleClick}
-        className="relative flex w-full items-center justify-center overflow-hidden rounded-full text-[15px] font-normal transition-all duration-200 ease-out hover:scale-[1.02] hover:-translate-y-[2px] active:scale-[0.98] active:translate-y-0 shadow-[3px_5px_8px_0px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.75)] hover:shadow-[3px_10px_18px_0px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.75)] sm:w-[200px]"
+        className="relative flex w-[200px] h-[44px] items-center justify-center overflow-hidden px-8 transition-all duration-300 md:h-[44px]"
         style={{
-          height: "52px",
-          background: "radial-gradient(ellipse at center, rgba(138,175,230,1) 0%, rgba(213,230,246,1) 100%)",
-          border: "1px solid rgba(255,255,255,0.8)",
+          borderRadius: "25px",
+          background:
+            "radial-gradient(68.32% 145.43% at 54.1% 47.19%, rgba(191, 219, 254, 0.74) 0%, rgba(191, 219, 254, 0.074) 100%)",
+          boxShadow: "3px 5px 8px rgba(0, 0, 0, 0.15)",
         }}
       >
+        {/* 반투명 틴트 레이어 (Rectangle 2713) */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-full"
+          className="pointer-events-none absolute inset-0"
           style={{
-            background: "linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0.0) 100%)",
-            backdropFilter: "blur(2px)",
+            borderRadius: "25px",
+            background: "rgba(250, 250, 248, 0.1)",
           }}
         />
-        <span className="relative z-10" style={{ color: "#2A4874" }}>다시 검색하기</span>
+
+        {/* 유리 재질 라이트 하이라이트 (Glass: 135deg, 80%) */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            borderRadius: "25px",
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 55%)",
+          }}
+        />
+
+        <span
+          className="relative z-10 whitespace-nowrap text-[13px] md:text-[14px]"
+          style={{
+            fontFamily: "'Prompt', sans-serif",
+            color: "#222222",
+            fontWeight: 500,
+          }}
+        >
+          다시 검색하기
+        </span>
       </button>
     </div>
   );
