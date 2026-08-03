@@ -94,6 +94,18 @@ export default function RecommendationPage1() {
         <RecommendationCourseList />
       </Suspense>
 
+      {/* 하단 그라데이션 블러 */}
+      <div
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-40 md:hidden"
+        style={{
+          height: "292px",
+          background:
+            "linear-gradient(to bottom, rgba(217, 217, 217, 0) 0%, rgba(255, 255, 255, 0.6) 100%)",
+          backdropFilter: "blur(0.5px)",
+          WebkitBackdropFilter: "blur(2px)",
+        }}
+      />
+
       {/* 다시 검색하기 */}
       <div className="pb-20">
         <TryAgain />
