@@ -2,121 +2,77 @@ import { Place } from "@/courses/types/course";
 
 interface ScheduleCardProps {
   place: Place;
-  previousPlaceName?: string;
-  walkingTimeFromPrevious?: string;
-  transportLabel?: string;
-}
-
-function IconClock() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="7" stroke="#707070" strokeWidth="1.5" />
-      <path d="M8 5V9L10.5 10.5" stroke="#707070" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
+  order: number;
 }
 
 function IconPin() {
   return (
-    <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
-        d="M8 2C5.79 2 4 3.79 4 6C4 9 8 14 8 14C8 14 12 9 12 6C12 3.79 10.21 2 8 2Z"
-        stroke="#707070"
-        strokeWidth="1.5"
+        d="M0.0210222 4.94944L-0.000150188 4.46304L11.6115 0.000218996L7.14873 11.6119L6.66233 11.5907L4.7588 6.85296L0.0210222 4.94944ZM1.52696 4.69565L5.37635 6.23541L6.91611 10.0848L10.2706 1.34118L1.52696 4.69565Z"
+        fill="#222222"
+        fillOpacity="0.9"
       />
-      <circle cx="8" cy="6" r="1.5" fill="#707070" />
     </svg>
   );
 }
 
-export default function ScheduleCard({
-  place,
-  previousPlaceName,
-  walkingTimeFromPrevious,
-  transportLabel = "도보",
-}: ScheduleCardProps) {
-  const img1 = place.imageUrl ?? `https://picsum.photos/seed/${place.id}-a/200/200`;
-  const img2 = place.imageUrl2 ?? `https://picsum.photos/seed/${place.id}-b/200/200`;
+function firstCategoryTag(category?: string): string | undefined {
+  const tag = category
+    ?.split(/[,>]/)
+    .map((t) => t.trim())
+    .filter(Boolean)[0];
+  return tag ? tag.charAt(0).toUpperCase() + tag.slice(1) : undefined;
+}
+
+export default function ScheduleCard({ place, order }: ScheduleCardProps) {
+  const img =
+    place.imageUrl ?? `https://picsum.photos/seed/${place.id}-a/200/200`;
+  const tag = firstCategoryTag(place.category);
 
   return (
-    <div className="rounded-[20px] bg-[#f5f5f5] px-[6px] pt-[6px] pb-[8px] border border-[#D4D4D4] shadow-[0px_2px_8px_rgba(0,0,0,0.06)]">
-      {/* White inner card — relative so category badge can be anchored to top-left */}
-      <div className="relative rounded-[18px] bg-white px-[9px] pt-[36px] pb-[16px] shadow-[0px_4px_5px_rgba(0,0,0,0.10)]">
-        {/* Category pills — split by , or > into individual navy pills */}
-        {place.category && (
-          <div className="absolute top-[8px] left-[9px] flex flex-wrap gap-[4px]">
-            {place.category
-              .split(/[,>]/)
-              .map((t) => t.trim())
-              .filter(Boolean)
-              .map((tag, i) => (
-                <span
-                  key={i}
-                  className="flex h-[20px] items-center justify-center whitespace-nowrap rounded-full bg-[#2a4874] px-[10px] text-[11px] text-white"
-                >
-                  {tag}
-                </span>
-              ))}
-          </div>
+    // 코스 카드
+    <div className="flex gap-3 rounded-[18px] bg-[#FAFAF8]/80 px-[22px] py-[20px] shadow-[1.11px_2.22px_7.4px_0px_rgba(187,199,211,0.54)]">
+      <img
+        src={img}
+        alt={place.name}
+        className="w-[140px] shrink-0 self-stretch rounded-[19.17px] object-cover"
+      />
+
+      <div className="flex flex-col justify-center gap-[10px] pl-[20px]">
+        {tag && (
+          <span className="w-fit rounded-full bg-[#222222]/5 px-[20px] py-[5px] text-[11.77px] text-[#222222]/80 font-semibold shadow-[0px_0px_2.49px_2.49px_rgba(191,219,254,0.1)]">
+            # {tag}
+          </span>
         )}
 
-        {/* 모바일: 이미지 상단·텍스트 하단 / md+: 가로 배치 */}
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
-          {/* Overlapping circles */}
-          <div className="relative h-[100px] w-[180px] shrink-0 md:h-[130px] md:w-[230px]">
-            <img
-              src={img1}
-              alt={place.name}
-              className="absolute left-0 top-0 z-[2] h-[95px] w-[95px] rounded-full border-[2px] border-white object-cover md:h-[125px] md:w-[125px] md:border-[2.5px]"
-            />
-            <img
-              src={img2}
-              alt={place.name}
-              className="absolute top-0 z-[1] h-[95px] w-[95px] rounded-full border-[2px] border-white object-cover md:h-[125px] md:w-[125px] md:border-[2.5px]"
-              style={{ left: 82 }}
-            />
-          </div>
-
-          {/* Content */}
-          <div className="flex flex-col gap-[8px] md:gap-[10px]">
-            {/* 시간 + 주소 — 장소명 위 */}
-            <div className="flex flex-col gap-[5px]">
-              {(place.startTime ?? place.time) && (
-                <div className="flex items-center gap-[4px]">
-                  <IconClock />
-                  <span className="whitespace-nowrap text-[10px] text-[#959595]">
-                    {place.startTime && place.endTime
-                      ? `${place.startTime} ~ ${place.endTime}`
-                      : (place.startTime ?? place.time)}
-                  </span>
-                </div>
-              )}
-              {(place.address ?? place.location) && (
-                <div className="flex items-center gap-[4px]">
-                  <IconPin />
-                  <span className="text-[11px] text-[#959595] line-clamp-1">
-                    {place.address ?? place.location}
-                  </span>
-                </div>
-              )}
-            </div>
-            <p className="text-[20px] font-medium text-black">{place.name}</p>
-            <p className="text-[12.5px] font-light leading-[15px] text-[#2d2d2d]">
-              {place.description}
-            </p>
-          </div>
+        <div className="flex flex-nowrap items-center gap-[9.41px]">
+          <span className="relative flex h-[30px] w-[30px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#05A66B] text-white">
+            <span className="absolute -bottom-[4px] text-[28.22px] font-bold leading-none">
+              {order}
+            </span>
+          </span>
+          <span className="shrink-0 text-[16px] font-bold text-[#222222]/90 md:text-[27.03px]">
+            {place.name}
+          </span>
         </div>
-      </div>
-
-      {/* Bottom row: always rendered so all cards share identical structure */}
-      <div className="mt-[10px] flex min-h-[24px] items-center justify-center px-[3px]">
-        {previousPlaceName && walkingTimeFromPrevious && (
-          <div className="flex items-center gap-[6px] text-[11.5px] text-[#959595]">
-            <span className="whitespace-nowrap">{previousPlaceName} → {place.name}</span>
-            <span className="inline-block h-[2.6px] w-[2.6px] shrink-0 rounded-full bg-[#959595]" />
-            <span className="whitespace-nowrap">{transportLabel} {walkingTimeFromPrevious}</span>
-          </div>
+        {(place.address ?? place.location) && (
+          <span className="inline-flex items-center gap-[3px] whitespace-nowrap text-[11.29px] text-[#222222]/70 underline">
+            <IconPin />
+            <span className="whitespace-nowrap">
+              {place.address ?? place.location}
+            </span>
+          </span>
         )}
+        <p className="truncate text-[13px] leading-[15px] text-[#222222]">
+          {place.description}
+        </p>
       </div>
     </div>
   );

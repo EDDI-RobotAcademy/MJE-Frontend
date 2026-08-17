@@ -31,7 +31,10 @@ interface KakaoGeocoder {
   ): void;
 }
 interface KakaoMaps {
-  Map: new (el: HTMLElement, opts: { center: KakaoLatLng; level: number }) => KakaoMap;
+  Map: new (
+    el: HTMLElement,
+    opts: { center: KakaoLatLng; level: number },
+  ) => KakaoMap;
   CustomOverlay: new (opts: {
     position: KakaoLatLng;
     content: string;
@@ -61,10 +64,10 @@ declare global {
 const MAP_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY ?? "";
 const SCRIPT_ID = "kakao-map-sdk";
 const SINGLE_MARKER_ZOOM = 5;
-const SEGMENT_COLORS = ["#2A4874"];
+const SEGMENT_COLORS = ["#05A66B"];
 const POLYLINE_WEIGHT = 3;
 const POLYLINE_OPACITY = 1;
-const POLYLINE_STYLE = "solid";
+const POLYLINE_STYLE = "shortdot";
 
 type Status = "loading" | "ready" | "error";
 
@@ -80,8 +83,8 @@ interface CourseMapProps {
   location?: string;
   totalDistanceM?: number;
   transport?: string;
+  heightClassName?: string;
 }
-
 
 function markerContent(order: number, name: string): string {
   const color = "#F1354D";
@@ -126,23 +129,41 @@ function geocodeAll(
   entries: Array<{ addr: string; place: Place; sortedIndex: number }>,
 ): Promise<Array<{ pos: KakaoLatLng; place: Place; sortedIndex: number }>> {
   return Promise.all(
-    entries.map(({ addr, place, sortedIndex }) =>
-      new Promise<{ pos: KakaoLatLng; place: Place; sortedIndex: number } | null>(resolve => {
-        geocoder.addressSearch(addr, (result, s) => {
-          if (s === maps.services.Status.OK && result[0]) {
-            resolve({ pos: new maps.LatLng(+result[0].y, +result[0].x), place, sortedIndex });
-          } else {
-            resolve(null);
-          }
-        });
-      }),
+    entries.map(
+      ({ addr, place, sortedIndex }) =>
+        new Promise<{
+          pos: KakaoLatLng;
+          place: Place;
+          sortedIndex: number;
+        } | null>((resolve) => {
+          geocoder.addressSearch(addr, (result, s) => {
+            if (s === maps.services.Status.OK && result[0]) {
+              resolve({
+                pos: new maps.LatLng(+result[0].y, +result[0].x),
+                place,
+                sortedIndex,
+              });
+            } else {
+              resolve(null);
+            }
+          });
+        }),
     ),
-  ).then(results =>
-    results.filter((r): r is { pos: KakaoLatLng; place: Place; sortedIndex: number } => r !== null),
+  ).then((results) =>
+    results.filter(
+      (r): r is { pos: KakaoLatLng; place: Place; sortedIndex: number } =>
+        r !== null,
+    ),
   );
 }
 
-export default function CourseMap({ places, location, totalDistanceM, transport }: CourseMapProps) {
+export default function CourseMap({
+  places,
+  location,
+  totalDistanceM,
+  transport,
+  heightClassName = "h-[200px]",
+}: CourseMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<Status>("loading");
   const [osrmDistanceM, setOsrmDistanceM] = useState<number | null>(null);
@@ -182,13 +203,19 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
           if (cancelled) return;
           const from = positions[i].pos;
           const to = positions[i + 1].pos;
-          const result = await fetchOsrmRoute(from.getLat(), from.getLng(), to.getLat(), to.getLng());
+          const result = await fetchOsrmRoute(
+            from.getLat(),
+            from.getLng(),
+            to.getLat(),
+            to.getLng(),
+          );
           if (cancelled) return;
           const path = result
             ? result.coords.map(([lng, lat]) => new maps.LatLng(lat, lng))
             : [from, to];
           if (result) totalDist += result.distanceM;
-          const color = SEGMENT_COLORS[i] ?? SEGMENT_COLORS[SEGMENT_COLORS.length - 1];
+          const color =
+            SEGMENT_COLORS[i] ?? SEGMENT_COLORS[SEGMENT_COLORS.length - 1];
           const polyline = new maps.Polyline({
             path,
             strokeWeight: POLYLINE_WEIGHT,
@@ -219,7 +246,9 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
 
       const withCoords = sorted
         .map((place, sortedIndex) => ({ place, sortedIndex }))
-        .filter(({ place }) => place.latitude != null && place.longitude != null);
+        .filter(
+          ({ place }) => place.latitude != null && place.longitude != null,
+        );
 
       if (withCoords.length > 0) {
         const positions = withCoords.map(({ place, sortedIndex }) => ({
@@ -235,8 +264,14 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
       }
 
       const addressEntries = sorted
-        .map((place, sortedIndex) => ({ addr: place.address ?? place.location, place, sortedIndex }))
-        .filter((e): e is { addr: string; place: Place; sortedIndex: number } => Boolean(e.addr));
+        .map((place, sortedIndex) => ({
+          addr: place.address ?? place.location,
+          place,
+          sortedIndex,
+        }))
+        .filter((e): e is { addr: string; place: Place; sortedIndex: number } =>
+          Boolean(e.addr),
+        );
 
       if (addressEntries.length === 0) {
         if (!cancelled) setStatus("ready");
@@ -308,7 +343,10 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
   }, [places]);
 
   return (
-    <div className="relative h-[200px] w-full rounded-[20px] overflow-hidden" style={{ opacity: 0.93, border: "1px solid #D4D4D4" }}>
+    <div
+      className={`relative w-full rounded-[20px] overflow-hidden ${heightClassName}`}
+      style={{ opacity: 0.93, border: "1px solid #FAFAF8" }}
+    >
       {status === "loading" && (
         <div className="absolute inset-0">
           <CourseMapSkeleton />
@@ -316,7 +354,9 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
       )}
       {status === "error" && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#f0f4f8]">
-          <span className="text-[12px] text-[#959595]">지도를 불러올 수 없어요</span>
+          <span className="text-[12px] text-[#959595]">
+            지도를 불러올 수 없어요
+          </span>
         </div>
       )}
       <div
@@ -345,8 +385,14 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
             pointerEvents: "none",
           }}
         >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="#1A1A1A" style={{ display: "inline", marginRight: 4, flexShrink: 0 }}>
-            <path d="M2 12L22 2L12 22L10 14L2 12Z"/>
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="#1A1A1A"
+            style={{ display: "inline", marginRight: 4, flexShrink: 0 }}
+          >
+            <path d="M2 12L22 2L12 22L10 14L2 12Z" />
           </svg>
           {location}
         </div>
@@ -370,11 +416,31 @@ export default function CourseMap({ places, location, totalDistanceM, transport 
             minWidth: 72,
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 700, color: "#1A1A1A", lineHeight: 1.2 }}>
-            {osrmDistanceM != null ? formatDistance(osrmDistanceM) : totalDistanceM != null ? formatDistance(totalDistanceM) : "—"}
+          <span
+            style={{
+              fontSize: 13,
+              fontWeight: 700,
+              color: "#1A1A1A",
+              lineHeight: 1.2,
+            }}
+          >
+            {osrmDistanceM != null
+              ? formatDistance(osrmDistanceM)
+              : totalDistanceM != null
+                ? formatDistance(totalDistanceM)
+                : "—"}
           </span>
-          <span style={{ fontSize: 10, color: "#959595", lineHeight: 1.3, textAlign: "center", whiteSpace: "nowrap" }}>
-            {(transport ? (TRANSPORT_LABEL[transport] ?? transport) : "이동")} 이동 기준
+          <span
+            style={{
+              fontSize: 10,
+              color: "#959595",
+              lineHeight: 1.3,
+              textAlign: "center",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {transport ? (TRANSPORT_LABEL[transport] ?? transport) : "이동"}{" "}
+            이동 기준
           </span>
         </div>
       )}

@@ -6,17 +6,16 @@ import { trackReturnClick } from "@/courses/ui/components/return/event_tracking"
 function ArrowLeftIcon() {
   return (
     <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
+      width="10"
+      height="18"
+      viewBox="0 0 10 18"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <line x1="19" y1="12" x2="5" y2="12" />
-      <polyline points="12 5 5 12 12 19" />
+      <path
+        d="M8.78829 17.5766L0 8.78829L8.78829 0L9.96014 1.17185L2.34371 8.78829L9.96014 16.4047L8.78829 17.5766Z"
+        fill="#222222"
+      />
     </svg>
   );
 }
@@ -33,10 +32,10 @@ export default function ReturnToRecommendation() {
   return (
     <button
       onClick={handleClick}
-      className="flex w-fit items-center gap-1.5 text-[16px] text-[#2a4874] transition-opacity hover:opacity-75"
+      className="flex w-fit items-center gap-[15px] text-[14px] text-[#222222]/90 font-semibold"
     >
       <ArrowLeftIcon />
-      추천 코스로 돌아가기
+      추천 코스
     </button>
   );
 }
