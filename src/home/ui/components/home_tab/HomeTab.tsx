@@ -15,7 +15,7 @@ export default function HomeTab() {
       className={`h-full flex items-center justify-center items-start pt-[38px] text-[11px] transition-colors border-b-2 font-semibold w-[46px] ${
         isActive
           ? "text-black border-black"
-          : "text-[#5e5e5e] border-transparent hover:text-black"
+          : "text-[#222222]/50 border-transparent hover:text-black"
       }`}
       style={{ fontFamily: "'Prompt', sans-serif" }}
       aria-current={isActive ? "page" : undefined}

@@ -73,7 +73,10 @@ export default function RecommendationCourseList() {
     let transport = searchParams.get("transport") ?? "walk";
 
     if (area) {
-      sessionStorage.setItem("mje_search_params", JSON.stringify({ area, start_time, transport }));
+      sessionStorage.setItem(
+        "mje_search_params",
+        JSON.stringify({ area, start_time, transport }),
+      );
     } else {
       const saved = sessionStorage.getItem("mje_search_params");
       if (saved) {
@@ -112,7 +115,10 @@ export default function RecommendationCourseList() {
         setData(result);
         sessionStorage.setItem(
           "mje_recommendation_cache",
-          JSON.stringify({ params: { area, start_time, transport }, data: result }),
+          JSON.stringify({
+            params: { area, start_time, transport },
+            data: result,
+          }),
         );
         if (result.courses.length > 0) {
           void trackCourseCreate();
@@ -122,12 +128,25 @@ export default function RecommendationCourseList() {
   }, [searchParams]);
 
   const handleBestCourseClick = (course: RecommendationCourseItem) => {
-    void trackCardClick(pathname, course.course_id, course.places[0]?.name ?? "", "main");
+    void trackCardClick(
+      pathname,
+      course.course_id,
+      course.places[0]?.name ?? "",
+      "main",
+    );
     router.push(`/courses/detail/${course.course_id}?grade=best`);
   };
 
-  const handleOptionalCourseClick = (course: RecommendationCourseItem, index: number) => {
-    void trackCardClick(pathname, course.course_id, course.places[0]?.name ?? "", "sub");
+  const handleOptionalCourseClick = (
+    course: RecommendationCourseItem,
+    index: number,
+  ) => {
+    void trackCardClick(
+      pathname,
+      course.course_id,
+      course.places[0]?.name ?? "",
+      "sub",
+    );
     const grade = index === 0 ? "optional_a" : "optional_b";
     router.push(`/courses/detail/${course.course_id}?grade=${grade}`);
   };
@@ -137,7 +156,9 @@ export default function RecommendationCourseList() {
   if (!data) return null;
 
   const bestCourse = data.courses.find((c) => c.grade === "best") ?? null;
-  const optionalCourses = data.courses.filter((c) => c.grade === "optional").slice(0, 2);
+  const optionalCourses = data.courses
+    .filter((c) => c.grade === "optional")
+    .slice(0, 2);
 
   const isEmpty = !bestCourse && optionalCourses.length === 0;
   const hasShortage = data.shortage_reasons.length > 0;
@@ -146,7 +167,9 @@ export default function RecommendationCourseList() {
     return (
       <div className="flex flex-col items-center justify-center rounded-[24px] bg-white py-16 text-center shadow-[3px_6px_20px_0px_rgba(187,199,211,0.25)]">
         <p className="text-base text-gray-500">아직 추천 코스가 없어요</p>
-        <p className="mt-1 text-sm text-gray-400">검색 조건을 다시 설정해 보세요</p>
+        <p className="mt-1 text-sm text-gray-400">
+          검색 조건을 다시 설정해 보세요
+        </p>
       </div>
     );
   }
