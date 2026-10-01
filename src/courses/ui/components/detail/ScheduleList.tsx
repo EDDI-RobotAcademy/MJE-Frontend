@@ -5,11 +5,13 @@ import ScheduleTimelineConnector from "./ScheduleTimelineConnector";
 interface ScheduleListProps {
   places: Place[];
   transportLabel?: string;
+  variant?: "card" | "flat";
 }
 
 export default function ScheduleList({
   places,
   transportLabel,
+  variant = "card",
 }: ScheduleListProps) {
   if (places.length === 0) {
     return (
@@ -23,11 +25,12 @@ export default function ScheduleList({
     <div className="flex flex-col rounded-[16.93px]">
       {places.map((place, index) => (
         <div key={place.id} className="flex flex-col">
-          <ScheduleCard place={place} order={index + 1} />
+          <ScheduleCard place={place} order={index + 1} variant={variant} />
           {index < places.length - 1 && (
             <ScheduleTimelineConnector
               walkingTime={place.walkingTimeTo}
               transportLabel={transportLabel}
+              variant={variant}
             />
           )}
         </div>

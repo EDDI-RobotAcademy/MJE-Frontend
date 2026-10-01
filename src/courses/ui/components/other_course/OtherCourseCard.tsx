@@ -12,6 +12,10 @@ interface OtherCourseCardProps {
   course: Course;
   label: CourseType;
   onClick: (course: Course) => void;
+  variant?: "card" | "flat";
+  isSelected?: boolean;
+  isShrunk?: boolean;
+  onSelect?: () => void;
 }
 
 function buildCourseDescription(course: Course): string | undefined {
@@ -49,8 +53,68 @@ export default function OtherCourseCard({
   course,
   label,
   onClick,
+  variant = "card",
+  isSelected = false,
+  isShrunk = false,
+  onSelect,
 }: OtherCourseCardProps) {
   const description = buildCourseDescription(course);
+
+  if (variant === "flat") {
+    return (
+      <div
+        onClick={onSelect}
+        className={
+          isSelected
+            ? "flex w-full origin-top scale-100 flex-col gap-3 rounded-[20px] border-2 border-dashed border-[#05A66B] bg-white pl-[20px] pt-[17px] pr-[20px] pb-[18px] transition-transform duration-200"
+            : `flex w-full flex-col gap-3 rounded-[20px] bg-[#222222]/5 pl-[20px] pt-[17px] pr-[20px] pb-[18px] transition-transform duration-200 ${
+                isShrunk ? "origin-top scale-[0.94]" : ""
+              }`
+        }
+      >
+        <div className="flex items-center justify-between">
+          <span className="inline-flex w-fit items-center gap-[6px] rounded-full bg-[#05A66B] px-[14px] py-[4px] text-[13px] font-bold text-[#ffffff]">
+            {LABEL_TEXT[label]}
+            <span className="text-[11px] font-bold">상세 일정</span>
+          </span>
+          <MenuIcon />
+        </div>
+
+        <div className="flex flex-col gap-[4px] text-left">
+          <div className="flex flex-wrap items-baseline gap-[6px]">
+            <h3 className="text-left text-[18px] font-bold text-[#222222]/90">
+              {generateCourseTitle(course.places, course.courseType) ||
+                course.name}
+            </h3>
+            {course.duration && (
+              <OtherCourseDurationLabel duration={course.duration} />
+            )}
+          </div>
+          {description && (
+            <p className="line-clamp-2 text-[12px] font-medium leading-[16px] text-[#222222]/60">
+              {description}
+            </p>
+          )}
+        </div>
+
+        <button
+          type="button"
+          disabled={!course.id}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(course);
+          }}
+          className={
+            isSelected
+              ? "w-full rounded-full bg-[#BFDBFE] px-[16px] py-[8px] text-[13px] font-bold text-[#222222] shadow-[0px_0px_2.77px_2.77px_rgba(191,219,254,0.1)]"
+              : "w-full rounded-full bg-white px-[16px] py-[8px] text-[13px] font-bold text-[#222222]/60 shadow-[0px_0px_2.77px_2.77px_rgba(191,219,254,0.1)]"
+          }
+        >
+          전체보기
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-fit min-w-full flex-col gap-3 rounded-[20px] bg-[#222222]/5 p-[23px]">

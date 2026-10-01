@@ -3,6 +3,7 @@ import { Place } from "@/courses/types/course";
 interface ScheduleCardProps {
   place: Place;
   order: number;
+  variant?: "card" | "flat";
 }
 
 function IconPin() {
@@ -31,10 +32,55 @@ function firstCategoryTag(category?: string): string | undefined {
   return tag ? tag.charAt(0).toUpperCase() + tag.slice(1) : undefined;
 }
 
-export default function ScheduleCard({ place, order }: ScheduleCardProps) {
+export default function ScheduleCard({
+  place,
+  order,
+  variant = "card",
+}: ScheduleCardProps) {
   const img =
     place.imageUrl ?? `https://picsum.photos/seed/${place.id}-a/200/200`;
   const tag = firstCategoryTag(place.category);
+
+  if (variant === "flat") {
+    return (
+      // 코스 카드 (바텀시트용 — 배경/그림자 없이)
+      <div className="flex gap-[22px]">
+        <img
+          src={img}
+          alt={place.name}
+          className="relative z-10 h-[110px] w-[110px] shrink-0 rounded-[16px] object-cover"
+        />
+
+        <div className="flex flex-1 flex-col items-start justify-start gap-[8px]">
+          {tag && (
+            <span className="w-fit rounded-full bg-[#222222]/5 px-[14px] py-[4px] text-[11px] font-semibold text-[#222222]/70">
+              # {tag}
+            </span>
+          )}
+
+          <div className="flex flex-nowrap items-center gap-[7px]">
+            <span className="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full bg-[#05A66B] text-[11px] font-bold text-white">
+              {order}
+            </span>
+            <span className="shrink-0 text-[16px] font-bold text-[#222222]/90">
+              {place.name}
+            </span>
+          </div>
+          {(place.address ?? place.location) && (
+            <span className="inline-flex items-center gap-[3px] whitespace-nowrap text-[11px] text-[#959595] underline">
+              <IconPin />
+              <span className="whitespace-nowrap">
+                {place.address ?? place.location}
+              </span>
+            </span>
+          )}
+          <p className="truncate text-[12px] leading-[15px] text-[#222222]/70">
+            {place.description}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     // 코스 카드

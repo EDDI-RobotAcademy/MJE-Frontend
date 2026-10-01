@@ -23,6 +23,7 @@ interface KakaoMap {
   setBounds(bounds: KakaoLatLngBounds): void;
   setCenter(latlng: KakaoLatLng): void;
   setLevel(level: number): void;
+  relayout(): void;
 }
 interface KakaoGeocoder {
   addressSearch(
@@ -84,19 +85,14 @@ interface CourseMapProps {
   totalDistanceM?: number;
   transport?: string;
   heightClassName?: string;
+  expanded?: boolean;
 }
 
 function markerContent(order: number, name: string): string {
-  const color = "#F1354D";
-  return `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-    <div style="background:#fff;color:#2A4874;font-size:10px;font-weight:600;font-family:sans-serif;padding:2px 6px 2px 3px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.2);display:flex;align-items:center;gap:4px;">
-      <span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${order}</span>
-      ${name}
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36" fill="none">
-      <path d="M14 0C6.268 0 0 6.268 0 14c0 9.625 14 22 14 22S28 23.625 28 14C28 6.268 21.732 0 14 0z" fill="${color}"/>
-      <path d="M14 20C14 20 6.5 15.5 6.5 10.5C6.5 8 8.5 6.5 11 6.5C12.5 6.5 13.5 7.3 14 7.8C14.5 7.3 15.5 6.5 17 6.5C19.5 6.5 21.5 8 21.5 10.5C21.5 15.5 14 20 14 20Z" fill="#fff"/>
-    </svg>
+  const color = "#05A66B";
+  return `<div style="background:#FAFAF8;color:#222;font-size:12px;font-weight:700;font-family:sans-serif;padding:8px 10px;border-radius:9999px;white-space:nowrap;box-shadow:0 2.17px 5.64px rgba(0,0,0,0.23);display:flex;align-items:center;gap:9px;">
+    <span style="color:${color}; font-size:11px; font-weight:700;flex-shrink:0;">${order}</span>
+    ${name}
   </div>`;
 }
 
@@ -163,8 +159,12 @@ export default function CourseMap({
   totalDistanceM,
   transport,
   heightClassName = "h-[200px]",
+  expanded = false,
 }: CourseMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<KakaoMap | null>(null);
+  const boundsRef = useRef<KakaoLatLngBounds | null>(null);
+  const singlePosRef = useRef<KakaoLatLng | null>(null);
   const [status, setStatus] = useState<Status>("loading");
   const [osrmDistanceM, setOsrmDistanceM] = useState<number | null>(null);
 
@@ -189,7 +189,7 @@ export default function CourseMap({
         const overlay = new maps.CustomOverlay({
           position: pos,
           content: markerContent(sortedIndex + 1, place.name),
-          yAnchor: 1,
+          yAnchor: 0.5,
           xAnchor: 0.5,
           zIndex: 3,
         });
@@ -230,11 +230,13 @@ export default function CourseMap({
       }
 
       if (positions.length === 1) {
+        singlePosRef.current = positions[0].pos;
         map.setCenter(positions[0].pos);
         map.setLevel(SINGLE_MARKER_ZOOM);
       } else {
         const bounds = new maps.LatLngBounds();
         positions.forEach(({ pos }) => bounds.extend(pos));
+        boundsRef.current = bounds;
         map.setBounds(bounds);
       }
     }
@@ -306,6 +308,7 @@ export default function CourseMap({
           center: new maps.LatLng(37.5665, 126.978),
           level: SINGLE_MARKER_ZOOM,
         });
+        mapInstanceRef.current = map;
 
         renderMarkers(maps, map);
       });
@@ -339,12 +342,32 @@ export default function CourseMap({
       cancelled = true;
       overlays.forEach((o) => o.setMap(null));
       polylines.forEach((p) => p.setMap(null));
+      mapInstanceRef.current = null;
+      boundsRef.current = null;
+      singlePosRef.current = null;
     };
   }, [places]);
 
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (status !== "ready" || !map) return;
+
+    const timer = setTimeout(() => {
+      map.relayout();
+      if (boundsRef.current) {
+        map.setBounds(boundsRef.current);
+      } else if (singlePosRef.current) {
+        map.setCenter(singlePosRef.current);
+        map.setLevel(SINGLE_MARKER_ZOOM);
+      }
+    }, 320);
+
+    return () => clearTimeout(timer);
+  }, [expanded, status]);
+
   return (
     <div
-      className={`relative w-full rounded-[20px] overflow-hidden ${heightClassName}`}
+      className={`relative w-full rounded-[20px] overflow-hidden transition-[height] duration-300 ${heightClassName}`}
       style={{ opacity: 0.93, border: "1px solid #FAFAF8" }}
     >
       {status === "loading" && (
@@ -372,10 +395,14 @@ export default function CourseMap({
             bottom: 16,
             left: 16,
             zIndex: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            flexWrap: "nowrap",
             backdropFilter: "blur(5px)",
             WebkitBackdropFilter: "blur(5px)",
-            background: "rgba(0,0,0,0.05)",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+            background: "rgba(255,255,255,0.55)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
             borderRadius: 9999,
             padding: "5px 12px",
             fontSize: 11,
@@ -388,13 +415,17 @@ export default function CourseMap({
           <svg
             width="11"
             height="11"
-            viewBox="0 0 24 24"
-            fill="#1A1A1A"
-            style={{ display: "inline", marginRight: 4, flexShrink: 0 }}
+            viewBox="0 0 11 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ flexShrink: 0 }}
           >
-            <path d="M2 12L22 2L12 22L10 14L2 12Z" />
+            <path
+              d="M0.0188968 4.37352L0.000187621 3.9437L10.2612 -5.72885e-07L6.31749 10.261L5.88767 10.2423L4.20557 6.05562L0.0188968 4.37352ZM1.34966 4.14925L4.75129 5.5099L6.11194 8.91153L9.07621 1.18498L1.34966 4.14925Z"
+              fill="#222222"
+            />
           </svg>
-          {location}
+          <span>{location}</span>
         </div>
       )}
 
@@ -402,25 +433,28 @@ export default function CourseMap({
         <div
           style={{
             position: "absolute",
+            width: 30,
             bottom: 12,
             right: 12,
             zIndex: 10,
-            background: "#fff",
-            borderRadius: 12,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-            padding: "8px 10px",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: 20,
+            boxShadow: "0 2px 10px rgba(0,0,0,0.12)",
+            padding: "8px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 2,
-            minWidth: 72,
+            gap: 8,
+            minWidth: 100,
           }}
         >
           <span
             style={{
-              fontSize: 13,
+              fontSize: 10,
               fontWeight: 700,
-              color: "#1A1A1A",
+              color: "#222222",
               lineHeight: 1.2,
             }}
           >
@@ -430,10 +464,18 @@ export default function CourseMap({
                 ? formatDistance(totalDistanceM)
                 : "—"}
           </span>
+          <div
+            style={{
+              width: "calc(100% + 8px)",
+              margin: "0 -4px",
+              borderTop: "2px dashed #222222",
+            }}
+          />
           <span
             style={{
               fontSize: 10,
-              color: "#959595",
+              fontWeight: 600,
+              color: "#222222",
               lineHeight: 1.3,
               textAlign: "center",
               whiteSpace: "nowrap",

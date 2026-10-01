@@ -32,7 +32,7 @@ export default function ReturnToRecommendation() {
   return (
     <button
       onClick={handleClick}
-      className="flex w-fit items-center gap-[15px] text-[14px] text-[#222222]/90 font-semibold"
+      className="flex w-fit items-center gap-[15px] text-[14px] text-[#222222]/90 font-bold"
     >
       <ArrowLeftIcon />
       추천 코스
