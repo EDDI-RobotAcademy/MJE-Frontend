@@ -124,12 +124,26 @@ const prompt = "'Prompt', sans-serif";
 
 function DotGrid() {
   const positions: [number, number][] = [
-    [3, 0], [0, 3], [3, 3], [3, 6],
-    [6, 3], [6, 6], [6, 9], [9, 3],
-    [9, 6], [12, 3], [9, 0],
+    [3, 0],
+    [0, 3],
+    [3, 3],
+    [3, 6],
+    [6, 3],
+    [6, 6],
+    [6, 9],
+    [9, 3],
+    [9, 6],
+    [12, 3],
+    [9, 0],
   ];
   return (
-    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+    <svg
+      width="16"
+      height="12"
+      viewBox="0 0 16 12"
+      fill="none"
+      aria-hidden="true"
+    >
       {positions.map(([x, y], i) => (
         <rect key={i} x={x} y={y} width="3" height="3" fill="#fcad9e" />
       ))}
@@ -150,17 +164,36 @@ function IconPin({ color = "#757575" }: { color?: string }) {
   );
 }
 
-function IconClock({ color = "#757575", size = 16 }: { color?: string; size?: number }) {
+function IconClock({
+  color = "#757575",
+  size = 16,
+}: {
+  color?: string;
+  size?: number;
+}) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
       <circle cx="8" cy="8" r="7" stroke={color} strokeWidth="1.5" />
-      <path d="M8 5V9L10.5 10.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d="M8 5V9L10.5 10.5"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
 
 /** Two circular place images that overlap — right image sits 85 px from left edge */
-function PlaceImages({ image1, image2, name }: { image1: string; image2: string; name: string }) {
+function PlaceImages({
+  image1,
+  image2,
+  name,
+}: {
+  image1: string;
+  image2: string;
+  name: string;
+}) {
   return (
     <div className="relative h-[101px] w-[186px] shrink-0">
       <img
@@ -202,9 +235,16 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
           </div>
 
           <div className="flex items-center gap-5">
-            <PlaceImages image1={stop.image1} image2={stop.image2} name={stop.name} />
+            <PlaceImages
+              image1={stop.image1}
+              image2={stop.image2}
+              name={stop.name}
+            />
 
-            <div className="flex flex-col gap-[14px]" style={{ fontFamily: pretendard }}>
+            <div
+              className="flex flex-col gap-[14px]"
+              style={{ fontFamily: pretendard }}
+            >
               {/* Time & address meta */}
               <div className="flex flex-col gap-[6px]">
                 <div className="flex items-center gap-[3px]">
@@ -267,7 +307,14 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
       {!isLast && (
         <div className="flex items-center justify-center py-[4px]">
           <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
-            <line x1="14" y1="0" x2="14" y2="11" stroke="#c0c0c0" strokeWidth="1.5" />
+            <line
+              x1="14"
+              y1="0"
+              x2="14"
+              y2="11"
+              stroke="#c0c0c0"
+              strokeWidth="1.5"
+            />
             <polyline
               points="9,8 14,13 19,8"
               stroke="#c0c0c0"
@@ -283,13 +330,15 @@ function StopCard({ stop, isLast }: { stop: PlaceStop; isLast: boolean }) {
   );
 }
 
-
 /** Single alternative course card in the sidebar */
 function AlternativeCard({ course }: { course: AlternativeCourse }) {
   return (
     <div className="w-full rounded-[30px] bg-white p-[15px] shadow-[3px_6px_10px_rgba(187,199,211,0.25)]">
       <div className="flex items-end justify-between gap-3">
-        <div className="flex min-w-0 flex-col gap-[12px]" style={{ fontFamily: pretendard }}>
+        <div
+          className="flex min-w-0 flex-col gap-[12px]"
+          style={{ fontFamily: pretendard }}
+        >
           {/* Option label + title */}
           <div className="flex flex-col gap-[9px]">
             <span
@@ -308,11 +357,15 @@ function AlternativeCard({ course }: { course: AlternativeCourse }) {
           <div className="flex items-center gap-[24px]">
             <div className="flex items-center gap-[3px]">
               <IconPin color="#707070" />
-              <span className="text-[11px] text-[#707070]">{course.location}</span>
+              <span className="text-[11px] text-[#707070]">
+                {course.location}
+              </span>
             </div>
             <div className="flex items-center gap-[3px]">
               <IconClock color="#707070" size={12} />
-              <span className="text-[11px] text-[#707070]">{course.duration}</span>
+              <span className="text-[11px] text-[#707070]">
+                {course.duration}
+              </span>
             </div>
           </div>
         </div>
@@ -350,7 +403,9 @@ export default function RecommendationDetailPage({ courseId }: Props) {
   return (
     <main
       className="relative min-h-screen overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #ffffff 50%, #eaf2fb 100%)" }}
+      style={{
+        background: "linear-gradient(180deg, #ffffff 50%, #eaf2fb 100%)",
+      }}
     >
       {/* Decorative background blob */}
       <div
@@ -380,11 +435,15 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           <div className="mb-[10px] flex flex-wrap items-center gap-[14px] md:gap-[23px]">
             <div className="flex items-end gap-[3px]">
               <IconPin />
-              <span className="text-[12px] text-[#757575]">{course.location}</span>
+              <span className="text-[12px] text-[#757575]">
+                {course.location}
+              </span>
             </div>
             <div className="flex items-end gap-[3px]">
               <IconClock />
-              <span className="text-[12px] text-[#757575]">{course.startTime}</span>
+              <span className="text-[12px] text-[#757575]">
+                {course.startTime}
+              </span>
             </div>
           </div>
 
@@ -396,7 +455,9 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           {/* Description with dot-grid accent */}
           <div className="flex items-start gap-[12px]">
             <DotGrid />
-            <p className="text-[12px] md:text-[14px] text-[#757575]">{course.description}</p>
+            <p className="text-[12px] md:text-[14px] text-[#757575]">
+              {course.description}
+            </p>
           </div>
         </section>
 
@@ -406,7 +467,6 @@ export default function RecommendationDetailPage({ courseId }: Props) {
           <div className="flex min-w-0 flex-1 flex-col">
             {/* White outer card: badge + title header + all stops */}
             <div className="w-full rounded-[30px] bg-white px-[17px] pb-[19px] pt-[22px] shadow-[0px_8px_32px_rgba(42,72,116,0.12)]">
-
               {/* ── Card header: "Best Course!" + "상세 일정" (stacked) ──── */}
               <div className="mb-[22px] flex flex-col gap-[26px]">
                 <span
@@ -415,11 +475,18 @@ export default function RecommendationDetailPage({ courseId }: Props) {
                 >
                   Best Course !
                 </span>
-                <div className="flex items-center gap-[17px]" style={{ fontFamily: pretendard }}>
-                  <span className="text-[20px] font-medium text-black">상세 일정</span>
+                <div
+                  className="flex items-center gap-[17px]"
+                  style={{ fontFamily: pretendard }}
+                >
+                  <span className="text-[20px] font-medium text-black">
+                    상세 일정
+                  </span>
                   <div className="flex items-end gap-[3px]">
                     <IconClock />
-                    <span className="text-[12px] text-[#757575]">{course.totalDuration}</span>
+                    <span className="text-[12px] text-[#757575]">
+                      {course.totalDuration}
+                    </span>
                   </div>
                 </div>
               </div>

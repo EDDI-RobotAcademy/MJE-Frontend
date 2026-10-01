@@ -1,17 +1,30 @@
-export default function ScheduleTimelineConnector() {
+interface ScheduleTimelineConnectorProps {
+  walkingTime?: string;
+  transportLabel?: string;
+}
+
+export default function ScheduleTimelineConnector({
+  walkingTime,
+  transportLabel = "도보",
+}: ScheduleTimelineConnectorProps) {
   return (
-    <div className="flex items-center justify-center py-[4px]">
-      <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
-        <line x1="14" y1="0" x2="14" y2="11" stroke="#c0c0c0" strokeWidth="1.5" />
-        <polyline
-          points="9,8 14,13 19,8"
-          stroke="#c0c0c0"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
+    <div className="relative z-10 flex px-[22px]">
+      <div className="relative h-[20px] w-[140px] shrink-0">
+        <div
+          className="absolute left-1/2 z-0 w-[13px] -translate-x-1/2"
+          style={{
+            top: "-20px",
+            height: "calc(100% + 50px)",
+            backgroundImage:
+              "repeating-linear-gradient(to bottom, #05A66B 0px, #05A66B 5px, transparent 1px, transparent 11px)",
+          }}
         />
-      </svg>
+        {walkingTime && (
+          <span className="absolute bottom-0 left-1/2 z-20 -translate-x-1/2 translate-y-[calc(50%+20px)] whitespace-nowrap rounded-full bg-[#05A66B] px-[10px] py-[3px] text-[10px] font-semibold text-white">
+            {transportLabel} {walkingTime}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

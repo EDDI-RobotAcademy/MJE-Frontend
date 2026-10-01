@@ -32,6 +32,8 @@ interface CourseDetailPlaceApiResponse {
   latitude?: number;
   longitude?: number;
   address?: string;
+  startTime?: string;
+  endTime?: string;
 }
 
 interface CourseDetailApiResponse {
@@ -105,6 +107,8 @@ function mapPlace(place: CourseDetailPlaceApiResponse, courseId: string): Place 
     imageUrl: place.photoUrl,
     type: classifyType(place.category),
     category: place.category,
+    startTime: place.startTime,
+    endTime: place.endTime,
     walkingTimeTo:
       place.routeDurationMin != null ? `${place.routeDurationMin}분` : undefined,
   };
@@ -124,6 +128,7 @@ function mapSelectedCourse(response: CourseDetailApiResponse): Course {
     name: response.title,
     description: response.description,
     locations,
+    startTime: response.places[0]?.startTime,
     duration: formatDuration(response.totalDuration),
     keywords: [],
     imageUrl: response.places[0]?.photoUrl,

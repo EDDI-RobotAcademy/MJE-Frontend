@@ -38,7 +38,7 @@ export default function RootLayout({
         <GoogleTagManagerScript />
       </head>
       <body>
-        {/* <DwellTimeTracker /> */}
+        <DwellTimeTracker />
         <GoogleTagManagerNoScript />
         {children}
       </body>
