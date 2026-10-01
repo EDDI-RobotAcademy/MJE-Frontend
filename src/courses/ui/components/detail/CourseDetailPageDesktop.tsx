@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { CourseDetailData } from "@/recommendation/infrastructure/api/course_detail/courseDetailApi";
 import { useCourseDetail } from "@/courses/hooks/useCourseDetail";
 import DetailCourseSkeleton from "./DetailCourseSkeleton";
@@ -34,6 +35,7 @@ export default function CourseDetailPageDesktop({
   isSharedView = false,
 }: CourseDetailPageDesktopProps) {
   const view = useCourseDetail({ courseId, initialDetailData, grade });
+  const [selectedAltId, setSelectedAltId] = useState<string | null>(null);
 
   if (view.isLoading) return <DetailCourseSkeleton />;
 
@@ -140,14 +142,20 @@ export default function CourseDetailPageDesktop({
             </div>
           )}
           <div className="mt-[85px] mb-[146px] grid grid-cols-2 gap-[18.96px]">
-            {safeAlternatives.map((course, index) => (
-              <OtherCourseCard
-                key={course.id || `alternative-course-${index}`}
-                course={course}
-                label={getCourseLabel(course.id, course.courseType)}
-                onClick={handleOtherCourseClick}
-              />
-            ))}
+            {safeAlternatives.map((course, index) => {
+              const altId = course.id || `alternative-course-${index}`;
+              return (
+                <OtherCourseCard
+                  key={altId}
+                  course={course}
+                  label={getCourseLabel(course.id, course.courseType)}
+                  onClick={handleOtherCourseClick}
+                  isSelected={altId === selectedAltId}
+                  isShrunk={selectedAltId != null && altId !== selectedAltId}
+                  onSelect={() => setSelectedAltId(altId)}
+                />
+              );
+            })}
           </div>
         </div>
       )}
